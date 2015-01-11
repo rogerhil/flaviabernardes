@@ -1,4 +1,6 @@
 # Byte-compiled / optimized / DLL files
+fbenv/
+
 __pycache__/
 *.py[cod]
 
