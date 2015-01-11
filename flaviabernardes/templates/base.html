@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <style>
+            body {
+                font-family: Myriad Pro;
+                font-stretch: condensed;
+                font-variant: small-caps;
+                text-transform: capitalize;
+                color: #888;
+            }
+            #site {
+                width: 1170px;
+                margin: 0 auto;
+                *border: 1px solid gray;
+            }
+            #header {
+                margin-bottom: 20px;
+            }
+            #header h1 {
+                text-align: center;
+                font-size: 48px;
+                margin: 0;
+                padding: 0;
+            }
+            #menu {
+                display: table;
+                width: 1428px;
+                margin-left: -124px;
+                margin-bottom: 20px;
+            }
+            #menu h2 {
+                text-align: center;
+                font-size: 30px;
+                display: table-cell;
+                *border: 1px solid gray;
+                width: 25%;
+                margin: 0;
+                padding: 0;
+            }
+            #menu h2.first {
+                *text-align: left;
+            }
+            #menu h2.last {
+                *text-align: right;
+            }
+            #container {
+                margin-bottom: 20px;
+            }
+            #footer {
+                *font-family: helvetica;
+                font-variant: normal;
+            }
+            .clear {
+                clear: both;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="site">
+            <section id="header">
+                <h1>Flavia Bernardes</h1>
+            </section>
+            <section id="menu">
+                <h2 class="first">Paintings</h2>
+                <h2>About</h2>
+                <h2>Blog</h2>
+                <h2 class="last">Contact</h2>
+                <div class="clear"></div>
+            </section>
+            <section id="container">
+                {% block container %}
+                {% endblock %}
+            </section>
+            <section id="footer">
+                <div class="copyrights">Flavia Bernardes, 2015. All rights reserved.</div>
+                <div class="social"></div>
+            </section>
+        </div>
+    </body>
+</html>
