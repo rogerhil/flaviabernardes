@@ -21,18 +21,19 @@
                 margin-top: 0px;
                 margin-bottom: 0px;
                 position: absolute;
-                background-color: white;
-                width: 900px;
+                background-color: #eee;
+                width: 100%;
                 opacity: .6;
-                padding: 0 30px;
+                padding: 0 0px;
                 color: #333;
+                border-bottom: 1px solid #bbb;
                 *text-align: center;
             }
             #header a.logo {
                 text-align: left;
                 font-size: 30px;
                 margin: 0;
-                padding: 0;
+                padding: 5px 50px 0;
                 color: inherit;
                 text-decoration: none;
                 float: left;
@@ -40,8 +41,8 @@
             }
             #menu {
                 display: table;
-                width: 680px;
-                margin-top: 10px;
+                width: 480px;
+                margin: 10px 50px 0 0;
                 float: right;
             }
             #menu a {
@@ -81,17 +82,17 @@
         </style>
     </head>
     <body>
-        <div id="site">
-            <section id="header">
-                <a href="{% url 'home' %}" class="logo">Flavia Bernardes</a>
-                <section id="menu">
-                    <a href="{% url 'home' %}" class="active">Paintings</a>
-                    <a href="#">About</a>
-                    <a href="#">Blog</a>
-                    <a href="#">Contact</a>
-                    <div class="clear"></div>
-                </section>
+        <section id="header">
+            <a href="{% url 'home' %}" class="logo">Flavia Bernardes</a>
+            <section id="menu">
+                <a href="{% url 'home' %}" class="active">Paintings</a>
+                <a href="#">About</a>
+                <a href="#">Blog</a>
+                <a href="#">Contact</a>
+                <div class="clear"></div>
             </section>
+        </section>
+        <div id="site">
             <section id="container">
                 {% block container %}
                 {% endblock %}
