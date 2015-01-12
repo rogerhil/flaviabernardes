@@ -1,5 +1,12 @@
+{% load staticfiles %}
 <html>
     <head>
+        <!-- jQuery library (served from Google) -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <!-- bxSlider Javascript file -->
+        <script src="{% static 'js/jquery.bxslider.js' %}"></script>
+        <!-- bxSlider CSS file -->
+        <link href="{% static 'css/jquery.bxslider.css' %}" rel="stylesheet" />
         <style>
             body {
                 font-family: Myriad Pro;
@@ -9,31 +16,41 @@
                 color: #999;
                 margin: 0;
             }
+            ul {
+                margin: 0;
+            }
             a {
                 color: #444;
             }
             #site {
                 width: 960px;
-                margin: 0 auto;
+                margin: 35px auto;
                 *border: 1px solid gray;
+                z-index: 1 !important;
             }
             #header {
-                margin-top: 0px;
-                margin-bottom: 0px;
-                position: absolute;
-                background-color: #eee;
-                width: 100%;
+                margin: 0 auto !important;
+                width: 960px;
                 opacity: .6;
-                padding: 0 0px;
                 color: #333;
-                border-bottom: 1px solid #bbb;
-                *text-align: center;
+                z-index: 9999 !important;
+                background-color: white !important;
+                position: relative;
+            }
+            #header .content {
+                position: fixed !important;
+                background-color: white;
+                padding: 0;
+                margin: 0;
+                width: 960px;
+                top: 0px;
+                z-index: 9999 !important;
             }
             #header a.logo {
                 text-align: left;
                 font-size: 30px;
                 margin: 0;
-                padding: 5px 50px 0;
+                padding: 0;
                 color: inherit;
                 text-decoration: none;
                 float: left;
@@ -41,8 +58,8 @@
             }
             #menu {
                 display: table;
-                width: 480px;
-                margin: 10px 50px 0 0;
+                width: 580px;
+                margin-top: 8px;
                 float: right;
             }
             #menu a {
@@ -59,7 +76,6 @@
             }
             #menu a:hover {
                 color: #000;
-            text-decoration: underline;
             }
             #menu a.active {
                 *border-bottom: 2px solid #efefef;
@@ -83,14 +99,16 @@
     </head>
     <body>
         <section id="header">
-            <a href="{% url 'home' %}" class="logo">Flavia Bernardes</a>
-            <section id="menu">
-                <a href="{% url 'home' %}" class="active">Paintings</a>
-                <a href="#">About</a>
-                <a href="#">Blog</a>
-                <a href="#">Contact</a>
-                <div class="clear"></div>
-            </section>
+            <div class="content">
+                <a href="{% url 'home' %}" class="logo">Flavia Bernardes</a>
+                <section id="menu">
+                    <a href="{% url 'home' %}" class="active">Paintings</a>
+                    <a href="#">About</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Contact</a>
+                    <div class="clear"></div>
+                </section>
+            </div>
         </section>
         <div id="site">
             <section id="container">

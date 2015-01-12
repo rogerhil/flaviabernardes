@@ -2,5 +2,24 @@
 {% load staticfiles %}
 
 {% block container %}
-    <img src="{% static 'img/untitled.png' %}">
+    <ul class="bxslider">
+        <li>
+            <img src="{% static 'img/untitled.png' %}">
+        </li>
+        <li>
+            <img src="{% static 'img/amelie.png' %}">
+        </li>
+        <li>
+            <img src="{% static 'img/stolen_moment.png' %}">
+        </li>
+    </ul>
+    <script>
+        $(document).ready(function(){
+            $('.bxslider').bxSlider({
+                auto: true,
+                controls: false,
+                speed: 3000,
+            });
+        });
+    </script>
 {% endblock %}
