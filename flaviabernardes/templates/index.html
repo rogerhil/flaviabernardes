@@ -1,17 +1,15 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load cropping %}
 
 {% block container %}
+
     <ul class="bxslider">
-        <li>
-            <img src="{% static 'img/untitled.png' %}">
-        </li>
-        <li>
-            <img src="{% static 'img/amelie.png' %}">
-        </li>
-        <li>
-            <img src="{% static 'img/stolen_moment.png' %}">
-        </li>
+        {% for artwork in home_artwork_list %}
+            <li>
+                <img src="{% cropped_thumbnail artwork 'home_preview' scale=1 %}" />
+            </li>
+        {% endfor %}
     </ul>
     <script>
         $(document).ready(function(){

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block container %}
+    <div id="about-picture">
+        <img src="{% static 'img/about.jpg' %}" />
+    </div>
+    <div id="about-text">
+        {% lorem 7 p %}
+    </div>
+    <script>
+    </script>
+{% endblock %}

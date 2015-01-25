@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load cropping %}
+
+{% block container %}
+    <div id="full-view">
+
+    </div>
+    <div id="painting-preview">
+        <img src="{% cropped_thumbnail artwork_list.2 "listing_preview" scale=1 %}">
+    </div>
+    <div id="thumbnails">
+        <ul>
+            {% for artwork in artwork_list %}
+                <li artwork="{{ artwork.id }}">
+                    <div>
+                        <p>
+                            {{ artwork.name }}<br />
+                            {{ artwork.year }}<br /><br />
+                            {{ artwork.type }}<br />
+                            {{ artwork.width }} X {{ artwork.height }} cm<br />
+                        </p>
+                    </div>
+                    <img src="{% cropped_thumbnail artwork 'thumbnail' scale=1 %}" />
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <script>
+        var preview_urls = {
+            {% for artwork in artwork_list %}
+                {{ artwork.id }}: {preview: '{% cropped_thumbnail artwork 'listing_preview' scale=1 %}', original: '{% cropped_thumbnail artwork 'full_preview' width=960 %}'},
+            {% endfor%}
+        };
+        $('#thumbnails li').mouseover(function (e) {
+            var url = preview_urls[$(this).attr('artwork')].preview;
+            $('#painting-preview img').fadeOut(1000, function () {$(this).remove();});
+            var $img = $('<img src="' + url + '" style="display: none;" />');
+            $('#painting-preview').append($img);
+            $img.fadeIn(500);
+            $('<img/>')[0].src = preview_urls[$(this).attr('artwork')].original;
+            //$(this).find('p').css('color', '#000');
+        });
+        $('#thumbnails li').click(function (e) {
+            var url = preview_urls[$(this).attr('artwork')].original;
+            $("#full-view").append('<img src="' + url + '" />');
+            //$('#painting-preview').css('z-index', -1);
+            //$('#thumbnails').css('z-index', -1);
+            $("#full-view").css('z-index', 9999);
+            $("#full-view").fadeIn(1000);
+            $('#cover').fadeIn();
+            //$("#footer").fadeOut();
+        });
+        var closeFullPreview = function () {
+            $("#full-view").fadeOut(1000, function () {
+                $(this).html('');
+            });
+            $('#cover').fadeOut();
+            //$("#footer").fadeIn();
+        }
+        $('#full-view').click(closeFullPreview);
+        $('#cover').click(closeFullPreview);
+
+        //$('#thumbnails').fadeOut();
+        //$('#painting-preview').fadeOut();
+        //$("#full-view").animate({width: 'toggle'}, 1500);
+        //$("#full-view").show();
+        //$("#full-view img").css('width', '10px');
+        //$("#full-view img").css('position', 'absolute');
+        //$("#full-view img").css('left', '255px');
+        //$("#full-view img").css('top', '290px');
+        //$("#full-view img").animate({width: '+=950', left: '-=255', 'top': '-=290'}, 1500);
+        //$("#full-view").animate({height: 'toggle'}, 1000);
+        //$("body").css('background', 'black');
+        //$("body").css('opacity', '.9');
+
+        $(window).mousemove(function (e) {
+
+            if (e.clientY > 560) {
+            //    console.log(e.clientX);
+            //    $('#thumbnails').animate({scrollTop: 150}, 500);
+
+            }
+
+        });
+
+    </script>
+{% endblock %}
