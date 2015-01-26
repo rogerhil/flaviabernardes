@@ -108,5 +108,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "media"),
 )
 
-from .productionsettings import *
-
+try:
+    from .developmentsettings import *
+except ImportError:
+    from .productionsettings import *
