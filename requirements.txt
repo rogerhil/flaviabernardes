@@ -1,2 +1,4 @@
 flaviabernardes
-Django==1.8a1
+Django
+easy_thumbnails
+django_image_cropping
