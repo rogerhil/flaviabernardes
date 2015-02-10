@@ -12,7 +12,7 @@
     <div id="thumbnails">
         <ul>
             {% for artwork in artwork_list %}
-                <li artwork="{{ artwork.id }}">
+                <li artwork="{{ artwork.id }}" class="ui-state-default">
                     <div>
                         <p>
                             {{ artwork.name }}<br />
@@ -83,6 +83,29 @@
             }
 
         });
+
+        $("#thumbnails ul").sortable({
+            stop: function (e, ui) {
+                var data = [];
+                $("#thumbnails ul li").each(function () {
+                    data.push($(this).attr('artwork'));
+                });
+                console.log(data);
+                $.ajax({
+                    url: '/artworks/sort/',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {data: data},
+                    success: function (result) {
+                        console.log(result);
+                        if (!result.success) {
+                            alert('Something went wrong while trying to sort the artworks. Please contact Rogerio: ' + result.message);
+                        }
+                    }
+                })
+            }
+        });
+        $("#thumbnails ul").disableSelection();
 
     </script>
 {% endblock %}

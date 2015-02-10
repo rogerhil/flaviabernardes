@@ -22,6 +22,7 @@ class Artwork(models.Model):
     year = models.IntegerField()
     listing = models.BooleanField(default=True)
     home = models.BooleanField(default=False)
+    order = models.IntegerField(default=0)
     mini_thumbnail = ImageRatioField('image', '50x50')
     thumbnail = ImageRatioField('image', '130x130', size_warning=True)
     listing_preview = ImageRatioField('image', '510x580', size_warning=True)
