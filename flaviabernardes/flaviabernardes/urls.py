@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'flaviabernardes.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^admin/$', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
     url(r'^artworks/$', PaintingsView.as_view(), name='artworks'),
     url(r'^artworks/sort/$', ArtworksSortJson.as_view(), name='artworks_sort'),
     url(r'^about/$', TemplateView.as_view(template_name="about/about.html"),
