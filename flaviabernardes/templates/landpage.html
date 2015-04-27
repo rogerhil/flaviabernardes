@@ -128,7 +128,7 @@
                         last_name: $(this).find('input[name=last_name]').val(),
                         first_name: $(this).find('input[name=first_name]').val(),
                     };
-                    $('#form-subscriber .errorlist').remove();
+                    $('#form-subscriber .errorlist').slideUp();
                     $('#cover').fadeIn();
                     $.ajax({
                         type: 'post',
