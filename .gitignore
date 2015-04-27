@@ -1,6 +1,8 @@
 # Byte-compiled / optimized / DLL files
 .idea
 db.sqlite3
+.DS_Store
+fbenv/
 
 __pycache__/
 *.py[cod]

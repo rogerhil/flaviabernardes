@@ -2,3 +2,4 @@ flaviabernardes
 Django
 easy_thumbnails
 django_image_cropping
+mailchimp

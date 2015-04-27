@@ -1,32 +1,37 @@
-from django.views.generic import ListView, View
-from django import http
+from django.views.generic import ListView
 
+from ..utils import JsonView, JsonFormView
 from .models import Artwork
+from .forms import SubscriberForm
+
+
+class LandPageView(JsonFormView):
+    template_name = 'landpage.html'
+    form_template = 'landingpage_form.html'
+    form_class = SubscriberForm
+    success_url = '/'
+
+    def form_valid(self, form):
+        form.subscribe()
+        return super(LandPageView, self).form_valid(form)
+
+
+class ConfirmationView(ListView):
+    context_object_name = 'home_artwork_list'
+    queryset = Artwork.objects.filter(home=True)
+    template_name = 'confirmation.html'
 
 
 class HomeView(ListView):
-
     context_object_name = 'home_artwork_list'
     queryset = Artwork.objects.filter(home=True)
     template_name = 'index.html'
 
 
 class PaintingsView(ListView):
-
     context_object_name = 'artwork_list'
     queryset = Artwork.objects.filter(listing=True).order_by('order')
     template_name = 'artwork/artworks.html'
-
-
-
-class JsonView(View):
-
-    def post(self, request, *args, **kwargs):
-        try:
-            data = self.json_post(request)
-            return http.JsonResponse({'success': True, 'data': data})
-        except Exception as err:
-            return http.JsonResponse({'success': False, 'message': str(err)})
 
 
 class ArtworksSortJson(JsonView):

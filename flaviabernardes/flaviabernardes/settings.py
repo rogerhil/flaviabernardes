@@ -39,7 +39,8 @@ INSTALLED_APPS = (
     'django.contrib.webdesign',
     'easy_thumbnails',
     'image_cropping',
-    'flaviabernardes.artwork'
+    'flaviabernardes.artwork',
+    'flaviabernardes.blog'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -107,6 +108,11 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
     os.path.join(BASE_DIR, "media"),
 )
+
+
+MAILCHIMP_SUBSCRIBERS_LIST_ID = '2172bebde9'
+MAILCHIMP_API_KEY = ''
+
 
 try:
     from .developmentsettings import *

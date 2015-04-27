@@ -1,0 +1,15 @@
+
+<div id="login">
+    <h1>Login</h1>
+    <br>
+    <form>
+        {% csrf_token %}
+        <ul>
+            {% include 'formbase.html' %}
+            <li>
+                <button>Login</button>
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </form>
+</div>

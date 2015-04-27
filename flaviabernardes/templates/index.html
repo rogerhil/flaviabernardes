@@ -1,24 +1,45 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load math %}
 {% load cropping %}
+
+{% block extrastyle %}
+    <style>
+
+    </style>
+{% endblock %}
 
 {% block container %}
 
-    <ul class="bxslider">
+    {% comment %}
+    <ul class="bxslider cb-slideshow">
         {% for artwork in home_artwork_list %}
             <li>
-                <img src="{% cropped_thumbnail artwork 'home_preview' scale=1 %}" />
+                <span>
+                    <img src="{% cropped_thumbnail artwork 'full_preview' scale=1 %}" />
+                </span>
             </li>
         {% endfor %}
     </ul>
+
+
+        <ul class="cb-slideshow-----------------">
+            {% for artwork in home_artwork_list %}
+                <li><span></span><div><h3></h3></div></li>
+            {% endfor %}
+        </ul>
+    {% endcomment %}
+
     <script>
         $(document).ready(function(){
-            $('.bxslider').bxSlider({
-                auto: true,
-                controls: false,
-                speed: 1000,
-                mode: 'fade'
-            });
+            //$('.bxslider').bxSlider({
+            //    auto: true,
+            //    controls: false,
+            //    speed: 1000,
+            //    mode: 'fade'
+            //});
         });
+
+
     </script>
 {% endblock %}

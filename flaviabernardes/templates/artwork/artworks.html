@@ -44,12 +44,9 @@
         $('#thumbnails li').click(function (e) {
             var url = preview_urls[$(this).attr('artwork')].original;
             $("#full-view").append('<img src="' + url + '" />');
-            //$('#painting-preview').css('z-index', -1);
-            //$('#thumbnails').css('z-index', -1);
             $("#full-view").css('z-index', 9999);
             $("#full-view").fadeIn(1000);
             $('#cover').fadeIn();
-            //$("#footer").fadeOut();
         });
         var closeFullPreview = function () {
             $("#full-view").fadeOut(1000, function () {
@@ -61,18 +58,6 @@
         $('#full-view').click(closeFullPreview);
         $('#cover').click(closeFullPreview);
 
-        //$('#thumbnails').fadeOut();
-        //$('#painting-preview').fadeOut();
-        //$("#full-view").animate({width: 'toggle'}, 1500);
-        //$("#full-view").show();
-        //$("#full-view img").css('width', '10px');
-        //$("#full-view img").css('position', 'absolute');
-        //$("#full-view img").css('left', '255px');
-        //$("#full-view img").css('top', '290px');
-        //$("#full-view img").animate({width: '+=950', left: '-=255', 'top': '-=290'}, 1500);
-        //$("#full-view").animate({height: 'toggle'}, 1000);
-        //$("body").css('background', 'black');
-        //$("body").css('opacity', '.9');
 
         $(window).mousemove(function (e) {
 
