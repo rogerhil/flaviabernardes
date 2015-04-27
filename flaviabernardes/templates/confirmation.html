@@ -81,6 +81,11 @@
         <script src="{% static 'js/wow.min.js' %}"></script>
         <script src="{% static 'js/jquery.placeholder.min.js' %}"></script>
         <script src="{% static 'js/tmstickup.js' %}"></script>
+        <script>
+            window.setTimeout(function () {
+                $('object').remove();
+            }, 500);
+        </script>
 
     </body>
 </html>
