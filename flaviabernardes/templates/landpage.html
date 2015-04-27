@@ -41,30 +41,25 @@
             <div class="text-vertical">
                 <div class="container-fluid">
 
-                    <div style=" font-size: 16px; text-align: center; width: 99%; position: absolute; top: 10%; z-index: 0;">
-                        <h1 style="font-family: Polygraph; font-size: 120px; margin-bottom: 100px;" class="wow fadeInDownBig">
+                    <div style="text-align: center; width: 100%; z-index: 0;">
+                        <h1 style="font-family: Polygraph; font-size: 80px; margin-bottom: 50px;" class="wow fadeInDownBig">
                             FLAVIA BERNARDES
                         </h1>
-                        <div style="width: 80%; margin: 0 auto;" class="wow fadeInDown">
-                            <p>
+                        <div style="width: 80%; margin: 0 auto;">
+                            <p class="wow fadeInRight">
                                 Art is not just about beauty. It's about truth. <br>And truth? Is empowering.
                             </p>
-                            <p>
+                            <p class="wow fadeInLeft">
                                 Want some? <br>
                                 Enter your email below to be notified when the site is up and <br>
                                 running and receive a free exclusive artwork wallpaper. <br>
                                 Plus special offers only shared via e-mail.
                             </p>
-                            <p>
+                            <div class="wow fadeInUp">
                                 <form id="form-subscriber" action="{% url 'landpage' %}">
                                     {% include 'landingpage_form.html' %}
                                 </form>
-                            </p>
-                            <!--
-                            <p>
-                                <button style="padding: 0px 50px; background: #fff; color: rgba(0,0,0,0.9); border: 0px solid #fff;">SEND</button>
-                            </p>
-                            -->
+                            </div>
                         </div>
 
                     </div>
@@ -86,14 +81,15 @@
         <section class="thankyou" id="thankyou" style="display: none;">
             <div class="container-fluid text-vertical text-center">
                 <div class="col-sm-10 col-sm-offset-1 wow fadeInDownBig">
-                    <h2>
-                        Please check your email and click Activate Account in <br>
-                        the message we just sent to <span id="sent-email"></span>.
-                    </h2>
-                    <h2>
-                        Once your account is activated, we’ll send you  <br>
-                        an email with some information blah blah....
-                    </h2>
+                    <h3>
+                        Please confirm your subscription in the email message<br>
+                        that was just sent to <span id="sent-email"></span>.
+                    </h3>
+                    <br>
+                    <h3>
+                        Once you confirm the subscription, you will redirected<br>
+                        to a page to download your artwork wallpaper.
+                    </h3>
                     <br>
 
                 </div>
@@ -122,9 +118,10 @@
                 $("#form-subscriber input[name=email]").focus();
                 $("#form-subscriber").submit(function (e) {
                     e.preventDefault();
+                    var email = $(this).find('input[name=email]').val();
                     var data = {
                         csrfmiddlewaretoken: $(this).find('input[name=csrfmiddlewaretoken]').val(),
-                        email: $(this).find('input[name=email]').val(),
+                        email: email,
                         last_name: $(this).find('input[name=last_name]').val(),
                         first_name: $(this).find('input[name=first_name]').val(),
                     };
@@ -142,7 +139,7 @@
                             }
 
                             $('#thankyou').show();
-                            var email = $(this).find('input[type=email]').val();
+                            $('#top').hide();
                             $('#sent-email').html(email);
                             wow = new WOW({
                                 offset: 50

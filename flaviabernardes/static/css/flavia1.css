@@ -471,9 +471,7 @@ label {
 
 .thankyou .text-vertical,
 .overlay {
-    background: rgba(0, 0, 0, 0.6);
-    width: 100%;
-    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
 }
 
 #cover {
@@ -504,14 +502,14 @@ label {
 #form-subscriber input {
     width: 50%;
     color: #fff;
-    padding: 0 20px;
+    padding: 5px 20px;
     background: rgba(255,255,255,0.0);
     border: 2px solid #fff;
     margin-bottom: 20px;
 }
 
 #form-subscriber input.half {
-    width: 24.4%;
+    width: calc(25% - 10px);
 }
 
 #form-subscriber button {

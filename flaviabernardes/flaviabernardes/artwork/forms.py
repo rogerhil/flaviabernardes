@@ -17,4 +17,6 @@ class SubscriberForm(forms.Form):
                                      data)
         except:
             pass
+        if settings.DEVELOPMENT:
+            return
         client.lists.subscribe(settings.MAILCHIMP_SUBSCRIBERS_LIST_ID, data)
