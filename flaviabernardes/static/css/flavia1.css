@@ -7,10 +7,6 @@
     src: url(../font/MYRIADPRO-COND.OTF);
     font-stretch: condensed;
 }
-//@font-face {
-//    font-family: Polygraph;
-//    src: url(../font/polygraph.ttf);
-//}
 
 @font-face {
 	font-family: 'gothic';
@@ -793,6 +789,6 @@ footer,
 
 @media (max-width: 1400px) {
     .text-vertical {
-        padding-top: 50px;
+        padding-top: 0px;
     }
 }

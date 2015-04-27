@@ -42,14 +42,14 @@
                 <div class="container-fluid">
 
                     <div style="text-align: center; z-index: 0;">
-                        <h1 style="font-family: Polygraph; font-size: 80px; margin-bottom: 50px; font-weight: normal;" class="wow fadeInDownBig">
+                        <h1 style="font-family: Polygraph; font-size: 100px; margin-bottom: 50px; font-weight: normal;" class="wow fadeInDownBig">
                             FLAVIA BERNARDES
                         </h1>
                         <div style="width: 80%; margin: 0 auto;">
-                            <p class="wow fadeInLeft">
+                            <p class="wow fadeInDown">
                                 Art is not just about beauty. It's about truth. <br>And truth? Is empowering.
                             </p>
-                            <p class="wow fadeInLeft">
+                            <p class="wow fadeInDown">
                                 Want some? <br>
                                 Enter your email below to be notified when the site is up and <br>
                                 running and receive a free exclusive artwork wallpaper. <br>
@@ -73,17 +73,23 @@
         <!-- callout -->
         <section class="thankyou" id="thankyou" style="display: none;">
             <div class="container-fluid text-vertical text-center">
-                <div class="col-sm-10 col-sm-offset-1 wow fadeInDownBig">
-                    <h3>
-                        Please confirm your subscription in the email message<br>
-                        that was just sent to <span id="sent-email"></span>.
-                    </h3>
+                <div class="col-sm-10 col-sm-offset-1" id="almost-done">
+                    <div class="wow fadeInDownBig">
+                        <h1>
+                            Almost Done
+                        </h1>
+                    </div>
                     <br>
-                    <h3>
-                        Once you confirm the subscription, you will redirected<br>
-                        to a page to download your artwork wallpaper.
-                    </h3>
-                    <br>
+                    <div class="wow fadeInLeftBig">
+                        <h3>
+                            Please confirm your subscription in the email message<br>
+                            that was just sent to <span id="sent-email"></span>.
+                        </h3>
+                        <h3>
+                            Once you confirm the subscription, you will redirected<br>
+                            to a page to download your artwork wallpaper.
+                        </h3>
+                    </div>
 
                 </div>
             </div>
@@ -105,6 +111,8 @@
         <script src="{% static 'js/tmstickup.js' %}"></script>
 
         <script>
+            var img = new Image();
+            img.src = '{% static 'img/ajax-loader.png' %}';
             $(window).load(function () {
                 window.setTimeout(function () {
                     $('object').remove();
@@ -120,29 +128,31 @@
                         last_name: $(this).find('input[name=last_name]').val(),
                         first_name: $(this).find('input[name=first_name]').val(),
                     };
+                    $('#form-subscriber .errorlist').remove();
                     $('#cover').fadeIn();
                     $.ajax({
                         type: 'post',
                         url: $(this).attr('action'),
                         data: data,
                         success: function (data) {
-                            $('#cover').fadeOut();
-                            if (!data.success) {
-                                console.log(data.html);
-                                $('#form-subscriber').html(data.html);
-                                return;
-                            }
-
-                            $('#thankyou').show();
-                            $('#top').hide();
-                            $('#sent-email').html(email);
-                            wow = new WOW({
-                                offset: 50
+                            $('#cover').fadeOut(function () {
+                                if (!data.success) {
+                                    $('#form-subscriber').html(data.html);
+                                    $('#form-subscriber .errorlist').hide();
+                                    $('#form-subscriber .errorlist').slideDown();
+                                    return;
+                                }
+                                var h = $('#almost-done').html();
+                                $('#almost-done').html('');
+                                $('#thankyou').show();
+                                $('html,body').animate({
+                                    scrollTop: $('#thankyou').offset().top
+                                }, 1000, function () {
+                                    $('#almost-done').html(h);
+                                    $('#sent-email').html(email);
+                                    $('#top').hide();
+                                });
                             });
-                            wow.init();
-                            $('html,body').animate({
-                                scrollTop: $('#thankyou').offset().top
-                            }, 1000);
                         }
                     });
                 });
