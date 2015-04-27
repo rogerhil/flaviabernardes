@@ -17,4 +17,4 @@ class SubscriberForm(forms.Form):
                                      data)
         except:
             pass
-        #client.lists.subscribe(settings.MAILCHIMP_SUBSCRIBERS_LIST_ID, data)
+        client.lists.subscribe(settings.MAILCHIMP_SUBSCRIBERS_LIST_ID, data)
