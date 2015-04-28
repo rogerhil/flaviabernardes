@@ -873,6 +873,9 @@ footer,
     #form-subscriber .errorlist li {
         width: 90%;
     }
+    #form-subscriber .non-field-errors {
+        width: 90%;
+    }
     .landing-page .body {
         width: 90%;
     }
@@ -907,6 +910,9 @@ footer,
         margin-right: 0;
     }
     #form-subscriber .errorlist li {
+        width: 80%;
+    }
+    #form-subscriber .non-field-errors {
         width: 80%;
     }
     .landing-page .body {
@@ -944,6 +950,9 @@ footer,
         margin-right: 0;
     }
     #form-subscriber .errorlist li {
+        width: 60%;
+    }
+    #form-subscriber .non-field-errors {
         width: 60%;
     }
     .landing-page .body {
@@ -990,6 +999,9 @@ footer,
         margin-right: 0px;
     }
     #form-subscriber .errorlist li {
+        width: 60%;
+    }
+    #form-subscriber .non-field-errors {
         width: 60%;
     }
     .landing-page .body {
