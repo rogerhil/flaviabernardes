@@ -1,9 +1,15 @@
 {% csrf_token %}
 
+{% if form.non_field_errors %}
+    <div class="non-field-errors">
+        {{ form.non_field_errors }}
+    </div>
+{% endif %}
+
 {{ form.errors.email }}
 <input type="email" name="email" value="" placeholder="e-mail" class="required" /><div></div>
 {{ form.errors.first_name }}
-<input type="text" name="first_name" value="" placeholder="first name" class="required half" style="margin-right: 15px;" />
+<input type="text" name="first_name" value="" placeholder="first name" class="required half" />
 {{ form.errors.last_name }}
-<input type="text" name="last_name" value="" placeholder="last name (optional)"  class="half" /><div></div>
+<input type="text" name="last_name" value="" placeholder="last name (optional)" class="half last" /><div></div>
 <button>Subscribe</button>

@@ -12,11 +12,11 @@ class SubscriberForm(forms.Form):
     def subscribe(self):
         data = self.cleaned_data
         client = Mailchimp(settings.MAILCHIMP_API_KEY)
-        try:
-            client.lists.unsubscribe(settings.MAILCHIMP_SUBSCRIBERS_LIST_ID,
-                                     data)
-        except:
-            pass
-        if settings.DEVELOPMENT:
-            return
+        #try:
+            #client.lists.unsubscribe(settings.MAILCHIMP_SUBSCRIBERS_LIST_ID,
+            #                         data)
+        #except:
+        #    pass
+        #if settings.DEVELOPMENT:
+        #    return
         client.lists.subscribe(settings.MAILCHIMP_SUBSCRIBERS_LIST_ID, data)

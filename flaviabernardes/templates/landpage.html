@@ -34,34 +34,43 @@
 
     <body>
         <div id="cover">
-            <img src="{% static 'img/ajax-loader.png' %}" style="position: absolute; top: calc(50% - 64px); left: calc(50% - 64px); display: block;">
+            <img src="{% static 'img/ajax-loader.png' %}" class="ajax-loader">
         </div>
         <!-- Header -->
-        <header id="top" class="header">
+        <header id="top" class="header landing-page">
             <div class="text-vertical">
                 <div class="container-fluid">
 
-                    <div style="text-align: center; z-index: 0;">
-                        <h1 style="font-family: Polygraph; font-size: 100px; margin-bottom: 50px; font-weight: normal;" class="wow fadeInDownBig">
+                    <div>
+                        <h1 class="wow fadeInDownBig title">
                             FLAVIA BERNARDES
                         </h1>
-                        <div style="width: 80%; margin: 0 auto;">
+                        <div class="body">
                             <p class="wow fadeInDown">
-                                Art is not just about beauty. It's about truth. <br>And truth? Is empowering.
+                                Art is not just about beauty. It's about truth. <br>
+                                And truth? Is empowering.
                             </p>
                             <p class="wow fadeInDown">
                                 Want some? <br>
-                                Enter your email below to be notified when the site is up and <br>
-                                running and receive a free exclusive artwork wallpaper. <br>
+                                Enter your email below to be notified when the site is up and
+                                running and receive a free exclusive artwork wallpaper.
                                 Plus special offers only shared via e-mail.
                             </p>
+                        </div>
+                        <div>
                             <div class="wow fadeInLeft">
                                 <form id="form-subscriber" action="{% url 'landpage' %}">
                                     {% include 'landingpage_form.html' %}
                                 </form>
                             </div>
                         </div>
-
+                        <div class="">
+                            <p>
+                                {% with '64' as size %}
+                                    {% include 'social.html' %}
+                                {% endwith %}
+                            </p>
+                        </div>
                     </div>
 
                 </div>
@@ -138,8 +147,8 @@
                             $('#cover').fadeOut(function () {
                                 if (!data.success) {
                                     $('#form-subscriber').html(data.html);
-                                    $('#form-subscriber .errorlist').hide();
-                                    $('#form-subscriber .errorlist').slideDown();
+                                    $('#form-subscriber .errorlist').hide().slideDown();
+                                    $('#form-subscriber .non-field-errors').hide().slideDown();
                                     return;
                                 }
                                 var h = $('#almost-done').html();

@@ -1,3 +1,5 @@
+from mailchimp import ListAlreadySubscribedError
+
 from django.views.generic import ListView
 
 from ..utils import JsonView, JsonFormView
@@ -12,7 +14,12 @@ class LandPageView(JsonFormView):
     success_url = '/'
 
     def form_valid(self, form):
-        form.subscribe()
+        try:
+            form.subscribe()
+        except ListAlreadySubscribedError:
+            msg = "You are already subscribed to my newsletter."
+            form.errors['__all__'] = msg
+            return self.form_invalid(form)
         return super(LandPageView, self).form_valid(form)
 
 

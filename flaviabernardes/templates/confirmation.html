@@ -35,12 +35,14 @@
 
         <section class="thankyou thankyou-flavia">
             <div class="container-fluid text-vertical text-center">
-                <div class="col-sm-10 col-sm-offset-1">
+                <div class="col-sm-8 col-sm-offset-2">
                     <div class="wow fadeInDownBig">
                         <h1>
-                            Thank you so much for getting on board!<br>
-                            I'm really happy to have you here!
+                            Thank you so much for getting on board!
                         </h1>
+                        <h2>
+                            I'm really happy to have you here!
+                        </h2>
                     </div>
                     <div class="wow fadeInDown">
                         <p>
@@ -50,24 +52,29 @@
                     </div>
                     <div class="wow fadeInDown">
                         <p>
-                            This is a space where I share my thoughts, stories and behind
-                            the scenes stuff. <br>There are some things that I only share here
-                            and you will always be the first to know when there's
-                            something new and exciting going on.
+                            This is a space where I share my thoughts, stories and behind the scenes stuff.
+                            There are some things that I only share here and you will always be the
+                            first to know when there's something new and exciting going on.
                         </p>
                     </div>
                     <div class="wow fadeInDown">
                         <p>
                             If you ever have any questions, feel free to drop me a line
-                            at flavia@flaviabernardesart.com. I'll be happy to hear from
-                            you! <br>
-                            If you feel like this is something someone else you know might
-                            enjoy, please invite them over! The more, the merrier!
+                            at <a href="mailto:flavia@flaviabernardesart.com">flavia@flaviabernardesart.com</a>.
+                            I'll be happy to hear from you! If you feel like this is something someone else you
+                            know might enjoy, please invite them over! The more, the merrier!
+                        </p>
+                    </div>
+                    <div class="">
+                        <p>
+                            {% with '64' as size %}
+                                {% include 'social.html' %}
+                            {% endwith %}
                         </p>
                     </div>
                     <div class="wow fadeInLeft">
                         <p>
-                            <a href="{% static 'img/amelie.jpg' %}">Please click here to download your wallpaper.</a><br>
+                            <a href="{% static 'img/amelie-wallpaper.jpg' %}">Please click here to download your wallpaper.</a><br>
                             I hope you enjoy it!
                         </p>
                     </div>
