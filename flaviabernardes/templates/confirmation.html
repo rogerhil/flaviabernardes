@@ -10,7 +10,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Flavia Bernardes - Confirmation</title>
+        <title>Flavia Bernardes</title>
 
         <!-- Bootstrap Core CSS -->
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
@@ -29,6 +29,11 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+        <script type="text/javascript">var switchTo5x=true;</script>
+        <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+        <script type="text/javascript">stLight.options({publisher: "023fcf4a-4582-470d-8c44-a22303a1ce96", doNotHash: true, doNotCopy: false, hashAddressBar: false});</script>
+
     </head>
 
     <body>
@@ -63,14 +68,17 @@
                                 If you ever have any questions, feel free to drop me a line
                                 at <a href="mailto:flavia@flaviabernardesart.com">flavia@flaviabernardesart.com</a>.
                                 I'll be happy to hear from you! If you feel like this is something someone else you
-                                know might enjoy, please invite them over! The more, the merrier!
+                                know might enjoy, please invite them over sharing! The more, the merrier!
                             </p>
                         </div>
-                        <div class="">
-                            <p>
-                                {% with '64' as size %}
-                                    {% include 'social.html' %}
-                                {% endwith %}
+                        <div id="share" style="height: 60px;">
+                            <p style="display: none;">
+                                <span class='st_sharethis_large' st_url="http://flaviabernardes.rogerhil.webfactional.com/" displayText='ShareThis'></span>
+                                <span class='st_facebook_large' st_url="http://flaviabernardes.rogerhil.webfactional.com/" displayText='Facebook'></span>
+                                <span class='st_twitter_large' st_url="http://flaviabernardes.rogerhil.webfactional.com/" displayText='Tweet'></span>
+                                <span class='st_instagram_large' st_url="http://flaviabernardes.rogerhil.webfactional.com/" displayText='Instagram'></span>
+                                <span class='st_pinterest_large' st_url="http://flaviabernardes.rogerhil.webfactional.com/" displayText='Pinterest'></span>
+                                <span class='st_email_large' st_url="http://flaviabernardes.rogerhil.webfactional.com/" displayText='Email'></span>
                             </p>
                         </div>
                         <div class="wow fadeInLeft">
@@ -103,6 +111,9 @@
             window.setTimeout(function () {
                 $('object').remove();
             }, 500);
+            window.setTimeout(function () {
+                $('#share p').fadeIn(1000);
+            }, 1000);
         </script>
 
     </body>
