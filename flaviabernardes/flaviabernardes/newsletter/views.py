@@ -2,7 +2,7 @@ from mailchimp import ListAlreadySubscribedError
 
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from django.views.generic import ListView
+from django.views.generic import TemplateView
 
 from ..utils import JsonFormView
 from .forms import SubscriberForm
@@ -25,8 +25,7 @@ class LandPageView(JsonFormView):
         return super(LandPageView, self).form_valid(form)
 
 
-class ConfirmationView(ListView):
-    context_object_name = 'home_artwork_list'
+class ConfirmationView(TemplateView):
     template_name = 'confirmation.html'
 
     def dispatch(self, request, *args, **kwargs):
