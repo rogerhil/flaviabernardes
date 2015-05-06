@@ -1,32 +1,7 @@
-from mailchimp import ListAlreadySubscribedError
-
 from django.views.generic import ListView
 
-from ..utils import JsonView, JsonFormView
+from ..utils import JsonView
 from .models import Artwork
-from .forms import SubscriberForm
-
-
-class LandPageView(JsonFormView):
-    template_name = 'landpage.html'
-    form_template = 'landingpage_form.html'
-    form_class = SubscriberForm
-    success_url = '/'
-
-    def form_valid(self, form):
-        try:
-            form.subscribe()
-        except ListAlreadySubscribedError:
-            msg = "You are already subscribed to my newsletter."
-            form.errors['__all__'] = msg
-            return self.form_invalid(form)
-        return super(LandPageView, self).form_valid(form)
-
-
-class ConfirmationView(ListView):
-    context_object_name = 'home_artwork_list'
-    queryset = Artwork.objects.filter(home=True)
-    template_name = 'confirmation.html'
 
 
 class HomeView(ListView):

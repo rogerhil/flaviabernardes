@@ -40,7 +40,8 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'image_cropping',
     'flaviabernardes.artwork',
-    'flaviabernardes.blog'
+    'flaviabernardes.blog',
+    'flaviabernardes.newsletter'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -113,6 +114,7 @@ STATICFILES_DIRS = (
 
 
 MAILCHIMP_SUBSCRIBERS_LIST_ID = '2172bebde9'
+MAILCHIMP_SUBSCRIBERS_LIST_NAME = 'Newsletter'
 MAILCHIMP_API_KEY = ''
 
 

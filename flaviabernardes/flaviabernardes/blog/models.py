@@ -16,7 +16,7 @@ class BaseBlog(models.Model):
     text = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    head_image = models.ForeignKey('HeadImage')
+    #head_image = models.ForeignKey('HeadImage')
     tags = models.ManyToManyField(Tag)
 
     class Meta:
@@ -41,7 +41,7 @@ class Draft(BaseBlog):
         self.blog.title = self.title
         self.blog.text = self.text
         self.blog.slug = self.slug
-        self.blog.head_image = self.head_image
+        #self.blog.head_image = self.head_image
         #self.tags.clean()
         self.blog.save()
 

@@ -4,10 +4,10 @@ from django.conf import settings
 from django.contrib import admin
 from django.views.generic import TemplateView
 
-from .artwork.views import HomeView, PaintingsView, ArtworksSortJson, \
-                           LandPageView, ConfirmationView
+from .artwork.views import HomeView, PaintingsView, ArtworksSortJson
 from .blog.views import BlogsView, BlogView, BlogFieldForm
 from .fbauth.views import LoginJson, LogoutJson
+from .newsletter.views import LandPageView, ConfirmationView
 
 
 urlpatterns = patterns('',
@@ -28,7 +28,7 @@ urlpatterns = patterns('',
         name='about'),
     #url(r'^$', HomeView.as_view(), name='home'),
     url(r'^$', LandPageView.as_view(), name='landpage'),
-    url(r'^confirmation/$', ConfirmationView.as_view(), name='confimation'),
+    url(r'^confirmation/$', ConfirmationView.as_view(), name='confirmation'),
 
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
