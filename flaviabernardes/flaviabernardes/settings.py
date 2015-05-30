@@ -117,6 +117,10 @@ MAILCHIMP_SUBSCRIBERS_LIST_ID = '2172bebde9'
 MAILCHIMP_SUBSCRIBERS_LIST_NAME = 'Newsletter'
 MAILCHIMP_API_KEY = ''
 
+EMAIL_HOST = "smtp.webfaction.com"
+EMAIL_HOST_PASSWORD = "Natasha1"
+EMAIL_HOST_USER = "flaviabernardesart"
+DEFAULT_FROM_EMAIL = "flavia@flaviabernardesart.com"
 
 try:
     from .developmentsettings import *
