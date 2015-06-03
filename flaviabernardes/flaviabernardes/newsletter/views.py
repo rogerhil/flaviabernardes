@@ -16,7 +16,6 @@ class LandPageView(JsonFormView):
 
     def form_valid(self, form):
         try:
-            #form.subscribe()
             subscriber = form.pre_subscribe_locally()
             form.send_confirmation(subscriber)
         except AlreadySubscribedError:
