@@ -132,7 +132,8 @@ CURRENT_EMAIL_MARKETING_PROVIDER = MADMIMI
 EMAIL_HOST = ""
 EMAIL_HOST_PASSWORD = ""
 EMAIL_HOST_USER = ""
-DEFAULT_FROM_EMAIL = ""
+DEFAULT_FROM_EMAIL = "Flavia Bernardes - Artist " \
+                     "<flavia@flaviabernardesart.com>"
 
 try:
     from .developmentsettings import *

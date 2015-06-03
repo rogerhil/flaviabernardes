@@ -17,7 +17,6 @@ BODY = "Hello %s, \n\n" \
        "%s\n\n" \
        "Thank you,\n\n" \
        "Flavia Bernardes\n"
-FROM_EMAIL = "Flavia Bernades - Artist <flavia@flaviabernardesart.com>"
 
 
 class SubscriberForm(forms.Form):
