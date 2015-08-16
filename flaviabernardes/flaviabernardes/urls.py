@@ -26,8 +26,8 @@ urlpatterns = patterns('',
         BlogFieldForm.as_view(), name='blog_change_field'),
     url(r'^about/$', TemplateView.as_view(template_name="about/about.html"),
         name='about'),
-    #url(r'^$', HomeView.as_view(), name='home'),
-    url(r'^$', LandPageView.as_view(), name='landpage'),
+    url(r'^$', HomeView.as_view(), name='home'),
+    #url(r'^$', LandPageView.as_view(), name='landpage'),
     url(r'^confirmation/$', ConfirmationView.as_view(), name='confirmation'),
 
 

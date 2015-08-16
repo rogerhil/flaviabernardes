@@ -4,42 +4,49 @@
 {% load cropping %}
 
 {% block extrastyle %}
-    <style>
-
-    </style>
+    <link href="{% static 'css/home.css' %}" rel="stylesheet" />
 {% endblock %}
 
-{% block container %}
-
-    {% comment %}
-    <ul class="bxslider cb-slideshow">
-        {% for artwork in home_artwork_list %}
-            <li>
-                <span>
-                    <img src="{% cropped_thumbnail artwork 'full_preview' scale=1 %}" />
-                </span>
-            </li>
-        {% endfor %}
-    </ul>
-
-
-        <ul class="cb-slideshow-----------------">
-            {% for artwork in home_artwork_list %}
-                <li><span></span><div><h3></h3></div></li>
-            {% endfor %}
-        </ul>
-    {% endcomment %}
-
-    <script>
-        $(document).ready(function(){
-            //$('.bxslider').bxSlider({
-            //    auto: true,
-            //    controls: false,
-            //    speed: 1000,
-            //    mode: 'fade'
-            //});
-        });
-
-
-    </script>
+{% block site %}
+    <section id="home">
+        <div class="home-overlay"></div>
+        <div class="home-bar">
+            <div id="logo-div">
+                <div id="logo-home" style="display: none;">
+                    Flavia Bernardes
+                </div>
+            </div>
+            <div class="content">
+                <div class="transp">
+                    <section id="menu">
+                        <a href="{% url 'artworks' %}"{% if request.resolver_match.url_name == "artworks" %} class="active"{% endif %}>Artworks</a>
+                        <a href="{% url 'about' %}"{% if request.resolver_match.url_name == "about" %} class="active"{% endif %}>About</a>
+                        <a href="{% url 'blog' %}">Blog</a>
+                        <a href="#">Contact</a>
+                        <div class="clear"></div>
+                    </section>
+                </div>
+            </div>
+            <script>
+                $('#logo-home').fadeIn(1000);
+                $('.content').fadeIn(2000);
+                $('.home-bar a').click(function (e) {
+                    e.preventDefault();
+                    $('.content').addClass('top');
+                    $('#logo-div').addClass('logo-top');
+                    $('.transp').addClass('transp-top');
+                    $('#menu').addClass('menu-top');
+                    //$('#logo-home').fadeOut();
+                    //$('#home-overlay').css('background-color', 'rgba(255, 255, 255, 1); transition: 2s;');
+                    var href = $(this).attr('href');
+                    window.setTimeout(function () {
+                        $('#home').addClass('home-top');
+                        window.setTimeout(function () {
+                            window.location.replace(href);
+                        }, 500);
+                    }, 500);
+                });
+            </script>
+        </div>
+    </section>
 {% endblock %}

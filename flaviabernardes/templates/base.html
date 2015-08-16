@@ -9,7 +9,7 @@
         <script src="{% static 'js/jquery.bxslider.js' %}"></script>
         <script src="{% static 'js/jquery.cookie.js' %}"></script>
         <link href="{% static 'css/jquery.bxslider.css' %}" rel="stylesheet" />
-
+        <link href="{% static 'css/base.css' %}" rel="stylesheet" />
 
         <script>
             var csrftoken = $.cookie('csrftoken');
@@ -99,275 +99,6 @@
         </script>
 
         <style>
-            @font-face {
-                font-family: Myriad Pro;
-                src: url({% static 'font/MYRIADPRO-COND.OTF' %});
-                font-stretch: condensed;
-            }
-            @font-face {
-                font-family: Polygraph;
-                src: url({% static 'font/polygraph.ttf' %});
-            }
-            body {
-                *font-family: Myriad Pro;
-                font-family: Polygraph;
-                *font-stretch: condensed;
-                *font-variant: small-caps;
-                text-transform: capitalize;
-                color: #999;
-                margin: 0;
-            }
-            ul {
-                margin: 0;
-                padding: 0;
-            }
-            a {
-                color: #444;
-            }
-            html {
-                {# *background-image: url({% cropped_thumbnail home_artwork_list.1 'full_preview' scale=1 %}); #}
-                *background-size: cover;
-            }
-            #site {
-                width: 960px;
-                margin: 50px auto 0 auto;
-            }
-            #header {
-                margin: 0 auto !important;
-                color: #fff;
-                z-index: 999 !important;
-                font-weight: bold;
-                background-image: url({% cropped_thumbnail home_artwork_list.1 'full_preview' scale=1 %});
-                display: table;
-                position: relative;
-                width: 100%;
-                height: 100%;
-                background-size: cover;
-                *background-color: #000;
-            }
-            #header .home-bar {
-                *position: fixed !important;
-                *position: absolute !important;
-                margin: 0 auto;
-                width: 100%;
-                margin-top: 30%;
-                z-index: 999 !important;
-            }
-            #header .content {
-                background: rgba(255, 255, 255, 0.1) !important;
-                padding: 20px 0 0 0;
-                position: absolute;
-                top: 80%;
-                width: 100%;
-
-            }
-            #header .top {
-                position: absolute;
-                top: 0%;
-                transition: 0.5s;
-                -webkit-transition: 0.5s;
-                color: #000 !important;
-            }
-            #header a.logo {
-                text-align: left;
-                font-size: 50px;
-                margin: 0;
-                padding: 0;
-                color: inherit;
-                text-decoration: none;
-                position: absolute;
-                left: 3%;
-                font-variant: small-caps;
-            }
-            #menu {
-                *display: table;
-                width: 836px;
-                font-size: 50px;
-                margin: 8px auto 0 auto;
-                position: relative;
-                font-size: 47px !important;
-                font-family: Myriad Pro;
-                font-variant: small-caps;
-                text-transform: uppercase;
-                font-stretch: condensed;
-                font-weight: normal;
-            }
-            #menu a {
-                text-align: center;
-                display: block;
-                height: 80px;
-                margin: 0 !important;
-                padding: 0 45px !important;
-                float: left;
-                color: inherit;
-                text-decoration: none;
-                z-index: 999999;
-            }
-            #menu a:hover {
-                color: #800;
-            }
-            #menu a.active {
-                *border-bottom: 2px solid #efefef;
-                *font-weight: bold;
-                text-decoration: underline;
-                *color: #b00;
-            }
-            #container {
-                margin-bottom: 10px;
-            }
-            #footer {
-                font-family: helvetica;
-                font-variant: normal;
-                margin-top: 0px;
-                margin-bottom: 20px;
-                font-size: 14px;
-            }
-            .clear {
-                clear: both;
-            }
-
-            #painting-preview {
-                width: 510px;
-                height: 580px;
-                float: left;
-                position: relative;
-            }
-            #painting-preview img {
-                position: absolute;
-                top: 0;
-                left: 0;
-            }
-            #thumbnails {
-                width: 450px;
-                height: 580px;
-                max-height: 580px;
-                float: right;
-                overflow: auto;
-            }
-            #thumbnails ul {
-                list-style: none;
-                margin-top: -20px;
-            }
-            #thumbnails li {
-                list-style: none;
-                margin-left: 20px;
-                margin-top: 20px;
-                float: left;
-                opacity: 1;
-                width: 120px;
-                height: 120px;
-                padding: 5px;
-                color: transparent;
-                position: relative;
-            }
-            #thumbnails img {
-                position: absolute;
-                top: 0;
-                left: 0;
-            }
-            #thumbnails li div {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 120px;
-                height: 120px;
-                margin: 5px;
-                display: table;
-            }
-            #thumbnails li p {
-                margin: 0;
-                text-transform: uppercase;
-                font-size: 17px;
-                text-align: center;
-                color: #000;
-                display: table-cell;
-                vertical-align: middle;
-            }
-            #thumbnails li:hover {
-                cursor: pointer;
-            }
-            #thumbnails li img:hover {
-                cursor: pointer;
-                color: #000;
-                transition: .8s;
-                opacity: .3;
-                *text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
-            }
-            #full-view {
-                position: absolute;
-                display: none;
-                text-align: right;
-                cursor: crosshair;
-                margin-bottom: 40px;
-            }
-            #full-view img {
-            }
-
-            #cover {
-                position:fixed;
-                top:0;
-                left:0;
-                background:rgba(0,0,0,0.8);
-                z-index:9990;
-                width:100%;
-                height:100%;
-                display:none;
-            }
-            #about-picture {
-                float: left;
-                margin-right: 20px;
-                margin-bottom: 10px;
-            }
-            #about-text {
-                text-align: justify;
-                font-variant: normal;
-                text-transform: none;
-                font-size: 20px;
-            }
-
-            #login {
-                width: 170px;
-                padding: 20px;
-                background-color: #ffeeee;
-                margin: 200px auto 0 auto;
-                border: 1px solid #999;
-            }
-            #login h1 {
-                margin: 0;
-            }
-            #login form {
-                margin: 0;
-            }
-            #login ul {
-                list-style: none;
-            }
-            #login li {
-                margin-bottom: 10px;
-            }
-            button {
-                border: 1px solid #999;
-                background-color: white;
-                padding: 5px;
-                margin: 10px 0 0 0;
-            }
-            input {
-                padding: 5px;
-            }
-            .errorlist {
-                color: red;
-                font-family: tahoma;
-                font-size: 12px !important;
-                font-variant: none;
-                text-transform: none;
-                margin: 0;
-                padding: 0;
-            }
-            .errorlist ul,
-            .errorlist li {
-                margin: 0 !important;
-                padding: 0 !important;
-            }
-
             {% if user.is_authenticated %}
                 #site {
                     *border: 1px dashed red;
@@ -380,57 +111,57 @@
                     background-color: #fff8f8 !important;
                 }
             {% endif %}
-
         </style>
         {% block extrastyle %}{% endblock %}
     </head>
     <body>
         <div id="cover"></div>
-        <section id="header">
-            <div id="bbb" style="background-color: rgba(0, 0, 0, 0.6);  transition: 2s; z-index: 99999999; width: 100%; height: 100%;">
-                <ul>
-                    {% for artwork in home_artwork_list %}
-                        <li><span></span><div><h3></h3></div></li>
-                    {% endfor %}
-                </ul>
-
-                <div class="home-bar">
-                    <div id="logo-home" style="font-size: 150px; text-transform: uppercase; font-weight: normal; width: 740px; margin: 0 auto; display: none;">
+        {% block site %}
+            <section id="header">
+                <div style="position: absolute; width: 100%; height: 210px;">
+                    <div id="logo-home">
                         Flavia Bernardes
                     </div>
-                    <div class="content" style="display: none;">
-                        <a href="{% url 'home' %}" class="logo" style="display: none;">Flavia Bernardes</a>
-                        <section id="menu">
-                            <a href="{% url 'artworks' %}"{% if request.resolver_match.url_name == "artworks" %} class="active"{% endif %}>Artworks</a>
-                            <a href="{% url 'about' %}"{% if request.resolver_match.url_name == "about" %} class="active"{% endif %}>About</a>
-                            <a href="{% url 'blog' %}">Blog</a>
-                            <a href="#">Contact</a>
-                            <div class="clear"></div>
-                        </section>
+                    <div class="content">
+                        <div class="transp transp-top" style="padding: 0px 0 20px 0; margin-top: 18px;">
+                            <section id="menu">
+                                <a href="{% url 'artworks' %}"{% if request.resolver_match.url_name == "artworks" %} class="active"{% endif %}>Artworks</a>
+                                <a href="{% url 'about' %}"{% if request.resolver_match.url_name == "about" %} class="active"{% endif %}>About</a>
+                                <a href="{% url 'blog' %}">Blog</a>
+                                <a href="#">Contact</a>
+                                <div class="clear"></div>
+                            </section>
+                        </div>
                     </div>
-                    <script>
-                        $('#logo-home').fadeIn(1000);
-                        $('.content').fadeIn(3000);
-                        $('.home-bar a').click(function () {
-                            $('.content').addClass('top');
-                            $('#logo-home').fadeOut();
-                            $('#bbb').css('background-color', 'rgba(255, 255, 255, 0.7); transition: 2s;')
-                        });
-                    </script>
                 </div>
-            </div>
-        </section>
-        <div id="site">
-            <section id="container">
-                {% block container %}
-                {% endblock %}
+                <div class="home-overlay"></div>
+            </section>
+            <div id="site">
+                <section id="container">
+                    {% block container %}
+                    {% endblock %}
+                    <div class="clear"></div>
+                </section>
                 <div class="clear"></div>
-            </section>
-            <div class="clear"></div>
-            <section id="footer">
-                <div class="copyrights">&#9400 Flavia Bernardes, 2015. All rights reserved.</div>
-                <div class="social"></div>
-            </section>
-        </div>
+                <section id="footer">
+                    <div class="copyrights">&#9400 Flavia Bernardes, 2015. All rights reserved.</div>
+                    <div class="social"></div>
+                </section>
+            </div>
+        {% endblock %}
     </body>
+    <script>
+        $(window).ready(function () {
+            if ($.browser.chrome) {
+                $("#logo-home").css("margin", "-20px auto 38px auto");
+            }
+            $(window).scroll(function () {
+                if ($(window).scrollTop() > 157) {
+                    $('.content').addClass('menu-fixed');
+                } else {
+                    $('.content').removeClass('menu-fixed');
+                }
+            });
+        });
+    </script>
 </html>

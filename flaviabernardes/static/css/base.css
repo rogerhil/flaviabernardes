@@ -1,0 +1,301 @@
+@font-face {
+    font-family: Myriad Pro;
+    src: url(/static/font/MYRIADPRO-COND.OTF);
+    font-stretch: condensed;
+}
+@font-face {
+    font-family: Gothic;
+    src: url(/static/font/gothic.ttf);
+}
+@font-face {
+    font-family: 'Polygraph';
+    src: url('../font/2E4B6B_0_0.eot');
+    src: url('../font/2E4B6B_0_0.eot?#iefix') format('embedded-opentype'),
+         url('../font/2E4B6B_0_0.woff2') format('woff2'),
+         url('../font/2E4B6B_0_0.woff') format('woff'),
+         url('../font/2E4B6B_0_0.ttf') format('truetype');
+    -moz-font-feature-settings:"kern" 1;
+    -moz-font-feature-settings:"kern=1";
+    -ms-font-feature-settings:"kern" 1;
+    -o-font-feature-settings:"kern" 1;
+    -webkit-font-feature-settings:"kern" 1;
+    font-feature-settings:"kern" 1;
+}
+body {
+    font-family: Gothic;
+    text-transform: capitalize;
+    font-weight: normal;
+    color: #444;
+    margin: 0;
+}
+ul {
+    margin: 0;
+    padding: 0;
+}
+a {
+    color: inherit;
+}
+html {
+    *background-size: cover;
+}
+#site {
+    width: 960px;
+    margin: 20px auto 0 auto;
+}
+
+#logo-home {
+    font-family: Polygraph;
+    font-size: 150px;
+    text-transform: uppercase;
+    font-weight: normal;
+    width: 740px;
+    height: 140px;
+    margin: 0 auto;
+    position: relative;
+}
+
+#header {
+    font-family: Polygraph;
+    margin: 0 auto !important;
+    color: #fff;
+    z-index: 999 !important;
+    font-weight: bold;
+    background-image: url(/static/img/amelie-home.jpg);
+    display: table;
+    position: relative;
+    width: 100%;
+    height: 210px;
+    background-size: cover;
+}
+
+#header .menu-fixed {
+    position: fixed;
+    left: 0;
+    top: -18px;
+    width: 100%;
+    transition: all 0.5s ease;
+    -webkit-transition: background 0.5s ease;
+    -moz-transition: background 0.5s ease;
+    -o-transition: background 0.5s ease;
+    -ms-transition: background 0.5s ease;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+#header .transp {
+    padding: 20px 0 40px 0;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.home-overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+    transition: 2s;
+    z-index: 9999999 !important;
+    width: 100%;
+    height: 210px;
+    display: block;
+}
+
+
+#header a.logo {
+    font-family: Polygraph;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 40px;
+}
+#header a.logo:hover {
+    color: 550000;
+}
+
+#menu {
+    width: 836px;
+    margin: 8px auto 0 auto;
+    position: relative;
+    font-size: 36px !important;
+    font-family: Gothic;
+    text-transform: lowercase;
+    font-stretch: condensed;
+    font-weight: normal;
+}
+
+#menu a {
+    text-align: center;
+    display: block;
+    height: 30px;
+    margin: 0 !important;
+    padding: 0 45px !important;
+    float: left;
+    color: inherit;
+    text-decoration: none;
+    z-index: 9999999;
+}
+#menu a:hover {
+    text-decoration: underline;
+}
+
+#menu a.active {
+    *color: a00;
+    text-decoration: underline;
+}
+
+#menu a.active:hover {
+    *text-decoration: none;
+}
+
+#container {
+    margin-bottom: 10px;
+}
+
+#footer {
+    font-family: helvetica;
+    font-variant: normal;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+.clear {
+    clear: both;
+}
+
+#painting-preview {
+    width: 510px;
+    height: 580px;
+    float: left;
+    position: relative;
+}
+#painting-preview img {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#thumbnails {
+    width: 450px;
+    height: 580px;
+    max-height: 580px;
+    float: right;
+    overflow: auto;
+}
+#thumbnails ul {
+    list-style: none;
+    margin-top: -20px;
+}
+#thumbnails li {
+    list-style: none;
+    margin-left: 20px;
+    margin-top: 20px;
+    float: left;
+    opacity: 1;
+    width: 120px;
+    height: 120px;
+    padding: 5px;
+    color: transparent;
+    position: relative;
+}
+#thumbnails img {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#thumbnails li div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 120px;
+    margin: 5px;
+    display: table;
+}
+#thumbnails li p {
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 17px;
+    text-align: center;
+    color: #000;
+    display: table-cell;
+    vertical-align: middle;
+}
+#thumbnails li:hover {
+    cursor: pointer;
+}
+#thumbnails li img:hover {
+    cursor: pointer;
+    color: #000;
+    transition: .8s;
+    opacity: .3;
+    *text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+}
+#full-view {
+    position: absolute;
+    display: none;
+    text-align: right;
+    cursor: crosshair;
+    margin-bottom: 40px;
+}
+#full-view img {
+}
+
+#cover {
+    position:fixed;
+    top:0;
+    left:0;
+    background:rgba(0,0,0,0.8);
+    z-index:9990;
+    width:100%;
+    height:100%;
+    display:none;
+}
+#about-picture {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+#about-text {
+    text-align: justify;
+    font-variant: normal;
+    text-transform: none;
+    font-size: 20px;
+}
+
+#login {
+    width: 170px;
+    padding: 20px;
+    background-color: #ffeeee;
+    margin: 200px auto 0 auto;
+    border: 1px solid #999;
+}
+#login h1 {
+    margin: 0;
+}
+#login form {
+    margin: 0;
+}
+#login ul {
+    list-style: none;
+}
+#login li {
+    margin-bottom: 10px;
+}
+button {
+    border: 1px solid #999;
+    background-color: white;
+    padding: 5px;
+    margin: 10px 0 0 0;
+}
+input {
+    padding: 5px;
+}
+.errorlist {
+    color: red;
+    font-family: tahoma;
+    font-size: 12px !important;
+    font-variant: none;
+    text-transform: none;
+    margin: 0;
+    padding: 0;
+}
+.errorlist ul,
+.errorlist li {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+

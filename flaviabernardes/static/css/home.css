@@ -1,0 +1,119 @@
+
+
+#logo-div {
+    position: absolute;
+    top: 60%;
+    width: 100%;
+}
+
+.home-overlay {
+    height: 100%;
+}
+
+#logo-home {
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+}
+
+#home {
+    margin: 0 auto !important;
+    color: #fff;
+    z-index: 999 !important;
+    font-weight: bold;
+    background-image: url(/static/img/amelie-home.jpg);
+    display: table;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    *background-color: #000;
+}
+
+#home .home-bar {
+    margin: 0 auto;
+    width: 100%;
+    margin-top: 30%;
+    z-index: 999 !important;
+}
+#home .content {
+    position: absolute;
+    top: 80%;
+    width: 100%;
+    display: none;
+    height: 60px;
+}
+
+#home .transp {
+    padding: 20px 0 40px 0;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+#home .top {
+    position: absolute;
+    top: 150px;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    *color: #444 !important;
+}
+
+#home .logo-top {
+    position: absolute;
+    top: 0px;
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    *color: #444 !important;
+}
+
+.transp-top {
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    padding: 0 0 0 0 !important;
+}
+
+.menu-top {
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    height: 60px;
+}
+
+.home-top {
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    height: 210px !important;
+    display: block !important;
+}
+
+
+.menu-transition a {
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    font-size: 22px !important;
+}
+
+.logo-transition {
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    font-size: 50px !important;
+    margin: 20px 0 0 0;
+}
