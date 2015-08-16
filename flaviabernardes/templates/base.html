@@ -123,7 +123,7 @@
                         Flavia Bernardes
                     </div>
                     <div class="content">
-                        <div class="transp transp-top" style="padding: 0px 0 20px 0; margin-top: 18px;">
+                        <div class="transp transp-top" style="">
                             <section id="menu">
                                 <a href="{% url 'artworks' %}"{% if request.resolver_match.url_name == "artworks" %} class="active"{% endif %}>Artworks</a>
                                 <a href="{% url 'about' %}"{% if request.resolver_match.url_name == "about" %} class="active"{% endif %}>About</a>
@@ -153,10 +153,10 @@
     <script>
         $(window).ready(function () {
             if ($.browser.chrome) {
-                $("#logo-home").css("margin", "-20px auto 38px auto");
+                $("#logo-home").css("margin", "-10px auto 28px auto");
             }
             $(window).scroll(function () {
-                if ($(window).scrollTop() > 157) {
+                if ($(window).scrollTop() > 110) {
                     $('.content').addClass('menu-fixed');
                 } else {
                     $('.content').removeClass('menu-fixed');
