@@ -3,21 +3,15 @@ from django.db import models
 from image_cropping import ImageRatioField
 
 
-class Tag(models.Model):
-    name = models.CharField(max_length=64, unique=True)
-
-    def __str__(self):
-        return '%s' % self.name
-
-
 class BaseBlog(models.Model):
     title = models.CharField(max_length=128, unique=True)
     slug = models.SlugField(max_length=64, unique=True)
     text = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    #head_image = models.ForeignKey('HeadImage')
-    tags = models.ManyToManyField(Tag)
+    tags = models.TextField(null=True, blank=True)
+    image = models.ImageField(blank=True, upload_to='uploads')
+    listing = ImageRatioField('image', '300x300')
 
     class Meta:
         abstract = True
@@ -41,17 +35,8 @@ class Draft(BaseBlog):
         self.blog.title = self.title
         self.blog.text = self.text
         self.blog.slug = self.slug
-        #self.blog.head_image = self.head_image
-        #self.tags.clean()
+        self.blog.tags = self.tags
         self.blog.save()
-
-
-class Category(models.Model):
-    name = models.CharField(max_length=64, unique=True)
-    slug = models.SlugField(max_length=64, unique=True)
-
-    def __str__(self):
-        return '%s' % self.name
 
 
 class BaseImage(models.Model):
@@ -65,12 +50,8 @@ class BaseImage(models.Model):
         return self.name
 
 
-class HeadImage(BaseImage):
-    head_ratio = ImageRatioField('image', '960x250')
-
-
 class Image(BaseImage):
-    blog = models.ForeignKey(Blog)
+    blog = models.ForeignKey(Blog, related_name='images')
     ratio = ImageRatioField('image', '50x50')
 
 

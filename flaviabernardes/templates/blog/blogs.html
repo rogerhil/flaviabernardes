@@ -77,11 +77,6 @@
 {% block container %}
     <div id="blogs">
         <ul>
-            <li class="add-blog">
-                <a href="/">
-                    +
-                </a>
-            </li>
             {% for blog in blogs_list %}
                 <li class="{% cycle '' 'last' '' %}">
                     <a href="{% url 'blog_item' blog.slug %}">
@@ -90,10 +85,12 @@
                             {{ blog.text|truncatechars:120 }}
                         </p>
                         <span></span>
-                        <img src="{% cropped_thumbnail blog.listing 'listing' scale=1 %}" />
+                        <img src="{% cropped_thumbnail blog 'listing' scale=1 %}" />
                     </a>
                 </li>
             {% endfor %}
         </ul>
     </div>
+    <div class="clear"></div>
+    <br>
 {% endblock %}

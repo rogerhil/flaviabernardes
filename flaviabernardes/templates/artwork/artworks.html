@@ -7,7 +7,9 @@
 
     </div>
     <div id="painting-preview">
-        <img src="{% cropped_thumbnail artwork_list.0 "listing_preview" scale=1 %}">
+        {% if artwork_list %}
+            <img src="{% cropped_thumbnail artwork_list.0 "listing_preview" scale=1 %}">
+        {% endif %}
     </div>
     <div id="thumbnails">
         <ul>
