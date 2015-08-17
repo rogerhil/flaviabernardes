@@ -99,6 +99,7 @@
         </script>
 
         <style>
+            {% comment %}
             {% if user.is_authenticated %}
                 #site {
                     *border: 1px dashed red;
@@ -111,6 +112,7 @@
                     background-color: #fff8f8 !important;
                 }
             {% endif %}
+            {% endcomment %}
         </style>
         {% block extrastyle %}{% endblock %}
     </head>

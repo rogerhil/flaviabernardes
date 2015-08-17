@@ -25,8 +25,6 @@ class Artwork(models.Model):
     order = models.IntegerField(default=0)
     mini_thumbnail = ImageRatioField('image', '50x50')
     thumbnail = ImageRatioField('image', '130x130', size_warning=True)
-    listing_preview = ImageRatioField('image', '510x580', size_warning=True)
-    home_preview = ImageRatioField('image', '960x580', size_warning=True)
     full_preview = ImageRatioField('image', '960x580', free_crop=True)
 
     def __str__(self):
