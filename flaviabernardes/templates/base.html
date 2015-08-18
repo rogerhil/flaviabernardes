@@ -119,10 +119,10 @@
     <body>
         <div id="cover"></div>
         {% block site %}
-            <section id="header">
-                <div style="position: absolute; width: 100%; height: 210px;">
+            <div id="body">
+                <section id="header">
                     <div id="logo-home">
-                        Flavia Bernardes
+                        <img src="{% static 'img/logo-small.png' %}" />
                     </div>
                     <div class="content">
                         <div class="transp transp-top" style="">
@@ -135,27 +135,26 @@
                             </section>
                         </div>
                     </div>
-                </div>
-                <div class="home-overlay"></div>
-            </section>
-            <div id="site">
-                <section id="container">
-                    {% block container %}
-                    {% endblock %}
+                </section>
+                <div id="site">
+                    <section id="container">
+                        {% block container %}
+                        {% endblock %}
+                        <div class="clear"></div>
+                    </section>
                     <div class="clear"></div>
-                </section>
-                <div class="clear"></div>
-                <section id="footer">
-                    <div class="copyrights">&#9400 Flavia Bernardes, 2015. All rights reserved.</div>
-                    <div class="social"></div>
-                </section>
+                    <section id="footer">
+                        <div class="copyrights">&#9400 Flavia Bernardes, 2015. All rights reserved.</div>
+                        <div class="social"></div>
+                    </section>
+                </div>
             </div>
         {% endblock %}
     </body>
     <script>
         $(window).ready(function () {
             if ($.browser.chrome) {
-                $("#logo-home").css("margin", "-10px auto 28px auto");
+                //$("#logo-home").css("margin", "-10px auto 28px auto");
             }
             $(window).scroll(function () {
                 if ($(window).scrollTop() > 110) {

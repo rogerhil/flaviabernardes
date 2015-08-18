@@ -60,7 +60,7 @@
 
 #home .top {
     position: absolute;
-    top: 100px;
+    top: 45px;
     transition: 0.5s;
     -webkit-transition: 0.5s;
     *color: #444 !important;
@@ -79,13 +79,25 @@
 
 #home .logo-top #logo-home {
     font-size: 100px !important;
-    width: 493px !important;
-    height: 80px;
+    width: 1316px !important;
+    height: 50px !important;
     *margin: -10px auto 28px auto !important;
 }
 
+#home .logo-top #logo-home img {
+    transform: scale(0.5);
+    -webkit-filter: invert(80%);
+    -ms-transform: scale(0.5); /* IE 9 */
+    -webkit-transform: scale(0.5); /* Chrome, Safari, Opera */
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+}
+
 #menu {
-    margin-top: 8px;
+    *margin-top: 8px;
     width: 832px;
     font-size: 36px;
 }
@@ -101,6 +113,7 @@
     -o-transition: all 0.5s ease;
     -ms-transition: all 0.5s ease;
     padding: 0 0 0 0 !important;
+    background: rgba(0, 0, 0, 0.02) !important;
 }
 
 .menu-top {
@@ -109,12 +122,14 @@
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     -ms-transition: all 0.5s ease;
-    width: 583px !important;
+    width: 1050px !important;
     font-size: 17px !important;
+    color: #444;
 }
 
 .menu-top a {
     padding: 5px 45px !important;
+    float: right !important;
 }
 
 .home-top {
@@ -123,8 +138,12 @@
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     -ms-transition: all 0.5s ease;
-    height: 140px !important;
-    display: block !important;
+    *height: 100px !important;
+    *display: block !important;
+}
+
+.home-top .home-overlay {
+    background-color: rgba(255, 255, 255, 1);
 }
 
 
