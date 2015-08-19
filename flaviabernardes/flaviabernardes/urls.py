@@ -27,7 +27,7 @@ urlpatterns = patterns('',
     url(r'^about/$', TemplateView.as_view(template_name="about/about.html"),
         name='about'),
     url(r'^$', HomeView.as_view(), name='home'),
-    #url(r'^$', LandPageView.as_view(), name='landpage'),
+    url(r'^landing-page/$', LandPageView.as_view(), name='landpage'),
     url(r'^confirmation/$', ConfirmationView.as_view(), name='confirmation'),
     url(r'^oauau/$', AuAuView.as_view(), name='auau'),
 
