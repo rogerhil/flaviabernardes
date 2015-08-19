@@ -39,3 +39,10 @@ class ConfirmationView(TemplateView):
         form = SubscriberForm()
         form.subscribe(subscriber)
         return super(ConfirmationView, self).dispatch(request, *args, **kwargs)
+
+
+class AuAuView(JsonFormView):
+    template_name = 'auau.html'
+    #form_template = 'landingpage_form.html'
+    form_class = SubscriberForm
+    success_url = '/'
