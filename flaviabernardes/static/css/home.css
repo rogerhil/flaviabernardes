@@ -60,7 +60,7 @@
 
 #home .top {
     position: absolute;
-    top: 45px;
+    top: 25px;
     transition: 0.5s;
     -webkit-transition: 0.5s;
     *color: #444 !important;
@@ -68,7 +68,7 @@
 
 #home .logo-top {
     position: absolute;
-    top: 0px;
+    top: -20px;
     transition: all 0.5s ease;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -113,7 +113,7 @@
     -o-transition: all 0.5s ease;
     -ms-transition: all 0.5s ease;
     padding: 0 0 0 0 !important;
-    background: rgba(0, 0, 0, 0.02) !important;
+    background: rgba(0, 0, 0, 0) !important;
 }
 
 .menu-top {
@@ -129,7 +129,6 @@
 
 .menu-top a {
     padding: 5px 45px !important;
-    float: right !important;
 }
 
 .home-top {

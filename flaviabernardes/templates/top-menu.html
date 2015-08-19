@@ -1,0 +1,7 @@
+<section id="menu">
+    <a href="#">Contact</a>
+    <a href="{% url 'blog' %}">Blog</a>
+    <a href="{% url 'about' %}"{% if request.resolver_match.url_name == "about" %} class="active"{% endif %}>About</a>
+    <a href="{% url 'artworks' %}"{% if request.resolver_match.url_name == "artworks" %} class="active"{% endif %}>Artworks</a>
+    <div class="clear"></div>
+</section>

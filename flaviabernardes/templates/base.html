@@ -117,25 +117,19 @@
         {% block extrastyle %}{% endblock %}
     </head>
     <body>
-        <div id="cover"></div>
         {% block site %}
             <div id="body">
-                <section id="header">
+                <section id="header" style="">
                     <div id="logo-home">
                         <img src="{% static 'img/logo-small.png' %}" />
                     </div>
                     <div class="content">
                         <div class="transp transp-top" style="">
-                            <section id="menu">
-                                <a href="{% url 'artworks' %}"{% if request.resolver_match.url_name == "artworks" %} class="active"{% endif %}>Artworks</a>
-                                <a href="{% url 'about' %}"{% if request.resolver_match.url_name == "about" %} class="active"{% endif %}>About</a>
-                                <a href="{% url 'blog' %}">Blog</a>
-                                <a href="#">Contact</a>
-                                <div class="clear"></div>
-                            </section>
+                            {% include "top-menu.html" %}
                         </div>
                     </div>
                 </section>
+                <div style="height: 100px;"></div>
                 <div id="site">
                     <section id="container">
                         {% block container %}
@@ -143,11 +137,15 @@
                         <div class="clear"></div>
                     </section>
                     <div class="clear"></div>
-                    <section id="footer">
+                </div>
+                <div class="clear"></div>
+                <div style="height: 20px;"></div>
+                <section id="footer">
+                    <div class="content">
                         <div class="copyrights">&#9400 Flavia Bernardes, 2015. All rights reserved.</div>
                         <div class="social"></div>
-                    </section>
-                </div>
+                    </div>
+                </section>
             </div>
         {% endblock %}
     </body>
@@ -157,10 +155,11 @@
                 //$("#logo-home").css("margin", "-10px auto 28px auto");
             }
             $(window).scroll(function () {
+            return;
                 if ($(window).scrollTop() > 110) {
-                    $('.content').addClass('menu-fixed');
+                    $('#header').addClass('menu-fixed');
                 } else {
-                    $('.content').removeClass('menu-fixed');
+                    $('#header').removeClass('menu-fixed');
                 }
             });
             $('#logo-home').click(function () {
