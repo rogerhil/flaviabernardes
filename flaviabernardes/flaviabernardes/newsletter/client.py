@@ -46,12 +46,31 @@ class EmailMarketing(object):
             raise NotImplementedError('EmailMarketing provider %s is '
                         'invalid.' % settings.CURRENT_EMAIL_MARKETING_PROVIDER)
 
+    def oauau_id_name(self):
+        if self.is_mailchimp():
+            return settings.MAILCHIMP_OAUAU_LIST_ID, \
+                   settings.MAILCHIMP_OAUAU_LIST_NAME
+        elif self.is_madmimi():
+            return settings.MADMIMI_OAUAU_LIST_ID, \
+                   settings.MADMIMI_OAUAU_LIST_NAME
+        else:
+            raise NotImplementedError('EmailMarketing provider %s is '
+                        'invalid.' % settings.CURRENT_EMAIL_MARKETING_PROVIDER)
+
     def subscribe_to_newsletter(self, email, **kwargs):
         list_id = self.newsletter_id_name()[0]
         self.subscribe(email, list_id, **kwargs)
 
     def unsubscribe_to_newsletter(self, email):
         list_id = self.newsletter_id_name()[0]
+        self.unsubscribe(email, list_id)
+
+    def subscribe_to_oauau(self, email, **kwargs):
+        list_id = self.oauau_id_name()[0]
+        self.subscribe(email, list_id, **kwargs)
+
+    def unsubscribe_to_oauau(self, email):
+        list_id = self.oauau_id_name()[0]
         self.unsubscribe(email, list_id)
 
     def subscribe(self, email, list_id, **kwargs):

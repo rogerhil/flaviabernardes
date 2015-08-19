@@ -8,21 +8,16 @@ from .models import Subscriber, List, Subscription
 
 BASE_URL = 'http://www.flaviabernardesart.com'
 
-SUBJECT = "Confirm your subscription and download your artwork"
-BODY = "Hello %s, \n\n" \
-       "Please follow the link below to download your free wallpaper " \
-       "artwork. \n\n" \
-       "If you can't click it, please copy the entire link and paste it " \
-       "into your browser. \n\n" \
-       "%s\n\n" \
-       "Thank you,\n\n" \
-       "Flavia Bernardes\n"
 
-
-class SubscriberForm(forms.Form):
+class BaseSubscriberForm(forms.Form):
     email = forms.EmailField()
     first_name = forms.CharField(max_length=255, required=False)
     last_name = forms.CharField(max_length=255, required=False)
+
+    confirmation_url = '%s/confirmation/?s=%%s' % BASE_URL
+    list_id = None
+    subject = ""
+    body = ""
 
     def pre_subscribe_locally(self):
         data = self.cleaned_data
@@ -37,21 +32,50 @@ class SubscriberForm(forms.Form):
 
     def send_confirmation(self, subscriber):
         email = self.cleaned_data['email']
-        redirect = '%s/confirmation/?s=%s' % (BASE_URL, subscriber.uuid)
-        body = BODY % (str(subscriber), redirect)
-        send_mail(SUBJECT, body, settings.DEFAULT_FROM_EMAIL, [email])
+        redirect = self.confirmation_url % subscriber.uuid
+        body = self.body % (str(subscriber), redirect)
+        send_mail(self.subject, body, settings.DEFAULT_FROM_EMAIL, [email])
 
     def subscribe(self, subscriber):
         email = subscriber.email
         client = EmailMarketing()
         #try:
-        #    client.unsubscribe_to_newsletter(email)
+        #    client.unsubscribe(email, self.list_id)
         #except:
         #    pass
         #if settings.DEVELOPMENT:
         #    return
-        client.subscribe_to_newsletter(email, first_name=subscriber.first_name,
-                                       last_name=subscriber.last_name)
+        client.subscribe(email, self.list_id, first_name=subscriber.first_name,
+                        last_name=subscriber.last_name)
         list_id, list_name = client.newsletter_id_name()
         slist = List.objects.get_or_create(list_id=list_id, name=list_name)[0]
         Subscription.objects.get_or_create(list=slist, subscriber=subscriber)
+
+
+class SubscriberForm(BaseSubscriberForm):
+
+    subject = "Confirm your subscription and download your artwork"
+    body = "Hello %s, \n\n" \
+        "Please follow the link below to download your free wallpaper " \
+        "artwork. \n\n" \
+        "If you can't click it, please copy the entire link and paste it " \
+        "into your browser. \n\n" \
+        "%s\n\n" \
+        "Thank you,\n\n" \
+        "Flavia Bernardes\n"
+
+    list_id = settings.MADMIMI_NEWSLETTER_LIST_ID
+
+
+class OauauSubscriberForm(BaseSubscriberForm):
+
+    subject = "Confirme a subscricao"
+    body = "Hello %s, \n\n" \
+        "Please follow the link below. \n\n" \
+        "If you can't click it, please copy the entire link and paste it " \
+        "into your browser. \n\n" \
+        "%s\n\n" \
+        "Thank you,\n\n" \
+        "Flavia Bernardes\n"
+
+    list_id = settings.MADMIMI_OAUAU_LIST_ID
