@@ -18,6 +18,7 @@ class BaseSubscriberForm(forms.Form):
 
     confirmation_url = '%s/confirmation/?s=%%s' % BASE_URL
     list_id = None
+    name = None
     subject = ""
     body = ""
 
@@ -50,7 +51,7 @@ class BaseSubscriberForm(forms.Form):
         #    return
         client.subscribe(email, self.list_id, first_name=subscriber.first_name,
                         last_name=subscriber.last_name)
-        list_id, list_name = client.newsletter_id_name()
+        list_id, list_name = self.list_id, self.name
         slist = List.objects.get_or_create(list_id=list_id, name=list_name)[0]
         Subscription.objects.get_or_create(list=slist, subscriber=subscriber)
 
@@ -68,6 +69,7 @@ class SubscriberForm(BaseSubscriberForm):
         "Flavia Bernardes\n"
 
     list_id = settings.MADMIMI_NEWSLETTER_LIST_ID
+    name = settings.MADMIMI_NEWSLETTER_LIST_NAME
 
 
 class OauauSubscriberForm(BaseSubscriberForm):
@@ -84,3 +86,5 @@ class OauauSubscriberForm(BaseSubscriberForm):
     confirmation_url = '%s/oauau/livro-de-atividades/?s=%%s' % BASE_URL
 
     list_id = settings.MADMIMI_OAUAU_LIST_ID
+    name = settings.MADMIMI_OAUAU_LIST_NAME
+
