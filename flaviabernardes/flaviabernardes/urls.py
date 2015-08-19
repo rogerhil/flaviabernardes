@@ -7,7 +7,8 @@ from django.views.generic import TemplateView
 from .artwork.views import HomeView, PaintingsView, ArtworksSortJson
 from .blog.views import BlogsView, BlogView, BlogFieldForm
 from .fbauth.views import LoginJson, LogoutJson
-from .newsletter.views import LandPageView, ConfirmationView, OauauView
+from .newsletter.views import LandPageView, ConfirmationView, OauauView, \
+                              OauauConfirmationView
 
 
 urlpatterns = patterns('',
@@ -30,6 +31,8 @@ urlpatterns = patterns('',
     url(r'^$', LandPageView.as_view(), name='landpage'),
     url(r'^confirmation/$', ConfirmationView.as_view(), name='confirmation'),
     url(r'^oauau/$', OauauView.as_view(), name='oauau'),
+    url(r'^oauau/livro-de-atividades/$', OauauConfirmationView.as_view(),
+        name='oauau_confirmation'),
 
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

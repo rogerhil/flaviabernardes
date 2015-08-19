@@ -37,23 +37,81 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
+        <link href="{% static 'css/flavia1.css' %}" rel="stylesheet">
+        <style>
+            #form-subscriber input {
+                color: #000;
+                border-color: #000 !important;
+            }
+            #form-subscriber button {
+                background-color: #000 !important;
+                color: white;
+                border-color: #000 !important;
+            }
+        </style>
     </head>
 
     <body>
+        <div id="cover">
+            <img src="{% static 'img/ajax-loader.png' %}" class="ajax-loader">
+        </div>
         <div style="text-align: center;">
             <div style="margin-bottom: 50px;">
-                <img src="{% static 'img/auau-big.jpg' %}" width="1200">
+                <img src="{% static 'img/oauau-big.jpg' %}" width="1200">
             </div>
             <h3>
-                <a href="#">Clique aqui para baixar os prints</a>
+                {# <a href="#">Clique aqui para baixar os prints</a> #}
+                Se inscreva abaixo para baixar os prints:
             </h3>
-            <br><br><br>
-            <div class="">
-                <form id="form-subscriber" action="{% url 'landpage' %}">
-                    {% include "landingpage_form.html" %}
-                </form>
-            </div>
+            <form id="form-subscriber" action="{% url 'oauau' %}" method="post">
+                {% include "oauau_form.html" %}
+            </form>
         </div>
+
+        <!-- jQuery -->
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+
+        <script>
+            var img = new Image();
+            img.src = '{% static 'img/ajax-loader.png' %}';
+            $(window).load(function () {
+                window.setTimeout(function () {
+                    $('object').remove();
+                }, 500);
+
+                $("#form-subscriber input[name=email]").focus();
+                $("#form-subscriber").submit(function (e) {
+                    e.preventDefault();
+                    var email = $(this).find('input[name=email]').val();
+                    var data = {
+                        csrfmiddlewaretoken: $(this).find('input[name=csrfmiddlewaretoken]').val(),
+                        email: email,
+                        last_name: $(this).find('input[name=last_name]').val(),
+                        first_name: $(this).find('input[name=first_name]').val(),
+                    };
+                    $('#form-subscriber .errorlist').slideUp();
+                    $('#cover').fadeIn();
+                    $.ajax({
+                        type: 'post',
+                        url: $(this).attr('action'),
+                        data: data,
+                        success: function (data) {
+                            $('#cover').fadeOut(function () {
+                                if (!data.success) {
+                                    $('#form-subscriber').html(data.html);
+                                    $('#form-subscriber .errorlist').hide().slideDown();
+                                    $('#form-subscriber .non-field-errors').hide().slideDown();
+                                    return;
+                                }
+                                $("#form-subscriber").html('<h2 style="color: green">Uma mensagem foi enviada para o email ' + email + '.</h2>')
+                            });
+                        }
+                    });
+                });
+            });
+
+        </script>
+
 
     </body>
 

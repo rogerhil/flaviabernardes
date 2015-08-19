@@ -25,6 +25,7 @@ class NewsletterBaseView(JsonFormView):
 class NewsletterConfirmationBaseView(TemplateView):
     template_name = 'confirmation.html'
     redirect_name = None
+    subscription_form_class = None
 
     def dispatch(self, request, *args, **kwargs):
         subscriber_uuid = request.GET.get('s')
@@ -34,7 +35,7 @@ class NewsletterConfirmationBaseView(TemplateView):
             subscriber = Subscriber.objects.get(uuid=subscriber_uuid)
         except Subscriber.DoesNotExist:
             return HttpResponseRedirect(reverse(self.redirect_name))
-        form = SubscriberForm()
+        form = self.subscription_form_class()
         form.subscribe(subscriber)
         return super(NewsletterConfirmationBaseView, self).dispatch(request,
                                                                *args, **kwargs)
@@ -50,16 +51,18 @@ class LandPageView(NewsletterBaseView):
 
 class ConfirmationView(NewsletterConfirmationBaseView):
     template_name = 'confirmation.html'
+    subscription_form_class = SubscriberForm
 
 
 class OauauView(NewsletterBaseView):
     template_name = 'auau.html'
-    form_template = 'landingpage_form.html'
+    form_template = 'oauau_form.html'
     form_class = OauauSubscriberForm
     success_url = '/'
     already_msg = "Voce ja esta cadastado(a)"
 
 
 class OauauConfirmationView(NewsletterConfirmationBaseView):
-    template_name = 'confirmation.html'
+    template_name = 'oauau_confirmation.html'
     redirect_name = 'oauau'
+    subscription_form_class = OauauSubscriberForm

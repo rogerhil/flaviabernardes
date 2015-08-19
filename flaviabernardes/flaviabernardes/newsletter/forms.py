@@ -1,3 +1,5 @@
+# -*- coding: <nome da codificação> -*-
+
 from django.conf import settings
 from django import forms
 from django.core.mail import send_mail
@@ -23,11 +25,12 @@ class BaseSubscriberForm(forms.Form):
         data = self.cleaned_data
         try:
             subscriber = Subscriber.objects.get(email=data['email'])
-            if subscriber.subscription_set.count():
+            if subscriber.subscription_set\
+                         .filter(list__list_id=self.list_id).count():
                 raise AlreadySubscribedError('User %s is already subscribed.'
                                              % data['email'])
         except Subscriber.DoesNotExist:
-            subscriber = Subscriber.objects.create(**data)
+            subscriber = Subscriber.objects.get_or_create(**data)[0]
         return subscriber
 
     def send_confirmation(self, subscriber):
@@ -69,13 +72,15 @@ class SubscriberForm(BaseSubscriberForm):
 
 class OauauSubscriberForm(BaseSubscriberForm):
 
-    subject = "Confirme a subscricao"
-    body = "Hello %s, \n\n" \
-        "Please follow the link below. \n\n" \
-        "If you can't click it, please copy the entire link and paste it " \
-        "into your browser. \n\n" \
+    subject = "Confirme seu e-mail para baixar o livro de atividades do au au"
+    body = "Olá %s, \n\n" \
+        "Clique no link abaixo para fazer o download do livro de atividades " \
+        "do au au.\n\n" \
+        "Caso o link esteja inativo, copie e cole no seu browser.\n\n" \
         "%s\n\n" \
-        "Thank you,\n\n" \
-        "Flavia Bernardes\n"
+        "Obrigada,\n\n" \
+        "Flavia Bernardes e o au au"
+
+    confirmation_url = '%s/oauau/livro-de-atividades/?s=%%s' % BASE_URL
 
     list_id = settings.MADMIMI_OAUAU_LIST_ID
