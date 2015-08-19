@@ -1,3 +1,5 @@
+# -*- coding: <nome da codificação> -*-
+
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views.generic import TemplateView
@@ -59,7 +61,7 @@ class OauauView(NewsletterBaseView):
     form_template = 'oauau_form.html'
     form_class = OauauSubscriberForm
     success_url = '/'
-    already_msg = "Voce ja esta cadastado(a)"
+    already_msg = "Você já está cadastrado(a)"
 
 
 class OauauConfirmationView(NewsletterConfirmationBaseView):
