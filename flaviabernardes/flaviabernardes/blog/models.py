@@ -29,14 +29,22 @@ class Blog(BaseBlog):
 
 
 class Draft(BaseBlog):
-    blog = models.ForeignKey(Blog)
+    blog = models.ForeignKey(Blog, null=True, blank=True, editable=False)
 
     def publish(self):
-        self.blog.title = self.title
-        self.blog.text = self.text
-        self.blog.slug = self.slug
-        self.blog.tags = self.tags
-        self.blog.save()
+        blog = self.blog
+        new = False
+        if blog is None:
+            new = True
+            blog = Blog()
+        blog.title = self.title
+        blog.text = self.text
+        blog.slug = self.slug
+        blog.tags = self.tags
+        blog.save()
+        if new:
+            self.blog = blog
+            self.save()
 
 
 class BaseImage(models.Model):

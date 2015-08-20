@@ -1,7 +1,7 @@
 from django.views.generic import ListView, DetailView, CreateView
 
 from ..utils import JsonView
-from .models import Blog
+from .models import Blog, Draft
 
 
 class BlogsView(ListView):
@@ -15,6 +15,15 @@ class BlogView(DetailView):
     context_object_name = 'blog'
     template_name = 'blog/blog.html'
     model = Blog
+
+
+class DraftPublishView(JsonView, DetailView):
+    model = Draft
+
+    def json_post(self, request, *args, **kwargs):
+        obj = self.get_object()
+        obj.publish()
+        return {}
 
 
 class BlogFormView(CreateView):

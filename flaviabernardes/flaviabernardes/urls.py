@@ -3,9 +3,10 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
 from django.views.generic import TemplateView
+from django.views.decorators.csrf import csrf_exempt
 
 from .artwork.views import HomeView, PaintingsView, ArtworksSortJson
-from .blog.views import BlogsView, BlogView, BlogFieldForm
+from .blog.views import BlogsView, BlogView, BlogFieldForm, DraftPublishView
 from .fbauth.views import LoginJson, LogoutJson
 from .newsletter.views import LandPageView, ConfirmationView, AuAuView
 
@@ -21,6 +22,8 @@ urlpatterns = patterns('',
     url(r'^artworks/$', PaintingsView.as_view(), name='artworks'),
     url(r'^artworks/sort/$', ArtworksSortJson.as_view(), name='artworks_sort'),
     url(r'^blog/$', BlogsView.as_view(), name='blog'),
+    url(r'^blog/draft/(?P<pk>\d+)/publish/$',
+        csrf_exempt(DraftPublishView.as_view()), name='draft_publish'),
     url(r'^blog/(?P<slug>[-_\w]+)/$', BlogView.as_view(), name='blog_item'),
     url(r'^blog/(?P<slug>[-_\w]+)/change/field/json/$',
         BlogFieldForm.as_view(), name='blog_change_field'),
