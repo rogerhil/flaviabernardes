@@ -29,7 +29,7 @@ class BaseSubscriberForm(forms.Form):
             if subscriber.subscription_set\
                          .filter(list__list_id=self.list_id).count():
                 raise AlreadySubscribedError('User %s is already subscribed.'
-                                             % data['email'])
+                                             % data['email'], subscriber.uuid)
         except Subscriber.DoesNotExist:
             subscriber = Subscriber.objects.get_or_create(**data)[0]
         return subscriber

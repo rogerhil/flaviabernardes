@@ -39,8 +39,11 @@ class JsonFormView(FormView):
         return http.JsonResponse({'success': True,
                                   'success_url': self.success_url})
 
-    def form_invalid(self, form):
+    def form_invalid(self, form, extra_data=None):
         template = get_template(self.form_template)
         context = RequestContext(self.request, {'form': form})
         html = template.render(context)
-        return http.JsonResponse({'success': False, 'html': html})
+        data = {'success': False, 'html': html}
+        if extra_data:
+            data.update(extra_data)
+        return http.JsonResponse(data)

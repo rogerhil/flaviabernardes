@@ -55,9 +55,9 @@
         <div id="cover">
             <img src="{% static 'img/ajax-loader.png' %}" class="ajax-loader">
         </div>
-        <div style="text-align: center;">
+        <div style="text-align: center; padding: 10px;">
             <div style="margin-bottom: 50px;">
-                <img src="{% static 'img/oauau-big.jpg' %}" width="1200">
+                <img src="{% static 'img/oauau-medium.jpg' %}" id="oauau-image">
             </div>
             <h1>
                 Olá,
@@ -68,6 +68,22 @@
             <form id="form-subscriber" action="{% url 'oauau' %}" method="post">
                 {% include "oauau_form.html" %}
             </form>
+            <div class="clear"></div>
+            <br>
+            <br>
+            <div class="">
+                <p>
+                    {% with '64' as size %}
+                        {% include 'social.html' %}
+                    {% endwith %}
+                </p>
+            </div>
+            <br>
+            <p>
+                <a href="http://www.flaviabernardesart.com" target="_blank">www.flaviabernardesart.com</a><br>
+                &#9400 Flavia Bernardes, 2015. All rights reserved.
+            </p>
+            <br>
         </div>
 
         <!-- jQuery -->
@@ -106,6 +122,7 @@
                                     $('#form-subscriber').html(data.html);
                                     $('#form-subscriber .errorlist').hide().slideDown();
                                     $('#form-subscriber .non-field-errors').hide().slideDown();
+                                    window.location.replace('{% url 'oauau_confirmation' %}?s=' + data.s);
                                     return;
                                 }
                                 $("#form-subscriber").html('<h2 style="color: green">Uma mensagem foi enviada para o email ' + email + '.</h2>');

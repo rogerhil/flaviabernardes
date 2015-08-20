@@ -6,7 +6,10 @@ from django.conf import settings
 
 
 class AlreadySubscribedError(Exception):
-    pass
+
+    def __init__(self, message, uuid, *args, **kwargs):
+        super(Exception, self).__init__(message, *args, **kwargs)
+        self.uuid = uuid
 
 
 class EmailMarketing(object):

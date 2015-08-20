@@ -18,9 +18,9 @@ class NewsletterBaseView(JsonFormView):
         try:
             subscriber = form.pre_subscribe_locally()
             form.send_confirmation(subscriber)
-        except AlreadySubscribedError:
+        except AlreadySubscribedError as err:
             form.errors['__all__'] = self.already_msg
-            return self.form_invalid(form)
+            return self.form_invalid(form, extra_data={'s': err.uuid})
         return super(NewsletterBaseView, self).form_valid(form)
 
 
