@@ -1,20 +1,20 @@
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView
 
 from ..utils import JsonView
-from .models import Blog, Draft
+from .models import Post, Draft
 
 
-class BlogsView(ListView):
+class BlogView(ListView):
 
-    context_object_name = 'blogs_list'
-    queryset = Blog.objects.all().order_by('-created')
-    template_name = 'blog/blogs.html'
-
-
-class BlogView(DetailView):
-    context_object_name = 'blog'
+    context_object_name = 'posts_list'
+    queryset = Post.objects.all().order_by('-created')
     template_name = 'blog/blog.html'
-    model = Blog
+
+
+class PostView(DetailView):
+    context_object_name = 'post'
+    template_name = 'blog/post.html'
+    model = Post
 
 
 class DraftPublishView(JsonView, DetailView):
@@ -26,20 +26,10 @@ class DraftPublishView(JsonView, DetailView):
         return {}
 
 
-class BlogFormView(CreateView):
-    context_object_name = 'blog'
-    template_name = 'blog/blog_form.html'
-    model = Blog
-
-
-class BlogFieldForm(JsonView, DetailView):
-    context_object_name = 'blog'
-    template_name = 'blog/blog.html'
-    model = Blog
+class PostNewDraftView(JsonView, DetailView):
+    model = Post
 
     def json_post(self, request, *args, **kwargs):
         obj = self.get_object()
-        for key, value in request.POST.items():
-            setattr(obj, key, value)
-        obj.save()
-
+        draft = obj.new_draft()
+        return {'draft_id': draft.id}

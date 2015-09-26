@@ -12,7 +12,7 @@ $(window).ready(function () {
                 success: function (response, status, xhr, $form) {
                     console.log(status);
                     $.ajax({
-                        url: '/blog/draft/' + draftId + '/publish/',
+                        url: '/admin/blog/draft/' + draftId + '/publish/',
                         type: 'post',
                         dataType: 'json',
                         success: function (data) {

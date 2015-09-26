@@ -3,17 +3,24 @@ from django.utils.html import format_html
 
 from image_cropping import ImageCroppingMixin
 
-from .models import Blog, Image, Draft
+from .models import Post, Image, Draft
 
 
 class ImageInline(admin.TabularInline):
     model = Image
 
 
-@admin.register(Blog)
-class BlogAdmin(ImageCroppingMixin, admin.ModelAdmin):
+@admin.register(Post)
+class PostAdmin(ImageCroppingMixin, admin.ModelAdmin):
     #inlines = [ImageInline]
     list_display = ('title', 'slug', 'created', 'updated', 'tags')
+
+    class Media:
+            js = (
+                'js/jquery.min.js',
+                'js/admin/blog-post.js',
+              )
+
 
     def has_add_permission(self, request):
         return False
@@ -21,7 +28,7 @@ class BlogAdmin(ImageCroppingMixin, admin.ModelAdmin):
 
 @admin.register(Draft)
 class DraftAdmin(ImageCroppingMixin, admin.ModelAdmin):
-    list_display = ('title', 'slug', 'created', 'updated', 'tags')
+    list_display = ('title', 'slug', 'created', 'updated', 'tags', 'post')
 
     class Media:
             js = (

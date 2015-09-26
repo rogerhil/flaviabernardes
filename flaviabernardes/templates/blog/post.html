@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load cropping %}
+
+{% block extrastyle %}
+    <style>
+        #blog div,
+        #blog p,
+        #blog span {
+            text-transform: none;
+            font-variant: none;
+            font-size: 18px;
+            font-weight: normal;
+        }
+        textarea {
+            width: 100%;
+            height: 80px;
+        }
+        input[type=text] {
+            width: 100%;
+            height: 30px;
+            margin-bottom: 10px;
+            color: grey;
+        }
+        {% if user.is_authenticated %}
+            .editable:hover {
+                border: 1px dashed red;
+                margin: -1px;
+                cursor: crosshair;
+                background-color: #fff8f8;
+            }
+            h1.editable:hover {
+                margin: 19px -1px 18px -1px;
+            }
+            .editing {
+                border: 1px dashed red;
+                margin: -1px;
+                cursor: crosshair;
+                background-color: #fff8f8;
+                padding: 10px;
+            }
+            h1.editing {
+                margin: 19px -1px 18px -1px;
+            }
+        {% endif %}
+
+    </style>
+    <link href="{% static 'css/jquery-te-1.4.0.css' %}" rel="stylesheet" />
+{% endblock %}
+
+
+{% block container %}
+    <div id="blog">
+        <img src="{% cropped_thumbnail blog.listing 'head_ratio' scale=1 %}" class="editable" />
+        <h1 id="title" class="editable">{{ blog.title }}</h1>
+        <div id="text" class="editable">
+            {{ blog.text }}
+        </div>
+        <br/>
+        <h1>Related Posts</h1>
+
+        <p>0 Thoughts on {{ blog }}</p>
+
+        <p>Leave a reply</p>
+        <textarea></textarea>
+        <p>Fill in your details below or click an icon to log in:</p>
+        <input name="name" type="text" value="Name (required)" /><br/>
+        <input name="email" type="text" value="Email (required)" /><br/>
+        <input name="website" type="text" value="Website" /><br/>
+        <input type="checkbox" /> <span>Notify me of new comments via email</span><br/>
+        <button>Post comment</button><br/>
+    </div>
+
+    <script src="{% static 'js/jquery-te-1.4.0.min.js' %}"></script>
+    <script>
+        $("#title").click(function () {
+            if (!$(this).hasClass('editable')) return;
+            var value = $(this).html();
+            $(this).html('');
+            $(this).removeClass('editable');
+            $(this).addClass('editing');
+            $(this).append($('<input name="title" type="text" value="' + value + '" />'))
+            var $save = $('<button>Save</button>')
+            $(this).append($save);
+            $save.click(function () {
+                var value = $('input[name=title]').val();
+                $.ajax({
+                    url: '{% url 'blog_change_field' blog.slug %}',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {title: value},
+                    success: function (data) {
+                        if (!data.success) {
+                            alert(data.message);
+                            return;
+                        }
+                        $("#title").html(value);
+                        $("#title").removeClass('editing');
+                        $("#title").addClass('editable');
+                    }
+                });
+            });
+        });
+
+        $("#text").click(function () {
+            if (!$(this).hasClass('editable')) return;
+            var value = $(this).html();
+            $(this).html('');
+            $(this).removeClass('editable');
+            $(this).addClass('editing');
+            $(this).append($('<textarea name="text" value="' + value + '">' + value +  '</textarea>'));
+            var $save = $('<button>Save</button>')
+            $(this).append($save);
+            $("#text textarea[name=text]").jqte();
+            $save.click(function () {
+                var value = $('textarea[name=text]').val();
+                $.ajax({
+                    url: '{% url 'blog_change_field' blog.slug %}',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {text: value},
+                    success: function (data) {
+                        if (!data.success) {
+                            alert(data.message);
+                            return;
+                        }
+                        $("#text").html(value);
+                        $("#text").removeClass('editing');
+                        $("#text").addClass('editable');
+                    }
+                });
+            });
+        });
+
+
+    </script>
+{% endblock %}
