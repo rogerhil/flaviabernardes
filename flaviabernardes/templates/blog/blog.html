@@ -3,81 +3,8 @@
 {% load cropping %}
 
 {% block extrastyle %}
-    <style>
-        #posts ul {
-            list-style: none;
-        }
-        #posts li {
-            width: 305px;
-            height: 305px;
-            margin-right: 22.5px;
-            margin-bottom: 22.5px;
-            position: relative;
-            cursor: pointer;
-            float: left;
-            *border: 1px solid #eee;
-        }
-        #posts li.last {
-            margin-right: 0px;
-        }
-        #posts img {
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-        #posts li span,
-        #posts li p {
-            position: absolute;
-            padding: 0;
-            bottom: 0px;
-            display: block;
-            width: 245px;
-            height: 95px;
-            margin: 0 0 0 30px;
-            font-size: 14px;
-        }
-        #posts li p strong {
-            font-size: 18px !important;
-        }
-
-        #posts li span {
-            background-color: #fff;
-            opacity: 0.8;
-            z-index: 1;
-        }
-        #posts li p {
-            z-index: 4;
-            width: 225px;
-            height: 75px;
-            padding: 10px;
-            text-align: center;
-            color: #000;
-            text-transform: none;
-            font-variant: none;
-        }
-        #posts li img:hover {
-            transition: .5s;
-            opacity: .6;
-        }
-        .add-blog {
-            font-family: tahoma;
-            font-size: 14em;
-            font-weight: bold;
-            text-align: center;
-            color: #004400;
-            *background-color: #eeffee;
-        }
-        .add-blog a {
-            color: #004400;
-            text-decoration: none;
-            opacity: 0.5;
-        }
-        .add-blog a:hover {
-            opacity: 1;
-        }
-    </style>
+    <link href="{% static 'css/blog.css' %}" rel="stylesheet">
 {% endblock %}
-
 
 {% block container %}
     <div id="posts">
@@ -99,5 +26,4 @@
         </ul>
     </div>
     <div class="clear"></div>
-    <br>
 {% endblock %}

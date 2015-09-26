@@ -3,7 +3,6 @@
 
 {% block extrastyle %}
     <link href="{% static 'css/blog.css' %}" rel="stylesheet" />
-    <link href="{% static 'css/newsletter.css' %}" rel="stylesheet" />
     <link href="{% static 'css/jquery-te-1.4.0.css' %}" rel="stylesheet" />
 {% endblock %}
 
@@ -11,103 +10,99 @@
     {% include "blog/post_body.html" %}
 {% endblock %}
 
-{% block container-middle %}
-    <div id="newsletter-wrap">
-        {% include "newsletter/line_form.html"  %}
-    </div>
-    <div class="clear"></div>
-    <script src="{% static 'js/jquery.form.min.js' %}"></script>
-    <script src="{% static 'js/newsletter.js' %}"></script>
+{% block newsletter_description %}
+    Want more blog posts like this in your inbox? Plus get an exclusive artwork wallpaper? Sign up below
 {% endblock %}
 
 {% block container-bottom %}
-<div>
+    <div>
+        {% comment %}
+        <h1>Related Posts</h1>
+
+        <p>0 Thoughts on {{ post }}</p>
+        {% endcomment %}
+        <div class="clear"></div>
+        <div style="margin-bottom: 20px; width: 100%;">&nbsp;</div>
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES * * */
+            var disqus_shortname = 'flaviabernardesart';
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    </div>
+
+    <script src="{% static 'js/jquery-te-1.4.0.min.js' %}"></script>
+    <script>
     {% comment %}
-    <h1>Related Posts</h1>
+        $("#title").click(function () {
+            if (!$(this).hasClass('editable')) return;
+            var value = $(this).html();
+            $(this).html('');
+            $(this).removeClass('editable');
+            $(this).addClass('editing');
+            $(this).append($('<input name="title" type="text" value="' + value + '" />'))
+            var $save = $('<button>Save</button>')
+            $(this).append($save);
+            $save.click(function () {
+                var value = $('input[name=title]').val();
+                $.ajax({
+                    url: '{% url 'blog_change_field' blog.slug %}',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {title: value},
+                    success: function (data) {
+                        if (!data.success) {
+                            alert(data.message);
+                            return;
+                        }
+                        $("#title").html(value);
+                        $("#title").removeClass('editing');
+                        $("#title").addClass('editable');
+                    }
+                });
+            });
+        });
 
-    <p>0 Thoughts on {{ post }}</p>
+        $("#text").click(function () {
+            if (!$(this).hasClass('editable')) return;
+            var value = $(this).html();
+            $(this).html('');
+            $(this).removeClass('editable');
+            $(this).addClass('editing');
+            $(this).append($('<textarea name="text" value="' + value + '">' + value +  '</textarea>'));
+            var $save = $('<button>Save</button>')
+            $(this).append($save);
+            $("#text textarea[name=text]").jqte();
+            $save.click(function () {
+                var value = $('textarea[name=text]').val();
+                $.ajax({
+                    url: '{% url 'blog_change_field' blog.slug %}',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {text: value},
+                    success: function (data) {
+                        if (!data.success) {
+                            alert(data.message);
+                            return;
+                        }
+                        $("#text").html(value);
+                        $("#text").removeClass('editing');
+                        $("#text").addClass('editable');
+                    }
+                });
+            });
+        });
+
     {% endcomment %}
-    <div class="clear" style="margin-bottom: 20px;"></div>
 
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES * * */
-        var disqus_shortname = 'flaviabernardesart';
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
     </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-</div>
-
-<script src="{% static 'js/jquery-te-1.4.0.min.js' %}"></script>
-<script>
-{% comment %}
-    $("#title").click(function () {
-        if (!$(this).hasClass('editable')) return;
-        var value = $(this).html();
-        $(this).html('');
-        $(this).removeClass('editable');
-        $(this).addClass('editing');
-        $(this).append($('<input name="title" type="text" value="' + value + '" />'))
-        var $save = $('<button>Save</button>')
-        $(this).append($save);
-        $save.click(function () {
-            var value = $('input[name=title]').val();
-            $.ajax({
-                url: '{% url 'blog_change_field' blog.slug %}',
-                type: 'post',
-                dataType: 'json',
-                data: {title: value},
-                success: function (data) {
-                    if (!data.success) {
-                        alert(data.message);
-                        return;
-                    }
-                    $("#title").html(value);
-                    $("#title").removeClass('editing');
-                    $("#title").addClass('editable');
-                }
-            });
-        });
-    });
-
-    $("#text").click(function () {
-        if (!$(this).hasClass('editable')) return;
-        var value = $(this).html();
-        $(this).html('');
-        $(this).removeClass('editable');
-        $(this).addClass('editing');
-        $(this).append($('<textarea name="text" value="' + value + '">' + value +  '</textarea>'));
-        var $save = $('<button>Save</button>')
-        $(this).append($save);
-        $("#text textarea[name=text]").jqte();
-        $save.click(function () {
-            var value = $('textarea[name=text]').val();
-            $.ajax({
-                url: '{% url 'blog_change_field' blog.slug %}',
-                type: 'post',
-                dataType: 'json',
-                data: {text: value},
-                success: function (data) {
-                    if (!data.success) {
-                        alert(data.message);
-                        return;
-                    }
-                    $("#text").html(value);
-                    $("#text").removeClass('editing');
-                    $("#text").addClass('editable');
-                }
-            });
-        });
-    });
-
-{% endcomment %}
-
-</script>
 
 {% endblock %}

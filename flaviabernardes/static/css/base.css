@@ -56,6 +56,18 @@ html {
     margin: 0 auto 0 auto;
 }
 
+#logo {
+    width: 960px;
+    height: 90px;
+    margin: 0 auto;
+    *position: relative;
+    margin-top: 10px;
+}
+
+#logo img {
+    cursor: pointer !important;
+}
+
 #logo-home {
     font-family: Polygraph;
     font-size: 100px;
@@ -65,17 +77,11 @@ html {
     height: 90px;
     margin: 0 auto;
     position: relative;
-    *cursor: pointer;
 }
 
 #body {
     position: relative;
     min-height:100%;
-}
-
-#body #logo-home {
-    width: 960px !important;
-    margin-top: 10px;
 }
 
 #header {
@@ -290,6 +296,13 @@ html {
 #full-view img {
 }
 
+img.ajax-loader {
+    position: absolute;
+    top: calc(50% - 64px);
+    left: calc(50% - 64px);
+    display: block;
+}
+
 #cover {
     position:fixed;
     top:0;
@@ -300,6 +313,7 @@ html {
     height:100%;
     display:none;
 }
+
 #about-picture {
     float: left;
     margin-right: 20px;

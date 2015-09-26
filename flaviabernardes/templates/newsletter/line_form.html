@@ -1,9 +1,6 @@
 {% load staticfiles %}
 
 <form id="newsletter" action="{% url 'newsletter' %}" method="post">
-    <p class="center">
-        Want more blog posts like this in your inbox? Plus get an exclusive artwork wallpaper? Sign up below
-    </p>
     {% if form.non_field_errors %}
         <div class="non-field-errors">
             {{ form.non_field_errors }}
