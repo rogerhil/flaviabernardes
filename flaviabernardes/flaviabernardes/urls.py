@@ -12,6 +12,7 @@ from .fbauth.views import LoginJson, LogoutJson
 from .newsletter.views import LandPageView, ConfirmationView, NewsletterView
 
 
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'flaviabernardes.views.home', name='home'),
@@ -36,6 +37,5 @@ urlpatterns = patterns('',
     url(r'^$', HomeView.as_view(), name='home'),
     url(r'^landing-page/$', LandPageView.as_view(), name='landpage'),
     url(r'^confirmation/$', ConfirmationView.as_view(), name='confirmation'),
-
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
