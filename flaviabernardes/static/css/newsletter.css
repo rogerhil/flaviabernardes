@@ -1,0 +1,53 @@
+#newsletter {
+    margin: 0 auto;
+    width: 726px;
+}
+
+#newsletter strong {
+    display: block;
+    padding: 10px 20px !important;
+}
+
+#newsletter input {
+    width: 100%;
+    padding: 10px 20px !important;
+}
+
+#newsletter ul {
+    width: 100%;
+}
+
+#newsletter ul {
+    list-style: none;
+    margin: 0;
+}
+
+#newsletter ul li {
+    float: left;
+    margin-right: 10px;
+}
+
+#newsletter ul li.last {
+    margin-right: 0;
+}
+
+#newsletter button {
+    margin: 0px;
+    width: 100%;
+    padding: 11px 20px !important;
+}
+
+#newsletter button:hover {
+    color: #c00;
+    border-color: #c00;
+    transition: 0.5s;
+}
+
+
+.non-field-errors {
+    text-align: center;
+    padding: 5px 0px;
+    background-color: rgba(64,0,0,0.5);
+    *border: 1px solid #800;
+    color: #fff;
+}

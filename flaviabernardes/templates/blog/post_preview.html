@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block extrastyle %}
+    <link href="{% static 'css/blog.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/jquery-te-1.4.0.css' %}" rel="stylesheet" />
+    <style>
+        #header {
+            border-bottom: 1px solid red;
+        }
+    </style>
+{% endblock %}
+
+{% block logo %}
+    <p style="color: #f00; font-weight: bold; font-size: 50px;">
+        POST PREVIEW
+        <button id="publish" draft_id="{{ post.id }}" post_slug="{{ post.post.slug }}">
+            PUBLISH
+        </button>
+    </p>
+{% endblock %}
+
+{% block body_attrs %}style="background: #fee;"{% endblock %}
+
+{% block container %}
+    {% include "blog/post_body.html" %}
+    <script>
+        $(window).ready(function () {
+            var $publish = $('#publish');
+            var draftId = $publish.attr('draft_id');
+            var slug = $publish.attr('post_slug');
+            $publish.click(function () {
+                if (confirm("Are you sure you want to publish this draft?")) {
+                    $.ajax({
+                        url: '/admin/blog/draft/' + draftId + '/publish/',
+                        type: 'post',
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.success) {
+                                window.location = '/blog/' + slug + '/';
+                            } else {
+                                alert(data.message);
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+{% endblock %}

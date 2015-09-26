@@ -21,7 +21,7 @@ BODY = "Hello %s, \n\n" \
 
 class SubscriberForm(forms.Form):
     email = forms.EmailField()
-    first_name = forms.CharField(max_length=255, required=False)
+    first_name = forms.CharField(max_length=255)
     last_name = forms.CharField(max_length=255, required=False)
 
     def pre_subscribe_locally(self):

@@ -1,0 +1,59 @@
+/*
+#blog div,
+#blog p,
+#blog span {
+    text-transform: none;
+    font-variant: none;
+    font-size: 18px;
+    font-weight: normal;
+}
+textarea {
+    width: 100%;
+    height: 80px;
+}
+input[type=text] {
+    width: 100%;
+    height: 30px;
+    margin-bottom: 10px;
+    color: grey;
+}
+{% if user.is_authenticated %}
+    /*
+
+    .editable:hover {
+        border: 1px dashed red;
+        margin: -1px;
+        cursor: crosshair;
+        background-color: #fff8f8;
+    }
+    h1.editable:hover {
+        margin: 19px -1px 18px -1px;
+    }
+    .editing {
+        border: 1px dashed red;
+        margin: -1px;
+        cursor: crosshair;
+        background-color: #fff8f8;
+        padding: 10px;
+    }
+    h1.editing {
+        margin: 19px -1px 18px -1px;
+    }
+
+    */
+{% endif %}
+
+*/
+
+#disqus_thread {
+     position: relative;
+}
+#disqus_thread:after {
+     content: "";
+     display: block;
+     height: 55px;
+     width: 100%;
+     position: absolute;
+     bottom: 0;
+     background: white;
+}

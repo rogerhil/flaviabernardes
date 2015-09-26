@@ -9,7 +9,10 @@
         <script src="{% static 'js/jquery.bxslider.js' %}"></script>
         <script src="{% static 'js/jquery.cookie.js' %}"></script>
         <link href="{% static 'css/jquery.bxslider.css' %}" rel="stylesheet" />
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+        <link href="{% static 'css/social.css' %}" rel="stylesheet" />
         <link href="{% static 'css/base.css' %}" rel="stylesheet" />
+
 
         <script>
             var csrftoken = $.cookie('csrftoken');
@@ -101,7 +104,7 @@
         <style>
             {% comment %}
             {% if user.is_authenticated %}
-                #site {
+                .center-column {
                     *border: 1px dashed red;
                     background-color: #fff;
                 }
@@ -121,9 +124,9 @@
             <div id="body">
                 <section id="header" style="">
                     <div id="logo-home">
-                        <a href="/">
+                        {% block logo %}
                             <img src="{% static 'img/logo-small-bw.png' %}" />
-                        </a>
+                        {% endblock %}
                     </div>
                     <div class="content">
                         <div class="transp transp-top" style="">
@@ -132,20 +135,40 @@
                     </div>
                 </section>
                 <div style="height: 100px;"></div>
-                <div id="site">
-                    <section id="container">
+                <div class="center-column">
+                    <section class="container-top">
                         {% block container %}
                         {% endblock %}
                         <div class="clear"></div>
                     </section>
                     <div class="clear"></div>
                 </div>
+                <div class="site-middle">
+                    <div class="center-column">
+                        <section class="container-middle">
+                            {% block container-middle %}
+                            {% endblock %}
+                        </section>
+                    </div>
+                </div>
+                <div class="center-column">
+                    <section class="container-bottom">
+                        {% block container-bottom %}
+                        {% endblock %}
+                        <div class="clear"></div>
+                    </section>
+                    <div class="clear"></div>
+                </div>
+
                 <div class="clear"></div>
                 <div style="height: 20px;"></div>
                 <section id="footer">
                     <div class="content">
+                        {% with '32' as size %}
+                            <div class="footer-social">{% include "social.html" %}</div>
+                        {% endwith %}
                         <div class="copyrights">&#9400 Flavia Bernardes, 2015. All rights reserved.</div>
-                        <div class="social"></div>
+                        <div class="clear"></div>
                     </div>
                 </section>
             </div>
@@ -164,9 +187,9 @@
                     $('#header').removeClass('menu-fixed');
                 }
             });
-            $('#logo-home').click(function () {
-                window.location.replace('/');
-            });
+            //$('#logo-home').click(function () {
+            //    window.location.replace('/');
+            //});
         });
     </script>
 </html>

@@ -6,9 +6,10 @@ from django.views.generic import TemplateView
 from django.views.decorators.csrf import csrf_exempt
 
 from .artwork.views import HomeView, PaintingsView, ArtworksSortJson
-from .blog.views import BlogView, PostView, DraftPublishView, PostNewDraftView
+from .blog.views import BlogView, PostView, DraftPublishView, \
+                        PostNewDraftView, DraftPreview
 from .fbauth.views import LoginJson, LogoutJson
-from .newsletter.views import LandPageView, ConfirmationView
+from .newsletter.views import LandPageView, ConfirmationView, NewsletterView
 
 
 urlpatterns = patterns('',
@@ -17,8 +18,10 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
     url(r'^admin/blog/draft/(?P<pk>\d+)/publish/$',
         csrf_exempt(DraftPublishView.as_view()), name='draft_publish'),
-    url(r'^admin/blog/(?P<pk>\d+)/new-draft/$',
+    url(r'^admin/blog/post/(?P<pk>\d+)/new-draft/$',
         csrf_exempt(PostNewDraftView.as_view()), name='blog_post_new_draft'),
+    url(r'^admin/blog/draft/(?P<pk>\d+)/preview/$',
+        csrf_exempt(DraftPreview.as_view()), name='draft_preview'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^login/json/$', LoginJson.as_view(), name='login'),
     url(r'^logout/json/$', LogoutJson.as_view(), name='logout'),
@@ -29,6 +32,7 @@ urlpatterns = patterns('',
         name='blog_post_view'),
     url(r'^about/$', TemplateView.as_view(template_name="about/about.html"),
         name='about'),
+    url(r'^newsletter/$', NewsletterView.as_view(), name='newsletter'),
     url(r'^$', HomeView.as_view(), name='home'),
     url(r'^landing-page/$', LandPageView.as_view(), name='landpage'),
     url(r'^confirmation/$', ConfirmationView.as_view(), name='confirmation'),

@@ -3,15 +3,21 @@ from django.db import models
 from image_cropping import ImageRatioField
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.name
+
 class BasePost(models.Model):
     text = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    tags = models.CharField(max_length=255)
-    image = models.ImageField(blank=True, upload_to='uploads')
-    listing_image = models.ImageField(blank=True, upload_to='uploads')
-    listing = ImageRatioField('listing_image', '305x305')
-    banner = ImageRatioField('image', '960x200')
+    tags = models.ManyToManyField(Category)
+    image_banner = models.ImageField(blank=True, upload_to='uploads')
+    image_listing = models.ImageField(blank=True, upload_to='uploads')
+    listing = ImageRatioField('image_listing', '305x305')
+    banner = ImageRatioField('image_banner', '960x200')
 
     class Meta:
         abstract = True
@@ -27,20 +33,21 @@ class BasePost(models.Model):
 class Post(BasePost):
     title = models.CharField(max_length=128, unique=True)
     slug = models.SlugField(max_length=64, unique=True)
-    published = models.BooleanField(default=False)
 
     def new_draft(self):
         draft = Draft.objects.create(
             title=self.title,
             slug=self.slug,
             text=self.text,
-            tags=self.tags,
-            image=self.image,
-            listing_image=self.listing_image,
-            banner=self.banner,
+            image_listing=self.image_listing,
+            image_banner=self.image_banner,
             listing=self.listing,
+            banner=self.banner,
             post=self
         )
+        for tag in self.tags.all():
+            draft.tags.add(tag)
+        draft.save()
         return draft
 
 
@@ -58,15 +65,20 @@ class Draft(BasePost):
         post.title = self.title
         post.text = self.text
         post.slug = self.slug
-        post.tags = self.tags
-        post.image = self.image
-        post.listing_image = self.listing_image
+        post.image_banner = self.image_banner
+        post.image_listing = self.image_listing
         post.banner = self.banner
         post.listing = self.listing
+        if not new:
+            for tag in self.tags.all():
+                post.tags.add(tag)
         post.save()
         if new:
             self.post = post
             self.save()
+            for tag in self.tags.all():
+                post.tags.add(tag)
+            post.save()
 
 
 class BaseImage(models.Model):
@@ -80,11 +92,11 @@ class BaseImage(models.Model):
         return self.name
 
 
-class Image(BaseImage):
-    post = models.ForeignKey(Post, related_name='images')
-    ratio = ImageRatioField('image', '50x50')
+#class Image(BaseImage):
+#    post = models.ForeignKey(Post, related_name='images')
+#    ratio = ImageRatioField('image', '50x50')
 
 
-class DraftImage(BaseImage):
-    draft = models.ForeignKey(Draft)
-    ratio = ImageRatioField('image', '50x50')
+#class DraftImage(BaseImage):
+#    draft = models.ForeignKey(Draft)
+#    ratio = ImageRatioField('image', '50x50')

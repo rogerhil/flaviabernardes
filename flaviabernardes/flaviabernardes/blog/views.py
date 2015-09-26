@@ -2,10 +2,10 @@ from django.views.generic import ListView, DetailView
 
 from ..utils import JsonView
 from .models import Post, Draft
+from ..newsletter.forms import SubscriberForm
 
 
 class BlogView(ListView):
-
     context_object_name = 'posts_list'
     queryset = Post.objects.all().order_by('-created')
     template_name = 'blog/blog.html'
@@ -15,6 +15,11 @@ class PostView(DetailView):
     context_object_name = 'post'
     template_name = 'blog/post.html'
     model = Post
+
+    def get_context_data(self, **kwargs):
+        context = super(PostView, self).get_context_data(**kwargs)
+        context['form'] = SubscriberForm()
+        return context
 
 
 class DraftPublishView(JsonView, DetailView):
@@ -33,3 +38,9 @@ class PostNewDraftView(JsonView, DetailView):
         obj = self.get_object()
         draft = obj.new_draft()
         return {'draft_id': draft.id}
+
+
+class DraftPreview(DetailView):
+    context_object_name = 'post'
+    template_name = 'blog/post_preview.html'
+    model = Draft

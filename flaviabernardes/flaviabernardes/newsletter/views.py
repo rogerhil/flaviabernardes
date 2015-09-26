@@ -7,10 +7,7 @@ from .client import AlreadySubscribedError
 from .forms import SubscriberForm
 from .models import Subscriber
 
-
-class LandPageView(JsonFormView):
-    template_name = 'landpage.html'
-    form_template = 'landingpage_form.html'
+class BaseNewsletterView(JsonFormView):
     form_class = SubscriberForm
     success_url = '/'
 
@@ -22,7 +19,12 @@ class LandPageView(JsonFormView):
             msg = "You are already subscribed to my newsletter."
             form.errors['__all__'] = msg
             return self.form_invalid(form)
-        return super(LandPageView, self).form_valid(form)
+        return super(BaseNewsletterView, self).form_valid(form)
+
+
+class LandPageView(BaseNewsletterView):
+    template_name = 'landpage.html'
+    form_template = 'landingpage_form.html'
 
 
 class ConfirmationView(TemplateView):
@@ -39,3 +41,8 @@ class ConfirmationView(TemplateView):
         form = SubscriberForm()
         form.subscribe(subscriber)
         return super(ConfirmationView, self).dispatch(request, *args, **kwargs)
+
+
+class NewsletterView(BaseNewsletterView):
+    template_name = 'newsletter/line_form.html'
+    form_template = 'newsletter/line_form.html'

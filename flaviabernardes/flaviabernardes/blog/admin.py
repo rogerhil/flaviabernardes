@@ -3,17 +3,17 @@ from django.utils.html import format_html
 
 from image_cropping import ImageCroppingMixin
 
-from .models import Post, Image, Draft
+from .models import Post, Draft, Category
 
 
-class ImageInline(admin.TabularInline):
-    model = Image
+#class ImageInline(admin.TabularInline):
+#    model = Image
 
 
 @admin.register(Post)
 class PostAdmin(ImageCroppingMixin, admin.ModelAdmin):
     #inlines = [ImageInline]
-    list_display = ('title', 'slug', 'created', 'updated', 'tags', 'modify')
+    list_display = ('title', 'slug', 'created', 'updated', 'modify')
 
     class Media:
             js = (
@@ -33,7 +33,7 @@ class PostAdmin(ImageCroppingMixin, admin.ModelAdmin):
 
 @admin.register(Draft)
 class DraftAdmin(ImageCroppingMixin, admin.ModelAdmin):
-    list_display = ('title', 'slug', 'created', 'updated', 'tags', 'post')
+    list_display = ('title', 'post', 'slug', 'created', 'updated')
 
     class Media:
             js = (
@@ -43,6 +43,10 @@ class DraftAdmin(ImageCroppingMixin, admin.ModelAdmin):
                 'js/admin/blog-draft.js',
               )
 
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    pass
 
 
 #@admin.register(Image)

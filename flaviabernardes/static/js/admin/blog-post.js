@@ -12,7 +12,7 @@ $(window).ready(function () {
         var redirect = '/admin/blog/draft/';
         $(this).click(function () {
             $.ajax({
-                url: '/admin/blog/' + pid + '/new-draft/',
+                url: '/admin/blog/post/' + pid + '/new-draft/',
                 type: 'post',
                 dataType: 'json',
                 success: function (data) {
