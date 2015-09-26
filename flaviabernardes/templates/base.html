@@ -131,7 +131,7 @@
         {% block site %}
             <div id="body">
                 <section id="header">
-                    <div id="logo">
+                    <div id="logo" {% if landing_page %}style="height: 70px;"{% endif %}>
                         {% block logo %}
                             <img src="{% static 'img/logo-small-bw.png' %}" />
                         {% endblock %}
