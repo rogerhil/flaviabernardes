@@ -24,18 +24,27 @@ urlpatterns = patterns('',
     url(r'^admin/blog/draft/(?P<pk>\d+)/preview/$',
         csrf_exempt(DraftPreview.as_view()), name='draft_preview'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^login/json/$', LoginJson.as_view(), name='login'),
-    url(r'^logout/json/$', LogoutJson.as_view(), name='logout'),
-    url(r'^artworks/$', PaintingsView.as_view(), name='artworks'),
-    url(r'^artworks/sort/$', ArtworksSortJson.as_view(), name='artworks_sort'),
+    #url(r'^login/json/$', LoginJson.as_view(), name='login'),
+    #url(r'^logout/json/$', LogoutJson.as_view(), name='logout'),
+    url(r'^newsletter/$', NewsletterView.as_view(), name='newsletter'),
+    url(r'^confirmation/$', ConfirmationView.as_view(), name='confirmation'),
     url(r'^blog/$', BlogView.as_view(), name='blog'),
     url(r'^blog/(?P<slug>[-_\w]+)/$', PostView.as_view(),
-        name='blog_post_view'),
-    url(r'^about/$', TemplateView.as_view(template_name="about/about.html"),
-        name='about'),
-    url(r'^newsletter/$', NewsletterView.as_view(), name='newsletter'),
-    url(r'^$', HomeView.as_view(), name='home'),
-    url(r'^landing-page/$', LandPageView.as_view(), name='landpage'),
-    url(r'^confirmation/$', ConfirmationView.as_view(), name='confirmation'),
+        name='blog_post_view')
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.LANDING_PAGE:
+    urlpatterns += [
+        url(r'^$', LandPageView.as_view(), name='landpage'),
+    ]
+else:
+    urlpatterns += [
+        url(r'^$', HomeView.as_view(), name='home'),
+        url(r'^artworks/$', PaintingsView.as_view(), name='artworks'),
+        url(r'^artworks/sort/$', ArtworksSortJson.as_view(),
+            name='artworks_sort'),
+        url(r'^about/$',
+            TemplateView.as_view(template_name="about/about.html"),
+            name='about')
+    ]

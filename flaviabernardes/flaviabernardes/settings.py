@@ -64,7 +64,8 @@ TEMPLATE_DIRS = (
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.request'
+    'django.core.context_processors.request',
+    'flaviabernardes.context_processors.global_context',
 )
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
@@ -141,6 +142,8 @@ EMAIL_HOST_PASSWORD = ""
 EMAIL_HOST_USER = ""
 DEFAULT_FROM_EMAIL = "(Flavia Bernardes) " \
                      "<flavia@flaviabernardesart.com>"
+
+LANDING_PAGE = True
 
 try:
     from .developmentsettings import *

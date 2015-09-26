@@ -137,9 +137,11 @@
                         {% endblock %}
                     </div>
                     <div>
+                        {% if not landing_page %}
                         <div class="transp transp-top">
                             {% include "top-menu.html" %}
                         </div>
+                        {% endif %}
                     </div>
                 </section>
                 <div style="height: 100px;"></div>
