@@ -9,7 +9,9 @@ class BasePost(models.Model):
     updated = models.DateTimeField(auto_now=True)
     tags = models.CharField(max_length=255)
     image = models.ImageField(blank=True, upload_to='uploads')
-    listing = ImageRatioField('image', '300x300')
+    listing_image = models.ImageField(blank=True, upload_to='uploads')
+    listing = ImageRatioField('listing_image', '305x305')
+    banner = ImageRatioField('image', '960x200')
 
     class Meta:
         abstract = True
@@ -32,9 +34,10 @@ class Post(BasePost):
             title=self.title,
             slug=self.slug,
             text=self.text,
-            created=self.created,
             tags=self.tags,
             image=self.image,
+            listing_image=self.listing_image,
+            banner=self.banner,
             listing=self.listing,
             post=self
         )
@@ -57,6 +60,8 @@ class Draft(BasePost):
         post.slug = self.slug
         post.tags = self.tags
         post.image = self.image
+        post.listing_image = self.listing_image
+        post.banner = self.banner
         post.listing = self.listing
         post.save()
         if new:

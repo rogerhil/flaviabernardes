@@ -4,10 +4,10 @@
 
 {% block extrastyle %}
     <style>
-        #blogs ul {
+        #posts ul {
             list-style: none;
         }
-        #blogs li {
+        #posts li {
             width: 305px;
             height: 305px;
             margin-right: 22.5px;
@@ -15,17 +15,18 @@
             position: relative;
             cursor: pointer;
             float: left;
+            *border: 1px solid #eee;
         }
-        #blogs li.last {
+        #posts li.last {
             margin-right: 0px;
         }
-        #blogs img {
+        #posts img {
             position: absolute;
             top: 0;
             left: 0;
         }
-        #blogs li span,
-        #blogs li p {
+        #posts li span,
+        #posts li p {
             position: absolute;
             padding: 0;
             bottom: 0px;
@@ -33,14 +34,18 @@
             width: 245px;
             height: 95px;
             margin: 0 0 0 30px;
+            font-size: 14px;
+        }
+        #posts li p strong {
+            font-size: 18px !important;
         }
 
-        #blogs li span {
+        #posts li span {
             background-color: #fff;
-            opacity: 0.7;
+            opacity: 0.8;
             z-index: 1;
         }
-        #blogs li p {
+        #posts li p {
             z-index: 4;
             width: 225px;
             height: 75px;
@@ -50,9 +55,9 @@
             text-transform: none;
             font-variant: none;
         }
-        #blogs li img:hover {
-            transition: .8s;
-            opacity: .3;
+        #posts li img:hover {
+            transition: .5s;
+            opacity: .6;
         }
         .add-blog {
             font-family: tahoma;
@@ -75,17 +80,19 @@
 
 
 {% block container %}
-    <div id="blogs">
+    <div id="posts">
         <ul>
-            {% for blog in blogs_list %}
-                <li class="{% cycle '' 'last' '' %}">
-                    <a href="{% url 'blog_item' blog.slug %}">
+            {% for post in posts_list %}
+                <li class="{% cycle '' '' 'last' %}">
+                    <a href="{% url 'blog_post_view' post.slug %}">
                         <p>
-                            {{ blog }}<br/>
-                            {{ blog.text|truncatechars:120 }}
+                            <strong>{{ post.title }}</strong><br>
+                            {% autoescape off %}
+                                {{ post.text|removetags:"p b span i div table ul li th tr td body"|truncatechars:90 }}
+                            {% endautoescape %}
                         </p>
                         <span></span>
-                        <img src="{% cropped_thumbnail blog 'listing' scale=1 %}" />
+                        <img src="{% cropped_thumbnail post 'listing' scale=1 %}" />
                     </a>
                 </li>
             {% endfor %}

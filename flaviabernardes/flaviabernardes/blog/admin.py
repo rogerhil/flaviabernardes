@@ -13,7 +13,7 @@ class ImageInline(admin.TabularInline):
 @admin.register(Post)
 class PostAdmin(ImageCroppingMixin, admin.ModelAdmin):
     #inlines = [ImageInline]
-    list_display = ('title', 'slug', 'created', 'updated', 'tags')
+    list_display = ('title', 'slug', 'created', 'updated', 'tags', 'modify')
 
     class Media:
             js = (
@@ -24,6 +24,11 @@ class PostAdmin(ImageCroppingMixin, admin.ModelAdmin):
 
     def has_add_permission(self, request):
         return False
+
+    def modify(self, obj):
+        return format_html('<a class="modify" href="javacript:;" pid="%s">'
+                           'New draft</a>' % obj.id)
+
 
 
 @admin.register(Draft)
