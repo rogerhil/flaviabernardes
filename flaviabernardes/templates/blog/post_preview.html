@@ -41,11 +41,13 @@
             var slug = $publish.attr('post_slug');
             $publish.click(function () {
                 if (confirm("Are you sure you want to publish this draft?")) {
+                    $('#cover').fadeIn();
                     $.ajax({
                         url: '/admin/blog/draft/' + draftId + '/publish/',
                         type: 'post',
                         dataType: 'json',
                         success: function (data) {
+                            $('#cover').fadeOut();
                             if (data.success) {
                                 window.location = '/blog/' + slug + '/';
                             } else {

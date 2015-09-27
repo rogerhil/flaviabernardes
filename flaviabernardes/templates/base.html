@@ -10,6 +10,7 @@
         <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
         <link href="{% static 'css/social.css' %}" rel="stylesheet" />
         <link href="{% static 'css/base.css' %}" rel="stylesheet" />
+        <link href="{% static 'css/ajaxloader.css' %}" rel="stylesheet" />
         <link href="{% static 'css/newsletter.css' %}" rel="stylesheet" />
 
         <!-- jQuery library (served from Google) -->
@@ -17,6 +18,7 @@
         <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
         <script src="{% static 'js/jquery.bxslider.js' %}"></script>
         <script src="{% static 'js/jquery.cookie.js' %}"></script>
+        <script src="{% static 'js/ajaxloader.js' %}"></script>
         <script src="{% static 'js/parallax.js' %}"></script>
         <script src="{% static 'js/fixatscroll.js' %}"></script>
 
@@ -133,9 +135,6 @@
 
     </head>
     <body>
-        <div id="cover">
-            <img src="{% static 'img/ajax-loader.png' %}" class="ajax-loader">
-        </div>
         {% block site %}
             <div id="body">
                 <section id="header">

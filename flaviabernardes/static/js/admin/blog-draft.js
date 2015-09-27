@@ -1,4 +1,5 @@
 
+
 $(window).ready(function () {
     var draftId = window.location.pathname.split('/')[4];
     var $preview = $('<input id="preview" type="submit" value="Save and Preview" name="_continue" style="color: blue;">');
@@ -8,7 +9,11 @@ $(window).ready(function () {
 
     $preview.click(function () {
         $('#draft_form').ajaxForm({
+            beforeSubmit: function(arr, $form, options) {
+                $('#cover').fadeIn();
+            },
             success: function (response, status, xhr, $form) {
+                $('#cover').fadeOut();
                 window.open('/admin/blog/draft/' + draftId + '/preview/');
             }
         });

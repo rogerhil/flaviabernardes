@@ -16,10 +16,14 @@ class PostAdmin(ImageCroppingMixin, admin.ModelAdmin):
     list_display = ('title', 'slug', 'created', 'updated', 'modify')
 
     class Media:
-            js = (
-                'js/jquery.min.js',
-                'js/admin/blog-post.js',
-              )
+        js = (
+            'js/jquery.min.js',
+            'js/ajaxloader.js',
+            'js/admin/blog-post.js',
+        )
+        css = {
+            'all': ('css/ajaxloader.css',)
+        }
 
 
     def has_add_permission(self, request):
@@ -36,12 +40,16 @@ class DraftAdmin(ImageCroppingMixin, admin.ModelAdmin):
     list_display = ('title', 'post', 'slug', 'created', 'updated')
 
     class Media:
-            js = (
-                'js/jquery.min.js',
-                'js/jquery.form.min.js',
-                'tinymce/tinymce.min.js',
-                'js/admin/blog-draft.js',
-              )
+        js = (
+            'js/jquery.min.js',
+            'js/ajaxloader.js',
+            'js/jquery.form.min.js',
+            'tinymce/tinymce.min.js',
+        'js/admin/blog-draft.js',
+        )
+        css = {
+            'all': ('css/ajaxloader.css',)
+        }
 
 
 @admin.register(Category)

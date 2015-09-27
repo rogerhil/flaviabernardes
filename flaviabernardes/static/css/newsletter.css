@@ -28,6 +28,10 @@
     width: 23%;
 }
 
+#newsletter ul.errorlist li {
+    width: auto;
+}
+
 #newsletter ul li.last {
     margin-right: 0;
 }

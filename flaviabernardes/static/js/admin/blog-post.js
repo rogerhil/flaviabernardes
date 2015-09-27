@@ -11,11 +11,13 @@ $(window).ready(function () {
         var pid = $(this).attr('pid');
         var redirect = '/admin/blog/draft/';
         $(this).click(function () {
+            $('#cover').fadeIn();
             $.ajax({
                 url: '/admin/blog/post/' + pid + '/new-draft/',
                 type: 'post',
                 dataType: 'json',
                 success: function (data) {
+                    $('#cover').fadeOut();
                     if (data.success) {
                         window.location = redirect + data.data.draft_id + '/';
                     } else {
