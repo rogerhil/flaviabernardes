@@ -6,7 +6,7 @@
 {% block ogtitle %}Flavia Bernardes Art | Blog{% endblock %}
 {% block ogdescription %}Check out artist Flavia Bernardes' blog posts{% endblock %}
 {% block ogurl %}{% url 'blog' %}{% endblock %}
-{% if posts_list %}
+{% if posts_list.count %}
     {% block ogimage %}{% cropped_thumbnail posts_list.0 'listing' scale=1 %}{% endblock %}
 {% endif %}
 
