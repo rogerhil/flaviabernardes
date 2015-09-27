@@ -1,5 +1,7 @@
+from django.conf import settings
 from django.db import models
 from django.contrib.sitemaps import ping_google
+from django.core.mail import send_mail
 
 from image_cropping import ImageRatioField
 
@@ -84,7 +86,9 @@ class Draft(BasePost):
         try:
             ping_google()
         except Exception as err:
-            pass
+            subj = 'Flavia Bernardes Art: Error while trying to ping_google()'
+            send_mail(subj, str(err), settings.SERVER_EMAIL,
+                      [e[1] for e in settings.ADMINS])
 
 
 class BaseImage(models.Model):

@@ -140,12 +140,17 @@ MAILCHIMP = 'mailchimp'
 
 CURRENT_EMAIL_MARKETING_PROVIDER = MADMIMI
 
-
 EMAIL_HOST = ""
 EMAIL_HOST_PASSWORD = ""
 EMAIL_HOST_USER = ""
 DEFAULT_FROM_EMAIL = "(Flavia Bernardes) " \
                      "<flavia@flaviabernardesart.com>"
+
+ADMINS = (
+    ('Rogerio Hilbert', 'rogerhil@gmail.com'),
+)
+
+SERVER_EMAIL = 'support@flaviabernardesart.com'
 
 LANDING_PAGE = True
 
