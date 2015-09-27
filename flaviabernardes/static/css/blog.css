@@ -45,19 +45,6 @@ input[type=text] {
 
 */
 
-#disqus_thread {
-     position: relative;
-}
-#disqus_thread:after {
-     content: "";
-     display: block;
-     height: 55px;
-     width: 100%;
-     position: absolute;
-     bottom: 0;
-     background: white;
-}
-
 #posts ul {
     list-style: none;
     margin-left: -11.25px;

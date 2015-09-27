@@ -201,12 +201,27 @@ html {
     z-index: 9999;
 }
 
+#disqus_thread {
+    position: relative;
+    clear: both;
+}
+
+.hide_disqus_footer {
+    margin-bottom: 70px;
+    width: 100%;
+    position: absolute;
+    bottom:0;
+    left:0;
+    background: white;
+    height: 40px;
+}
+
 #footer {
     font-size: 14px;
     background-color: #f6f6f6;
     padding: 20px 0;
     width: 100%;
-    *height: 40px;
+    *height: 100px;
     position: absolute;
     bottom:0;
 	left:0;
@@ -417,6 +432,8 @@ input {
     }
 }
 
+
+
 @media (max-width: 645px) and (min-width: 50px) {
     #newsletter ul li {
         float: none !important;
@@ -433,5 +450,11 @@ input {
     #footer {
         margin-top: 250px !important;
         height: 100px;
+    }
+}
+
+@media (max-width: 505px) and (min-width: 50px) {
+    .hide_disqus_footer {
+        height: 200px;
     }
 }
