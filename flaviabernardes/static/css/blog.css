@@ -60,11 +60,14 @@ input[type=text] {
 
 #posts ul {
     list-style: none;
+    margin-left: -11.25px;
+    margin-right: -11.25px;
 }
 #posts li {
     width: 305px;
     height: 305px;
-    margin-right: 22.5px;
+    margin-left: 11.25px;
+    margin-right: 11.25px;
     margin-bottom: 22.5px;
     position: relative;
     cursor: pointer;
