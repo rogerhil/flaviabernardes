@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.webdesign',
+    'django.contrib.sites',
     'django.contrib.sitemaps',
     'easy_thumbnails',
     'image_cropping',
@@ -100,6 +101,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+SITE_ID = 1
 
 DEVELOPMENT = False
 

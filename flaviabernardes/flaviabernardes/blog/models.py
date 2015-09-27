@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.sitemaps import ping_google
 
 from image_cropping import ImageRatioField
 
@@ -8,6 +9,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class BasePost(models.Model):
     text = models.TextField()
@@ -79,6 +81,10 @@ class Draft(BasePost):
             for tag in self.tags.all():
                 post.tags.add(tag)
             post.save()
+        try:
+            ping_google()
+        except Exception as err:
+            pass
 
 
 class BaseImage(models.Model):

@@ -21,6 +21,7 @@ $(window).ready(function () {
                     if (data.success) {
                         window.location = redirect + data.data.draft_id + '/';
                     } else {
+                        $('#cover').fadeOut();
                         alert(data.message);
                     }
                 }
