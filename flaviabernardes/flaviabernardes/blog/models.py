@@ -17,7 +17,7 @@ class BasePost(models.Model):
     image_banner = models.ImageField(blank=True, upload_to='uploads')
     image_listing = models.ImageField(blank=True, upload_to='uploads')
     listing = ImageRatioField('image_listing', '305x305')
-    banner = ImageRatioField('image_banner', '960x200')
+    banner = ImageRatioField('image_banner', '1920x300')
 
     class Meta:
         abstract = True

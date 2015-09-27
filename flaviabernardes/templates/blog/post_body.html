@@ -2,7 +2,6 @@
 {% load cropping %}
 
 <div id="blog">
-    <img src="{% cropped_thumbnail post 'banner' scale=1 %}" class="editable" />
     <h1 id="title" class="editable">{{ post.title }}</h1>
     <div id="text" class="editable">
         {% autoescape off %}

@@ -1,18 +1,19 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load cropping %}
 
 {% block extrastyle %}
     <link href="{% static 'css/blog.css' %}" rel="stylesheet" />
     <link href="{% static 'css/jquery-te-1.4.0.css' %}" rel="stylesheet" />
     <style>
         #header {
-            border-bottom: 1px solid red;
+            border-bottom: 1px solid #f66;
         }
     </style>
 {% endblock %}
 
 {% block logo %}
-    <p style="color: #f00; font-weight: bold; font-size: 50px;">
+    <p style="color: #faa; font-weight: bold; font-size: 50px; margin-top: -10px;">
         POST PREVIEW
         <button id="publish" draft_id="{{ post.id }}" post_slug="{{ post.post.slug }}">
             PUBLISH
@@ -21,6 +22,15 @@
 {% endblock %}
 
 {% block body_attrs %}style="background: #fee;"{% endblock %}
+
+{% block container-subtop %}
+    <div class="parallax banner" bg-size="1920x300"
+         style="background-image: url({% cropped_thumbnail post 'banner' scale=1 %});">
+        <div class="center-column">
+
+        </div>
+    </div>
+{% endblock %}
 
 {% block container %}
     {% include "blog/post_body.html" %}
