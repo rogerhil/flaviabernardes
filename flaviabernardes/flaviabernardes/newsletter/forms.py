@@ -50,9 +50,10 @@ class BaseSubscriberForm(forms.Form):
         #if settings.DEVELOPMENT:
         #    return
         client.subscribe(email, self.list_id, first_name=subscriber.first_name,
-                        last_name=subscriber.last_name)
+                         last_name=subscriber.last_name)
         list_id, list_name = self.list_id, self.name
-        slist = List.objects.get_or_create(list_id=list_id, name=list_name)[0]
+        slist = List.objects.get_or_create(list_id=list_id, name=list_name,
+                         provider=settings.CURRENT_EMAIL_MARKETING_PROVIDER)[0]
         Subscription.objects.get_or_create(list=slist, subscriber=subscriber)
 
 
