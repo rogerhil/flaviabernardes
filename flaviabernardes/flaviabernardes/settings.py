@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.webdesign',
+    'django.contrib.sitemaps',
     'easy_thumbnails',
     'image_cropping',
     'flaviabernardes.artwork',

@@ -17,7 +17,7 @@ $(window).ready(function () {
                 type: 'post',
                 dataType: 'json',
                 success: function (data) {
-                    $('#cover').fadeOut();
+                    //$('#cover').fadeOut();
                     if (data.success) {
                         window.location = redirect + data.data.draft_id + '/';
                     } else {

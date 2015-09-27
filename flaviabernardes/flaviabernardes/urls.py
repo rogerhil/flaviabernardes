@@ -4,13 +4,20 @@ from django.conf import settings
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import user_passes_test
+from django.contrib.sitemaps.views import sitemap
 
 from .artwork.views import HomeView, PaintingsView, ArtworksSortJson
 from .blog.views import BlogView, PostView, DraftPublishView, \
                         PostNewDraftView, DraftPreview
 from .fbauth.views import LoginJson, LogoutJson
 from .newsletter.views import LandPageView, ConfirmationView, NewsletterView
+from .sitemaps import HomeSitemap, BlogSitemap
+
+sitemaps = dict(
+    home=HomeSitemap,
+    blog=BlogSitemap
+)
 
 is_superuser = user_passes_test(lambda u: u.is_superuser, '/')
 
@@ -34,7 +41,9 @@ urlpatterns = patterns('',
     url(r'^confirmation/$', ConfirmationView.as_view(), name='confirmation'),
     url(r'^blog/$', BlogView.as_view(), name='blog'),
     url(r'^blog/(?P<slug>[-_\w]+)/$', PostView.as_view(),
-        name='blog_post_view')
+        name='blog_post_view'),
+    url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
+        name='django.contrib.sitemaps.views.sitemap')
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
