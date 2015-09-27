@@ -18,8 +18,8 @@ class BasePost(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     tags = models.ManyToManyField(Category)
-    image_banner = models.ImageField(blank=True, upload_to='uploads')
-    image_listing = models.ImageField(blank=True, upload_to='uploads')
+    image_banner = models.ImageField(blank=True, upload_to=settings.UPLOAD_TO)
+    image_listing = models.ImageField(blank=True, upload_to=settings.UPLOAD_TO)
     listing = ImageRatioField('image_listing', '305x305')
     banner = ImageRatioField('image_banner', '1920x300')
 

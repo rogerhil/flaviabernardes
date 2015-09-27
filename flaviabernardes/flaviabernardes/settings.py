@@ -73,6 +73,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = '/media/'
 
+UPLOAD_TO = 'uploads'
 
 from easy_thumbnails.conf import Settings as thumbnail_settings
 THUMBNAIL_PROCESSORS = (
