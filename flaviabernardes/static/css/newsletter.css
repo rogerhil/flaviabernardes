@@ -1,6 +1,6 @@
 #newsletter {
     margin: 0 auto;
-    width: 726px;
+    width: calc(92% - 30px);
 }
 
 #newsletter strong {
@@ -25,6 +25,7 @@
 #newsletter ul li {
     float: left;
     margin-right: 10px;
+    width: 23%;
 }
 
 #newsletter ul li.last {

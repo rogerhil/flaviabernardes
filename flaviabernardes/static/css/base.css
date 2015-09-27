@@ -404,3 +404,40 @@ input {
     height: 300px;
     width: 100%;
 }
+
+
+
+@media (max-width: 1000px) and (min-width: 50px) {
+
+    .center-column {
+        width: 95%;
+    }
+
+    #logo {
+        width: 95%;
+    }
+
+    #footer .content {
+        width: 95%;
+    }
+
+}
+
+@media (max-width: 645px) and (min-width: 50px) {
+    #newsletter ul li {
+        float: none !important;
+        margin: 0 0 10px 0 !important;
+        width: 95% !important;
+    }
+    .footer-social {
+        float: none;
+        margin-bottom: 20px;
+    }
+    .copyrights {
+        text-align: center;
+    }
+    #footer {
+        margin-top: 250px !important;
+        height: 100px;
+    }
+}
