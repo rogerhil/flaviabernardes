@@ -9,9 +9,9 @@
     {% endblock %}
 {% endblock %}
 
-{% block title %}Flavia Bernardes Art | {{ blog.title }}{% endblock %}
-{% block ogtitle %}Flavia Bernardes Art | {{ blog.title }}{% endblock %}
-{% block ogdescription %}Check out artist Flavia Bernardes' blog post: {{ blog.title }}{% endblock %}
+{% block title %}Flavia Bernardes Art | {{ post.title }}{% endblock %}
+{% block ogtitle %}Flavia Bernardes Art | {{ post.title }}{% endblock %}
+{% block ogdescription %}Check out artist Flavia Bernardes' blog post: {{ post.title }}{% endblock %}
 {% block ogurl %}{% url 'blog_post_view' post.slug %}{% endblock %}
 {% block ogimage %}{% cropped_thumbnail post 'listing' scale=1 %}{% endblock %}
 
