@@ -1,8 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'blog/post.html' %}
 {% load staticfiles %}
 {% load cropping %}
 
-{% block extrastyle %}
+{% block postextrastyle %}
     <link href="{% static 'css/blog.css' %}" rel="stylesheet" />
     <link href="{% static 'css/jquery-te-1.4.0.css' %}" rel="stylesheet" />
     <style>
@@ -23,17 +23,7 @@
 
 {% block body_attrs %}style="background: #fee;"{% endblock %}
 
-{% block container-subtop %}
-    <div class="parallax banner" bg-size="1920x300"
-         style="background-image: url({% cropped_thumbnail post 'banner' scale=1 %});">
-        <div class="center-column">
-
-        </div>
-    </div>
-{% endblock %}
-
-{% block container %}
-    {% include "blog/post_body.html" %}
+{% block bottomjs %}
     <script>
         $(window).ready(function () {
             var $publish = $('#publish');
@@ -49,7 +39,7 @@
                         success: function (data) {
                             $('#cover').fadeOut();
                             if (data.success) {
-                                window.location = '/blog/' + slug + '/';
+                                //window.location = '/blog/' + slug + '/';
                             } else {
                                 alert(data.message);
                             }

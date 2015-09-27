@@ -4,6 +4,13 @@
 <html>
     <head>
 
+        <title>{% block title %}Flavia Bernardes Art{% endblock %}</title>
+        <meta property="og:title" content="{% block ogtitle %}Flavia Bernardes Art{% endblock %}" />
+        <meta property="og:description" content="{% block ogdescription %}Check out artist Flavia Bernardes' new website{% endblock %}" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://www.flaviabernardesart.com{% block ogurl %}{% endblock %}" />
+        <meta property="og:image" content="http://www.flaviabernardesart.com{% block ogimage %}{% static 'img/amelie125x125.jpg' %}{% endblock %}" />
+
         <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" />
 
         <link href="{% static 'css/jquery.bxslider.css' %}" rel="stylesheet" />
@@ -26,94 +33,6 @@
         <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
         <script type="text/javascript">stLight.options({publisher: "023fcf4a-4582-470d-8c44-a22303a1ce96", doNotHash: true, doNotCopy: false, hashAddressBar: false});</script>
         {% block extrajs %}{% endblock %}
-
-        <script>
-            var csrftoken = $.cookie('csrftoken');
-
-            function csrfSafeMethod(method) {
-                // these HTTP methods do not require CSRF protection
-                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-            }
-
-            $.ajaxSetup({
-                beforeSend: function(xhr, settings) {
-                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                    }
-                }
-            });
-
-            function login() {
-                if (location.hash != '#login') return;
-                $.ajax({
-                    url: '/login/json/',
-                    success: function (data) {
-                        if (!data.success) {
-                            alert(data.message);
-                            return
-                        }
-                        if (data.data.authenticated) {
-                            return;
-                        }
-                        $("#cover").html(data.data.content);
-                        $('#cover').fadeIn();
-                        $('#login button').click(loginSubmit);
-                    }
-                });
-            }
-            function logout() {
-                if (location.hash != '#logout') return;
-                $.ajax({
-                    url: '/logout/json/',
-                    success: function (data) {
-                        if (!data.success) {
-                            alert(data.message);
-                            return
-                        }
-                        window.location = window.location.href.split('#')[0];
-                    }
-                });
-            }
-
-            function setupLoginLogout() {
-                login();
-                logout();
-            };
-
-            window.onhashchange = setupLoginLogout;
-            setupLoginLogout();
-
-            function loginSubmit(e) {
-                e.preventDefault();
-                var formData = {
-                    username: $('#login input[name=username]').val(),
-                    password: $('#login input[name=password]').val(),
-                    csrfmiddlewaretoken: $('#login input[name=csrfmiddlewaretoken]').val(),
-                };
-                $.ajax({
-                    url: '/login/json/',
-                    type: 'post',
-                    dataType: 'json',
-                    data: formData,
-                    success: function (data) {
-                        if (!data.success) {
-                            alert(data.message);
-                            return
-                        }
-                        if (data.data) {
-                            $("#cover").html(data.data.content);
-                            $('#cover').fadeIn();
-                            $('#login button').click(loginSubmit);
-                            $('ul.errorlist').effect('bounce');
-                        } else {
-                            window.location = window.location.href.split('#')[0];
-                        }
-
-                    }
-                });
-            }
-
-        </script>
 
         <style>
             {% comment %}
@@ -151,22 +70,23 @@
                         {% endif %}
                     </div>
                 </section>
+
                 <div style="height: 80px;"></div>
+
                 <div class="site-top">
-
-                    {% block container-subtop %}
-
+                    {% block container-top %}
                     {% endblock %}
-
                 </div>
+
                 <div class="center-column">
-                    <section class="container-top">
+                    <section class="container-main">
                         {% block container %}
                         {% endblock %}
                         <div class="clear"></div>
                     </section>
                     <div class="clear"></div>
                 </div>
+
                 <div id="site-middle-anchor"></div>
                 <div class="site-middle scroll-fixed" fixat="80" anchor="site-middle-anchor">
                     <div class="center-column">
@@ -187,6 +107,7 @@
                         {% endblock %}
                     </div>
                 </div>
+
                 <div class="center-column">
                     <section class="container-bottom">
                         {% include "share.html"  %}
@@ -202,6 +123,7 @@
                 <div class="clear"></div>
                 <div style="height: 40px;"></div>
                 <div class="clear"></div>
+
                 <section id="footer">
                     <div class="content">
                         {% with '32' as size %}
@@ -213,15 +135,19 @@
                 </section>
             </div>
         {% endblock %}
-    </body>
-    <script>
-        $(window).ready(function () {
-            if ($.browser.chrome) {
-                //$("#logo-home").css("margin", "-10px auto 28px auto");
-            }
-            $('#logo img').click(function () {
-                window.location.replace('/');
+
+        <script>
+            $(window).ready(function () {
+                if ($.browser.chrome) {
+                    //$("#logo-home").css("margin", "-10px auto 28px auto");
+                }
+                $('#logo img').click(function () {
+                    window.location.replace('/');
+                });
             });
-        });
-    </script>
+        </script>
+
+        {% block bottomjs %}
+        {% endblock %}
+    </body>
 </html>

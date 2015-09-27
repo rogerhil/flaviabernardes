@@ -2,6 +2,14 @@
 {% load staticfiles %}
 {% load cropping %}
 
+{% block title %}Flavia Bernardes Art | Artworks{% endblock %}
+{% block ogtitle %}Flavia Bernardes Art | Artworks{% endblock %}
+{% block ogdescription %}Check out artist Flavia Bernardes' artworks{% endblock %}
+{% block ogurl %}{% url 'artworks' %}{% endblock %}
+{% if artwork_list %}
+    {% block ogimage %}{% cropped_thumbnail artwork_list.0 "listing_preview" scale=1 %}{% endblock %}
+{% endif %}
+
 {% block container %}
     <div id="full-view">
 

@@ -17,39 +17,45 @@ input[type=text] {
     margin-bottom: 10px;
     color: grey;
 }
-{% if user.is_authenticated %}
-    /*
-
-    .editable:hover {
-        border: 1px dashed red;
-        margin: -1px;
-        cursor: crosshair;
-        background-color: #fff8f8;
-    }
-    h1.editable:hover {
-        margin: 19px -1px 18px -1px;
-    }
-    .editing {
-        border: 1px dashed red;
-        margin: -1px;
-        cursor: crosshair;
-        background-color: #fff8f8;
-        padding: 10px;
-    }
-    h1.editing {
-        margin: 19px -1px 18px -1px;
-    }
-
-    */
-{% endif %}
-
 */
+
+/*{% if user.is_authenticated %}*/
+
+/*
+.editable:hover {
+    border: 1px dashed red;
+    margin: -1px;
+    cursor: crosshair;
+    background-color: #fff8f8;
+}
+h1.editable:hover {
+    margin: 19px -1px 18px -1px;
+}
+.editing {
+    border: 1px dashed red;
+    margin: -1px;
+    cursor: crosshair;
+    background-color: #fff8f8;
+    padding: 10px;
+}
+h1.editing {
+    margin: 19px -1px 18px -1px;
+}
+*/
+
+/*{% endif %}*/
+
+
+#posts {
+    margin-top: 20px !important;
+}
 
 #posts ul {
     list-style: none;
     margin-left: -11.25px;
     margin-right: -11.25px;
 }
+
 #posts li {
     width: 305px;
     height: 305px;

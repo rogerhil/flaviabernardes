@@ -2,12 +2,19 @@
 {% load staticfiles %}
 {% load cropping %}
 
+{% block title %}Flavia Bernardes Art | Blog{% endblock %}
+{% block ogtitle %}Flavia Bernardes Art | Blog{% endblock %}
+{% block ogdescription %}Check out artist Flavia Bernardes' blog posts{% endblock %}
+{% block ogurl %}{% url 'blog' %}{% endblock %}
+{% if posts_list %}
+    {% block ogimage %}{% cropped_thumbnail posts_list.0 'listing' scale=1 %}{% endblock %}
+{% endif %}
+
 {% block extrastyle %}
     <link href="{% static 'css/blog.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block container %}
-        {{ settings }}
     <div id="posts">
         <ul>
             {% for post in posts_list %}

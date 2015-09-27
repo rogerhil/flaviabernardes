@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% load staticfiles webdesign %}
 
+{% block title %}Flavia Bernardes Art | About{% endblock %}
+{% block ogtitle %}Flavia Bernardes Art | About{% endblock %}
+{% block ogdescription %}Do you want to know about Flavia Bernardes Artist?{% endblock %}
+{% block ogurl %}{% url 'about' %}{% endblock %}
+{% block ogimage %}{% static 'img/about.jpg' %}{% endblock %}
+
 {% block container %}
     <div id="about-picture">
         <img src="{% static 'img/about.jpg' %}" />
