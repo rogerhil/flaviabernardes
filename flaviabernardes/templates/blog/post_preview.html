@@ -9,18 +9,51 @@
 
 {% block logo %}
     <p class="preview-header">
-        POST PREVIEW
+        <span style="float: left;">
+            POST PREVIEW
+        </span>
         <button id="publish" draft_id="{{ post.id }}" post_slug="{{ post.post.slug }}">
             PUBLISH
         </button>
         <button id="change" draft_id="{{ post.id }}" post_slug="{{ post.post.slug }}">
             CHANGE
         </button>
+        <button id="cancel" draft_id="{{ post.id }}" post_slug="{{ post.post.slug }}">
+            CANCEL
+        </button>
     </p>
 {% endblock %}
 
 {% block bottomjs %}
     <script>
+        function publish(publish_old) {
+            var $publish = $('#publish');
+            var draftId = $publish.attr('draft_id');
+            var slug = $publish.attr('post_slug');
+            $('#cover').fadeIn();
+            $.ajax({
+                url: '/admin/blog/draft/' + draftId + '/publish/',
+                type: 'post',
+                data: {publish_old: publish_old},
+                dataType: 'json',
+                success: function (data) {
+                    //$('#cover').fadeOut();
+                    if (data.success) {
+                        if (data.data.too_old) {
+                            $('#cover').fadeOut();
+                            if (confirm(data.data.too_old.toUpperCase() + "\n *** ARE YOU STILL SURE YOU WANT TO PUBLISH THIS OLD DRAFT?")) {
+                                publish(true);
+                            }
+                        } else {
+                            window.location = '/blog/' + slug + '/';
+                        }
+                    } else {
+                        $('#cover').fadeOut();
+                        alert(data.message);
+                    }
+                }
+            });
+        }
         $(window).ready(function () {
             var $publish = $('#publish');
             var draftId = $publish.attr('draft_id');
@@ -28,23 +61,14 @@
             $("#change").click(function () {
                 window.location = '/admin/blog/draft/' + draftId + '/';
             });
+            $("#cancel").click(function () {
+                if (confirm("Are you sure you want to cancel editing this draft post?")) {
+                    window.location = '/blog/' + slug + '/';
+                }
+            });
             $publish.click(function () {
-                if (confirm("Are you sure you want to publish this draft?")) {
-                    $('#cover').fadeIn();
-                    $.ajax({
-                        url: '/admin/blog/draft/' + draftId + '/publish/',
-                        type: 'post',
-                        dataType: 'json',
-                        success: function (data) {
-                            //$('#cover').fadeOut();
-                            if (data.success) {
-                                window.location = '/blog/' + slug + '/';
-                            } else {
-                                $('#cover').fadeOut();
-                                alert(data.message);
-                            }
-                        }
-                    });
+                if (confirm("Are you sure you want to publish this draft post?")) {
+                    publish();
                 }
             });
         });

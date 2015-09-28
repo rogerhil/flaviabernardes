@@ -27,7 +27,11 @@ class DraftPublishView(JsonView, DetailView):
 
     def json_post(self, request, *args, **kwargs):
         obj = self.get_object()
-        obj.publish()
+        publish_old = bool(request.POST.get('publish_old', False))
+        try:
+            obj.publish(publish_old)
+        except Draft.TooOldToPublish as err:
+            return {'too_old': str(err)}
         return {}
 
 

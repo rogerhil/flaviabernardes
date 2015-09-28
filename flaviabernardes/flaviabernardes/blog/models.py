@@ -69,7 +69,14 @@ class Draft(BasePost):
     slug = models.SlugField(max_length=64)
     post = models.ForeignKey(Post, null=True, blank=True, editable=False)
 
-    def publish(self):
+    class TooOldToPublish(Exception):
+        pass
+
+    def publish(self, publish_old=False):
+        if not publish_old:
+            if Draft.objects.filter(created__gt=self.created).count():
+                raise Draft.TooOldToPublish('There are more recent drafts '
+                                            'created than this one.')
         post = self.post
         new = False
         if post is None:

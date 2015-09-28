@@ -137,8 +137,15 @@ h1.editing {
     margin-top: -10px;
 }
 
+.preview-header span {
+    float: left;
+    font-size: 65px;
+    margin-top: 5px;
+}
+
 .preview-header #publish,
-.preview-header #change {
+.preview-header #change,
+.preview-header #cancel {
     font-family: Gothic;
     font-size: 14px;
     font-weight: bold;
@@ -148,7 +155,7 @@ h1.editing {
     border: none;
     cursor: pointer;
     float: right;
-    margin-top: 25px;
+    margin-top: 5px;
 }
 
 .preview-header #publish {
@@ -161,11 +168,21 @@ h1.editing {
 }
 
 .preview-header #change {
-    background-color: #3af;
+    background-color: #ffcc00;
     margin-right: 20px;
 }
 
 .preview-header #change:hover {
+    background-color: #ffaa22;
+    transition: 1s;
+}
+
+.preview-header #cancel {
+    background-color: #3af;
+    margin-right: 20px;
+}
+
+.preview-header #cancel:hover {
     background-color: #66f;
     transition: 1s;
 }
