@@ -22,9 +22,7 @@
                     <a href="{% url 'blog_post_view' post.slug %}">
                         <p>
                             <strong>{{ post.title }}</strong><br>
-                            {% autoescape off %}
-                                {{ post.text|removetags:"p b span i div table ul li th tr td body"|truncatechars:90 }}
-                            {% endautoescape %}
+                            {{ post.listing_summary }}
                         </p>
                         <span></span>
                         <img src="{% cropped_thumbnail post 'listing' scale=1 %}" />

@@ -5,23 +5,19 @@
 {% block postextrastyle %}
     <link href="{% static 'css/blog.css' %}" rel="stylesheet" />
     <link href="{% static 'css/jquery-te-1.4.0.css' %}" rel="stylesheet" />
-    <style>
-        #header {
-            border-bottom: 1px solid #f66;
-        }
-    </style>
 {% endblock %}
 
 {% block logo %}
-    <p style="color: #faa; font-weight: bold; font-size: 50px; margin-top: -10px;">
+    <p class="preview-header">
         POST PREVIEW
         <button id="publish" draft_id="{{ post.id }}" post_slug="{{ post.post.slug }}">
             PUBLISH
         </button>
+        <button id="change" draft_id="{{ post.id }}" post_slug="{{ post.post.slug }}">
+            CHANGE
+        </button>
     </p>
 {% endblock %}
-
-{% block body_attrs %}style="background: #fee;"{% endblock %}
 
 {% block bottomjs %}
     <script>
@@ -29,6 +25,9 @@
             var $publish = $('#publish');
             var draftId = $publish.attr('draft_id');
             var slug = $publish.attr('post_slug');
+            $("#change").click(function () {
+                window.location = '/admin/blog/draft/' + draftId + '/';
+            });
             $publish.click(function () {
                 if (confirm("Are you sure you want to publish this draft?")) {
                     $('#cover').fadeIn();

@@ -84,6 +84,10 @@ html {
     min-height: 100%;
 }
 
+.after-header {
+    height: 80px;
+}
+
 #header {
     font-family: Polygraph;
     margin: 0 auto !important;
@@ -369,26 +373,6 @@ input {
     padding: 0 !important;
 }
 
-
-#publish {
-    background-color: #f66;
-    font-family: Gothic;
-    font-size: 14px;
-    font-weight: bold;
-    color: white;
-    border-radius: 5px;
-    padding: 5px 40px;
-    border: none;
-    cursor: pointer;
-    float: right;
-    margin-top: 25px;
-}
-
-#publish:hover {
-    background-color: #f3a;
-    transition: 1s;
-}
-
 .parallax {
     background-repeat:no-repeat;
     background-position: 0% 0%;
@@ -456,5 +440,17 @@ input {
 @media (max-width: 505px) and (min-width: 50px) {
     .hide_disqus_footer {
         height: 200px;
+    }
+    #logo img {
+        width: 230px;
+    }
+    #logo {
+        height: 50px !important;
+    }
+    #header {
+        height: 50px;
+    }
+    .after-header {
+        height: 50px !important;
     }
 }

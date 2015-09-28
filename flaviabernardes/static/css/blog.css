@@ -82,12 +82,15 @@ h1.editing {
     bottom: 0px;
     display: block;
     width: 245px !important;
-    height: 105px !important;
+    height: 115px !important;
+    line-height: 25px;
     margin: 0 0 0 30px;
     font-size: 14px;
+    overflow: hidden;
 }
 #posts li p strong {
     font-size: 18px !important;
+    line-height: 25px;
 }
 
 #posts li span {
@@ -124,4 +127,45 @@ h1.editing {
 }
 .add-blog a:hover {
     opacity: 1;
+}
+
+
+.preview-header {
+    color: #f66;
+    font-weight: bold;
+    font-size: 50px;
+    margin-top: -10px;
+}
+
+.preview-header #publish,
+.preview-header #change {
+    font-family: Gothic;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 40px;
+    border: none;
+    cursor: pointer;
+    float: right;
+    margin-top: 25px;
+}
+
+.preview-header #publish {
+    background-color: #f66;
+}
+
+.preview-header #publish:hover {
+    background-color: #f3a;
+    transition: 1s;
+}
+
+.preview-header #change {
+    background-color: #3af;
+    margin-right: 20px;
+}
+
+.preview-header #change:hover {
+    background-color: #66f;
+    transition: 1s;
 }

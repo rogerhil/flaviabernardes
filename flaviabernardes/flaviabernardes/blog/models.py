@@ -1,7 +1,10 @@
+import math
+
 from django.conf import settings
 from django.db import models
 from django.contrib.sitemaps import ping_google
 from django.core.mail import send_mail
+from django.template.defaultfilters import Truncator, strip_tags
 
 from image_cropping import ImageRatioField
 
@@ -32,6 +35,12 @@ class BasePost(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('blog_post_view', None, {'slug': self.slug})
+
+    def listing_summary(self):
+        title_lines = math.ceil(len(self.title) / 28)
+        summary_lines = 4 - title_lines
+        return Truncator(strip_tags(self.text)).chars(30 * summary_lines)
+
 
 
 class Post(BasePost):

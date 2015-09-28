@@ -14,7 +14,7 @@ $(window).ready(function () {
             },
             success: function (response, status, xhr, $form) {
                 $('#cover').fadeOut();
-                window.open('/admin/blog/draft/' + draftId + '/preview/');
+                window.location = '/admin/blog/draft/' + draftId + '/preview/';
             }
         });
     });
