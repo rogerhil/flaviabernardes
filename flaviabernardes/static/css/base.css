@@ -35,7 +35,8 @@ ul {
     padding: 0;
 }
 a {
-    color: inherit;
+    *color: inherit;
+    color: #c3a478;
 }
 
 p {
