@@ -48,3 +48,8 @@ class DraftPreview(DetailView):
     context_object_name = 'post'
     template_name = 'blog/post_preview.html'
     model = Draft
+
+    def get_context_data(self, **kwargs):
+        context = super(DraftPreview, self).get_context_data(**kwargs)
+        context['post_preview'] = True
+        return context

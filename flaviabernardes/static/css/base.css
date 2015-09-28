@@ -394,6 +394,47 @@ input {
     width: 100%;
 }
 
+button.pink,
+button.yellow,
+button.blue {
+    font-family: Gothic;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 40px;
+    border: none;
+    cursor: pointer;
+}
+
+button.pink {
+    background-color: #f66;
+}
+
+button.pink:hover {
+    background-color: #f3a;
+    transition: 1s;
+}
+
+button.yellow {
+    background-color: #ffcc00;
+    color: #000;
+}
+
+button.yellow:hover {
+    background-color: #ffaa22;
+    transition: 1s;
+}
+
+button.blue {
+    background-color: #3af;
+}
+
+button.blue:hover {
+    background-color: #66f;
+    transition: 1s;
+}
+
 
 
 @media (max-width: 1000px) and (min-width: 50px) {

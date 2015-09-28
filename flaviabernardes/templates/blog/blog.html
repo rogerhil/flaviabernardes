@@ -31,6 +31,18 @@
                     </a>
                 </li>
             {% endfor %}
+            {% if user.is_authenticated and user.is_superuser %}
+                <li class="{% cycle '' '' '' %}" style="border: 2px dashed #f66;">
+                    <button id="modify-post" class="pink" style="margin: 130px 0 0 60px;">
+                        ADD NEW DRAFT POST
+                    </button>
+                    <script>
+                        $("#modify-post").click(function () {
+                            window.location = '/admin/blog/draft/add/';
+                        });
+                    </script>
+                </li>
+            {% endif %}
         </ul>
     </div>
     <div class="clear"></div>
