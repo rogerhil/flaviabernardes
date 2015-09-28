@@ -45,7 +45,7 @@ class DraftAdmin(ImageCroppingMixin, admin.ModelAdmin):
             'js/ajaxloader.js',
             'js/jquery.form.min.js',
             'tinymce/tinymce.min.js',
-        'js/admin/blog-draft.js',
+            'js/admin/blog-draft.js',
         )
         css = {
             'all': ('css/ajaxloader.css',)
