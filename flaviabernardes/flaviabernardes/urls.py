@@ -55,7 +55,8 @@ else:
     urlpatterns += [
         url(r'^$', HomeView.as_view(), name='home'),
         url(r'^artworks/$', PaintingsView.as_view(), name='artworks'),
-        url(r'^artworks/sort/$', ArtworksSortJson.as_view(),
+        url(r'^artworks/sort/$',
+            csrf_exempt(is_superuser(ArtworksSortJson.as_view())),
             name='artworks_sort'),
         url(r'^about/$',
             TemplateView.as_view(template_name="about/about.html"),

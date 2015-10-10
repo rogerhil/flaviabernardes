@@ -22,9 +22,12 @@ class BasePost(models.Model):
     updated = models.DateTimeField(auto_now=True)
     tags = models.ManyToManyField(Category)
     image_banner = models.ImageField(blank=True, upload_to=settings.UPLOAD_TO)
+    image_banner2 = models.ImageField(blank=True, upload_to=settings.UPLOAD_TO)
     image_listing = models.ImageField(blank=True, upload_to=settings.UPLOAD_TO)
-    listing = ImageRatioField('image_listing', '305x305')
-    banner = ImageRatioField('image_banner', '1920x300')
+    listing = ImageRatioField('image_listing', '1920x600')
+    listing_half = ImageRatioField('image_listing', '960x600')
+    banner = ImageRatioField('image_banner', '1920x600')
+    banner2 = ImageRatioField('image_banner2', '1920x600')
 
     class Meta:
         abstract = True
@@ -55,7 +58,9 @@ class Post(BasePost):
             image_listing=self.image_listing,
             image_banner=self.image_banner,
             listing=self.listing,
+            listing_half=self.listing_half,
             banner=self.banner,
+            banner2=self.banner2,
             post=self
         )
         for tag in self.tags.all():
@@ -88,7 +93,9 @@ class Draft(BasePost):
         post.image_banner = self.image_banner
         post.image_listing = self.image_listing
         post.banner = self.banner
+        post.banner2 = self.banner2
         post.listing = self.listing
+        post.listing_half = self.listing_half
         if not new:
             for tag in self.tags.all():
                 post.tags.add(tag)

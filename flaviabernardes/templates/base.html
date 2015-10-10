@@ -64,12 +64,15 @@
 
     </head>
     <body>
+        <div id="cover">
+            <img src="{% static 'img/ajax-loader.png' %}" class="ajax-loader">
+        </div>
         {% block site %}
             <div id="body">
                 <section id="header">
                     <div id="logo" {% if landing_page %}style="height: 70px;"{% endif %}>
                         {% block logo %}
-                            <img src="{% static 'img/logo-small-bw.png' %}" />
+                            <img src="{% static 'img/logo-small-bw.png' %}" style="width: 320px;" />
                         {% endblock %}
                     </div>
                     <div>

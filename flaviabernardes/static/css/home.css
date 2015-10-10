@@ -68,7 +68,7 @@
 
 #home .logo-top {
     position: absolute;
-    top: -20px;
+    top: -23px;
     transition: all 0.5s ease;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -79,16 +79,16 @@
 
 #home .logo-top #logo-home {
     font-size: 100px !important;
-    width: 1316px !important;
+    width: 1353px !important;
     height: 50px !important;
     *margin: -10px auto 28px auto !important;
 }
 
 #home .logo-top #logo-home img {
-    transform: scale(0.5);
+    transform: scale(0.45);
     -webkit-filter: invert(80%);
-    -ms-transform: scale(0.5); /* IE 9 */
-    -webkit-transform: scale(0.5); /* Chrome, Safari, Opera */
+    -ms-transform: scale(0.45); /* IE 9 */
+    -webkit-transform: scale(0.45); /* Chrome, Safari, Opera */
     transition: all 0.5s ease;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;

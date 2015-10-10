@@ -11,11 +11,12 @@
 {% endif %}
 
 {% block extrastyle %}
-    <link href="{% static 'css/blog.css' %}" rel="stylesheet">
+
 {% endblock %}
 
-{% block container %}
-    <div id="posts">
+{% block container-top %}
+    <div id="">
+        {% comment %}
         <ul>
             {% for post in posts_list %}
                 <li class="{% cycle '' '' '' %}">
@@ -44,6 +45,62 @@
                 </li>
             {% endif %}
         </ul>
+        {% endcomment %}
+
+        <div id="posts">
+            {% for post in posts_list %}
+                <a href="{% url 'blog_post_view' post.slug %}">
+                    <div class="grid post {% cycle 'halfleft' 'halfright' '' %}">
+                        <figure class="effect-lily">
+                            {% if forloop.counter0|add:1|divisibleby:3 %}
+                                <img src="{% cropped_thumbnail post 'listing' scale=1 %}" />
+                            {% else %}
+                                <img src="{% cropped_thumbnail post 'listing_half' scale=1 %}" />
+                            {% endif %}
+                            <div class="dark">
+                                <figcaption>
+                                    <div class="description">
+                                        <h2>{{ post.title }}</h2><br>
+                                        <p style="text-transform: none;">
+                                            {% autoescape off %}
+                                                {{ post.text|truncatewords:30 }}
+                                            {% endautoescape %}
+                                        </p><br>
+                                        <p style="text-transform: none; font-style: italic;">
+                                            Published on {{ post.created|date }} by Flavia Bernardes
+                                        </p>
+                                    </div>
+                                </figcaption>
+                            </div>
+                        </figure>
+                    </div>
+                </a>
+            {% endfor %}
+
+
+
+            <div class="grid post halfright" style="">
+                <figure class="effect-lily">
+                    <img src="{% static 'img/mars-half.jpg' %}" />
+                    <div class="dark">
+                        <figcaption>
+                            <div class="description">
+                                <button id="modify-post" class="pink" style="margin-left: 50px;">
+                                    ADD NEW DRAFT POST
+                                </button>
+                            </div>
+                        </figcaption>
+                    </div>
+                </figure>
+            </div>
+            <script>
+                $("#modify-post").click(function () {
+                    window.location = '/admin/blog/draft/add/';
+                });
+            </script>
+
+        </div>
+
     </div>
     <div class="clear"></div>
 {% endblock %}
