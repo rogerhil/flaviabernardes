@@ -421,12 +421,6 @@ button.blue:hover {
     min-width: 310px;
 }
 
-#artworks figure.effect-lily h2 {
-	color: rgba(255,255,255,0.8);
-	opacity: 0;
-	-webkit-transition: opacity 0.2s, -webkit-transform 0.35s;
-	transition: opacity 0.2s, transform 0.35s;
-}
 
 
 #posts {
@@ -621,6 +615,13 @@ figure.effect-lily h2 {
 	transition: transform 0.35s;
 }
 
+#artworks figure.effect-lily h2 {
+	color: rgba(255,255,255,0.8);
+	opacity: 0;
+	-webkit-transition: opacity 0.2s, -webkit-transform 0.35s;
+	transition: opacity 0.2s, transform 0.35s;
+}
+
 figure.effect-lily p {
 	color: rgba(255,255,255,0.8);
 	opacity: 0;
@@ -645,7 +646,7 @@ figure.effect-lily .dark:hover {
 figure.effect-lily:hover img,
 figure.effect-lily:hover p,
 figure.effect-lily:hover h2 {
-	opacity: 1;
+	opacity: 1 !important;
 }
 
 figure.effect-lily:hover .description {
