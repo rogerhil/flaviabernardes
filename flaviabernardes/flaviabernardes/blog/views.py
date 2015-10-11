@@ -1,6 +1,5 @@
 from django.views.generic import ListView, DetailView
 
-from ..utils import JsonView
 from .models import Post, Draft
 from ..newsletter.forms import SubscriberForm
 
@@ -20,28 +19,6 @@ class PostView(DetailView):
         context = super(PostView, self).get_context_data(**kwargs)
         context['form'] = SubscriberForm()
         return context
-
-
-class DraftPublishView(JsonView, DetailView):
-    model = Draft
-
-    def json_post(self, request, *args, **kwargs):
-        obj = self.get_object()
-        publish_old = bool(request.POST.get('publish_old', False))
-        try:
-            obj.publish(publish_old)
-        except Draft.TooOldToPublish as err:
-            return {'too_old': str(err)}
-        return {}
-
-
-class PostNewDraftView(JsonView, DetailView):
-    model = Post
-
-    def json_post(self, request, *args, **kwargs):
-        obj = self.get_object()
-        draft = obj.new_draft()
-        return {'draft_id': draft.id}
 
 
 class DraftPreview(DetailView):
