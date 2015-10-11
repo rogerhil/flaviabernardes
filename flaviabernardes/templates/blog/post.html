@@ -16,21 +16,25 @@
 {% block ogimage %}{% cropped_thumbnail post 'listing' scale=1 %}{% endblock %}
 
 {% block container-top %}
-    <div class="parallax banner" bg-size="1920x300"
+    <div class="parallax banner" bg-size="1920x600"
          style="background-image: url({% cropped_thumbnail post 'banner' scale=1 %});">
         <div class="center-column">
         </div>
-        {% if user.is_authenticated and user.is_superuser and not post_preview %}
-            <script src="{% static 'js/admin/blog-post.js' %}"></script>
-            <button id="modify-post" class="yellow" style="position: absolute; right: 40px; top: 250px;">
-                MODIFY
-            </button>
-            <script>
-                $("#modify-post").click(function () {
-                    newDraft({{ post.id }});
-                });
-            </script>
-        {% endif %}
+        {% block cms_actions %}
+            {% if user.is_authenticated and user.is_superuser %}
+                <script src="{% static 'js/admin/cmsobjectlist.js' %}"></script>
+                <p id="preview-actions">
+                    <button id="modify-post" class="yellow">
+                        MODIFY
+                    </button>
+                </p>
+                <script>
+                    $("#modify-post").click(function () {
+                        newDraft('blog', 'post', 'draft', {{ post.id }});
+                    });
+                </script>
+            {% endif %}
+        {% endblock %}
     </div>
 {% endblock %}
 

@@ -1,3 +1,5 @@
+import sys, traceback
+
 from django.views.generic import ListView, View, FormView
 from django.template import RequestContext
 from django.template.loader import get_template
@@ -9,19 +11,25 @@ class JsonView(View):
     implemented.
     """
 
+    def _get_traceback(self):
+        ex_type, ex, tb = sys.exc_info()
+        return ''.join([str(i) for i in traceback.format_tb(tb)])
+
     def get(self, request, *args, **kwargs):
         try:
             data = self.json_get(request)
             return http.JsonResponse({'success': True, 'data': data})
         except Exception as err:
-            return http.JsonResponse({'success': False, 'message': str(err)})
+            msg = "%s\n%s" % (self._get_traceback(), str(err))
+            return http.JsonResponse({'success': False, 'message': msg})
 
     def post(self, request, *args, **kwargs):
         try:
             data = self.json_post(request)
             return http.JsonResponse({'success': True, 'data': data})
         except Exception as err:
-            return http.JsonResponse({'success': False, 'message': str(err)})
+            msg = "%s\n%s" % (self._get_traceback(), str(err))
+            return http.JsonResponse({'success': False, 'message': msg})
 
     def json_get(self, request, *args, **kwargs):
         raise NotImplementedError

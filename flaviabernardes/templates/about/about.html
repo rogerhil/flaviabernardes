@@ -8,10 +8,15 @@
 {% block ogimage %}{% static 'img/about.jpg' %}{% endblock %}
 
 {% block container %}
-    <div id="about-picture">
-        <img src="{% static 'img/about.jpg' %}" />
-    </div>
-    <div id="about-text">
-        {% lorem 12 p %}
+    {% autoescape off %}
+        {{ page.content1 }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block content2 %}
+    <div class="center-column">
+        {% autoescape off %}
+            {{ page.content2 }}
+        {% endautoescape %}
     </div>
 {% endblock %}

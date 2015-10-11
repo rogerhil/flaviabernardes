@@ -51,6 +51,13 @@ p {
     font-size: 16px;
 }
 
+div {
+    *margin: 0 0 30px 0;
+    line-height: 30px;
+    text-align: justify;
+    font-size: 16px;
+}
+
 h1, h2, h3, h4, h6, h7, h8 {
     margin-bottom: 50px;
     margin-top: 50px;
@@ -211,7 +218,7 @@ html {
 }
 
 .container-main {
-    margin-bottom: 40px;
+    *margin-bottom: 40px;
 }
 
 .site-middle {
@@ -268,69 +275,17 @@ html {
     top: 0;
     left: 0;
 }
-#thumbnails {
-    width: 450px;
-    height: 580px;
-    max-height: 580px;
-    float: right;
-    overflow: auto;
-}
-#thumbnails ul {
-    list-style: none;
-    margin-top: -20px;
-}
-#thumbnails li {
-    list-style: none;
-    margin-left: 20px;
-    margin-top: 20px;
-    float: left;
-    opacity: 1;
-    width: 120px;
-    height: 120px;
-    padding: 5px;
-    color: transparent;
-    position: relative;
-}
-#thumbnails img {
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-#thumbnails li div {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 120px;
-    height: 120px;
-    margin: 5px;
-    display: table;
-}
-#thumbnails li p {
-    margin: 0;
-    text-transform: lowercase;
-    font-size: 17px;
-    text-align: center;
-    color: #000;
-    display: table-cell;
-    vertical-align: middle;
-}
-#thumbnails li:hover {
-    cursor: pointer;
-}
-#thumbnails li img:hover {
-    cursor: pointer;
-    color: #000;
-    transition: .8s;
-    opacity: .3;
-    *text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
-}
+
+
 #full-view {
     position: absolute;
     display: none;
-    text-align: right;
-    cursor: crosshair;
+    width: 100%;
+    text-align: center !important;
+    *cursor: crosshair;
     margin-bottom: 40px;
 }
+
 #full-view img {
 }
 
@@ -392,14 +347,14 @@ input {
 
 .parallax {
     background-repeat:no-repeat;
-    background-position: 0% 0%;
+    background-position: center center;
     /* ie8- graceful degradation */
     background-position: 0% 0%\9 !important;
 }
 
 .banner {
     position: relative;
-    height: 300px;
+    height: 600px;
     width: 100%;
 }
 
@@ -407,13 +362,14 @@ button.pink,
 button.yellow,
 button.blue {
     font-family: Gothic;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
     color: white;
     border-radius: 5px;
-    padding: 5px 40px;
+    padding: 0px 20px;
     border: none;
     cursor: pointer;
+    text-transform: lowercase;
 }
 
 button.pink {
@@ -446,6 +402,333 @@ button.blue:hover {
 
 
 
+
+
+#artworks {
+    text-align: center;
+    vertical-align: top;
+    letter-spacing: 0px !important;
+    *word-spacing: 20px !important;
+    padding-top: 15px;
+    padding-left: 15px;
+    *width: 1500px;
+}
+
+#artworks .artwork {
+    width: 310px;
+    height: 310px;
+    position: relative;
+    cursor: pointer;
+	display: inline-block;
+	margin: 0 15px 15px 0;
+	word-spacing: 0px;
+    *float: left;
+    *border: 1px solid #eee;
+}
+
+#artworks .grid figure {
+    min-width: 310px;
+}
+
+
+
+#posts {
+    text-align: center;
+    vertical-align: top;
+    letter-spacing: 0px !important;
+    *word-spacing: 20px !important;
+    *padding-top: 15px;
+    *padding-left: 15px;
+    *width: 1500px;
+}
+
+#posts .post {
+    width: 100%;
+    height: auto;
+    position: relative;
+    cursor: pointer;
+	word-spacing: 0px;
+    float: left;
+}
+
+#posts .post.halfleft {
+    width: 50%;
+}
+
+#posts .post.halfright {
+    width: 50%;
+}
+
+#posts .grid figure {
+    min-width: 100%;
+	max-width: auto;
+	max-height: auto !important;
+	width: 100%;
+}
+
+#posts figure.effect-lily {
+    height: 600px !important;
+}
+
+
+
+.preview-header {
+    color: #f66;
+    font-weight: bold;
+    font-size: 50px;
+    margin-top: -10px;
+}
+
+.preview-header span {
+    float: left;
+    font-size: 65px;
+    margin-top: 5px;
+}
+
+.preview-header #publish,
+.preview-header #change,
+.preview-header #cancel {
+    float: right;
+    margin-top: 5px;
+}
+
+.preview-header #change {
+    margin-right: 20px;
+}
+
+
+.preview-header #cancel {
+    margin-right: 20px;
+}
+
+#preview-actions {
+    position: absolute;
+    right: 20px;
+    bottom: -20px;
+    *clear: both;
+}
+
+
+
+/*---------------*/
+/***** Lily *****/
+/*---------------*/
+
+.grid {
+	position: relative;
+	margin: 0 auto;
+	/*padding: 1em 0 4em;*/
+	/*max-width: 1000px;*/
+	list-style: none;
+	text-align: center;
+}
+
+/* Common style */
+.grid figure {
+	position: relative;
+	float: left;
+	overflow: hidden;
+	margin: 0;
+	min-width: 310px;
+	max-width: 480px;
+	*max-height: 360px;
+	width: 100%;
+	/*background: #3085a3;*/
+	text-align: center;
+	cursor: pointer;
+}
+
+.grid figure img {
+	position: relative;
+	display: block;
+	min-height: 100%;
+	max-width: 100%;
+	opacity: 0.8;
+}
+
+.grid figure figcaption h2 {
+    text-transform: uppercase;
+}
+
+.grid figure figcaption {
+	padding: 2em;
+	color: #fff;
+	*text-transform: uppercase;
+	text-transform: lowercase;
+	font-size: 1.25em;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+.grid figure figcaption::before,
+.grid figure figcaption::after {
+	pointer-events: none;
+}
+
+.grid figure figcaption,
+.grid figure figcaption > a {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/* Anchor will cover the whole item by default */
+/* For some effects it will show as a button */
+.grid figure figcaption > a {
+	z-index: 1000;
+	text-indent: 200%;
+	white-space: nowrap;
+	font-size: 0;
+	opacity: 0;
+}
+
+.grid figure h2 {
+	*word-spacing: -0.15em;
+	*font-weight: 300;
+
+    font-family: Polygraph;
+    *font-size: 40px;
+    *text-transform: uppercase;
+    *font-weight: normal;
+}
+
+.grid figure h2 span {
+	font-weight: 800;
+}
+
+.grid figure h2,
+.grid figure p {
+	margin: 0;
+}
+
+.grid figure p {
+	letter-spacing: 1px;
+	font-size: 68.5%;
+}
+
+figure {
+    margin: 0 40px;
+    display: block;
+}
+
+figure.effect-lily img {
+	max-width: none;
+	width: -webkit-calc(100% + 50px);
+	width: calc(100% + 50px);
+	opacity: 1;
+	-webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+	transition: opacity 0.35s, transform 0.35s;
+	-webkit-transform: translate3d(-40px,0, 0);
+	transform: translate3d(-40px,0,0);
+}
+
+figure.effect-lily figcaption {
+	text-align: left;
+}
+
+figure.effect-lily figcaption > div {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	padding: 2em;
+	width: 100%;
+	height: 50%;
+}
+
+figure.effect-lily h2,
+figure.effect-lily p {
+	-webkit-transform: translate3d(0,40px,0);
+	transform: translate3d(0,40px,0);
+}
+
+figure.effect-lily h2 {
+	-webkit-transition: -webkit-transform 0.35s;
+	transition: transform 0.35s;
+}
+
+#artworks figure.effect-lily h2 {
+	color: rgba(255,255,255,0.8);
+	opacity: 0;
+	-webkit-transition: opacity 0.2s, -webkit-transform 0.35s;
+	transition: opacity 0.2s, transform 0.35s;
+}
+
+figure.effect-lily p {
+	color: rgba(255,255,255,0.8);
+	opacity: 0;
+	-webkit-transition: opacity 0.2s, -webkit-transform 0.35s;
+	transition: opacity 0.2s, transform 0.35s;
+}
+
+figure.effect-lily .dark {
+    z-index: 1001;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	transition: 0.5s;
+}
+
+figure.effect-lily .dark:hover {
+    background: rgba(0,0,0,0.4) !important;
+}
+
+figure.effect-lily:hover img,
+figure.effect-lily:hover p,
+figure.effect-lily:hover h2 {
+	opacity: 1 !important;
+}
+
+figure.effect-lily:hover .description {
+	*background: rgba(0,0,0,0.5)
+}
+
+figure.effect-lily {
+    height: auto;
+    background-position: center center !important;
+    background-size: auto 120% !important;
+	-webkit-transition-delay: 0.05s;
+	transition-delay: 0.05s;
+	-webkit-transition-duration: 0.35s;
+	transition-duration: 0.35s;
+}
+
+figure.effect-lily:hover {
+    background-position: calc(50% - 50px) center !important;
+    background-size: auto 120% !important;
+	-webkit-transition-delay: 0.05s;
+	transition-delay: 0.05s;
+	-webkit-transition-duration: 0.35s;
+	transition-duration: 0.35s;
+}
+
+figure.effect-lily:hover img,
+figure.effect-lily:hover h2,
+figure.effect-lily:hover p {
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+
+figure.effect-lily:hover p {
+	-webkit-transition-delay: 0.05s;
+	transition-delay: 0.05s;
+	-webkit-transition-duration: 0.35s;
+	transition-duration: 0.35s;
+}
+
+@media (min-width: 1920px) {
+    figure.effect-lily {
+        background-size: 120% auto !important;
+    }
+
+    figure.effect-lily:hover {
+        background-size: 120% auto !important;
+    }
+}
+
 @media (max-width: 1000px) and (min-width: 50px) {
 
     .center-column {
@@ -459,19 +742,16 @@ button.blue:hover {
     #footer .content {
         width: 95%;
     }
-
-    #posts {
-        width: 633px !important;
-        margin: 0 auto;
+    #posts .post.halfleft {
+        width: 100%;
+    }
+    #posts .post.halfright {
+        width: 100%;
     }
 }
 
 @media (max-width: 670px) and (min-width: 50px) {
-    #posts {
-        width: 305px !important;
-        height: 100px;
-        margin: 0 auto;
-    }
+
 }
 
 
@@ -503,12 +783,12 @@ button.blue:hover {
         width: 230px;
     }
     #logo {
-        height: 50px !important;
+        *height: 80px !important;
     }
     #header {
-        height: 50px;
+        *height: 80px;
     }
     .after-header {
-        height: 50px !important;
+        *height: 80px !important;
     }
 }

@@ -1,0 +1,28 @@
+
+- model: cms.page
+  pk: 1
+  fields:
+    name: artworks
+    title: Artworks
+    description: Artworks
+
+- model: cms.page
+  pk: 2
+  fields:
+    name: about
+    title: About
+    description: About
+
+- model: cms.page
+  pk: 3
+  fields:
+    name: blog
+    title: Blog
+    description: Blog
+
+- model: cms.page
+  pk: 4
+  fields:
+    name: contact
+    title: Contact
+    description: Contact

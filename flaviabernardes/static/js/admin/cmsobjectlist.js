@@ -1,9 +1,10 @@
 
-function newDraft(pid) {
-    var redirect = '/admin/blog/draft/';
+function newDraft(app, model, draft_model, obj_id) {
+    var basepath = '/admin/' + app +  '/' + model + '/';
+    var redirect = '/admin/' + app +  '/' + draft_model + '/';
     $('#cover').fadeIn();
     $.ajax({
-        url: '/admin/blog/post/' + pid + '/new-draft/',
+        url: basepath + obj_id + '/new-draft/',
         type: 'post',
         dataType: 'json',
         success: function (data) {
@@ -19,19 +20,20 @@ function newDraft(pid) {
 }
 
 $(window).ready(function () {
+    var app = window.location.pathname.split('/')[2];
+
     $("#changelist-form tr").each(function () {
         if (!$(this).find('td').length) return;
-        var slug = $($(this).find('td')[1]).html();
-        var redirect = '/admin/blog/draft/';
-        $($(this).find('a')[0]).attr('href', '/blog/' + slug + '/');
+        var url = $($(this).find('td a.modify')).attr('view-url');
+        $($(this).find('a')[0]).attr('href', url);
     });
 
     $("#changelist-form a.modify").each(function () {
-        var pid = $(this).attr('pid');
+        var obj_id = $(this).attr('obj_id');
+        var model = $(this).attr('model');
+        var draft_model = $(this).attr('draft-model');
         $(this).click(function () {
-            newDraft(pid);
+            newDraft(app, model, draft_model, obj_id);
         });
-
     });
-
 });

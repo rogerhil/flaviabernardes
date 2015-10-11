@@ -7,82 +7,76 @@
 {% block ogdescription %}Check out artist Flavia Bernardes' artworks{% endblock %}
 {% block ogurl %}{% url 'artworks' %}{% endblock %}
 {% if artwork_list %}
-    {% block ogimage %}{% cropped_thumbnail artwork_list.0 "listing_preview" scale=1 %}{% endblock %}
+    {# {% block ogimage %}{% cropped_thumbnail artwork_list.0 "thumbnail" scale=1 %}{% endblock %} #}
 {% endif %}
 
-{% block container %}
+{% block extrastyle %}
+    <link href="{% static 'css/blog.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block container-large %}
     <div id="full-view">
 
     </div>
-    <div id="painting-preview">
-        {% if artwork_list %}
-            <img src="{% cropped_thumbnail artwork_list.0 "listing_preview" scale=1 %}">
-        {% endif %}
-    </div>
-    <div id="thumbnails">
-        <ul>
-            {% for artwork in artwork_list %}
-                <li artwork="{{ artwork.id }}" class="ui-state-default">
-                    <div>
-                        <p>
-                            {{ artwork.name }}<br />
-                            {{ artwork.year }}<br /><br />
-                            {{ artwork.type }}<br />
-                            {{ artwork.width }} X {{ artwork.height }} cm<br />
-                        </p>
+    <div id="artworks">
+        {% for artwork in artwork_list %}
+            <div class="grid artwork" artwork="{{ artwork.id }}">
+                <figure class="effect-lily">
+                    <img src="{% cropped_thumbnail artwork 'thumbnail' scale=1 %}" style=""/>
+                    <div class="dark">
+                        <figcaption>
+                            <div class="description">
+                                <h2>{{ artwork.name }}</h2>
+                                <p>
+                                    {{ artwork.type }}, {{ artwork.width }}x{{ artwork.height }}cm, {{ artwork.year }}
+                                </p>
+                            </div>
+                            <a href="#">View more</a>
+                        </figcaption>
                     </div>
-                    <img src="{% cropped_thumbnail artwork 'thumbnail' scale=1 %}" />
-                </li>
-            {% endfor %}
-        </ul>
+                </figure>
+            </div>
+        {% endfor %}
     </div>
+    <div class="clear"></div>
+
     <script>
         var preview_urls = {
             {% for artwork in artwork_list %}
-                {{ artwork.id }}: {preview: '{% cropped_thumbnail artwork 'listing_preview' scale=1 %}', original: '{% cropped_thumbnail artwork 'full_preview' width=960 %}'},
+                {{ artwork.id }}: {original: '{% cropped_thumbnail artwork 'full_preview' width=960 %}'},
             {% endfor%}
         };
-        $('#thumbnails li').mouseover(function (e) {
-            var url = preview_urls[$(this).attr('artwork')].preview;
-            $('#painting-preview img').fadeOut(1000, function () {$(this).remove();});
-            var $img = $('<img src="' + url + '" style="display: none;" />');
-            $('#painting-preview').append($img);
-            $img.fadeIn(500);
-            $('<img/>')[0].src = preview_urls[$(this).attr('artwork')].original;
-            //$(this).find('p').css('color', '#000');
-        });
-        $('#thumbnails li').click(function (e) {
+        $('#artworks div.artwork').click(function (e) {
             var url = preview_urls[$(this).attr('artwork')].original;
             $("#full-view").append('<img src="' + url + '" />');
             $("#full-view").css('z-index', 9999);
             $("#full-view").fadeIn(1000);
+            $('#cover img').hide();
             $('#cover').fadeIn();
+            $("#footer").fadeOut();
+            $("#artworks").css('visibility', 'hidden');
+            $(".site-middle").fadeOut();
+            $(".container-bottom").fadeOut();
+
         });
         var closeFullPreview = function () {
             $("#full-view").fadeOut(1000, function () {
                 $(this).html('');
             });
             $('#cover').fadeOut();
-            //$("#footer").fadeIn();
+            $('#cover img').show();
+            $("#footer").fadeIn();
+            $("#artworks").css('visibility', 'visible');
+            $(".site-middle").fadeIn();
+            $(".container-bottom").fadeIn();
         }
         $('#full-view').click(closeFullPreview);
         $('#cover').click(closeFullPreview);
 
-
-        $(window).mousemove(function (e) {
-
-            if (e.clientY > 560) {
-            //    console.log(e.clientX);
-            //    $('#thumbnails').animate({scrollTop: 150}, 500);
-
-            }
-
-        });
-
-        $("#thumbnails ul").sortable({
+        $("#artworks").sortable({
             stop: function (e, ui) {
                 var data = [];
-                $("#thumbnails ul li").each(function () {
+                $("#artworks .artwork").each(function () {
                     data.push($(this).attr('artwork'));
                 });
                 console.log(data);

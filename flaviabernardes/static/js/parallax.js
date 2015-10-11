@@ -14,10 +14,12 @@ $(window).ready(function () {
 });
 
 function parallaxPosition(e) {
-    var topWindow = $(window).scrollTop();
-    var widthWindow = $(window).width();
+    //var topWindow = $(window).scrollTop();
+    //var widthWindow = $(window).width();
     var headerHeight = Number($('#header').css('height').replace('px', ''));
     $(".parallax").each(function(i) {
+        var topWindow = $(window).scrollTop();
+        var widthWindow = $(window).width();
         if (!$(this).attr('bg')) {
             $(this).attr('bg', $(this).css('background-image'));
         }
@@ -26,15 +28,11 @@ function parallaxPosition(e) {
         var w = bgSize.split('x')[0];
         var h = bgSize.split('x')[1];
         var horp = (- (w - widthWindow) / 2) + 'px';
-        var value = headerHeight - (topWindow / 2);
+        var height = Number($(this).position().top);
+        var value = headerHeight / 2 + height / 2 - (topWindow / 2);
+        console.log('value: ' + value);
+        console.log('height: ' + height);
         $(this).css("background-position", horp + " " + value + "px");
-        //if (topWindow > 300) {
-        //    $('#header').css('background-color', headerBgColor);
-        //    $(this).css('background-image', '');
-        //} else {
-        //    $('#header').css('background-color', 'white');
-        //    $(this).css('background-image', $(this).attr('bg'));
-        //}
         if (widthWindow > w) {
             $(this).css("background-size", widthWindow + "px");
         }
