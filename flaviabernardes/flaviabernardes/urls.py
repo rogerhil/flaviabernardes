@@ -22,30 +22,36 @@ sitemaps = dict(
 )
 
 is_superuser = user_passes_test(lambda u: u.is_superuser, '/')
+s = lambda v: csrf_exempt(is_superuser(v))
 
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'flaviabernardes.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^admin/(?P<app>\w+)/(?P<draft_model>\w+)/(?P<pk>\d+)/publish/$',
-        csrf_exempt(is_superuser(CmsDraftPublishView.as_view())),
+        s(CmsDraftPublishView.as_view()),
         name='draft_publish'),
     url(r'^admin/(?P<app>\w+)/(?P<model>\w+)/(?P<pk>\d+)/new-draft/$',
-        csrf_exempt(is_superuser(CmsObjectNewDraftView.as_view())),
+        s(CmsObjectNewDraftView.as_view()),
         name='blog_post_new_draft'),
     url(r'^admin/(?P<app>\w+)/(?P<draft_model>\w+)/(?P<pk>\d+)/preview/$',
-        csrf_exempt(is_superuser(CmsDraftPreview.as_view())),
+        s(CmsDraftPreview.as_view()),
         name='draft_preview'),
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^login/json/$', LoginJson.as_view(), name='login'),
     #url(r'^logout/json/$', LogoutJson.as_view(), name='logout'),
     url(r'^newsletter/$', NewsletterView.as_view(), name='newsletter'),
     url(r'^confirmation/$', ConfirmationView.as_view(), name='confirmation'),
-    url(r'^blog/$', BlogView.as_view(), name='blog'),
+    url(r'^blog/$', s(BlogView.as_view()), name='blog'),  # REMOVE S() WHEN LAUNCH
     url(r'^blog/(?P<slug>[-_\w]+)/$', PostView.as_view(),
         name='blog_post_view'),
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
-        name='django.contrib.sitemaps.views.sitemap')
+        name='django.contrib.sitemaps.views.sitemap'),
+
+    url(r'^artworks/$', s(PaintingsView.as_view()), name='artworks'), # REMOVE S() WHEN LAUNCH
+    url(r'^artworks/sort/$', s(ArtworksSortJson.as_view()), name='artworks_sort'),  # REMOVE S() WHEN LAUNCH
+    url(r'^about/$', s(AboutView.as_view()), name='about'),  # REMOVE S() WHEN LAUNCH
+    url(r'^contact/$', s(TemplateView.as_view(template_name="contact/contact.html")), name='contact') # REMOVE S() WHEN LAUNCH
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
@@ -56,12 +62,4 @@ if settings.LANDING_PAGE:
 else:
     urlpatterns += [
         url(r'^$', HomeView.as_view(), name='home'),
-        url(r'^artworks/$', PaintingsView.as_view(), name='artworks'),
-        url(r'^artworks/sort/$',
-            csrf_exempt(is_superuser(ArtworksSortJson.as_view())),
-            name='artworks_sort'),
-        url(r'^about/$', AboutView.as_view(), name='about'),
-        url(r'^contact/$',
-            TemplateView.as_view(template_name="contact/contact.html"),
-            name='contact')
     ]

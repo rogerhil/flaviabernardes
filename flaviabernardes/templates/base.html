@@ -76,11 +76,15 @@
                         {% endblock %}
                     </div>
                     <div>
-                        {% if not landing_page %}
                         <div class="transp transp-top">
-                            {% include "top-menu.html" %}
+                            {% if user.is_authenticated and user.is_superuser %}
+                                {% include "top-menu.html" %}
+                            {% else %}
+                                <section id="menu">
+                                </section>
+                            {% endif %}
                         </div>
-                        {% endif %}
+
                     </div>
                 </section>
 
