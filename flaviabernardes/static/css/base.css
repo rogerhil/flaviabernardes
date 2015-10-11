@@ -358,6 +358,19 @@ input {
     width: 100%;
 }
 
+.banner-title {
+    color: white;
+    text-align: center;
+    font-family: Polygraph;
+    text-transform: uppercase;
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 37%;
+    line-height: 100px;
+}
+
 button.pink,
 button.yellow,
 button.blue {
@@ -764,6 +777,18 @@ figure.effect-lily:hover p {
     #posts .post.halfright {
         width: 100%;
     }
+    #menu {
+        visibility: hidden;
+    }
+    #menu-toggle {
+        display: block !important;
+    }
+}
+
+@media (max-width: 1000px) and (min-width: 505px) {
+    .toggle {
+        margin-top: 10px !important;
+    }
 }
 
 @media (max-width: 670px) and (min-width: 50px) {
@@ -796,15 +821,81 @@ figure.effect-lily:hover p {
         height: 200px;
     }
     #logo img {
-        width: 230px;
+        width: 230px !important;
     }
     #logo {
-        *height: 80px !important;
+        height: 60px !important;
     }
     #header {
-        *height: 80px;
+        height: 60px !important;
     }
     .after-header {
-        *height: 80px !important;
+        height: 60px !important;
     }
+    .banner-title {
+        font-size: 70px;
+        line-height: 70px;
+    }
+}
+
+
+#menu-toggle {
+    display: none;
+    z-index: 1;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
+
+.toggle {
+    margin: -3px 10px 0 0;
+}
+
+.btn,
+.btn:focus,
+.btn:active,
+.active {
+    outline: 0;
+}
+
+btn {
+    transition: 0.2s;
+    -moz-transition: 0.2s;
+    -webkit-transition: 0.2s;
+    -o-transition: 0.2s;
+}
+
+.btn {
+    border-radius: 2px;
+}
+
+.btn-lg {
+  padding: 13px 16px;
+  font-size: 18px;
+  line-height: 1.3333333;
+  border-radius: 6px;
+}
+
+.btn-dark {
+    border-radius: 50%;
+    color: #fff;
+    background-color: rgba(120,120,120,0.6);
+}
+
+.btn-dark:hover,
+.btn-dark:focus,
+.btn-dark:active {
+    color: #fff;
+    background-color: rgba(0,0,0,0.9);
+    opacity: .8;
+}
+
+.btn-light {
+    color: #999;
+}
+
+.btn-light:hover,
+.btn-light:focus,
+.btn-light:active {
+    color: #ccc;
 }

@@ -29,6 +29,7 @@
         <link href="{% static 'css/base.css' %}" rel="stylesheet" />
         <link href="{% static 'css/ajaxloader.css' %}" rel="stylesheet" />
         <link href="{% static 'css/newsletter.css' %}" rel="stylesheet" />
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
         <!-- jQuery library (served from Google) -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
@@ -83,6 +84,12 @@
                                 <section id="menu">
                                 </section>
                             {% endif %}
+
+
+                            <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle">
+                                <i class="fa fa-1x fa-bars"></i>
+                            </a>
+
                         </div>
 
                     </div>
@@ -97,7 +104,7 @@
                                  style="background-image: url({% cropped_thumbnail page 'banner1' scale=1 %}); position: relative;">
                                 <div class="center-column">
                                 </div>
-                                <div style="color: white; text-align: center; font-family: Polygraph; text-transform: uppercase; font-size: 100px; position: absolute; left: 0; right: 0; top: 35%;">
+                                <div class="banner-title">
                                     {{ page.title }}
                                 </div>
                                 {% block cms_actions %}
