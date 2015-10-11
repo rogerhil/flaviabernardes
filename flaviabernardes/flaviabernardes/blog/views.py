@@ -28,5 +28,5 @@ class DraftPreview(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(DraftPreview, self).get_context_data(**kwargs)
-        context['post_preview'] = True
+        context['preview'] = True
         return context

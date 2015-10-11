@@ -20,7 +20,7 @@
          style="background-image: url({% cropped_thumbnail post 'banner' scale=1 %});">
         <div class="center-column">
         </div>
-        {% if user.is_authenticated and user.is_superuser and not post_preview %}
+        {% if user.is_authenticated and user.is_superuser and not preview %}
             <script src="{% static 'js/admin/blog-post.js' %}"></script>
             <button id="modify-post" class="yellow" style="position: absolute; right: 40px; top: 250px;">
                 MODIFY

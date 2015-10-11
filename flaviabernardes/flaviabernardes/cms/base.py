@@ -66,6 +66,10 @@ class CmsDraft(object):
         pass
 
     @property
+    def model_name(self):
+        return self._meta.model_name
+
+    @property
     def draft_related_class(self):
         klass = self.cms.draft_related_class
         if isinstance(klass, str):

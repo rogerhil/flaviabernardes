@@ -1,0 +1,85 @@
+{% extends extend_template %}
+{% load staticfiles %}
+{% load cropping %}
+
+{% block postextrastyle %}
+    <!-- <link href="{% static 'css/blog.css' %}" rel="stylesheet" /> -->
+    <link href="{% static 'css/jquery-te-1.4.0.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block logo %}
+    <p id="preview-actions" class="preview-header" draft-id="{{ draft.id }}" instance-id="{{ draft.instance.id }}" url="{{ draft.instance.get_absolute_url }}" draft-model="{{ draft.model_name }}" app="{{ draft.app }}">
+        <span style="float: left;">
+            {{ draft.instance.model_name }} PREVIEW
+        </span>
+        <button id="publish" class="pink">
+            PUBLISH
+        </button>
+        <button id="change" class="yellow">
+            CHANGE
+        </button>
+        <button id="cancel" class="blue">
+            CANCEL
+        </button>
+    </p>
+{% endblock %}
+
+{% block bottomjs %}
+    <script>
+        function publish(publish_old) {
+            var $actions = $('#preview-actions');
+            var draft_id = $actions.attr('draft-id');
+            var id = $actions.attr('instance-id');
+            var absurl = $actions.attr('url');
+            var app = $actions.attr('app');
+            var model = $actions.attr('draft-model');
+            var basepath = '/admin/' + app + '/' + model + '/';
+            $('#cover').fadeIn();
+            $.ajax({
+                url: basepath + draft_id + '/publish/',
+                type: 'post',
+                data: {publish_old: publish_old},
+                dataType: 'json',
+                success: function (data) {
+                    //$('#cover').fadeOut();
+                    if (data.success) {
+                        if (data.data.too_old) {
+                            $('#cover').fadeOut();
+                            if (confirm(data.data.too_old.toUpperCase() + "\n *** ARE YOU STILL SURE YOU WANT TO PUBLISH THIS OLD DRAFT?")) {
+                                publish(true);
+                            }
+                        } else {
+                            window.location = url;
+                        }
+                    } else {
+                        $('#cover').fadeOut();
+                        alert(data.message);
+                    }
+                }
+            });
+        }
+        $(window).ready(function () {
+            var $actions = $('#preview-actions');
+            var draft_id = $actions.attr('draft-id');
+            var id = $actions.attr('instance-id');
+            var absurl = $actions.attr('url');
+            var app = $actions.attr('app');
+            var model = $actions.attr('draft-model');
+            var basepath = '/admin/' + app + '/' + model + '/';
+            $("#change").click(function () {
+                window.location = baseurl + draft_id + '/';
+            });
+            $("#cancel").click(function () {
+                if (confirm("Are you sure you want to cancel editing this draft?")) {
+                    window.location = absurl;
+                }
+            });
+            $('#publish').click(function () {
+                if (confirm("Are you sure you want to publish this draft?")) {
+                    publish();
+                }
+            });
+        });
+    </script>
+
+{% endblock %}
