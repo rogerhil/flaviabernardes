@@ -61,5 +61,5 @@ if settings.LANDING_PAGE:
     ]
 else:
     urlpatterns += [
-        url(r'^$', HomeView.as_view(), name='home'),
+        s(url(r'^home/$', HomeView.as_view(), name='home')),  # USE / WHEN LAUNCH, ALSO REMOVE S()
     ]
