@@ -16,37 +16,6 @@
 
 {% block container-large %}
     <div id="">
-        {% comment %}
-        <ul>
-            {% for post in posts_list %}
-                <li class="{% cycle '' '' '' %}">
-                    <a href="{% url 'blog_post_view' post.slug %}">
-                        <p>
-                            <strong>{{ post.title }}</strong><br>
-                            {% autoescape off %}
-                                {{ post.listing_summary }}
-                            {% endautoescape %}
-                        </p>
-                        <span></span>
-                        <img src="{% cropped_thumbnail post 'listing' scale=1 %}" />
-                    </a>
-                </li>
-            {% endfor %}
-            {% if user.is_authenticated and user.is_superuser %}
-                <li class="{% cycle '' '' '' %}" style="border: 2px dashed #f66;">
-                    <button id="modify-post" class="pink" style="margin: 130px 0 0 38px;">
-                        ADD NEW DRAFT POST
-                    </button>
-                    <script>
-                        $("#modify-post").click(function () {
-                            window.location = '/admin/blog/draft/add/';
-                        });
-                    </script>
-                </li>
-            {% endif %}
-        </ul>
-        {% endcomment %}
-
         <div id="posts">
             {% for post in posts_list %}
                 <a href="{% url 'blog_post_view' post.slug %}">
@@ -71,8 +40,6 @@
                     </div>
                 </a>
             {% endfor %}
-
-
 
             <div class="grid post halfright" style="">
                 <figure class="effect-lily" style="background: url({% static 'img/mars-half.jpg' %});">
