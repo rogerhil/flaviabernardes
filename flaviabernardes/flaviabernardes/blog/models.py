@@ -60,6 +60,8 @@ class Draft(BasePost, CmsDraft):
     class cms:
         draft_related_class = Post
         instance_name = 'post'
+        context_object_name = 'post'
+        template_preview = 'blog/post.html'
 
 
 class BaseImage(models.Model):

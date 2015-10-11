@@ -60,6 +60,8 @@ class CmsDraft(object):
         """ Must define the following attributes, e.g:
         draft_related_class = Post
         instance_name = 'post'
+        context_object_name = 'post'
+        template_preview = 'blog/blog.html'
         """
 
     class TooOldToPublish(Exception):
@@ -68,6 +70,10 @@ class CmsDraft(object):
     @property
     def model_name(self):
         return self._meta.model_name
+
+    @property
+    def app_name(self):
+        return self._meta.app_label
 
     @property
     def draft_related_class(self):

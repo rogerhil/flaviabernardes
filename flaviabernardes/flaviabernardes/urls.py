@@ -9,7 +9,8 @@ from django.contrib.sitemaps.views import sitemap
 
 from .artwork.views import HomeView, PaintingsView, ArtworksSortJson
 from .blog.views import BlogView, PostView, DraftPreview
-from .cms.views import CmsDraftPublishView, CmsObjectNewDraftView
+from .cms.views import CmsDraftPublishView, CmsObjectNewDraftView, \
+                       CmsDraftPreview
 from .fbauth.views import LoginJson, LogoutJson
 from .newsletter.views import LandPageView, ConfirmationView, NewsletterView
 from .sitemaps import HomeSitemap, BlogSitemap
@@ -32,7 +33,7 @@ urlpatterns = patterns('',
         csrf_exempt(is_superuser(CmsObjectNewDraftView.as_view())),
         name='blog_post_new_draft'),
     url(r'^admin/(?P<app>\w+)/(?P<draft_model>\w+)/(?P<pk>\d+)/preview/$',
-        csrf_exempt(is_superuser(DraftPreview.as_view())),
+        csrf_exempt(is_superuser(CmsDraftPreview.as_view())),
         name='draft_preview'),
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^login/json/$', LoginJson.as_view(), name='login'),

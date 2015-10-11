@@ -354,13 +354,14 @@ button.pink,
 button.yellow,
 button.blue {
     font-family: Gothic;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
     color: white;
     border-radius: 5px;
-    padding: 5px 40px;
+    padding: 0px 20px;
     border: none;
     cursor: pointer;
+    text-transform: lowercase;
 }
 
 button.pink {
@@ -457,6 +458,44 @@ button.blue:hover {
 	width: 100%;
 }
 
+
+
+
+.preview-header {
+    color: #f66;
+    font-weight: bold;
+    font-size: 50px;
+    margin-top: -10px;
+}
+
+.preview-header span {
+    float: left;
+    font-size: 65px;
+    margin-top: 5px;
+}
+
+.preview-header #publish,
+.preview-header #change,
+.preview-header #cancel {
+    float: right;
+    margin-top: 5px;
+}
+
+.preview-header #change {
+    margin-right: 20px;
+}
+
+
+.preview-header #cancel {
+    margin-right: 20px;
+}
+
+#preview-actions {
+    position: absolute;
+    right: 20px;
+    bottom: -20px;
+    *clear: both;
+}
 
 
 

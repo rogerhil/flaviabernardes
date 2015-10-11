@@ -131,34 +131,3 @@ h1.editing {
     opacity: 1;
 }
 */
-
-
-.preview-header {
-    color: #f66;
-    font-weight: bold;
-    font-size: 50px;
-    margin-top: -10px;
-}
-
-.preview-header span {
-    float: left;
-    font-size: 65px;
-    margin-top: 5px;
-}
-
-.preview-header #publish,
-.preview-header #change,
-.preview-header #cancel {
-    float: right;
-    margin-top: 5px;
-}
-
-.preview-header #change {
-    margin-right: 20px;
-}
-
-
-.preview-header #cancel {
-    margin-right: 20px;
-}
-

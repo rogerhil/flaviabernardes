@@ -22,7 +22,6 @@ class CmsDraftPublishView(JsonView, DetailView):
         return {}
 
 
-
 class CmsObjectNewDraftView(JsonView, DetailView):
 
     def get_queryset(self):
@@ -37,7 +36,7 @@ class CmsObjectNewDraftView(JsonView, DetailView):
         return {'draft_id': draft.id}
 
 
-class DraftPreview(DetailView):
+class CmsDraftPreview(DetailView):
     context_object_name = 'draft'
     template_name = 'cms/preview.html'
 
@@ -48,7 +47,9 @@ class DraftPreview(DetailView):
         return ct.model_class().objects.all()
 
     def get_context_data(self, **kwargs):
-        context = super(DraftPreview, self).get_context_data(**kwargs)
+        context = super(CmsDraftPreview, self).get_context_data(**kwargs)
+        obj = self.get_object()
         context['preview'] = True
-        #context['preview'] = True
+        context[obj.cms.context_object_name] = obj
+        context['extend_template'] = obj.cms.template_preview
         return context

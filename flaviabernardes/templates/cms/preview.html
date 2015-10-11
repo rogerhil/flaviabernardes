@@ -3,15 +3,19 @@
 {% load cropping %}
 
 {% block postextrastyle %}
-    <!-- <link href="{% static 'css/blog.css' %}" rel="stylesheet" /> -->
     <link href="{% static 'css/jquery-te-1.4.0.css' %}" rel="stylesheet" />
 {% endblock %}
 
 {% block logo %}
-    <p id="preview-actions" class="preview-header" draft-id="{{ draft.id }}" instance-id="{{ draft.instance.id }}" url="{{ draft.instance.get_absolute_url }}" draft-model="{{ draft.model_name }}" app="{{ draft.app }}">
-        <span style="float: left;">
+    <p class="preview-header">
+        <span>
             {{ draft.instance.model_name }} PREVIEW
         </span>
+    </p>
+{% endblock %}
+
+{% block cms_actions %}
+    <p id="preview-actions" draft-id="{{ draft.id }}" instance-id="{{ draft.instance.id }}" url="{{ draft.instance.get_absolute_url }}" draft-model="{{ draft.model_name }}" app="{{ draft.app_name }}">
         <button id="publish" class="pink">
             PUBLISH
         </button>
@@ -49,7 +53,7 @@
                                 publish(true);
                             }
                         } else {
-                            window.location = url;
+                            window.location = absurl;
                         }
                     } else {
                         $('#cover').fadeOut();
