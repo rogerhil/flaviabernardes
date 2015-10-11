@@ -21,8 +21,7 @@
     <div id="artworks">
         {% for artwork in artwork_list %}
             <div class="grid artwork" artwork="{{ artwork.id }}">
-                <figure class="effect-lily">
-                    <img src="{% cropped_thumbnail artwork 'thumbnail' scale=1 %}" style=""/>
+                <figure class="effect-lily" style="background-image: url({% cropped_thumbnail artwork 'thumbnail' scale=1 %});">
                     <div class="dark">
                         <figcaption>
                             <div class="description">
@@ -49,14 +48,16 @@
         $('#artworks div.artwork').click(function (e) {
             var url = preview_urls[$(this).attr('artwork')].original;
             $("#full-view").append('<img src="' + url + '" />');
-            $("#full-view").css('z-index', 9999);
+            $("#full-view").css('z-index', 9000);
             $("#full-view").fadeIn(1000);
             $('#cover img').hide();
             $('#cover').fadeIn();
             $("#footer").fadeOut();
-            $("#artworks").css('visibility', 'hidden');
-            $(".site-middle").fadeOut();
-            $(".container-bottom").fadeOut();
+            $(".banner").hide();
+            //$("#artworks").css('visibility', 'hidden');
+            $("#artworks").hide();
+            $(".site-middle").hide();
+            $(".container-bottom").hide();
 
         });
         var closeFullPreview = function () {
@@ -66,9 +67,11 @@
             $('#cover').fadeOut();
             $('#cover img').show();
             $("#footer").fadeIn();
-            $("#artworks").css('visibility', 'visible');
+            //$("#artworks").css('visibility', 'visible');
+            $("#artworks").fadeIn();
             $(".site-middle").fadeIn();
             $(".container-bottom").fadeIn();
+            $(".banner").fadeIn();
         }
         $('#full-view').click(closeFullPreview);
         $('#cover').click(closeFullPreview);

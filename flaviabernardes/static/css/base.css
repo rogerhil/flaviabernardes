@@ -116,7 +116,7 @@ html {
     font-family: Polygraph;
     margin: 0 auto !important;
     color: #fff;
-    z-index: 999 !important;
+    z-index: 9999 !important;
     font-weight: bold;
     background-position: 50% 40%;
     background-color: rgba(255, 255, 255, 0.9);
@@ -409,27 +409,31 @@ button.blue:hover {
     vertical-align: top;
     letter-spacing: 0px !important;
     *word-spacing: 20px !important;
-    padding-top: 15px;
-    padding-left: 15px;
-    *width: 1500px;
+    *padding-top: 15px;
+    *padding-left: 15px;
+    width: 100%;
 }
 
 #artworks .artwork {
-    width: 310px;
-    height: 310px;
+    width: 33.3333%;
+    height: auto;
     position: relative;
     cursor: pointer;
-	display: inline-block;
-	margin: 0 15px 15px 0;
-	word-spacing: 0px;
-    *float: left;
-    *border: 1px solid #eee;
+	display: block;
+	margin: 0;
+	float: left;
 }
 
 #artworks .grid figure {
-    min-width: 310px;
+    min-width: 100%;
+	max-width: auto;
+	max-height: auto !important;
+	width: 100%;
 }
 
+#artworks figure.effect-lily {
+    height: 600px !important;
+}
 
 
 #posts {
@@ -726,6 +730,18 @@ figure.effect-lily:hover p {
 
     figure.effect-lily:hover {
         background-size: 120% auto !important;
+    }
+}
+
+@media (max-width: 1200px) and (min-width: 750px) {
+    #artworks .artwork {
+        width: 50%;
+    }
+}
+
+@media (max-width: 750px) and (min-width: 50px) {
+    #artworks .artwork {
+        width: 100%;
     }
 }
 
