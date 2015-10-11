@@ -51,12 +51,7 @@
             {% for post in posts_list %}
                 <a href="{% url 'blog_post_view' post.slug %}">
                     <div class="grid post {% cycle 'halfleft' 'halfright' '' %}">
-                        <figure class="effect-lily">
-                            {% if forloop.counter0|add:1|divisibleby:3 %}
-                                <img src="{% cropped_thumbnail post 'listing' scale=1 %}" />
-                            {% else %}
-                                <img src="{% cropped_thumbnail post 'listing_half' scale=1 %}" />
-                            {% endif %}
+                        <figure class="effect-lily" style="background: url({% if forloop.counter0|add:1|divisibleby:3 %}{% cropped_thumbnail post 'listing' scale=1 %}{% else %}{% cropped_thumbnail post 'listing_half' scale=1 %}{% endif %});">
                             <div class="dark">
                                 <figcaption>
                                     <div class="description">
@@ -80,8 +75,7 @@
 
 
             <div class="grid post halfright" style="">
-                <figure class="effect-lily">
-                    <img src="{% static 'img/mars-half.jpg' %}" />
+                <figure class="effect-lily" style="background: url({% static 'img/mars-half.jpg' %});">
                     <div class="dark">
                         <figcaption>
                             <div class="description">

@@ -438,33 +438,16 @@ button.blue:hover {
     height: auto;
     position: relative;
     cursor: pointer;
-	*display: inline-block;
-	*margin: 0 15px 15px 0;
-	*margin-bottom: 15px;
 	word-spacing: 0px;
     float: left;
-    *border: 1px solid #eee;
 }
 
 #posts .post.halfleft {
-    *margin-left: -50%;
     width: 50%;
 }
 
 #posts .post.halfright {
-    *margin-right: calc(-50% - 15px);
-    *margin-right: -50%;
-    *float: right;
     width: 50%;
-}
-
-.post.halfleft figure figcaption {
-    *left: 50%;
-    *width: 50%;
-}
-
-.post.halfright figure figcaption {
-    *width: 50%;
 }
 
 #posts .grid figure {
@@ -653,6 +636,25 @@ figure.effect-lily:hover .description {
 	*background: rgba(0,0,0,0.5)
 }
 
+figure.effect-lily {
+    height: 600px;
+    background-position: center center !important;
+    background-size: auto 120% !important;
+	-webkit-transition-delay: 0.05s;
+	transition-delay: 0.05s;
+	-webkit-transition-duration: 0.35s;
+	transition-duration: 0.35s;
+}
+
+figure.effect-lily:hover {
+    background-position: calc(50% - 50px) center !important;
+    background-size: auto 120% !important;
+	-webkit-transition-delay: 0.05s;
+	transition-delay: 0.05s;
+	-webkit-transition-duration: 0.35s;
+	transition-duration: 0.35s;
+}
+
 figure.effect-lily:hover img,
 figure.effect-lily:hover h2,
 figure.effect-lily:hover p {
@@ -668,7 +670,15 @@ figure.effect-lily:hover p {
 }
 
 
+@media (min-width: 1920px) {
+    figure.effect-lily {
+        background-size: 120% auto !important;
+    }
 
+    figure.effect-lily:hover {
+        background-size: 120% auto !important;
+    }
+}
 
 @media (max-width: 1000px) and (min-width: 50px) {
 
@@ -683,19 +693,16 @@ figure.effect-lily:hover p {
     #footer .content {
         width: 95%;
     }
-
-    #posts {
-        width: 633px !important;
-        margin: 0 auto;
+    #posts .post.halfleft {
+        width: 100%;
+    }
+    #posts .post.halfright {
+        width: 100%;
     }
 }
 
 @media (max-width: 670px) and (min-width: 50px) {
-    #posts {
-        width: 305px !important;
-        height: 100px;
-        margin: 0 auto;
-    }
+
 }
 
 
@@ -727,12 +734,12 @@ figure.effect-lily:hover p {
         width: 230px;
     }
     #logo {
-        height: 50px !important;
+        *height: 80px !important;
     }
     #header {
-        height: 50px;
+        *height: 80px;
     }
     .after-header {
-        height: 50px !important;
+        *height: 80px !important;
     }
 }
