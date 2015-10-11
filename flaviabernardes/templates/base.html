@@ -92,7 +92,7 @@
 
                 <div class="site-top">
                     {% block container-top %}
-                        {% if page %}
+                        {% if page and page.banner1 %}
                             <div class="parallax banner" bg-size="1920x600"
                                  style="background-image: url({% cropped_thumbnail page 'banner1' scale=1 %}); position: relative;">
                                 <div class="center-column">
@@ -136,7 +136,7 @@
 
                 <div>
                     {% block banner2 %}
-                        {% if page %}
+                        {% if page and page.image_banner2 %}
                             <div class="parallax banner" bg-size="1920x600"
                                  style="background-image: url({% cropped_thumbnail page 'banner2' scale=1 %});">
                                 <div class="center-column">
