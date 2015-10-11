@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.sitemaps.views import sitemap
 
-from .views import HomeView, AboutView
+from .views import HomeView, AboutView, ContactView
 from .artwork.views import PaintingsView, ArtworksSortJson
 from .blog.views import BlogView, PostView
 from .cms.views import CmsDraftPublishView, CmsObjectNewDraftView, \
@@ -51,7 +51,7 @@ urlpatterns = patterns('',
     url(r'^artworks/$', s(PaintingsView.as_view()), name='artworks'), # REMOVE S() WHEN LAUNCH
     url(r'^artworks/sort/$', s(ArtworksSortJson.as_view()), name='artworks_sort'),  # REMOVE S() WHEN LAUNCH
     url(r'^about/$', s(AboutView.as_view()), name='about'),  # REMOVE S() WHEN LAUNCH
-    url(r'^contact/$', s(TemplateView.as_view(template_name="contact/contact.html")), name='contact') # REMOVE S() WHEN LAUNCH
+    url(r'^contact/$', s(ContactView.as_view()), name='contact') # REMOVE S() WHEN LAUNCH
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
