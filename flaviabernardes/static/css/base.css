@@ -339,7 +339,7 @@ input {
 
 .parallax {
     background-repeat:no-repeat;
-    background-position: 0% 0%;
+    background-position: center center;
     /* ie8- graceful degradation */
     background-position: 0% 0%\9 !important;
 }

@@ -71,7 +71,7 @@
             var model = $actions.attr('draft-model');
             var basepath = '/admin/' + app + '/' + model + '/';
             $("#change").click(function () {
-                window.location = baseurl + draft_id + '/';
+                window.location = basepath + draft_id + '/';
             });
             $("#cancel").click(function () {
                 if (confirm("Are you sure you want to cancel editing this draft?")) {

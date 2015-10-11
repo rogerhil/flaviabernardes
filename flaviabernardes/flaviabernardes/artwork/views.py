@@ -5,13 +5,6 @@ from ..cms.models import Page
 from .models import Artwork
 
 
-
-class HomeView(ListView):
-    context_object_name = 'home_artwork_list'
-    queryset = Artwork.objects.filter(home=True)
-    template_name = 'index.html'
-
-
 class PaintingsView(ListView):
     context_object_name = 'artwork_list'
     queryset = Artwork.objects.filter(listing=True).order_by('order')

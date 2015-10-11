@@ -3,26 +3,7 @@ from django.utils.html import format_html
 
 from image_cropping import ImageCroppingMixin
 
-from .models import Page
-
-
-@admin.register(Page)
-class PageAdmin(ImageCroppingMixin, admin.ModelAdmin):
-    list_display = ('name', 'title', 'description')
-
-    def has_add_permission(self, request):
-        return False
-
-    class Media:
-        js = (
-            'js/jquery.min.js',
-            'js/ajaxloader.js',
-            'js/jquery.form.min.js',
-            'tinymce/tinymce.min.js'
-        )
-        css = {
-            'all': ('css/ajaxloader.css',)
-        }
+from .models import Page, PageDraft
 
 
 class CmsObjectAdmin(admin.ModelAdmin):
@@ -62,3 +43,27 @@ class CmsDraftAdmin(admin.ModelAdmin):
         css = {
             'all': ('css/ajaxloader.css',)
         }
+
+
+@admin.register(Page)
+class PageAdmin(ImageCroppingMixin, CmsObjectAdmin, admin.ModelAdmin):
+    list_display = ('name', 'title', 'description', 'modify')
+
+    def has_add_permission(self, request):
+        return False
+
+    class Media:
+        js = (
+            'js/jquery.min.js',
+            'js/ajaxloader.js',
+            'js/jquery.form.min.js',
+            'tinymce/tinymce.min.js'
+        )
+        css = {
+            'all': ('css/ajaxloader.css',)
+        }
+
+
+@admin.register(PageDraft)
+class PageDraftAdmin(ImageCroppingMixin, CmsDraftAdmin, admin.ModelAdmin):
+    list_display = ('name', 'title', 'description')

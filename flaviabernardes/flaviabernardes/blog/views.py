@@ -1,6 +1,6 @@
 from django.views.generic import ListView, DetailView
 
-from .models import Post, Draft
+from .models import Post
 from ..newsletter.forms import SubscriberForm
 from ..cms.models import Page
 

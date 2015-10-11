@@ -7,7 +7,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.sitemaps.views import sitemap
 
-from .artwork.views import HomeView, PaintingsView, ArtworksSortJson
+from .views import HomeView, AboutView
+from .artwork.views import PaintingsView, ArtworksSortJson
 from .blog.views import BlogView, PostView
 from .cms.views import CmsDraftPublishView, CmsObjectNewDraftView, \
                        CmsDraftPreview
@@ -59,7 +60,8 @@ else:
         url(r'^artworks/sort/$',
             csrf_exempt(is_superuser(ArtworksSortJson.as_view())),
             name='artworks_sort'),
-        url(r'^about/$',
-            TemplateView.as_view(template_name="about/about.html"),
-            name='about')
+        url(r'^about/$', AboutView.as_view(), name='about'),
+        url(r'^contact/$',
+            TemplateView.as_view(template_name="contact/contact.html"),
+            name='contact')
     ]

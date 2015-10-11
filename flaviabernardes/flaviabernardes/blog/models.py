@@ -17,8 +17,8 @@ class Category(models.Model):
 
 class BasePost(models.Model):
     text = models.TextField()
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True, editable=False)
+    updated = models.DateTimeField(auto_now=True, editable=False)
     tags = models.ManyToManyField(Category)
     image_banner = models.ImageField(blank=True, upload_to=settings.UPLOAD_TO)
     image_banner2 = models.ImageField(blank=True, upload_to=settings.UPLOAD_TO)

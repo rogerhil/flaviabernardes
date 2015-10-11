@@ -18,11 +18,13 @@ $(window).ready(function () {
         });
     });
 
-    tinymce.init({
-        selector: "#id_text",
-        plugins: [
-            "link image textcolor"
-        ],
-        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | forecolor link image",
+    $('textarea.vLargeTextField').each(function () {
+        tinymce.init({
+            selector: "#" + $(this).attr('id'),
+            plugins: [
+                "link image textcolor"
+            ],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | forecolor link image",
+        });
     });
 });

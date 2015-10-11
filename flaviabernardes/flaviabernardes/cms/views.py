@@ -17,7 +17,7 @@ class CmsDraftPublishView(JsonView, DetailView):
         publish_old = bool(request.POST.get('publish_old', False))
         try:
             obj.publish(publish_old)
-        except self.model.TooOldToPublish as err:
+        except obj.TooOldToPublish as err:
             return {'too_old': str(err)}
         return {}
 
@@ -40,6 +40,13 @@ class CmsDraftPreview(DetailView):
     context_object_name = 'draft'
     template_name = 'cms/preview.html'
 
+    page_preview_templates = dict(
+        artworks='artwork/artworks.html',
+        blog='blog/blog.html',
+        about='about/about.html',
+        contact='contact/contact.html',
+    )
+
     def get_queryset(self):
         app = self.kwargs['app']
         model = self.kwargs['draft_model']
@@ -51,5 +58,9 @@ class CmsDraftPreview(DetailView):
         obj = self.get_object()
         context['preview'] = True
         context[obj.cms.context_object_name] = obj
-        context['extend_template'] = obj.cms.template_preview
+        if obj.cms.template_preview is 'PAGE':
+            context['extend_template'] = self.page_preview_templates.get(
+                                                                      obj.name)
+        else:
+            context['extend_template'] = obj.cms.template_preview
         return context

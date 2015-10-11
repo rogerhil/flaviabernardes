@@ -96,6 +96,21 @@
                                 <div style="color: white; text-align: center; font-family: Polygraph; text-transform: uppercase; font-size: 100px; position: absolute; left: 0; right: 0; top: 35%;">
                                     {{ page.title }}
                                 </div>
+                                {% block cms_actions %}
+                                    {% if user.is_authenticated and user.is_superuser %}
+                                        <script src="{% static 'js/admin/cmsobjectlist.js' %}"></script>
+                                        <p id="preview-actions">
+                                            <button id="modify-post" class="yellow">
+                                                MODIFY
+                                            </button>
+                                        </p>
+                                        <script>
+                                            $("#modify-post").click(function () {
+                                                newDraft('cms', 'page', 'pagedraft', {{ page.id }});
+                                            });
+                                        </script>
+                                    {% endif %}
+                                {% endblock %}
                             </div>
                         {% endif %}
                     {% endblock %}
@@ -114,6 +129,21 @@
                     </section>
                     <div class="clear"></div>
                 </div>
+
+                <div>
+                    {% block banner2 %}
+                        {% if page %}
+                            <div class="parallax banner" bg-size="1920x600"
+                                 style="background-image: url({% cropped_thumbnail page 'banner2' scale=1 %});">
+                                <div class="center-column">
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endblock %}
+                </div>
+
+                {% block content2 %}
+                {% endblock %}
 
                 <div id="site-middle-anchor"></div>
                 <div class="site-middle scroll-fixed" fixat="80" anchor="site-middle-anchor">
