@@ -58,8 +58,10 @@ urlpatterns = patterns('',
 if settings.LANDING_PAGE:
     urlpatterns += [
         url(r'^$', LandPageView.as_view(), name='landpage'),
+        s(url(r'^home/$', HomeView.as_view(), name='home')),  # USE / WHEN LAUNCH, ALSO REMOVE S()
+        #     !!!!!!!!!!!!!!!!!!!! ALSO CHANGE JAVASCRIPT IN BASE.HTML !!!!
     ]
 else:
     urlpatterns += [
-        s(url(r'^home/$', HomeView.as_view(), name='home')),  # USE / WHEN LAUNCH, ALSO REMOVE S()
+        url(r'^$', HomeView.as_view(), name='home'),
     ]
