@@ -30,8 +30,6 @@ function parallaxPosition(e) {
         var horp = (- (w - widthWindow) / 2) + 'px';
         var height = Number($(this).position().top);
         var value = headerHeight / 2 + height / 2 - (topWindow / 2);
-        console.log('value: ' + value);
-        console.log('height: ' + height);
         $(this).css("background-position", horp + " " + value + "px");
         if (widthWindow > w) {
             $(this).css("background-size", widthWindow + "px");

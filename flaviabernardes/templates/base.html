@@ -104,12 +104,12 @@
                                     {% if user.is_authenticated and user.is_superuser %}
                                         <script src="{% static 'js/admin/cmsobjectlist.js' %}"></script>
                                         <p id="preview-actions">
-                                            <button id="modify-post" class="yellow">
+                                            <button id="modify-page" class="yellow">
                                                 MODIFY
                                             </button>
                                         </p>
                                         <script>
-                                            $("#modify-post").click(function () {
+                                            $("#modify-page").click(function () {
                                                 newDraft('cms', 'page', 'pagedraft', {{ page.id }});
                                             });
                                         </script>

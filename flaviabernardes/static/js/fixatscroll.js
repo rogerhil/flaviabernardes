@@ -5,7 +5,6 @@ function scrollFixedElements() {
         $sm.css('top', '0px');
         return;
     }
-    console.log(window.innerWidth);
     var $anchor = $('#' + $sm.attr('anchor'));
     var height = $sm.css('height');
     var margin = $sm.css('margin');

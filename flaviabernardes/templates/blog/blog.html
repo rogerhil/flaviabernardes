@@ -46,7 +46,7 @@
                     <div class="dark">
                         <figcaption>
                             <div class="description">
-                                <button id="modify-post" class="pink" style="margin-left: 50px;">
+                                <button id="add-post" class="pink" style="margin-left: 50px;">
                                     ADD NEW DRAFT POST
                                 </button>
                             </div>
@@ -54,14 +54,19 @@
                     </div>
                 </figure>
             </div>
-            <script>
-                $("#modify-post").click(function () {
-                    window.location = '/admin/blog/draft/add/';
-                });
-            </script>
-
         </div>
 
     </div>
     <div class="clear"></div>
+{% endblock %}
+
+
+{% block bottomjs %}
+    <script>
+        $(window).ready(function () {
+            $("#add-post").click(function () {
+                window.location = '/admin/blog/draft/add/';
+            });
+        });
+    </script>
 {% endblock %}
