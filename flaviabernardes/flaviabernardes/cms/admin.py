@@ -1,6 +1,29 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
+from image_cropping import ImageCroppingMixin
+
+from .models import Page
+
+
+@admin.register(Page)
+class PageAdmin(ImageCroppingMixin, admin.ModelAdmin):
+    list_display = ('name', 'title', 'description')
+
+    def has_add_permission(self, request):
+        return False
+
+    class Media:
+        js = (
+            'js/jquery.min.js',
+            'js/ajaxloader.js',
+            'js/jquery.form.min.js',
+            'tinymce/tinymce.min.js'
+        )
+        css = {
+            'all': ('css/ajaxloader.css',)
+        }
+
 
 class CmsObjectAdmin(admin.ModelAdmin):
 

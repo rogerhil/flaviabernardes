@@ -1,7 +1,9 @@
 from django.views.generic import ListView
 
 from ..utils import JsonView
+from ..cms.models import Page
 from .models import Artwork
+
 
 
 class HomeView(ListView):
@@ -14,6 +16,11 @@ class PaintingsView(ListView):
     context_object_name = 'artwork_list'
     queryset = Artwork.objects.filter(listing=True).order_by('order')
     template_name = 'artwork/artworks.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(PaintingsView, self).get_context_data(**kwargs)
+        context['page'] = Page.objects.get(name='artworks')
+        return context
 
 
 class ArtworksSortJson(JsonView):

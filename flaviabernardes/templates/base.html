@@ -88,6 +88,21 @@
 
                 <div class="site-top">
                     {% block container-top %}
+                        {% if page %}
+                            <div class="parallax banner" bg-size="1920x600"
+                                 style="background-image: url({% cropped_thumbnail page 'banner1' scale=1 %}); position: relative;">
+                                <div class="center-column">
+                                </div>
+                                <div style="color: white; text-align: center; font-family: Polygraph; text-transform: uppercase; font-size: 100px; position: absolute; left: 0; right: 0; top: 35%;">
+                                    {{ page.title }}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endblock %}
+                </div>
+
+                <div class="container-large">
+                    {% block container-large %}
                     {% endblock %}
                 </div>
 

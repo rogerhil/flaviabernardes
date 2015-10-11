@@ -1,6 +1,5 @@
 
-function newDraft(model, draft_model, obj_id) {
-    var app = window.location.pathname.split('/')[2];
+function newDraft(app, model, draft_model, obj_id) {
     var basepath = '/admin/' + app +  '/' + model + '/';
     var redirect = '/admin/' + app +  '/' + draft_model + '/';
     $('#cover').fadeIn();
@@ -21,6 +20,8 @@ function newDraft(model, draft_model, obj_id) {
 }
 
 $(window).ready(function () {
+    var app = window.location.pathname.split('/')[2];
+
     $("#changelist-form tr").each(function () {
         if (!$(this).find('td').length) return;
         var url = $($(this).find('td a.modify')).attr('view-url');
@@ -32,7 +33,7 @@ $(window).ready(function () {
         var model = $(this).attr('model');
         var draft_model = $(this).attr('draft-model');
         $(this).click(function () {
-            newDraft(model, draft_model, obj_id);
+            newDraft(app, model, draft_model, obj_id);
         });
     });
 });

@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.contrib.sitemaps.views import sitemap
 
 from .artwork.views import HomeView, PaintingsView, ArtworksSortJson
-from .blog.views import BlogView, PostView, DraftPreview
+from .blog.views import BlogView, PostView
 from .cms.views import CmsDraftPublishView, CmsObjectNewDraftView, \
                        CmsDraftPreview
 from .fbauth.views import LoginJson, LogoutJson
