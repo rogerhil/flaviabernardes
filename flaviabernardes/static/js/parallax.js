@@ -5,7 +5,7 @@ $(window).ready(function () {
     headerBgColor = $('#header').css('background-color');
     $(".parallax").css("background-attachment", "fixed");
     if (isiOS) {
-        parallaxPosition();
+        //parallaxPosition();
         return;
     }
     $(window).resize(parallaxPosition);
@@ -19,6 +19,7 @@ function parallaxPosition(e) {
     var headerHeight = Number($('#header').css('height').replace('px', ''));
     $(".parallax").each(function(i) {
         var topWindow = $(window).scrollTop();
+        //var bottomWindow = $(window).scrollBottom();
         var widthWindow = $(window).width();
         if (!$(this).attr('bg')) {
             $(this).attr('bg', $(this).css('background-image'));

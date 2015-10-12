@@ -16,7 +16,7 @@ class BasePage(models.Model):
     image_banner2 = models.ImageField(blank=True, upload_to='uploads')
     image_social = models.ImageField(blank=True, upload_to='uploads')
     banner1 = ImageRatioField('image_banner1', '1920x600')
-    banner2 = ImageRatioField('image_banner2', '1920x600')
+    banner2 = ImageRatioField('image_banner2', '1920x1200')
     social = ImageRatioField('image_social', '1200x630')
     content1 = models.TextField(null=True, blank=True)
     content2 = models.TextField(null=True, blank=True)

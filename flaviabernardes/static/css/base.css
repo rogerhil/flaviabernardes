@@ -109,7 +109,7 @@ html {
 }
 
 .after-header {
-    height: 80px;
+    height: 75px;
 }
 
 #header {
@@ -123,7 +123,7 @@ html {
     display: table;
     position: fixed !important;
     width: 100%;
-    height: 80px;
+    height: 75px;
     background-size: cover;
     border-bottom: 1px solid #eee;
 }
@@ -185,7 +185,7 @@ html {
 #body #menu {
     color: #444;
     width: 960px !important;
-    margin-top: -80px;
+    margin-top: -82px;
 }
 
 #menu a {
