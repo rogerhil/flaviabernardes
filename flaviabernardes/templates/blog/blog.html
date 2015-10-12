@@ -13,12 +13,12 @@
                                 <figcaption>
                                     <div class="description">
                                         <h2>{{ post.title }}</h2><br>
-                                        <p style="text-transform: none;">
+                                        <p style="text-transform: none; color: #fff;">
                                             {% autoescape off %}
-                                                {{ post.text|truncatewords:30 }}
+                                                {{ post.text|truncatewords:25 }}
                                             {% endautoescape %}
                                         </p><br>
-                                        <p style="text-transform: none; font-style: italic;">
+                                        <p style="text-transform: none; font-style: italic; font-size: 12px;">
                                             Published on {{ post.created|date }} by Flavia Bernardes
                                         </p>
                                     </div>

@@ -444,6 +444,10 @@ button.blue:hover {
 	width: 100%;
 }
 
+#artworks .grid figure:hover {
+    background-position: center center !important;
+}
+
 #artworks figure.effect-lily {
     height: 400px !important;
 }
@@ -564,7 +568,7 @@ button.blue:hover {
 }
 
 .grid figure figcaption h2 {
-    text-transform: uppercase;
+    *text-transform: uppercase;
 }
 
 .grid figure figcaption {
@@ -605,7 +609,7 @@ button.blue:hover {
 	*word-spacing: -0.15em;
 	*font-weight: 300;
 
-    font-family: Polygraph;
+    *font-family: Polygraph;
     *font-size: 40px;
     *text-transform: uppercase;
     *font-weight: normal;
@@ -622,7 +626,7 @@ button.blue:hover {
 
 .grid figure p {
 	letter-spacing: 1px;
-	font-size: 68.5%;
+	*font-size: 68.5%;
 }
 
 figure {
@@ -690,13 +694,14 @@ figure.effect-lily .dark {
 }
 
 figure.effect-lily .dark:hover {
-    background: rgba(0,0,0,0.4) !important;
+    background: rgba(0,0,0,0.5) !important;
 }
 
 figure.effect-lily:hover img,
 figure.effect-lily:hover p,
 figure.effect-lily:hover h2 {
 	opacity: 1 !important;
+	color: #fff !important;
 }
 
 figure.effect-lily:hover .description {
