@@ -153,6 +153,9 @@
                     <div class="clear"></div>
                 </div>
 
+                {% block content_before_banner %}
+                {% endblock %}
+
                 <div>
                     {% block banner2 %}
                         {% if page and page.image_banner2 %}
