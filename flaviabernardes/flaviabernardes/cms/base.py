@@ -6,6 +6,12 @@ from django.core.mail import send_mail
 from django.db import models
 
 
+DESCRIPTION_HELP_TEXT = ("Please consider filling this field to provide "
+   "proper information to social media, e.g.: Facebook share. This "
+   "description will included as a <meta> tag in the html to be parsed when "
+   "the url is shared through a social website.")
+
+
 class CmsObject(object):
 
     class cms:
@@ -113,8 +119,9 @@ class CmsDraft(object):
                 continue
             setattr(instance, attr_name, attr)
 
+        instance.save()
         self.instance = instance
-        self.instance.save()
+        self.save()
 
         for attr_name, attr in many_to_many.items():
             for item in getattr(self, attr_name).all():

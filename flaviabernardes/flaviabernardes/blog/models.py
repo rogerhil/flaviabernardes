@@ -6,7 +6,8 @@ from django.template.defaultfilters import Truncator, strip_tags
 
 from image_cropping import ImageRatioField
 
-from ..cms.base import CmsObject, CmsDraft
+from ..cms.base import CmsObject, CmsDraft, DESCRIPTION_HELP_TEXT
+
 
 class Category(models.Model):
     name = models.CharField(max_length=128)
@@ -17,6 +18,9 @@ class Category(models.Model):
 
 class BasePost(models.Model):
     text = models.TextField()
+    text2 = models.TextField(null=True, blank=True)
+    description = models.CharField(max_length=255, null=True, blank=True,
+                                   help_text=DESCRIPTION_HELP_TEXT)
     created = models.DateTimeField(auto_now_add=True, editable=False)
     updated = models.DateTimeField(auto_now=True, editable=False)
     tags = models.ManyToManyField(Category)

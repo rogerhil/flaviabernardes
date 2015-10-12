@@ -5,12 +5,13 @@ from django.db import models
 from image_cropping import ImageRatioField
 
 
-from .base import CmsObject, CmsDraft
+from .base import CmsObject, CmsDraft, DESCRIPTION_HELP_TEXT
 
 
 class BasePage(models.Model):
     title = models.CharField(max_length=255)
-    description = models.CharField(max_length=255)
+    description = models.CharField(max_length=255,
+                                   help_text=DESCRIPTION_HELP_TEXT)
     image_banner1 = models.ImageField(blank=True, upload_to='uploads')
     image_banner2 = models.ImageField(blank=True, upload_to='uploads')
     image_social = models.ImageField(blank=True, upload_to='uploads')
@@ -19,10 +20,8 @@ class BasePage(models.Model):
     social = ImageRatioField('image_social', '1200x630')
     content1 = models.TextField(null=True, blank=True)
     content2 = models.TextField(null=True, blank=True)
-    created = models.DateTimeField(auto_now_add=True, default=datetime.now(),
-                                   editable=False)
-    updated = models.DateTimeField(auto_now=True, default=datetime.now(),
-                                   editable=False)
+    created = models.DateTimeField(auto_now_add=True, editable=False)
+    updated = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
         abstract = True

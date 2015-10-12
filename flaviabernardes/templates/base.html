@@ -14,12 +14,12 @@
         <meta name="p:domain_verify" content="0abc82f2a4e2d934f1b07766abce62ee"/>
         <!-- end pinterest -->
 
-        <title>{% block title %}Flavia Bernardes Art{% endblock %}</title>
-        <meta property="og:title" content="{% block ogtitle %}Flavia Bernardes Art{% endblock %}" />
-        <meta property="og:description" content="{% block ogdescription %}Check out artist Flavia Bernardes' new website{% endblock %}" />
+        <title>{% block title %}{% if page %}{{ page.title }}{% else %}Flavia Bernardes Art{% endif %}{% endblock %}</title>
+        <meta property="og:title" content="{% block ogtitle %}{% if page %}{{ page.title }}{% else %}Flavia Bernardes Art{% endif %}{% endblock %}" />
+        <meta property="og:description" content="{% block ogdescription %}{% if page %}{{ page.description }}{% else %}Check out artist Flavia Bernardes' new website{% endif %}{% endblock %}" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="http://www.flaviabernardesart.com{% block ogurl %}{% endblock %}" />
-        <meta property="og:image" content="http://www.flaviabernardesart.com{% block ogimage %}{% static 'img/amelie125x125.jpg' %}{% endblock %}" />
+        <meta property="og:url" content="http://www.flaviabernardesart.com{% block ogurl %}{% if page %}{{ page.get_absolute_url }}{% else %}/{% endif %}{% endblock %}" />
+        <meta property="og:image" content="http://www.flaviabernardesart.com{% block ogimage %}{% if page and page.social %}{% cropped_thumbnail page 'social' scale=1 %}{% else %}{% static 'img/amelie125x125.jpg' %}{% endif %}{% endblock %}" />
 
         <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" />
 

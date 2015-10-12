@@ -11,7 +11,7 @@
 
 {% block title %}{{ post.title }}{% endblock %}
 {% block ogtitle %}{{ post.title }}{% endblock %}
-{% block ogdescription %}Check out artist Flavia Bernardes' blog post: {{ post.title }}{% endblock %}
+{% block ogdescription %}{% if post.description %}{{ post.description }}{% else %}Check out artist Flavia Bernardes' blog post: {{ post.title }}{% endif %}{% endblock %}
 {% block ogurl %}{% url 'blog_post_view' post.slug %}{% endblock %}
 {% block ogimage %}{% cropped_thumbnail post 'listing' scale=1 %}{% endblock %}
 
@@ -53,6 +53,26 @@
 
     <p>0 Thoughts on {{ post }}</p>
     {% endcomment %}
+{% endblock %}
+
+{% block banner2 %}
+    {% if post.image_banner2 %}
+        <div class="parallax banner" bg-size="1920x600"
+             style="background-image: url({% cropped_thumbnail post 'banner2' scale=1 %});">
+            <div class="center-column">
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content2 %}
+    {% if post.text2 %}
+        <div class="center-column">
+            {% autoescape off %}
+                {{ post.text2 }}
+            {% endautoescape %}
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block newsletter_description %}
