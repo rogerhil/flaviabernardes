@@ -26,7 +26,7 @@ class Artwork(models.Model):
     mini_thumbnail = ImageRatioField('image', '50x50')
     #thumbnail = ImageRatioField('image', '370x320', size_warning=True)
     #thumbnail = ImageRatioField('image', '360x310', size_warning=True)
-    thumbnail = ImageRatioField('image', '640x600', size_warning=True)
+    thumbnail = ImageRatioField('image', '640x400', size_warning=True)
     full_preview = ImageRatioField('image', '960x580', free_crop=True)
 
     def __str__(self):
