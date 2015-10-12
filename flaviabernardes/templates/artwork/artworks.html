@@ -6,6 +6,22 @@
     <link href="{% static 'css/blog.css' %}" rel="stylesheet">
 {% endblock %}
 
+{% block content1 %}
+    <div class="center-column">
+        {% autoescape off %}
+            {{ page.content1 }}
+        {% endautoescape %}
+    </div>
+{% endblock %}
+
+{% block content2 %}
+    <div class="center-column">
+        {% autoescape off %}
+            {{ page.content2 }}
+        {% endautoescape %}
+    </div>
+{% endblock %}
+
 {% block container-large %}
     <div id="full-view">
 
