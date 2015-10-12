@@ -6,7 +6,7 @@
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
         <meta name="author" content="Flavia Bernardes">
         <meta name="description" content="{% block description %}Check out artist Flavia Bernardes' new website{% endblock %}">
 
@@ -86,9 +86,18 @@
                             {% endif %}
 
 
-                            <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle">
+                            <a id="menu-toggle" href="javascript:;" class="btn btn-dark btn-lg toggle">
                                 <i class="fa fa-1x fa-bars"></i>
                             </a>
+                            <script>
+                                $('#menu-toggle').click(function () {
+                                    if ($("#menu").is(':hidden')) {
+                                        $("#menu").slideDown();
+                                    } else {
+                                        $("#menu").slideUp();
+                                    }
+                                });
+                            </script>
 
                         </div>
 

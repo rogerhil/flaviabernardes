@@ -777,11 +777,44 @@ figure.effect-lily:hover p {
     #posts .post.halfright {
         width: 100%;
     }
-    #menu {
-        visibility: hidden;
-    }
+    //#menu {
+    //    visibility: hidden;
+    //}
+
     #menu-toggle {
         display: block !important;
+    }
+
+    #menu {
+        display: none;
+        width: 110px !important;
+        right: 0 !important;
+        top: 81px !important;
+        position: absolute !important;
+        background: rgba(255,255,255,0.9);
+    }
+
+    #body #menu {
+        color: #444;
+        width: 110px !important;
+        margin-top: 0px !important;
+    }
+
+    #menu a {
+        text-align: right;
+        display: block;
+        margin: 0 !important;
+        padding: 5px 10px;
+        float: none !important;
+    }
+
+    #body #menu a {
+        float: none !important;
+        padding: 5px 20px;
+    }
+
+    #logo {
+        height: 70px !important;
     }
 }
 
@@ -824,7 +857,7 @@ figure.effect-lily:hover p {
         width: 230px !important;
     }
     #logo {
-        height: 60px !important;
+        height: 50px !important;
     }
     #header {
         height: 60px !important;
@@ -836,6 +869,23 @@ figure.effect-lily:hover p {
         font-size: 70px;
         line-height: 70px;
     }
+
+    #menu {
+        display: none;
+        width: 110px !important;
+        right: 0 !important;
+        top: 61px !important;
+        position: absolute !important;
+        background: rgba(255,255,255,0.9);
+    }
+    #menu-toggle {
+        right: 0 !important;
+        top: 15px !important;
+    }
+    .btn-lg {
+        padding: 7px 10px !important;
+    }
+
 }
 
 
