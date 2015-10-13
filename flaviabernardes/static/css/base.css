@@ -191,10 +191,11 @@ html {
     text-transform: lowercase;
     font-stretch: condensed;
     font-weight: normal;
+    color: #fff !important;
 }
 
 #body #menu {
-    color: #444 !important;
+    color: #fff !important;
     width: 960px !important;
     margin-top: -82px;
 }
@@ -205,7 +206,7 @@ html {
     margin: 0 !important;
     padding: 5px 45px;
     float: right;
-    color: inherit;
+    color: #fff !important;
     text-decoration: none;
     z-index: 9999999;
 }
@@ -229,7 +230,7 @@ html {
     *text-decoration: none;
 }
 
-#menu a:visited {
+#body #menu a:visited {
     color: #444 !important;
     text-decoration: none;
 }

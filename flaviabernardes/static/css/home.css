@@ -54,7 +54,7 @@
 }
 
 #home .transp {
-    *padding: 20px 0 40px 0;
+    padding: 5px 0 5px 0;
     background: rgba(255, 255, 255, 0.1);
 }
 
