@@ -194,7 +194,7 @@ html {
 }
 
 #body #menu {
-    color: #444;
+    color: #444 !important;
     width: 960px !important;
     margin-top: -82px;
 }
@@ -212,20 +212,26 @@ html {
 
 #body #menu a {
     float: right;
+    color: #444 !important;
     padding: 5px 0px 5px 90px;
 }
 
 #menu a:hover {
-    text-decoration: underline;
+    text-decoration: underline !important;
 }
 
 #menu a.active {
-    *color: a00;
+    color: a00 !important;
     text-decoration: underline;
 }
 
 #menu a.active:hover {
     *text-decoration: none;
+}
+
+#menu a:visited {
+    color: #444 !important;
+    text-decoration: none;
 }
 
 .container-main {
