@@ -126,7 +126,7 @@ html {
 #header {
     font-family: Polygraph;
     margin: 0 auto !important;
-    color: #fff;
+    *color: #fff;
     z-index: 9999 !important;
     font-weight: bold;
     background-position: 50% 40%;
@@ -191,11 +191,9 @@ html {
     text-transform: lowercase;
     font-stretch: condensed;
     font-weight: normal;
-    color: #fff !important;
 }
 
 #body #menu {
-    color: #fff !important;
     width: 960px !important;
     margin-top: -82px;
 }
@@ -206,7 +204,7 @@ html {
     margin: 0 !important;
     padding: 5px 45px;
     float: right;
-    color: #fff !important;
+    *color: #fff;
     text-decoration: none;
     z-index: 9999999;
 }
