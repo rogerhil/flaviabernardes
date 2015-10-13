@@ -40,9 +40,20 @@ a {
 }
 
 a:hover {
-    color: #c00;
+    color: #7897c3;
+    text-decoration: none !important;
+}
+
+a:active {
+    color: #496fa5 !important;
+    text-decoration: none !important;
+}
+
+a:visited {
+    color: #d3bc9b !important;
     text-decoration: none;
 }
+
 
 p {
     margin: 0 0 30px 0;
