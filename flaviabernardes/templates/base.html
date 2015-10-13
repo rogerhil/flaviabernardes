@@ -71,12 +71,12 @@
         {% block site %}
             <div id="body">
                 <section id="header">
-                    <div id="logo" {% if landing_page and not user.is_authenticated %}style="height: 70px;"{% endif %}>
-                        {% block logo %}
-                            <img src="{% static 'img/logo-small-bw.png' %}" style="width: 320px;" />
-                        {% endblock %}
-                    </div>
-                    <div>
+                    <div class="center-column">
+                        <div id="logo" {% if landing_page and not user.is_authenticated %}style="height: 70px;"{% endif %}>
+                            {% block logo %}
+                                <img src="{% static 'img/logo-small-bw.png' %}" style="width: 320px;" />
+                            {% endblock %}
+                        </div>
                         <div class="transp transp-top">
                             {% if user.is_authenticated and user.is_superuser %}
                                 {% include "top-menu.html" %}
@@ -235,7 +235,7 @@
                 if ($.browser.chrome) {
                     //$("#logo-home").css("margin", "-10px auto 28px auto");
                 }
-                $('#logo img').click(function () {
+                $('#logo').click(function () {
                     {% if user.is_authenticated and user.is_superuser %}
                         window.location.replace('{% url 'home' %}');
                     {% else %}
