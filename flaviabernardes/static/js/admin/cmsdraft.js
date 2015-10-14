@@ -13,6 +13,17 @@ $(window).ready(function () {
             },
             success: function (response, status, xhr, $form) {
                 $('#cover').fadeOut();
+                $('.form-row').removeClass('errors');
+                if ($(response).find('.errornote').length) {
+                    $($(response).find('.errornote').clone().wrap('<p>').parent().html()).insertBefore($($('fieldset')[0]));
+                    $(response).find('.form-row.errors').each(function () {
+                        var id = $(this).find('label').attr('for');
+                        $($(this).find('.errorlist').clone().wrap('<p>').parent().html()).insertBefore($("#" + id).parent());
+                        $("#" + id).parent().parent().addClass('errors');
+                    });
+                    window.scrollTo(0, 0);
+                    return;
+                }
                 window.location = path + 'preview/';
             }
         });

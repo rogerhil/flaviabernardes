@@ -63,7 +63,7 @@ a {
 }
 
 a:hover {
-    color: #7897c3;
+    color: #7897c3 !important;
     text-decoration: none !important;
 }
 
@@ -73,7 +73,7 @@ a:active {
 }
 
 a:visited {
-    color: #d3bc9b !important;
+    color: #aaa;
     text-decoration: none;
 }
 

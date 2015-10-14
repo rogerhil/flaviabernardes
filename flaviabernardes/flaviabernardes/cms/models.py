@@ -18,8 +18,9 @@ class BasePage(models.Model):
     banner1 = ImageRatioField('image_banner1', '1920x600')
     banner2 = ImageRatioField('image_banner2', '1920x1200')
     social = ImageRatioField('image_social', '1200x630')
-    content1 = models.TextField(null=True, blank=True)
-    content2 = models.TextField(null=True, blank=True)
+    content1 = models.TextField(help_text="This content appears AFTER the FIRST banner", null=True, blank=True)
+    content2 = models.TextField(help_text="This content appears BEFORE the FIRST banner", null=True, blank=True)
+    content3 = models.TextField(help_text="This content appears AFTER the SECOND banner", null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, editable=False)
     updated = models.DateTimeField(auto_now=True, editable=False)
 

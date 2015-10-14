@@ -2,6 +2,10 @@ from django.contrib.contenttypes.models import ContentType
 from django.views.generic import DetailView
 
 from ..utils import JsonView
+from ..artwork.views import PaintingsView
+from ..blog.views import BlogView, PostView
+from ..views import AboutView, ContactView
+from ..blog.models import Draft
 
 
 class CmsDraftPublishView(JsonView, DetailView):
@@ -47,6 +51,26 @@ class CmsDraftPreview(DetailView):
         contact='contact/contact.html',
     )
 
+    def get_original_context(self, name, obj=None):
+        if name == 'artworks':
+            pv = PaintingsView()
+            pv.object_list = pv.get_queryset()
+            return pv.get_context_data()
+        elif name == 'blog':
+            bv = BlogView()
+            bv.object_list = bv.get_queryset()
+            return bv.get_context_data()
+        elif name == 'post':
+            pv = PostView()
+            pv.object = obj
+            return pv.get_context_data()
+        elif name == 'about':
+            return AboutView().get_context_data()
+        elif name == 'contact':
+            return ContactView().get_context_data()
+        else:
+            return {}
+
     def get_queryset(self):
         app = self.kwargs['app']
         model = self.kwargs['draft_model']
@@ -57,10 +81,14 @@ class CmsDraftPreview(DetailView):
         context = super(CmsDraftPreview, self).get_context_data(**kwargs)
         obj = self.get_object()
         context['preview'] = True
-        context[obj.cms.context_object_name] = obj
         if obj.cms.template_preview is 'PAGE':
+            context.update(self.get_original_context(obj.name))
+            context[obj.cms.context_object_name] = obj
             context['extend_template'] = self.page_preview_templates.get(
                                                                       obj.name)
         else:
+            if isinstance(obj, Draft):
+                context.update(self.get_original_context('post', obj))
+            context[obj.cms.context_object_name] = obj
             context['extend_template'] = obj.cms.template_preview
         return context

@@ -38,23 +38,19 @@ class CmsObject(object):
 
     def new_draft(self):
         draft = self.draft_class()
-        many_to_many = {}
         for field in self._meta.fields:
             attr_name = field.name
             if attr_name == 'id':
                 continue
             attr = getattr(self, field.name)
-            if isinstance(field, models.fields.related.ManyToManyField):
-                many_to_many[attr_name] = attr
-                continue
             setattr(draft, attr_name, attr)
         draft.instance = self
         draft.save()
 
         # save many to many relation
-        for attr_name, attr in many_to_many.items():
-            for item in getattr(self, attr_name).all():
-                getattr(draft, attr_name).add(item)
+        for field in self._meta.many_to_many:
+            for item in getattr(self, field.name).all():
+                getattr(draft, field.name).add(item)
 
         draft.save()
         return draft
@@ -123,9 +119,11 @@ class CmsDraft(object):
         self.instance = instance
         self.save()
 
-        for attr_name, attr in many_to_many.items():
-            for item in getattr(self, attr_name).all():
-                getattr(self.instance, attr_name).add(item)
+        # save many to many relation
+        for field in self._meta.many_to_many:
+            getattr(self.instance, field.name).clear()
+            for item in getattr(self, field.name).all():
+                getattr(self.instance, field.name).add(item)
 
         self.instance.save()
 

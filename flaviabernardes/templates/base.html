@@ -137,6 +137,13 @@
                 </div>
 
                 {% block content1 %}
+                    {% if page and page.content1 %}
+                        <div class="center-column">
+                            {% autoescape off %}
+                                {{ page.content1 }}
+                            {% endautoescape %}
+                        </div>
+                    {% endif %}
                 {% endblock %}
 
                 <div class="container-large">
@@ -153,7 +160,14 @@
                     <div class="clear"></div>
                 </div>
 
-                {% block content_before_banner %}
+                {% block content2 %}
+                    {% if page and page.content2 %}
+                        <div class="center-column">
+                            {% autoescape off %}
+                                {{ page.content2 }}
+                            {% endautoescape %}
+                        </div>
+                    {% endif %}
                 {% endblock %}
 
                 <div>
@@ -168,7 +182,14 @@
                     {% endblock %}
                 </div>
 
-                {% block content2 %}
+                {% block content3 %}
+                    {% if page and page.content3 %}
+                        <div class="center-column">
+                            {% autoescape off %}
+                                {{ page.content3 }}
+                            {% endautoescape %}
+                        </div>
+                    {% endif %}
                 {% endblock %}
 
                 <div id="site-middle-anchor"></div>

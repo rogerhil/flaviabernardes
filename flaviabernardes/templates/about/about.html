@@ -1,16 +1,2 @@
 {% extends 'base.html' %}
-{% load staticfiles webdesign %}
-
-{% block container %}
-    {% autoescape off %}
-        {{ page.content1 }}
-    {% endautoescape %}
-{% endblock %}
-
-{% block content2 %}
-    <div class="center-column">
-        {% autoescape off %}
-            {{ page.content2 }}
-        {% endautoescape %}
-    </div>
-{% endblock %}
+{% load staticfiles %}

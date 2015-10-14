@@ -30,7 +30,7 @@ class BasePost(models.Model):
     listing = ImageRatioField('image_listing', '1920x600')
     listing_half = ImageRatioField('image_listing', '960x600')
     banner = ImageRatioField('image_banner', '1920x600')
-    banner2 = ImageRatioField('image_banner2', '1920x600')
+    banner2 = ImageRatioField('image_banner2', '1920x1200')
 
     class Meta:
         abstract = True

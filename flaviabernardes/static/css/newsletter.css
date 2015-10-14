@@ -43,11 +43,10 @@
 }
 
 #newsletter button:hover {
-    color: #c00;
-    border-color: #c00;
-    transition: 0.5s;
+    color: #7897c3;
+    border-color: #7897c3;
+    transition: 0.2s;
 }
-
 
 .non-field-errors {
     text-align: center;
