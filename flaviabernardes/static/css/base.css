@@ -171,12 +171,12 @@ html {
 }
 
 .home-overlay {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.4);
     transition: 2s;
-    z-index: 9999999 !important;
+    z-index: 0 !important;
     width: 100%;
-    height: 140px;
     display: block;
+    position: absolute;
 }
 
 #menu {
@@ -906,6 +906,17 @@ figure.effect-lily:hover p {
 
 }
 
+@media (max-height: 800px) and (min-height: 600px) {
+    #logo-div {
+        top: 55% !important;
+    }
+}
+
+@media (max-height: 600px) and (min-height: 500px) {
+    #logo-div {
+        top: 50% !important;
+    }
+}
 
 #menu-toggle {
     display: none;

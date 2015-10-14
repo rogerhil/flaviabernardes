@@ -7,18 +7,22 @@
 }
 
 .home-overlay {
-    height: 100%;
+    height: 100% !important;
 }
 
 #logo-home {
     font-size: 150px;
-    width: 740px;
+    width: 722px;
     transition: all 0.5s ease;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     -ms-transition: all 0.5s ease;
     margin: 0 auto;
+}
+
+#logo-home img {
+    margin-left: 12px;
 }
 
 #home {
@@ -100,18 +104,18 @@
 
 #menu {
     *margin-top: 8px;
-    width: 832px;
+    width: 808px;
     font-size: 36px;
     float: none;
     margin: 0 auto;
 }
 
 #home #menu a {
-    padding: 10px 45px;
+    padding: 10px 41px;
 }
 
 .menu-home a {
-    color: #fff !important;
+    color: #eee !important;
 }
 
 .transp-top {
