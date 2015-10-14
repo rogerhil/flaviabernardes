@@ -458,7 +458,7 @@ button.blue:hover {
 }
 
 #artworks .grid figure:hover {
-    background-position: center center !important;
+    //background-position: center center !important;
 }
 
 #artworks figure.effect-lily {
@@ -658,11 +658,13 @@ figure.effect-lily img {
 	transform: translate3d(-40px,0,0);
 }
 
-figure.effect-lily figcaption {
+figure.effect-lily figcaption,
+figure.effect-text figcaption{
 	text-align: left;
 }
 
-figure.effect-lily figcaption > div {
+figure.effect-lily figcaption > div,
+figure.effect-text figcaption > div{
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -672,31 +674,37 @@ figure.effect-lily figcaption > div {
 }
 
 figure.effect-lily h2,
-figure.effect-lily p {
+figure.effect-lily p,
+figure.effect-text h2,
+figure.effect-text p {
 	-webkit-transform: translate3d(0,40px,0);
 	transform: translate3d(0,40px,0);
 }
 
-figure.effect-lily h2 {
+figure.effect-lily h2,
+figure.effect-text h2 {
 	-webkit-transition: -webkit-transform 0.35s;
 	transition: transform 0.35s;
 }
 
-#artworks figure.effect-lily h2 {
+#artworks figure.effect-lily h2,
+#artworks figure.effect-text h2 {
 	color: rgba(255,255,255,0.8);
 	opacity: 0;
 	-webkit-transition: opacity 0.2s, -webkit-transform 0.35s;
 	transition: opacity 0.2s, transform 0.35s;
 }
 
-figure.effect-lily p {
+figure.effect-lily p,
+figure.effect-text p {
 	color: rgba(255,255,255,0.8);
 	opacity: 0;
 	-webkit-transition: opacity 0.2s, -webkit-transform 0.35s;
 	transition: opacity 0.2s, transform 0.35s;
 }
 
-figure.effect-lily .dark {
+figure.effect-lily .dark,
+figure.effect-text .dark {
     z-index: 1001;
 	position: absolute;
 	bottom: 0;
@@ -706,18 +714,23 @@ figure.effect-lily .dark {
 	transition: 0.5s;
 }
 
-figure.effect-lily .dark:hover {
+figure.effect-lily .dark:hover,
+figure.effect-text .dark:hover {
     background: rgba(0,0,0,0.5) !important;
 }
 
 figure.effect-lily:hover img,
 figure.effect-lily:hover p,
-figure.effect-lily:hover h2 {
+figure.effect-lily:hover h2,
+figure.effect-text:hover img,
+figure.effect-text:hover p,
+figure.effect-text:hover h2 {
 	opacity: 1 !important;
 	color: #fff !important;
 }
 
-figure.effect-lily:hover .description {
+figure.effect-lily:hover .description,
+figure.effect-text:hover .description {
 	*background: rgba(0,0,0,0.5)
 }
 
@@ -742,12 +755,16 @@ figure.effect-lily:hover {
 
 figure.effect-lily:hover img,
 figure.effect-lily:hover h2,
-figure.effect-lily:hover p {
+figure.effect-lily:hover p,
+figure.effect-text:hover img,
+figure.effect-text:hover h2,
+figure.effect-text:hover p {
 	-webkit-transform: translate3d(0,0,0);
 	transform: translate3d(0,0,0);
 }
 
-figure.effect-lily:hover p {
+figure.effect-lily:hover p,
+figure.effect-text:hover p {
 	-webkit-transition-delay: 0.05s;
 	transition-delay: 0.05s;
 	-webkit-transition-duration: 0.35s;

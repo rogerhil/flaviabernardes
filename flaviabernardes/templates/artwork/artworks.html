@@ -29,7 +29,7 @@
     <div id="artworks">
         {% for artwork in artwork_list %}
             <div class="grid artwork" artwork="{{ artwork.id }}">
-                <figure class="effect-lily" style="background-image: url({% cropped_thumbnail artwork 'thumbnail' scale=1 %});">
+                <figure class="effect-text parallax" bg-size="640x600" style="background-image: url({% cropped_thumbnail artwork 'thumbnail' scale=1 %}); height: 400px;">
                     <div class="dark">
                         <figcaption>
                             <div class="description">
