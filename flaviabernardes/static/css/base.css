@@ -912,7 +912,7 @@ figure.effect-lily:hover p {
     }
 }
 
-@media (max-height: 600px) and (min-height: 500px) {
+@media (max-height: 600px) and (min-height: 5px) {
     #logo-div {
         top: 50% !important;
     }
