@@ -112,11 +112,6 @@
 
 #home #menu a {
     padding: 10px 52px;
-    transition: 0.2s;
-}
-
-#home #menu a:hover {
-    transition: 0.2s;
 }
 
 .menu-home a {
