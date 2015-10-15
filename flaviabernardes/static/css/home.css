@@ -73,8 +73,8 @@
 
 #home .logo-top {
     position: absolute;
-    top: -23px;
-    left: 1px;
+    top: -23px !important;
+    left: -11px;
     transition: all 0.5s ease;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -104,14 +104,19 @@
 
 #menu {
     *margin-top: 8px;
-    width: 808px;
-    font-size: 36px;
+    width: 810px;
+    font-size: 30px;
     float: none;
     margin: 0 auto;
 }
 
 #home #menu a {
-    padding: 10px 41px;
+    padding: 10px 52px;
+    transition: 0.2s;
+}
+
+#home #menu a:hover {
+    transition: 0.2s;
 }
 
 .menu-home a {
@@ -183,3 +188,211 @@
     font-size: 50px !important;
     margin: 20px 0 0 0;
 }
+
+
+@media (max-width: 1000px) and (min-width: 700px) {
+    #logo-home {
+        width: 500px;
+    }
+    #logo-home img {
+        max-width: 500px !important;
+        margin-left: 0 !important;
+    }
+    #logo-div {
+        top: 55% !important;
+    }
+    .content {
+        top: 75% !important;
+    }
+    #menu {
+        display: block !important;
+        position: static !important;
+        background: none;
+        text-align: center;
+        width: 540px !important;
+    }
+    #menu a {
+        width: 130px !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        float: left !important;
+        font-size: 26px !important;
+    }
+}
+
+
+@media (max-width: 700px) and (min-width: 50px) {
+    #logo-home {
+        width: 500px;
+    }
+    #logo-home img {
+        max-width: 500px !important;
+        margin-left: 0 !important;
+    }
+    #logo-div {
+        top: 55% !important;
+    }
+    .content {
+        top: 75% !important;
+    }
+    #menu {
+        display: block !important;
+        position: static !important;
+        background: none;
+        text-align: center;
+        width: 290px !important;
+    }
+    #menu a {
+        width: 250px !important;
+        float: none;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        text-align: center !important;
+    }
+}
+
+
+@media (max-width: 540px) and (min-width: 5px) {
+    #logo-home {
+        width: 400px;
+    }
+    #logo-home img {
+        max-width: 400px !important;
+    }
+    #menu a {
+        font-size: 26px !important;
+    }
+    .content {
+        top: 70% !important;
+    }
+
+}
+
+
+@media (max-width: 440px) and (min-width: 5px) {
+    #logo-home {
+        width: 350px;
+    }
+    #logo-home img {
+        max-width: 350px !important;
+    }
+    #menu a {
+        font-size: 20px !important;
+    }
+}
+
+@media (max-width: 370px) and (min-width: 5px) {
+    #logo-home {
+        width: 300px;
+    }
+    #logo-home img {
+        max-width: 300px !important;
+    }
+    #menu a {
+        font-size: 18px !important;
+    }
+}
+
+
+@media (max-width: 320px) and (min-width: 5px) {
+    #logo-home {
+        width: 250px;
+    }
+    #logo-home img {
+        max-width: 250px !important;
+    }
+    #menu a {
+        font-size: 16px !important;
+    }
+}
+
+@media (max-height: 800px) {
+    #logo-div {
+        top: 45% !important;
+    }
+    .content {
+        top: 65% !important;
+    }
+}
+
+@media (max-height: 700px) {
+    #logo-div {
+        top: 38% !important;
+    }
+    .content {
+        top: 60% !important;
+    }
+}
+
+@media (max-height: 600px) {
+    #logo-div {
+        top: 30% !important;
+    }
+    .content {
+        top: 55% !important;
+    }
+}
+
+
+@media (max-height: 500px) {
+    #logo-div {
+        top: 25% !important;
+    }
+    .content {
+        top: 50% !important;
+    }
+}
+
+@media (max-height: 400px) {
+    #logo-div {
+        top: 5% !important;
+    }
+    .content {
+        top: 32% !important;
+    }
+}
+
+@media (max-height: 300px) {
+    #logo-div {
+        top: 2% !important;
+    }
+    .content {
+        top: 28% !important;
+    }
+}
+
+
+@media (max-height: 600px) and (max-width: 700px) {
+    #menu a {
+        font-size: 26px !important;
+    }
+}
+
+
+@media (max-height: 500px) and (max-width: 700px) {
+    #menu a {
+        font-size: 20px !important;
+    }
+}
+
+@media (max-height: 400px) and (max-width: 700px) {
+    #menu a {
+        font-size: 18px !important;
+    }
+}
+
+@media (max-height: 300px) and (max-width: 700px) {
+    #menu a {
+        font-size: 16px !important;
+    }
+}
+
+
+
+
+
+/*
+.transp {
+    display: none;
+}
+*/
