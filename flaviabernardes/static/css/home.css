@@ -65,7 +65,7 @@
 
 #home .top {
     position: absolute;
-    top: 25px;
+    top: 25px !important;
     transition: 0.5s;
     -webkit-transition: 0.5s;
     color: #444 !important;
@@ -87,7 +87,6 @@
     font-size: 100px !important;
     width: 1353px !important;
     height: 50px !important;
-    *margin: -10px auto 28px auto !important;
 }
 
 #home .logo-top #logo-home img {
@@ -234,20 +233,21 @@
         display: block !important;
         position: static !important;
         background: none;
-        text-align: center;
-        width: 290px !important;
+        *text-align: center;
+        width: 560px !important;
     }
     #menu a {
-        width: 250px !important;
-        float: none;
-        padding-left: 20px !important;
-        padding-right: 20px !important;
+        width: 140px !important;
+        font-size: 22px !important;
+        float: left !important;
         text-align: center !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
     }
 }
 
 
-@media (max-width: 540px) and (min-width: 5px) {
+@media (max-width: 550px) and (min-width: 5px) {
     #logo-home {
         width: 400px;
     }
@@ -259,6 +259,13 @@
     }
     .content {
         top: 70% !important;
+    }
+    #menu {
+        width: 460px !important;
+    }
+    #menu a {
+        width: 115px !important;
+        font-size: 16px !important;
     }
 
 }
@@ -274,30 +281,79 @@
     #menu a {
         font-size: 20px !important;
     }
+    #menu {
+        width: 412px !important;
+    }
+    #menu a {
+        width: 103px !important;
+        font-size: 14px !important;
+    }
 }
 
-@media (max-width: 370px) and (min-width: 5px) {
+@media (max-width: 390px) and (min-width: 5px) {
     #logo-home {
         width: 300px;
     }
     #logo-home img {
         max-width: 300px !important;
     }
+    #menu {
+        width: 360px !important;
+    }
     #menu a {
-        font-size: 18px !important;
+        width: 90px !important;
+        font-size: 13px !important;
     }
 }
 
 
-@media (max-width: 320px) and (min-width: 5px) {
+@media (max-width: 350px) and (min-width: 5px) {
     #logo-home {
         width: 250px;
     }
     #logo-home img {
         max-width: 250px !important;
     }
+    #menu {
+        width: 280px !important;
+    }
     #menu a {
-        font-size: 16px !important;
+        width: 70px !important;
+        font-size: 12px !important;
+    }
+}
+
+
+@media (max-width: 280px) and (min-width: 5px) {
+    #logo-home {
+        width: 220px;
+    }
+    #logo-home img {
+        max-width: 220px !important;
+    }
+    #menu {
+        width: 240px !important;
+    }
+    #menu a {
+        width: 60px !important;
+        font-size: 11px !important;
+    }
+}
+
+
+@media (max-width: 240px) and (min-width: 5px) {
+    #logo-home {
+        width: 200px;
+    }
+    #logo-home img {
+        max-width: 200px !important;
+    }
+    #menu {
+        width: 220px !important;
+    }
+    #menu a {
+        width: 55px !important;
+        font-size: 10px !important;
     }
 }
 
@@ -355,39 +411,3 @@
         top: 28% !important;
     }
 }
-
-
-@media (max-height: 600px) and (max-width: 700px) {
-    #menu a {
-        font-size: 26px !important;
-    }
-}
-
-
-@media (max-height: 500px) and (max-width: 700px) {
-    #menu a {
-        font-size: 20px !important;
-    }
-}
-
-@media (max-height: 400px) and (max-width: 700px) {
-    #menu a {
-        font-size: 18px !important;
-    }
-}
-
-@media (max-height: 300px) and (max-width: 700px) {
-    #menu a {
-        font-size: 16px !important;
-    }
-}
-
-
-
-
-
-/*
-.transp {
-    display: none;
-}
-*/

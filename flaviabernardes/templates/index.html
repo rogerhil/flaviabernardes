@@ -28,15 +28,17 @@
                 $('#logo-home').fadeIn(1000);
                 $('.content').fadeIn(2000);
                 $('.home-bar a').click(function (e) {
+                    var href = $(this).attr('href');
+                    if ($(window).width() < 1353) {
+                        window.location.replace(href);
+                        return;
+                    }
                     e.preventDefault();
                     $('.content').addClass('top');
                     $('#logo-div').addClass('logo-top');
                     $('.transp').addClass('transp-top');
                     $('#menu').addClass('menu-top');
                     $('.transp').removeClass('menu-home');
-                    //$('#logo-home').fadeOut();
-                    //$('#home-overlay').css('background-color', 'rgba(255, 255, 255, 1); transition: 2s;');
-                    var href = $(this).attr('href');
                     $('#home').addClass('home-top');
                     window.setTimeout(function () {
                         window.setTimeout(function () {

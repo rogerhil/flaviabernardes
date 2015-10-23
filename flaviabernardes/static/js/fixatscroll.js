@@ -8,6 +8,9 @@ function scrollFixedElements() {
     var $anchor = $('#' + $sm.attr('anchor'));
     var height = $sm.css('height');
     var margin = $sm.css('margin');
+    if (!$anchor.offset()) {
+        return;
+    }
     var stop = $anchor.offset().top;
     var wtop = $(window).scrollTop();
     var fixat = Number($sm.attr('fixat'));

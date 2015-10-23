@@ -16,6 +16,9 @@ $(window).ready(function () {
 function parallaxPosition(e) {
     //var topWindow = $(window).scrollTop();
     //var widthWindow = $(window).width();
+    if (!$('#header').length) {
+        return;
+    }
     var headerHeight = Number($('#header').css('height').replace('px', ''));
     $(".parallax").each(function(i) {
         var topWindow = $(window).scrollTop();
