@@ -879,6 +879,17 @@ figure.effect-lily:hover p {
     #logo {
         height: 70px !important;
     }
+
+    #menu .item .sub-menu {
+        position: static;
+        transform: scale(1, 1);
+    }
+
+    #menu .item .sub-menu li,
+    #menu .item .sub-menu li a {
+        text-align: right !important;
+        padding: 0 10px 0 0 !important;
+    }
 }
 
 @media (max-width: 1000px) and (min-width: 505px) {

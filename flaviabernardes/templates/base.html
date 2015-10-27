@@ -85,6 +85,7 @@
                                         $(this).find('.sub-menu').css('transform', 'scale(1, 1)');
                                     });
                                     $('.item').mouseout(function () {
+                                        if ($(window).width() <= 1000) return;
                                         $(this).find('.sub-menu').css('transform', 'scale(1, 0)');
                                     });
                                 </script>
