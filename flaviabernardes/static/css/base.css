@@ -195,7 +195,7 @@ html {
     margin-top: 18px;
 }
 
-#menu a {
+#menu .item {
     text-align: center;
     display: block;
     margin: 0 !important;
@@ -206,7 +206,27 @@ html {
     z-index: 9999999;
 }
 
-#body #menu a {
+#menu .item .sub-menu {
+    list-style: none;
+    background: rgba(230, 230, 230, 0.5);
+    position: absolute;
+    *display: none;
+    *-ms-transform: scale(0.5,0.5); /* IE 9 */
+    *-webkit-transform: scale(0.5,0.5); /* Safari */
+    transform: scale(1, 0);
+    transition: 0.2s;
+}
+
+#menu .item .sub-menu li {
+    padding: 0 20px;
+}
+
+#menu .item .sub-menu li a {
+    color: #444 !important;
+}
+
+
+#body #menu .item {
     float: right;
     color: #444 !important;
     padding: 5px 0px 5px 90px;

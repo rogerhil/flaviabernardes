@@ -1,7 +1,39 @@
 <section id="menu">
-    <a href="{% url 'contact' %}"{% if request.resolver_match.url_name == "contact" %} class="active"{% endif %}>Contact</a>
-    <a href="{% url 'blog' %}"{% if request.resolver_match.url_name == "blog" %} class="active"{% endif %}>Blog</a>
-    <a href="{% url 'about' %}"{% if request.resolver_match.url_name == "about" %} class="active"{% endif %}>About</a>
-    <a href="{% url 'artworks' %}"{% if request.resolver_match.url_name == "artworks" %} class="active"{% endif %}>Artworks</a>
+    <div class="item">
+        <a href="{% url 'contact' %}"{% if request.resolver_match.url_name == "contact" or page.sub_page_of.name == "contact" %} class="active"{% endif %}>
+            Contact
+        </a>
+    </div>
+    <div class="item">
+        <a href="{% url 'blog' %}"{% if request.resolver_match.url_name == "blog" or page.sub_page_of.name == "blog" %} class="active"{% endif %}>
+            Blog
+        </a>
+    </div>
+    <div class="item">
+        <a href="{% url 'about' %}"{% if request.resolver_match.url_name == "about" or page.sub_page_of.name == "about" %} class="active"{% endif %}>
+            About
+        </a>
+    </div>
+    <div class="item">
+        <a href="{% url 'artworks' %}"{% if request.resolver_match.url_name == "artworks" or page.sub_page_of.name == "artworks" %} class="active"{% endif %}>Artworks</a>{% if page.sub_page_of.name == "artworks" %}: {{ page.title }}{% endif %}
+        <ul class="sub-menu">
+            {% for subpage in main_pages.artworks.sub_pages %}
+                <li>
+                    <a href="{{ subpage.get_absolute_url }}"{% if page.name == subpage.name %} class="active"{% endif %}>
+                        {{ subpage.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
     <div class="clear"></div>
 </section>
+
+<script>
+    $('.item').mouseover(function () {
+        $(this).find('.sub-menu').css('transform', 'scale(1, 1)');
+    });
+    $('.item').mouseout(function () {
+        $(this).find('.sub-menu').css('transform', 'scale(1, 0)');
+    });
+</script>

@@ -99,10 +99,8 @@ class CmsDraft(object):
                                                      'drafts created than '
                                                      'this one.')
         instance = self.instance
-        new = False
         many_to_many = {}
         if instance is None:
-            new = True
             instance = self.draft_related_class()
 
         for field in instance._meta.fields:

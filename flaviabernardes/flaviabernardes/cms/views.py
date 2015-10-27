@@ -1,11 +1,12 @@
 from django.contrib.contenttypes.models import ContentType
-from django.views.generic import DetailView
+from django.views.generic import DetailView, TemplateView
 
 from ..utils import JsonView
 from ..artwork.views import PaintingsView
 from ..blog.views import BlogView, PostView
 from ..views import AboutView, ContactView
 from ..blog.models import Draft
+from .models import Page
 
 
 class CmsDraftPublishView(JsonView, DetailView):
@@ -84,11 +85,23 @@ class CmsDraftPreview(DetailView):
         if obj.cms.template_preview is 'PAGE':
             context.update(self.get_original_context(obj.name))
             context[obj.cms.context_object_name] = obj
-            context['extend_template'] = self.page_preview_templates.get(
-                                                                      obj.name)
+            template_name = self.page_preview_templates.get(obj.name)
+            if template_name is None:
+                template_name = 'cms/generic_page_view.html'
+            context['extend_template'] = template_name
         else:
             if isinstance(obj, Draft):
                 context.update(self.get_original_context('post', obj))
             context[obj.cms.context_object_name] = obj
             context['extend_template'] = obj.cms.template_preview
+        return context
+
+
+class SubPageView(TemplateView):
+    template_name = 'cms/generic_page_view.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SubPageView, self).get_context_data(**kwargs)
+        subslug = kwargs['subslug']
+        context['page'] = Page.objects.get(name=subslug)
         return context

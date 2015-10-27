@@ -1,6 +1,6 @@
-from datetime import datetime
-
 from django.db import models
+from django.core.urlresolvers import reverse
+from django.core.exceptions import ValidationError
 
 from image_cropping import ImageRatioField
 
@@ -30,13 +30,44 @@ class BasePage(models.Model):
     def __str__(self):
         return self.name
 
-    @models.permalink
     def get_absolute_url(self):
-        return (self.name,)
+        if self.sub_page_of:
+            return reverse('sub_page', kwargs=dict(slug=self.sub_page_of.name,
+                                                   subslug=self.name,))
+        else:
+            return (self.name,)
+
+    @property
+    def sub_pages(self):
+        return Page.objects.filter(sub_page_of=self)
+
+    def clean(self):
+        if isinstance(self, PageDraft):
+            if self.page is None:
+                return
+            page = self.page
+            existing_name = page.name
+        else:
+            page = Page.objects.get(id=self.id)
+            existing_name = page.name
+        if self.sub_page_of is None and self.name != existing_name:
+            raise ValidationError('Changing the "name" of a Main Page is not '
+                                  'permitted. Please check the form below, '
+                                  'specifically the field "name", that you '
+                                  'have changed the value to "%s". Please '
+                                  'change it back to the original value '
+                                  '"%s".' % (self.name, existing_name))
+        if page.sub_page_of is None and self.sub_page_of is not None:
+            raise ValidationError('Making a Main Page become a Sub Page is '
+                                  'not permitted. You have changed the field '
+                                  '"Sub page of" with the value "%s". '
+                                  'Please change it back to the original none '
+                                  'value "---------" .' % self.sub_page_of)
 
 
 class Page(BasePage, models.Model, CmsObject):
     name = models.CharField(max_length=128, unique=True, editable=False)
+    sub_page_of = models.ForeignKey('Page', null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -46,7 +77,16 @@ class Page(BasePage, models.Model, CmsObject):
 
 
 class PageDraft(BasePage, CmsDraft):
-    name = models.CharField(max_length=128, editable=False)
+    name = models.CharField(max_length=128, help_text="PLEASE PROVIDE A GOOD "
+        "NAME FOR THIS PAGE IF YOU ARE CREATING A NEW ONE NOW, SO YOU WON'T "
+        "NEED TO CHANGE IT ANYMORE IN THE FUTURE. THIS VALUE ALSO CORRESPONDS "
+        "TO THE SLUG OF THE PAGE THAT WILL APPEAR IN THE URL "
+        "(e.g.: /artworks/slug/) AND IT IS COMPLICATED TO CHANGE THIS VALUE "
+        "AFTERWARDS. PLEASE AVOID CHANGING THIS VALUE BECAUSE IT CORRESPONDS "
+        "TO THE SLUG OF THE SUB PAGE AND IT WILL AFFECT DISQUS COMMENTS "
+        "REFERENCES AND GOOGLE INDEXING.")
+    sub_page_of = models.ForeignKey('Page', null=True, blank=True,
+                                    related_name='pages_sub')
     page = models.ForeignKey(Page, null=True, blank=True, editable=False)
 
     class cms:
