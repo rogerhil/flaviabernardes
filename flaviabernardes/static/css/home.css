@@ -109,8 +109,15 @@
     margin: 0 auto;
 }
 
-#home #menu a {
-    padding: 10px 52px;
+#menu a {
+    text-align: center;
+    display: block;
+    margin: 0 !important;
+    padding: 5px 45px;
+    float: right;
+    *color: #fff;
+    text-decoration: none;
+    z-index: 9999999;
 }
 
 .menu-home a {

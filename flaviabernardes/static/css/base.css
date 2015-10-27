@@ -210,9 +210,8 @@ html {
     list-style: none;
     background: rgba(230, 230, 230, 0.5);
     position: absolute;
-    *display: none;
-    *-ms-transform: scale(0.5,0.5); /* IE 9 */
-    *-webkit-transform: scale(0.5,0.5); /* Safari */
+    -ms-transform: scale(1, 0); /* IE 9 */
+    -webkit-transform: scale(1, 0); /* Safari */
     transform: scale(1, 0);
     transition: 0.2s;
 }

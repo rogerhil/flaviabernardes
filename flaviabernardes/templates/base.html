@@ -80,6 +80,14 @@
                         <div class="transp transp-top">
                             {% if user.is_authenticated and user.is_superuser %}
                                 {% include "top-menu.html" %}
+                                <script>
+                                    $('.item').mouseover(function () {
+                                        $(this).find('.sub-menu').css('transform', 'scale(1, 1)');
+                                    });
+                                    $('.item').mouseout(function () {
+                                        $(this).find('.sub-menu').css('transform', 'scale(1, 0)');
+                                    });
+                                </script>
                             {% else %}
                                 <section id="menu">
                                 </section>
