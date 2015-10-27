@@ -18,9 +18,9 @@
                     <div class="dark">
                         <figcaption>
                             <div class="description">
-                                <h2>{{ artwork.name }}</h2>
+                                <h2 class="title">{{ artwork.name }}</h2>
                                 <br>
-                                <p>
+                                <p class="details">
                                     {{ artwork.type }}, {{ artwork.width }}x{{ artwork.height }}cm, {{ artwork.year }}
                                 </p>
                             </div>
@@ -41,7 +41,10 @@
         };
         $('#artworks div.artwork').click(function (e) {
             var url = preview_urls[$(this).attr('artwork')].original;
+            var title = $(this).find('.title').text();
+            var details = $(this).find('.details').text();
             $("#full-view").append('<img src="' + url + '" />');
+            $("#full-view").append('<div class="artwork-preview-details"><p class="title">' + title + '</p><p>' + details + '</p></div>');
             $("#full-view").append('<div id="close-artwork-preview" class="fa fa-times-circle"></div>');
             $("#full-view").css('z-index', 9990);
             $("#full-view").fadeIn(1000);

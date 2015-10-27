@@ -527,6 +527,19 @@ button.blue:hover {
 	transition: 0.5s;
 }
 
+.artwork-preview-details {
+    width: 960px;
+    margin: 0 auto;
+    z-index: 9990;
+    color: #fff;
+}
+
+.artwork-preview-details .title {
+    font-size: 22px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
 #posts {
     text-align: center;
     vertical-align: top;
