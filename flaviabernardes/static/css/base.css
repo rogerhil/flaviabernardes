@@ -8,7 +8,7 @@
     src: url(/static/font/gothic.ttf);
 }
 @font-face {
-    font-family: 'Polygraph';
+    font-family: 'Meg';
     src: url('../font/2E4B6B_0_0.eot');
     src: url('../font/2E4B6B_0_0.eot?#iefix') format('embedded-opentype'),
          url('../font/2E4B6B_0_0.woff2') format('woff2'),
@@ -154,7 +154,7 @@ ol li p {
 }
 
 #header {
-    font-family: Polygraph;
+    font-family: Meg;
     margin: 0 auto !important;
     *color: #fff;
     z-index: 9999 !important;
@@ -419,7 +419,7 @@ input {
 .banner-title {
     color: white;
     text-align: center;
-    font-family: Polygraph;
+    font-family: Meg;
     text-transform: uppercase;
     font-size: 100px;
     position: absolute;
@@ -510,6 +510,22 @@ button.blue:hover {
     height: 400px !important;
 }
 
+#close-artwork-preview {
+    position: absolute;
+    top: 5px;
+    left: calc(50% + 488px);
+    font-size: 30px;
+	color: #300;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+}
+
+#close-artwork-preview:hover {
+    color: #700;
+    cursor: pointer;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+}
 
 #posts {
     text-align: center;
@@ -667,7 +683,7 @@ button.blue:hover {
 	*word-spacing: -0.15em;
 	*font-weight: 300;
 
-    *font-family: Polygraph;
+    *font-family: Meg;
     *font-size: 40px;
     *text-transform: uppercase;
     *font-weight: normal;
