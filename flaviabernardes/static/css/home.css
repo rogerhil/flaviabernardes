@@ -102,7 +102,6 @@
 }
 
 #menu {
-    *margin-top: 8px;
     width: 810px;
     font-size: 30px;
     float: none;
@@ -113,7 +112,7 @@
     text-align: center;
     display: block;
     margin: 0 !important;
-    padding: 5px 45px;
+    padding: 5px 52px;
     float: right;
     *color: #fff;
     text-decoration: none;
@@ -366,55 +365,55 @@
 
 @media (max-height: 800px) {
     #logo-div {
-        top: 45% !important;
+        top: 60% !important;
     }
     .content {
-        top: 65% !important;
+        top: 80% !important;
     }
 }
 
 @media (max-height: 700px) {
     #logo-div {
-        top: 38% !important;
+        top: 56% !important;
     }
     .content {
-        top: 60% !important;
+        top: 78% !important;
     }
 }
 
 @media (max-height: 600px) {
     #logo-div {
-        top: 30% !important;
+        top: 54% !important;
     }
     .content {
-        top: 55% !important;
+        top: 75% !important;
     }
 }
 
 
 @media (max-height: 500px) {
     #logo-div {
-        top: 25% !important;
+        top: 52% !important;
     }
     .content {
-        top: 50% !important;
+        top: 74% !important;
     }
 }
 
 @media (max-height: 400px) {
     #logo-div {
-        top: 5% !important;
+        top: 50% !important;
     }
     .content {
-        top: 32% !important;
+        top: 72% !important;
     }
 }
 
 @media (max-height: 300px) {
     #logo-div {
-        top: 2% !important;
+        top: 30% !important;
     }
     .content {
-        top: 28% !important;
+        top: 68% !important;
     }
 }
