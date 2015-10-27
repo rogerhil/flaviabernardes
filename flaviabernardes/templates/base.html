@@ -263,10 +263,10 @@
                 return str.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'');
             }
 
-            $('ol').each(function () {
+            $('ol').each(function (i) {
                 var $next = $(this).next();
                 if ($next.prop('tagName').toLowerCase() == 'ul') {
-                    var slug = toSlug($(this).find('p').text());
+                    var slug = toSlug($(this).find('p').text()) + i;
                     $next.hide();
                     $(this).attr('for', slug);
                     $(this).addClass('dynamic-accordion');
