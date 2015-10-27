@@ -280,8 +280,10 @@
                 var $el = $('#' + id);
                 if ($el.is(':hidden')) {
                     $el.slideDown();
+                    $(this).addClass('active');
                 } else {
                     $el.slideUp();
+                    $(this).removeClass('active');
                 }
             });
 

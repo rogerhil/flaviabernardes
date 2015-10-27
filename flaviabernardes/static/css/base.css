@@ -129,7 +129,11 @@ ol li p {
 }
 
 .dynamic-accordion:hover p {
-    color: #7897c3;
+    color: #7897c3 !important;
+}
+
+.dynamic-accordion.active p {
+    color: #c3a478;
 }
 
 #logo {
