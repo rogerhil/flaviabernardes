@@ -31,8 +31,8 @@ body {
 
 
 ul {
-    margin: 0;
-    padding: 0;
+    *margin: 0;
+    *padding: 0;
 }
 
 /*************  links colour schema commented: visited and normal as the same colours.
@@ -190,6 +190,7 @@ html {
     font-weight: normal;
 }
 
+
 #body #menu {
     width: 640px !important;
     margin-top: 18px;
@@ -214,6 +215,8 @@ html {
     -webkit-transform: scale(1, 0); /* Safari */
     transform: scale(1, 0);
     transition: 0.2s;
+    margin: 0;
+    padding: 0;
 }
 
 #menu .item .sub-menu li {
@@ -349,6 +352,8 @@ html {
 }
 #login ul {
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 #login li {
     margin-bottom: 10px;
