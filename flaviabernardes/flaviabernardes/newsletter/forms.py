@@ -72,3 +72,23 @@ class SubscriberForm(BaseSubscriberForm):
     list_id = settings.MADMIMI_NEWSLETTER_LIST_ID
     name = settings.MADMIMI_NEWSLETTER_LIST_NAME
 
+
+class WaitToBuyNewsletterForm(BaseSubscriberForm):
+
+    subject = "Confirm your subscription"
+    body = "Hello %s, \n\n" \
+        "Please follow the link below. \n\n" \
+        "If you can't click it, please copy the entire link and paste it " \
+        "into your browser. \n\n" \
+        "%s\n\n" \
+        "Thank you,\n\n" \
+        "Flavia Bernardes\n"
+
+    list_id = settings.MADMIMI_WAIT_TO_SHOP_LIST_ID
+    name = settings.MADMIMI_WAIT_TO_SHOP_LIST_NAME
+
+
+NEWSLETTER_FORMS = {
+    settings.MADMIMI_NEWSLETTER_LIST_ID: SubscriberForm,
+    settings.MADMIMI_WAIT_TO_SHOP_LIST_ID: WaitToBuyNewsletterForm,
+}

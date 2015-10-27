@@ -33,7 +33,7 @@ $(window).ready(function () {
         tinymce.init({
             selector: "#" + $(this).attr('id'),
             plugins: [
-                "link image textcolor"
+                "link image textcolor charmap visualblocks code"
             ],
             toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | forecolor link image",
         });
