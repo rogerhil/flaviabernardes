@@ -29,6 +29,7 @@
                 </a>
             {% endfor %}
 
+            {% if user.is_authenticated and user.is_superuser %}
             <div class="grid post halfright" style="">
                 <figure class="effect-lily" style="background: url({% static 'img/mars-half.jpg' %});">
                     <div class="dark">
@@ -42,6 +43,7 @@
                     </div>
                 </figure>
             </div>
+            {% endif %}
         </div>
 
     </div>
