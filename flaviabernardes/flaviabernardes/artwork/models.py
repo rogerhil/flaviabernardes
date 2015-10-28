@@ -1,6 +1,7 @@
 from django.db import models
 
 from easy_thumbnails.files import get_thumbnailer
+from easy_thumbnails.exceptions import InvalidImageFormatError
 from image_cropping import ImageRatioField
 
 
@@ -34,10 +35,13 @@ class Artwork(models.Model):
 
     def mini_thumbnail_url(self):
         field = self._meta.get_field_by_name('mini_thumbnail')[0]
-        thumbnail_url = get_thumbnailer(self.image).get_thumbnail({
-            'size': (field.width, field.height),
-            'box': self.mini_thumbnail,
-            'crop': True,
-            'detail': True,
-        }).url
+        try:
+            thumbnail_url = get_thumbnailer(self.image).get_thumbnail({
+                'size': (field.width, field.height),
+                'box': self.mini_thumbnail,
+                'crop': True,
+                'detail': True,
+            }).url
+        except InvalidImageFormatError:
+            return ''
         return thumbnail_url
