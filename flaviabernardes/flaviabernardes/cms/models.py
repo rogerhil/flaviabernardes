@@ -35,7 +35,7 @@ class BasePage(models.Model):
             return reverse('sub_page', kwargs=dict(slug=self.sub_page_of.name,
                                                    subslug=self.name,))
         else:
-            return (self.name,)
+            return reverse(self.name)
 
     @property
     def sub_pages(self):
