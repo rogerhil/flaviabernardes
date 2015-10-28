@@ -14,11 +14,12 @@ from .cms.views import CmsDraftPublishView, CmsObjectNewDraftView, \
                        CmsDraftPreview, SubPageView
 from .fbauth.views import LoginJson, LogoutJson
 from .newsletter.views import LandPageView, ConfirmationView, NewsletterView
-from .sitemaps import HomeSitemap, BlogSitemap
+from .sitemaps import HomeSitemap, BlogSitemap, PagesSitemap
 
 sitemaps = dict(
     home=HomeSitemap,
-    blog=BlogSitemap
+    blog=BlogSitemap,
+    pages=PagesSitemap
 )
 
 is_superuser = user_passes_test(lambda u: u.is_superuser, '/')
@@ -42,27 +43,21 @@ urlpatterns = patterns('',
     #url(r'^logout/json/$', LogoutJson.as_view(), name='logout'),
     url(r'^newsletter/$', NewsletterView.as_view(), name='newsletter'),
     url(r'^confirmation/$', ConfirmationView.as_view(), name='confirmation'),
-    url(r'^blog/$', s(BlogView.as_view()), name='blog'),  # REMOVE S() WHEN LAUNCH
+    url(r'^blog/$', BlogView.as_view(), name='blog'),
     url(r'^blog/(?P<slug>[-_\w]+)/$', PostView.as_view(),
         name='blog_post_view'),
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
 
-    url(r'^artworks/$', s(PaintingsView.as_view()), name='artworks'), # REMOVE S() WHEN LAUNCH
-    url(r'^artworks/sort/$', s(ArtworksSortJson.as_view()), name='artworks_sort'),  # REMOVE S() WHEN LAUNCH
-    url(r'^about/$', s(AboutView.as_view()), name='about'),  # REMOVE S() WHEN LAUNCH
-    url(r'^contact/$', s(ContactView.as_view()), name='contact'), # REMOVE S() WHEN LAUNCH
-    url(r'^(?P<slug>[-_\w]+)/(?P<subslug>[-_\w]+)/$', s(SubPageView.as_view()), name='sub_page'), # REMOVE S() WHEN LAUNCH
+    url(r'^artworks/$', PaintingsView.as_view(), name='artworks'),
+    url(r'^artworks/sort/$', ArtworksSortJson.as_view(), name='artworks_sort'),
+    url(r'^about/$', AboutView.as_view(), name='about'),
+    url(r'^contact/$', ContactView.as_view(), name='contact'),
+    url(r'^(?P<slug>[-_\w]+)/(?P<subslug>[-_\w]+)/$', SubPageView.as_view(), name='sub_page'),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-if settings.LANDING_PAGE:
-    urlpatterns += [
-        url(r'^$', LandPageView.as_view(), name='landpage'),
-        url(r'^home/$', s(HomeView.as_view()), name='home'),  # USE / WHEN LAUNCH, ALSO REMOVE S()
-        #     !!!!!!!!!!!!!!!!!!!! ALSO CHANGE JAVASCRIPT IN BASE.HTML !!!!
-    ]
-else:
-    urlpatterns += [
-        url(r'^$', HomeView.as_view(), name='home'),
-    ]
+
+urlpatterns += [
+    url(r'^$', HomeView.as_view(), name='home'),
+]

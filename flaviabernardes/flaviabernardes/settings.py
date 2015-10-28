@@ -159,7 +159,7 @@ ADMINS = (
 
 SERVER_EMAIL = 'support@flaviabernardesart.com'
 
-LANDING_PAGE = True
+LANDING_PAGE = False
 
 try:
     from .developmentsettings import *

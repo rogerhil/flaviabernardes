@@ -72,27 +72,22 @@
             <div id="body">
                 <section id="header">
                     <div class="center-column">
-                        <div id="logo" {% if landing_page and not user.is_authenticated %}style="height: 70px;"{% endif %}>
+                        <div id="logo">
                             {% block logo %}
                                 <img src="{% static 'img/logo-small-bw.png' %}" style="width: 320px;" />
                             {% endblock %}
                         </div>
                         <div class="transp transp-top">
-                            {% if user.is_authenticated and user.is_superuser %}
-                                {% include "top-menu.html" %}
-                                <script>
-                                    $('.item').mouseover(function () {
-                                        $(this).find('.sub-menu').css('transform', 'scale(1, 1)');
-                                    });
-                                    $('.item').mouseout(function () {
-                                        if ($(window).width() <= 1000) return;
-                                        $(this).find('.sub-menu').css('transform', 'scale(1, 0)');
-                                    });
-                                </script>
-                            {% else %}
-                                <section id="menu">
-                                </section>
-                            {% endif %}
+                            {% include "top-menu.html" %}
+                            <script>
+                                $('.item').mouseover(function () {
+                                    $(this).find('.sub-menu').css('transform', 'scale(1, 1)');
+                                });
+                                $('.item').mouseout(function () {
+                                    if ($(window).width() <= 1000) return;
+                                    $(this).find('.sub-menu').css('transform', 'scale(1, 0)');
+                                });
+                            </script>
 
 
                             <a id="menu-toggle" href="javascript:;" class="btn btn-dark btn-lg toggle">
@@ -303,11 +298,7 @@
                     //$("#logo-home").css("margin", "-10px auto 28px auto");
                 }
                 $('#logo').click(function () {
-                    {% if user.is_authenticated and user.is_superuser %}
-                        window.location.replace('{% url 'home' %}');
-                    {% else %}
-                        window.location.replace('{% url 'landpage' %}');
-                    {% endif %}
+                    window.location.replace('{% url 'home' %}');
                 });
             });
         </script>
