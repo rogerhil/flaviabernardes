@@ -483,6 +483,16 @@ label {
     background: url(../img/thank_you_flavia.jpg) no-repeat center center fixed;
 }
 
+.thankyou-ink {
+    background: url(../img/inksthankyou.jpg) no-repeat center center fixed;
+}
+
+.thankyou-ink h1,
+.thankyou-ink h2,
+.thankyou-ink p {
+    color: #000 !important;
+}
+
 
 .overlay {
     background: rgba(0, 0, 0, 0.3);

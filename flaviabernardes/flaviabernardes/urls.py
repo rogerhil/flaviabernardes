@@ -42,6 +42,7 @@ urlpatterns = patterns('',
     #url(r'^logout/json/$', LogoutJson.as_view(), name='logout'),
     url(r'^newsletter/$', NewsletterView.as_view(), name='newsletter'),
     url(r'^confirmation/$', ConfirmationView.as_view(), name='confirmation'),
+    url(r'^confirmation2/$', TemplateView.as_view(template_name="confirmation_wait_for_shop.html"), name='confirmation2'),
     url(r'^blog/$', s(BlogView.as_view()), name='blog'),  # REMOVE S() WHEN LAUNCH
     url(r'^blog/(?P<slug>[-_\w]+)/$', PostView.as_view(),
         name='blog_post_view'),
