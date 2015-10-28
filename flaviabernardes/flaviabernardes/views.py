@@ -1,12 +1,10 @@
 from django.views.generic import ListView, TemplateView
 
-from .artwork.models import Artwork
 from .cms.models import Page
 
 
-class HomeView(ListView):
+class HomeView(TemplateView):
     context_object_name = 'home_artwork_list'
-    queryset = Artwork.objects.filter(home=True)
     template_name = 'index.html'
 
 
