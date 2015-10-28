@@ -1,5 +1,6 @@
 from django.contrib.contenttypes.models import ContentType
 from django.views.generic import DetailView, TemplateView
+from django.http import Http404
 
 from ..utils import JsonView
 from ..artwork.views import PaintingsView
@@ -103,5 +104,8 @@ class SubPageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(SubPageView, self).get_context_data(**kwargs)
         subslug = kwargs['subslug']
-        context['page'] = Page.objects.get(name=subslug)
+        try:
+            context['page'] = Page.objects.get(name=subslug)
+        except Page.DoesNotExist:
+            raise Http404()
         return context
