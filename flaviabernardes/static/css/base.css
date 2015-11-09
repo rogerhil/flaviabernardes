@@ -7,6 +7,18 @@
     font-family: Gothic;
     src: url(/static/font/gothic.ttf);
 }
+
+@font-face {
+    font-family: Gothic;
+    src: url(/static/font/gothic.ttf);
+}
+
+@font-face {
+    font-family: Gothic;
+    font-weight: bold;
+    src: url(/static/font/gothic-bold.ttf);
+}
+
 @font-face {
     font-family: 'Meg';
     src: url('../font/2E4B6B_0_0.eot');
