@@ -1,4 +1,5 @@
 import math
+from datetime import datetime, timedelta
 
 from django.conf import settings
 from django.db import models
@@ -46,6 +47,11 @@ class BasePost(models.Model):
         title_lines = math.ceil(len(self.title) / 28)
         summary_lines = 4 - title_lines
         return Truncator(strip_tags(self.text)).chars(30 * summary_lines)
+
+    @property
+    def is_old(self):
+        month = 30
+        return (datetime.now() - self.created) > timedelta(6 * month)
 
 
 class Post(BasePost, CmsObject):

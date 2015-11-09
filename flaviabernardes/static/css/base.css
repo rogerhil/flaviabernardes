@@ -761,9 +761,11 @@ figure.effect-lily figcaption > div {
 }
 
 figure.effect-lily h2,
-figure.effect-lily p {
+figure.effect-lily p,
+figure.effect-lily .published-date {
 	-webkit-transform: translate3d(0,40px,0);
 	transform: translate3d(0,40px,0);
+	text-align: left;
 }
 
 figure.effect-lily h2 {
@@ -778,7 +780,8 @@ figure.effect-lily h2 {
 	transition: opacity 0.2s, transform 0.35s;
 }
 
-figure.effect-lily p {
+figure.effect-lily p,
+figure.effect-lily .published-date {
 	color: rgba(255,255,255,0.8);
 	opacity: 0;
 	-webkit-transition: opacity 0.2s, -webkit-transform 0.35s;
@@ -801,7 +804,8 @@ figure.effect-lily .dark:hover {
 
 figure.effect-lily:hover img,
 figure.effect-lily:hover p,
-figure.effect-lily:hover h2 {
+figure.effect-lily:hover h2,
+figure.effect-lily:hover .published-date {
 	opacity: 1 !important;
 	color: #fff !important;
 }
@@ -831,9 +835,20 @@ figure.effect-lily:hover {
 
 figure.effect-lily:hover img,
 figure.effect-lily:hover h2,
-figure.effect-lily:hover p {
+figure.effect-lily:hover p,
+figure.effect-lily:hover .published-date {
 	-webkit-transform: translate3d(0,0,0);
 	transform: translate3d(0,0,0);
+}
+
+figure.effect-lily .summary {
+    text-transform: none; color: #fff;
+}
+
+figure.effect-lily .published-date {
+    text-transform: none;
+    font-style: italic;
+    font-size: 12px;
 }
 
 figure.effect-lily:hover p {
@@ -862,6 +877,16 @@ figure.effect-lily:hover p {
 @media (max-width: 750px) and (min-width: 50px) {
     #artworks .artwork {
         width: 100%;
+    }
+}
+
+@media (max-width: 1300px) and (min-width: 50px) {
+    figure.effect-lily p {
+        display: none !important;
+    }
+
+    figure.effect-lily:hover p {
+        display: none !important;
     }
 }
 
@@ -935,6 +960,7 @@ figure.effect-lily:hover p {
         padding: 0 10px 0 0 !important;
     }
 }
+
 
 @media (max-width: 1000px) and (min-width: 505px) {
     .toggle {
