@@ -2,12 +2,11 @@ var headerBgColor;
 
 $(window).ready(function () {
     var isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-    headerBgColor = $('#header').css('background-color');
-    $(".parallax").css("background-attachment", "fixed");
     if (isiOS) {
-        //parallaxPosition();
         return;
     }
+    headerBgColor = $('#header').css('background-color');
+    $(".parallax").css("background-attachment", "fixed");
     $(window).resize(parallaxPosition);
     $(window).scroll(parallaxPosition);
     parallaxPosition();
