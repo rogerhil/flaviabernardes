@@ -39,6 +39,7 @@
                 {{ artwork.id }}: {original: '{% cropped_thumbnail artwork 'full_preview' width=960 %}'},
             {% endfor%}
         };
+        var $currentOpened;
         $('#artworks div.artwork').click(function (e) {
             var url = preview_urls[$(this).attr('artwork')].original;
             var title = $(this).find('.title').text();
@@ -58,6 +59,7 @@
             $("#artworks").hide();
             $(".site-middle").hide();
             $(".container-bottom").hide();
+            $currentOpened = $(this);
 
         });
         var closeFullPreview = function () {
@@ -65,7 +67,7 @@
                 $(this).html('');
             });
             $('#cover').fadeOut();
-            $('#cover img').show();
+            $('#cover img').fadeIn(5000);
             $("#footer").fadeIn();
             //$("#artworks").css('visibility', 'visible');
             $("#artworks").fadeIn();
@@ -78,6 +80,32 @@
         }
         $('#full-view').click(closeFullPreview);
         $('#cover').click(closeFullPreview);
+        $(document).keydown(function(e) {
+            var $item;
+            switch (e.keyCode) {
+                case 27:
+                    closeFullPreview();
+                    break;
+                case 37:  // left
+                    $item = $currentOpened.prev();
+                    if ($item.length) {
+                        $("#full-view").html('');
+                        $item.trigger('click');
+                        $("#full-view img").hide();
+                        $("#full-view img").fadeIn();
+                    }
+                    break;
+                case 39:  // right
+                    $item = $currentOpened.next();
+                    if ($item.length) {
+                        $("#full-view").html('');
+                        $item.trigger('click');
+                        $("#full-view img").hide();
+                        $("#full-view img").fadeIn();
+                    }
+                    break;
+            }
+        });
 
         $("#artworks").sortable({
             stop: function (e, ui) {
@@ -85,7 +113,6 @@
                 $("#artworks .artwork").each(function () {
                     data.push($(this).attr('artwork'));
                 });
-                console.log(data);
                 $.ajax({
                     url: '/artworks/sort/',
                     type: 'POST',
