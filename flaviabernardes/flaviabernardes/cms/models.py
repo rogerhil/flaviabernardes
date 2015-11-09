@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, NoReverseMatch
 from django.core.exceptions import ValidationError
 
 from image_cropping import ImageRatioField
@@ -35,7 +35,10 @@ class BasePage(models.Model):
             return reverse('sub_page', kwargs=dict(slug=self.sub_page_of.name,
                                                    subslug=self.name,))
         else:
-            return reverse(self.name)
+            try:
+                return reverse(self.name)
+            except NoReverseMatch:
+                return '/%s/' % self.name
 
     @property
     def sub_pages(self):
@@ -94,3 +97,4 @@ class PageDraft(BasePage, CmsDraft):
         instance_name = 'page'
         context_object_name = 'page'
         template_preview = 'PAGE'
+        publish_ignore = ['created']

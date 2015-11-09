@@ -11,7 +11,7 @@ from .views import HomeView, AboutView, ContactView
 from .artwork.views import PaintingsView, ArtworksSortJson
 from .blog.views import BlogView, PostView
 from .cms.views import CmsDraftPublishView, CmsObjectNewDraftView, \
-                       CmsDraftPreview, SubPageView
+                       CmsDraftPreview, SubPageView, CustomPageView
 from .fbauth.views import LoginJson, LogoutJson
 from .newsletter.views import LandPageView, ConfirmationView, NewsletterView
 from .sitemaps import HomeSitemap, BlogSitemap, PagesSitemap
@@ -53,6 +53,8 @@ urlpatterns = patterns('',
     url(r'^artworks/sort/$', ArtworksSortJson.as_view(), name='artworks_sort'),
     url(r'^about/$', AboutView.as_view(), name='about'),
     url(r'^contact/$', ContactView.as_view(), name='contact'),
+    url(r'^(?P<slug>[-_\w]+)/$', CustomPageView.as_view(),
+        name='custom_page'),
     url(r'^(?P<slug>[-_\w]+)/(?P<subslug>[-_\w]+)/$', SubPageView.as_view(), name='sub_page'),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

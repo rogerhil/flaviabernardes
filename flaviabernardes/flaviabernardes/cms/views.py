@@ -109,3 +109,16 @@ class SubPageView(TemplateView):
         except Page.DoesNotExist:
             raise Http404()
         return context
+
+
+class CustomPageView(TemplateView):
+    template_name = 'cms/generic_page_view.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(CustomPageView, self).get_context_data(**kwargs)
+        slug = kwargs['slug']
+        try:
+            context['page'] = Page.objects.get(name=slug)
+        except Page.DoesNotExist:
+            raise Http404()
+        return context
