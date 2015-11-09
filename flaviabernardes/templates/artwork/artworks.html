@@ -14,7 +14,7 @@
     <div id="artworks">
         {% for artwork in artwork_list %}
             <div class="grid artwork" artwork="{{ artwork.id }}">
-                <figure class="effect-lily" style="background-image: url({% cropped_thumbnail artwork 'thumbnail' scale=1 %});">
+                <figure class="effect-lily" style="background-image: url({% cropped_thumbnail artwork 'thumbnail' scale=1 %});" alt="{{ artwork.name }}" title="{{ artwork.name }}">
                     <div class="dark">
                         <figcaption>
                             <div class="description">
@@ -44,7 +44,7 @@
             var url = preview_urls[$(this).attr('artwork')].original;
             var title = $(this).find('.title').text();
             var details = $(this).find('.details').text();
-            $("#full-view").append('<img src="' + url + '" />');
+            $("#full-view").append('<img src="' + url + '" alt="' + title + '" title="' + title + '" />');
             $("#full-view").append('<div class="artwork-preview-details"><p class="title">' + title + '</p><p>' + details + '</p></div>');
             $("#full-view").append('<div id="close-artwork-preview" class="fa fa-times-circle"></div>');
             $("#full-view").css('z-index', 9990);

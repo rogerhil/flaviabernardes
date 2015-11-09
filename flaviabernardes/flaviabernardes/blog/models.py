@@ -66,6 +66,7 @@ class Draft(BasePost, CmsDraft):
         instance_name = 'post'
         context_object_name = 'post'
         template_preview = 'blog/post.html'
+        publish_ignore = ['created']
 
 
 class BaseImage(models.Model):

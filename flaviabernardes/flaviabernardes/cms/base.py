@@ -64,7 +64,9 @@ class CmsDraft(object):
         instance_name = 'post'
         context_object_name = 'post'
         template_preview = 'blog/blog.html'
+        publish_ignore = []
         """
+        publish_ignore = []
 
     class TooOldToPublish(Exception):
         pass
@@ -106,6 +108,8 @@ class CmsDraft(object):
         for field in instance._meta.fields:
             attr_name = field.name
             if attr_name == 'id':
+                continue
+            if attr_name in self.cms.publish_ignore:
                 continue
             attr = getattr(self, field.name)
             if isinstance(field, models.fields.related.ManyToManyField):
