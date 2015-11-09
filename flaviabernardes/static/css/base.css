@@ -973,6 +973,13 @@ figure.effect-lily:hover p {
 }
 
 
+@media (max-width: 730px) and (min-width: 646px) {
+    #newsletter input,
+    #newsletter button {
+        padding: 10px 5px !important;
+    }
+}
+
 
 @media (max-width: 645px) and (min-width: 50px) {
     #newsletter ul li {

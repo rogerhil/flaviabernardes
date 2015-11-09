@@ -10,7 +10,7 @@
 
 #newsletter input {
     width: 100%;
-    padding: 10px 20px !important;
+    padding: 10px 20px;
 }
 
 #newsletter ul {
@@ -39,7 +39,7 @@
 #newsletter button {
     margin: 0px;
     width: 100%;
-    padding: 11px 20px !important;
+    padding: 11px 20px;
 }
 
 #newsletter button:hover {

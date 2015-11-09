@@ -28,6 +28,10 @@ function scrollFixedElements() {
 }
 
 $(window).load(function () {
+    var isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    if (isiOS) {
+        return;
+    }
     scrollFixedElements();
     $(window).scroll(function () {
         scrollFixedElements();
