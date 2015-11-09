@@ -267,12 +267,15 @@ ol li p {
     padding: 5px 0px 5px 90px;
 }
 
+#menu a {
+    color: #444 !important;
+}
+
 #menu a:hover {
     text-decoration: underline !important;
 }
 
 #menu a.active {
-    color: a00 !important;
     text-decoration: underline;
 }
 
