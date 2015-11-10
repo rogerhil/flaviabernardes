@@ -27,12 +27,14 @@ class NewsletterBaseView(JsonFormView):
 
 class NewsletterConfirmationBaseView(TemplateView):
     template_name = 'confirmation.html'
-    redirect_name = None
+    redirect_name = 'home'
     subscription_form_class = BaseSubscriberForm
 
     def dispatch(self, request, *args, **kwargs):
         subscriber_uuid = request.GET.get('s')
         list_id = request.GET.get('l')
+        if not list_id:
+            return HttpResponseRedirect(reverse(self.redirect_name))
         list_obj = List.objects.get(pk=list_id)
         if not subscriber_uuid:
             return HttpResponseRedirect(reverse(self.redirect_name))
