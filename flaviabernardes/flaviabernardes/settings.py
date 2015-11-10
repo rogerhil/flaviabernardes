@@ -76,6 +76,8 @@ MEDIA_URL = '/media/'
 
 UPLOAD_TO = 'uploads'
 
+UPLOAD_CMS_IMAGES_PATH = os.path.join(MEDIA_ROOT, UPLOAD_TO, 'cms')
+
 from easy_thumbnails.conf import Settings as thumbnail_settings
 THUMBNAIL_PROCESSORS = (
     'image_cropping.thumbnail_processors.crop_corners',

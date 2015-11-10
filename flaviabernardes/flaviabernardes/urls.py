@@ -11,7 +11,8 @@ from .views import HomeView, AboutView, ContactView
 from .artwork.views import PaintingsView, ArtworksSortJson
 from .blog.views import BlogView, PostView
 from .cms.views import CmsDraftPublishView, CmsObjectNewDraftView, \
-                       CmsDraftPreview, SubPageView, CustomPageView
+                       CmsDraftPreview, SubPageView, CustomPageView, \
+                       UploadImageView, ImagesPathsView
 from .fbauth.views import LoginJson, LogoutJson
 from .newsletter.views import LandPageView, ConfirmationView, NewsletterView
 from .sitemaps import HomeSitemap, BlogSitemap, PagesSitemap
@@ -38,6 +39,10 @@ urlpatterns = patterns('',
     url(r'^admin/(?P<app>\w+)/(?P<draft_model>\w+)/(?P<pk>\d+)/preview/$',
         s(CmsDraftPreview.as_view()),
         name='draft_preview'),
+    url(r'^admin/cms/image/upload/$', s(UploadImageView.as_view()),
+        name='upload_image'),
+    url(r'^admin/cms/image/list/$', s(ImagesPathsView.as_view()),
+        name='list_images'),
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^login/json/$', LoginJson.as_view(), name='login'),
     #url(r'^logout/json/$', LogoutJson.as_view(), name='logout'),

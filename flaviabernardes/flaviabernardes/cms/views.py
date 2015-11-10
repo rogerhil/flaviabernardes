@@ -1,13 +1,18 @@
+import os
+from datetime import datetime
+
 from django.contrib.contenttypes.models import ContentType
 from django.views.generic import DetailView, TemplateView
 from django.http import Http404
+from django.conf import settings
 
-from ..utils import JsonView
+from ..utils import JsonView, JsonFormView
 from ..artwork.views import PaintingsView
 from ..blog.views import BlogView, PostView
 from ..views import AboutView, ContactView
 from ..blog.models import Draft
 from .models import Page
+from .forms import UploadFileForm
 
 
 class CmsDraftPublishView(JsonView, DetailView):
@@ -122,3 +127,35 @@ class CustomPageView(TemplateView):
         except Page.DoesNotExist:
             raise Http404()
         return context
+
+
+class UploadImageView(JsonFormView):
+
+    form_class = UploadFileForm
+
+    def form_valid(self, form):
+        if not os.path.isdir(settings.UPLOAD_CMS_IMAGES_PATH):
+            os.makedirs(settings.UPLOAD_CMS_IMAGES_PATH)
+        data = form.cleaned_data
+        name = data['file'].name
+        path = os.path.join(settings.UPLOAD_CMS_IMAGES_PATH, name)
+        if os.path.isfile(path):
+            name, ext = os.path.splitext(name)
+            sufix = datetime.now().isoformat()
+            name = "%s-%s%s" % (name, sufix, ext)
+            path = os.path.join(settings.UPLOAD_CMS_IMAGES_PATH, name)
+        with open(path, 'wb+') as afile:
+            for chunk in data['file'].chunks():
+                afile.write(chunk)
+        return super(UploadImageView, self).form_valid(form)
+
+
+class ImagesPathsView(JsonView):
+
+    def json_get(self, request, *args, **kwargs):
+        if not os.path.isdir(settings.UPLOAD_CMS_IMAGES_PATH):
+            os.makedirs(settings.UPLOAD_CMS_IMAGES_PATH)
+        j = lambda f: "/media/%s" % os.path.join(
+                       settings.UPLOAD_CMS_IMAGES_PATH, f).split('/media/')[-1]
+        paths = [j(f) for f in os.listdir(settings.UPLOAD_CMS_IMAGES_PATH)]
+        return {'paths': paths}
