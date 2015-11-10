@@ -21,7 +21,7 @@ class PagesSitemap(Sitemap):
     priority = 0.6
 
     def items(self):
-        return Page.objects.all()
+        return Page.objects.filter(confirmation_newsletter_lists=None)
 
     def lastmod(self, obj):
         return obj.updated

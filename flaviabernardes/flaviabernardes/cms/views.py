@@ -123,7 +123,10 @@ class CustomPageView(TemplateView):
         context = super(CustomPageView, self).get_context_data(**kwargs)
         slug = kwargs['slug']
         try:
-            context['page'] = Page.objects.get(name=slug)
+            page = Page.objects.get(name=slug)
+            if page.is_newsletter_confirmation_page:
+                raise Http404()
+            context['page'] = page
         except Page.DoesNotExist:
             raise Http404()
         return context

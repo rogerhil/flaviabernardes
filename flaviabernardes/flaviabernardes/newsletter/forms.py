@@ -15,80 +15,49 @@ class BaseSubscriberForm(forms.Form):
     email = forms.EmailField()
     first_name = forms.CharField(max_length=255)
     last_name = forms.CharField(max_length=255, required=False)
-
-    confirmation_url = '%s/confirmation/?s=%%s' % BASE_URL
-    list_id = None
-    name = None
-    subject = ""
-    body = ""
+    list_id = forms.CharField(widget=forms.HiddenInput)
+    provider = forms.CharField(widget=forms.HiddenInput)
 
     def pre_subscribe_locally(self):
         data = self.cleaned_data
+        list_id = data.pop('list_id')
+        provider = data.pop('provider')
+        list_obj = List.objects.get(list_id=list_id, provider=provider)
         try:
             subscriber = Subscriber.objects.get(email=data['email'])
             if subscriber.subscription_set\
-                         .filter(list__list_id=self.list_id).count():
+                         .filter(list__list_id=list_obj.list_id).count():
                 raise AlreadySubscribedError('User %s is already subscribed.'
                                              % data['email'], subscriber.uuid)
         except Subscriber.DoesNotExist:
             subscriber = Subscriber.objects.get_or_create(**data)[0]
-        return subscriber
+        return subscriber, list_obj
 
-    def send_confirmation(self, subscriber):
-        email = self.cleaned_data['email']
-        redirect = self.confirmation_url % subscriber.uuid
-        body = self.body % (str(subscriber), redirect)
-        send_mail(self.subject, body, settings.DEFAULT_FROM_EMAIL, [email])
+    def send_confirmation(self, subscriber, list_obj):
+        data = self.cleaned_data
+        email = data['email']
+        if list_obj.confirmation_page:
+            path = list_obj.confirmation_page.get_absolute_url()
+        else:
+            path = '/confirmation/'
+        link = "%s%s?l=%s&s=%s" % (BASE_URL, path, list_obj.id,
+                                   subscriber.uuid)
+        body = list_obj.email_message % dict(name=str(subscriber),
+                                             link=link)
+        send_mail(list_obj.email_subject, body, settings.DEFAULT_FROM_EMAIL,
+                  [email], html_message=body)
 
-    def subscribe(self, subscriber):
+    def subscribe(self, subscriber, list_obj):
         email = subscriber.email
         client = EmailMarketing()
         #try:
-        #    client.unsubscribe(email, self.list_id)
+        #    client.unsubscribe(email, self.list_obj.list_id)
         #except:
         #    pass
         #if settings.DEVELOPMENT:
         #    return
-        client.subscribe(email, self.list_id, first_name=subscriber.first_name,
+        client.subscribe(email, list_obj.list_id,
+                         first_name=subscriber.first_name,
                          last_name=subscriber.last_name)
-        list_id, list_name = self.list_id, self.name
-        slist = List.objects.get_or_create(list_id=list_id, name=list_name,
-                         provider=settings.CURRENT_EMAIL_MARKETING_PROVIDER)[0]
-        Subscription.objects.get_or_create(list=slist, subscriber=subscriber)
-
-
-class SubscriberForm(BaseSubscriberForm):
-
-    subject = "Confirm your subscription and download your artwork"
-    body = "Hello %s, \n\n" \
-        "Please follow the link below to download your free wallpaper " \
-        "artwork. \n\n" \
-        "If you can't click it, please copy the entire link and paste it " \
-        "into your browser. \n\n" \
-        "%s\n\n" \
-        "Thank you,\n\n" \
-        "Flavia Bernardes\n"
-
-    list_id = settings.MADMIMI_NEWSLETTER_LIST_ID
-    name = settings.MADMIMI_NEWSLETTER_LIST_NAME
-
-
-class WaitToBuyNewsletterForm(BaseSubscriberForm):
-
-    subject = "Confirm your subscription"
-    body = "Hello %s, \n\n" \
-        "Please follow the link below. \n\n" \
-        "If you can't click it, please copy the entire link and paste it " \
-        "into your browser. \n\n" \
-        "%s\n\n" \
-        "Thank you,\n\n" \
-        "Flavia Bernardes\n"
-
-    list_id = settings.MADMIMI_WAIT_TO_SHOP_LIST_ID
-    name = settings.MADMIMI_WAIT_TO_SHOP_LIST_NAME
-
-
-NEWSLETTER_FORMS = {
-    settings.MADMIMI_NEWSLETTER_LIST_ID: SubscriberForm,
-    settings.MADMIMI_WAIT_TO_SHOP_LIST_ID: WaitToBuyNewsletterForm,
-}
+        Subscription.objects.get_or_create(list=list_obj,
+                                           subscriber=subscriber)

@@ -14,11 +14,11 @@
         <meta name="p:domain_verify" content="0abc82f2a4e2d934f1b07766abce62ee"/>
         <!-- end pinterest -->
 
-        <title>{% block title %}{% if page %}{{ page.title }}{% else %}Flavia Bernardes Art{% endif %}{% endblock %}</title>
-        <meta property="og:title" content="{% block ogtitle %}{% if page %}{{ page.title }}{% else %}Flavia Bernardes Art{% endif %}{% endblock %}" />
-        <meta property="og:description" content="{% block ogdescription %}{% if page %}{{ page.description }}{% else %}Check out artist Flavia Bernardes' new website{% endif %}{% endblock %}" />
+        <title>{% block title %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.title }}{% else %}Flavia Bernardes Art{% endif %}{% endblock %}</title>
+        <meta property="og:title" content="{% block ogtitle %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.title }}{% else %}Flavia Bernardes Art{% endif %}{% endblock %}" />
+        <meta property="og:description" content="{% block ogdescription %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.description }}{% else %}Check out artist Flavia Bernardes' new website{% endif %}{% endblock %}" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="http://www.flaviabernardesart.com{% block ogurl %}{% if page %}{{ page.get_absolute_url }}{% else %}/{% endif %}{% endblock %}" />
+        <meta property="og:url" content="http://www.flaviabernardesart.com{% block ogurl %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.get_absolute_url }}{% else %}/{% endif %}{% endblock %}" />
         <meta property="og:image" content="http://www.flaviabernardesart.com{% block ogimage %}{% if page and page.social %}{% cropped_thumbnail page 'social' scale=1 %}{% else %}{% static 'img/amelie125x125.jpg' %}{% endif %}{% endblock %}" />
 
         <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" />
@@ -197,25 +197,31 @@
                 {% endblock %}
 
                 <div id="site-middle-anchor"></div>
-                <div class="site-middle scroll-fixed" fixat="75" anchor="site-middle-anchor">
-                    <div class="center-column">
-                        {% block container-middle %}
-                            <section class="container-middle">
-                                <div id="newsletter-wrap">
-                                    <p class="center">
-                                        {% block newsletter_description %}
-                                            Want an exclusive artwork wallpaper? Sign up below
-                                        {% endblock %}
-                                    </p>
-                                    {% include "newsletter/line_form.html"  %}
-                                </div>
-                                <div class="clear"></div>
-                                <script src="{% static 'js/jquery.form.min.js' %}"></script>
-                                <script src="{% static 'js/newsletter.js' %}"></script>
-                            </section>
-                        {% endblock %}
+                {% if not page or page and not page.is_newsletter_confirmation_page %}
+                    <div class="site-middle scroll-fixed" fixat="75" anchor="site-middle-anchor">
+                        <div class="center-column">
+                            {% block container-middle %}
+                                <section class="container-middle">
+                                    <div id="newsletter-wrap">
+                                        <p class="center">
+                                            {% block newsletter_description %}
+                                                {% if page and page.newsletter and page.newsletter.sign_up_title %}
+                                                    {{ page.newsletter.sign_up_title }}
+                                                {% else %}
+                                                    Want an exclusive artwork wallpaper? Sign up below
+                                                {% endif %}
+                                            {% endblock %}
+                                        </p>
+                                        {% include "newsletter/line_form.html"  %}
+                                    </div>
+                                    <div class="clear"></div>
+                                    <script src="{% static 'js/jquery.form.min.js' %}"></script>
+                                    <script src="{% static 'js/newsletter.js' %}"></script>
+                                </section>
+                            {% endblock %}
+                        </div>
                     </div>
-                </div>
+                {% endif %}
 
                 <div class="center-column">
                     <section class="container-bottom">
