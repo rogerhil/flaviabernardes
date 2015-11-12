@@ -156,6 +156,6 @@ class ImagesPathsView(JsonView):
         if not os.path.isdir(settings.UPLOAD_CMS_IMAGES_PATH):
             os.makedirs(settings.UPLOAD_CMS_IMAGES_PATH)
         j = lambda f: "/media/%s" % os.path.join(
-                       settings.UPLOAD_CMS_IMAGES_PATH, f).split('/media/')[-1]
+                       settings.UPLOAD_CMS_IMAGES_PATH, f).split('media/')[-1]
         paths = [j(f) for f in os.listdir(settings.UPLOAD_CMS_IMAGES_PATH)]
         return {'paths': paths}
