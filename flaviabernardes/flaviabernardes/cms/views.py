@@ -30,7 +30,7 @@ class CmsDraftPublishView(JsonView, DetailView):
             obj.publish(publish_old)
         except obj.TooOldToPublish as err:
             return {'too_old': str(err)}
-        return {}
+        return {'url': obj.instance.get_absolute_url()}
 
 
 class CmsObjectNewDraftView(JsonView, DetailView):

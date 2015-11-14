@@ -238,7 +238,7 @@
                 </div>
 
                 <div class="clear"></div>
-                <div style="height: 40px;"></div>
+                <div style="height: 60px;"></div>
                 <div class="clear"></div>
 
                 <section id="footer">
@@ -246,7 +246,13 @@
                         {% with '32' as size %}
                             <div class="footer-social">{% include "social.html" %}</div>
                         {% endwith %}
-                        <div class="copyrights">&#9400 Flavia Bernardes, 2015. All rights reserved.</div>
+                        <div class="copyright">&#9400 Flavia Bernardes, 2015. All rights reserved.</div>
+                        <div class="footer-submenu">
+                            <span class="first-pipe">|</span>
+                            {% for page in footer_pages %}
+                                <a href="{{ page.get_absolute_url }}">{{ page }}</a>{% if not forloop.last %} |{% endif %}
+                            {% endfor %}
+                        </div>
                         <div class="clear"></div>
                     </div>
                 </section>

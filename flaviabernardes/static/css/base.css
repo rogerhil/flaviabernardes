@@ -859,6 +859,21 @@ figure.effect-lily:hover p {
 	transition-duration: 0.35s;
 }
 
+.copyright {
+    font-size: 14px;
+    float: left;
+}
+
+.footer-submenu {
+    font-size: 14px;
+    float: left;
+    margin-left: 3px;
+}
+
+.footer-submenu a {
+    color: #333;
+}
+
 @media (min-width: 1920px) {
     figure.effect-lily {
         background-size: 120% auto !important;
@@ -904,6 +919,16 @@ figure.effect-lily:hover p {
     #footer .content {
         width: 95%;
     }
+
+    #footer .footer-submenu {
+        float: none;
+        clear: both;
+        text-align: center;
+    }
+    #footer .footer-submenu .first-pipe {
+        display: none;
+    }
+
     #posts .post.halfleft {
         width: 100%;
     }
@@ -992,13 +1017,15 @@ figure.effect-lily:hover p {
         float: none;
         margin-bottom: 20px;
     }
-    .copyrights {
+    .copyright {
         text-align: center;
+        float: none;
     }
     #footer {
-        margin-top: 250px !important;
-        height: 100px;
+        margin-top: 290px !important;
+        height: 140px;
     }
+
 }
 
 @media (max-width: 505px) and (min-width: 50px) {

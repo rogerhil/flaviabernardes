@@ -23,6 +23,7 @@ class BasePage(models.Model):
     content3 = models.TextField(help_text="This content appears AFTER the SECOND banner", null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, editable=False)
     updated = models.DateTimeField(auto_now=True, editable=False)
+    footer = models.BooleanField(default=False)
 
     class Meta:
         abstract = True
