@@ -46,7 +46,9 @@
             var details = $(this).find('.details').text();
             $("#full-view").append('<img src="' + url + '" alt="' + title + '" title="' + title + '" />');
             $("#full-view").append('<div class="artwork-preview-details"><p class="title">' + title + '</p><p>' + details + '</p></div>');
-            $("#full-view").append('<div id="close-artwork-preview" class="fa fa-times-circle"></div>');
+            $("#full-view").append('<div id="close-artwork-preview" class="fa fa-times" title="Close" alt="Close"></div>');
+            $("#full-view").append('<div id="right-artwork-preview" class="fa fa-caret-right" title="Next" alt="Next"></div>');
+            $("#full-view").append('<div id="left-artwork-preview" class="fa fa-caret-left" title="Previous" alt="Previous"></div>');
             $("#full-view").css('z-index', 9990);
             $("#full-view").fadeIn(1000);
             $('#cover img').hide();
@@ -61,6 +63,25 @@
             $(".container-bottom").hide();
             $currentOpened = $(this);
 
+            $('#close-artwork-preview').click(closeFullPreview);
+            $('#full-view').click(closeFullPreview);
+
+            $('#full-view *').click(function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+            });
+
+            $('#right-artwork-preview').click(function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+                moveRight();
+            });
+            $('#left-artwork-preview').click(function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+                moveLeft();
+            });
+            setupArrows();
         });
         var closeFullPreview = function () {
             $("#full-view").fadeOut(1000, function () {
@@ -79,8 +100,7 @@
             $(".page-content3").show();
             $(window).trigger('scroll');
         }
-        $('#full-view').click(closeFullPreview);
-        $('#cover').click(closeFullPreview);
+
         $(document).keydown(function(e) {
             var $item;
             switch (e.keyCode) {
@@ -88,25 +108,48 @@
                     closeFullPreview();
                     break;
                 case 37:  // left
-                    $item = $currentOpened.prev();
-                    if ($item.length) {
-                        $("#full-view").html('');
-                        $item.trigger('click');
-                        $("#full-view img").hide();
-                        $("#full-view img").fadeIn();
-                    }
+                    moveLeft();
                     break;
                 case 39:  // right
-                    $item = $currentOpened.next();
-                    if ($item.length) {
-                        $("#full-view").html('');
-                        $item.trigger('click');
-                        $("#full-view img").hide();
-                        $("#full-view img").fadeIn();
-                    }
+                    moveRight();
                     break;
             }
         });
+
+        function setupArrows() {
+            if (!$currentOpened.prev().length) {
+                $('#left-artwork-preview').hide();
+            } else {
+                $('#left-artwork-preview').show();
+            }
+            if (!$currentOpened.next().length) {
+                $('#right-artwork-preview').hide();
+            } else {
+                $('#right-artwork-preview').show();
+            }
+        }
+
+        function moveLeft() {
+            $item = $currentOpened.prev();
+            if ($item.length) {
+                $("#full-view").html('');
+                $item.trigger('click');
+                $("#full-view img").hide();
+                $("#full-view img").fadeIn();
+            }
+            setupArrows();
+        }
+
+        function moveRight() {
+            $item = $currentOpened.next();
+            if ($item.length) {
+                $("#full-view").html('');
+                $item.trigger('click');
+                $("#full-view img").hide();
+                $("#full-view img").fadeIn();
+            }
+            setupArrows();
+        }
 
         $("#artworks").sortable({
             stop: function (e, ui) {

@@ -525,21 +525,36 @@ button.blue:hover {
     height: 400px !important;
 }
 
-#close-artwork-preview {
+#close-artwork-preview,
+#right-artwork-preview,
+#left-artwork-preview {
     position: absolute;
     top: 5px;
     left: calc(50% + 488px);
     font-size: 30px;
-	color: #300;
-	-webkit-transition: 0.5s;
-	transition: 0.5s;
+	color: #fff;
+	-webkit-transition: 0.2s;
+	transition: 0.2s;
 }
 
-#close-artwork-preview:hover {
-    color: #700;
+#close-artwork-preview:hover,
+#right-artwork-preview:hover,
+#left-artwork-preview:hover {
+	color: #000;
     cursor: pointer;
-	-webkit-transition: 0.5s;
-	transition: 0.5s;
+	-webkit-transition: 0.2s;
+	transition: 0.2s;
+}
+
+#right-artwork-preview {
+    top: 300px;
+    font-size: 50px;
+}
+
+#left-artwork-preview {
+    top: 300px;
+    font-size: 50px;
+    left: calc(50% - 506px);
 }
 
 .artwork-preview-details {
