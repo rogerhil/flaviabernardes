@@ -17,7 +17,7 @@
         <title>{% block title %}{% if page %}{{ page.title }}{% else %}Flavia Bernardes Art{% endif %}{% endblock %}</title>
         <meta property="og:title" content="{% block ogtitle %}{% if page %}{{ page.title }}{% else %}Flavia Bernardes Art{% endif %}{% endblock %}" />
         <meta property="og:description" content="{% block ogdescription %}{% if page %}{{ page.description }}{% else %}Check out artist Flavia Bernardes' new website{% endif %}{% endblock %}" />
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="{% block ogtype %}website{% endblock %}" />
         <meta property="og:url" content="http://www.flaviabernardesart.com{% block ogurl %}{% if page %}{{ page.get_absolute_url }}{% else %}/{% endif %}{% endblock %}" />
         <meta property="og:image" content="http://www.flaviabernardesart.com{% block ogimage %}{% if page and page.social %}{% cropped_thumbnail page 'social' scale=1 %}{% else %}{% static 'img/amelie125x125.jpg' %}{% endif %}{% endblock %}" />
 
@@ -43,6 +43,10 @@
         <script type="text/javascript">var switchTo5x=true;</script>
         <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
         <script type="text/javascript">stLight.options({publisher: "023fcf4a-4582-470d-8c44-a22303a1ce96", doNotHash: true, doNotCopy: false, hashAddressBar: false});</script>
+
+        <script async defer data-pin-hover="true" data-pin-tall="true" src="//assets.pinterest.com/js/pinit.js"></script>
+
+
         {% block extrajs %}{% endblock %}
 
         <style>

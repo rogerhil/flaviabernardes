@@ -9,6 +9,7 @@
     {% endblock %}
 {% endblock %}
 
+{% block ogtype %}article{% endblock %}
 {% block title %}{{ post.title }}{% endblock %}
 {% block ogtitle %}{{ post.title }}{% endblock %}
 {% block ogdescription %}{% if post.description %}{{ post.description }}{% else %}Check out artist Flavia Bernardes' blog post: {{ post.title }}{% endif %}{% endblock %}
