@@ -45,9 +45,10 @@ class CmsDraftAdmin(admin.ModelAdmin):
             'all': ('css/ajaxloader.css',)
         }
 
-PAGE_FIELDS = ('name', 'sub_page_of', 'title', 'description', 'newsletter',
-    'content1', 'content2', 'content3', 'image_banner1', 'banner1',
-    'image_banner2', 'banner2', 'image_social', 'social')
+PAGE_FIELDS = ('name', 'sub_page_of', 'title', 'description', 'footer',
+               'newsletter', 'content1', 'content2', 'content3',
+               'image_banner1', 'banner1',
+               'image_banner2', 'banner2', 'image_social', 'social')
 
 
 class PageCommon(object):

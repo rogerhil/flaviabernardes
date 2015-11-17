@@ -525,21 +525,36 @@ button.blue:hover {
     height: 400px !important;
 }
 
-#close-artwork-preview {
+#close-artwork-preview,
+#right-artwork-preview,
+#left-artwork-preview {
     position: absolute;
     top: 5px;
     left: calc(50% + 488px);
     font-size: 30px;
-	color: #300;
-	-webkit-transition: 0.5s;
-	transition: 0.5s;
+	color: #fff;
+	-webkit-transition: 0.2s;
+	transition: 0.2s;
 }
 
-#close-artwork-preview:hover {
-    color: #700;
+#close-artwork-preview:hover,
+#right-artwork-preview:hover,
+#left-artwork-preview:hover {
+	color: #000;
     cursor: pointer;
-	-webkit-transition: 0.5s;
-	transition: 0.5s;
+	-webkit-transition: 0.2s;
+	transition: 0.2s;
+}
+
+#right-artwork-preview {
+    top: 300px;
+    font-size: 50px;
+}
+
+#left-artwork-preview {
+    top: 300px;
+    font-size: 50px;
+    left: calc(50% - 506px);
 }
 
 .artwork-preview-details {
@@ -859,6 +874,21 @@ figure.effect-lily:hover p {
 	transition-duration: 0.35s;
 }
 
+.copyright {
+    font-size: 14px;
+    float: left;
+}
+
+.footer-submenu {
+    font-size: 14px;
+    float: left;
+    margin-left: 3px;
+}
+
+.footer-submenu a {
+    color: #333;
+}
+
 @media (min-width: 1920px) {
     figure.effect-lily {
         background-size: 120% auto !important;
@@ -904,6 +934,16 @@ figure.effect-lily:hover p {
     #footer .content {
         width: 95%;
     }
+
+    #footer .footer-submenu {
+        float: none;
+        clear: both;
+        text-align: center;
+    }
+    #footer .footer-submenu .first-pipe {
+        display: none;
+    }
+
     #posts .post.halfleft {
         width: 100%;
     }
@@ -992,13 +1032,15 @@ figure.effect-lily:hover p {
         float: none;
         margin-bottom: 20px;
     }
-    .copyrights {
+    .copyright {
         text-align: center;
+        float: none;
     }
     #footer {
-        margin-top: 250px !important;
-        height: 100px;
+        margin-top: 290px !important;
+        height: 140px;
     }
+
 }
 
 @media (max-width: 505px) and (min-width: 50px) {
