@@ -26,7 +26,7 @@ class NewsletterBaseView(JsonFormView):
 
 class NewsletterConfirmationBaseView(TemplateView):
     template_name = 'confirmation.html'
-    redirect_name = None
+    redirect_name = 'home'
     subscription_form_class = None
 
     def dispatch(self, request, *args, **kwargs):
