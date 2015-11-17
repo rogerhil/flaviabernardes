@@ -1,7 +1,7 @@
 from django.views.generic import ListView, DetailView
 
 from .models import Post
-from ..newsletter.forms import SubscriberForm
+from ..newsletter.forms import BaseSubscriberForm
 from ..cms.models import Page
 
 
@@ -23,5 +23,5 @@ class PostView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(PostView, self).get_context_data(**kwargs)
-        context['form'] = SubscriberForm()
+        context['form'] = BaseSubscriberForm()
         return context

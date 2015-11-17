@@ -7,6 +7,12 @@
         </div>
     {% endif %}
     {% csrf_token %}
+
+    {% block list_id %}
+        <input type="hidden" name="list_id" value="{% if page and page.newsletter %}{{ page.newsletter.list_id }}{% else %}Newsletter{% endif %}" />
+        <input type="hidden" name="provider" value="{% if page and page.newsletter %}{{ page.newsletter.provider }}{% else %}madmimi{% endif %}" />
+    {% endblock %}
+
     <ul>
         <li>
             {% if form.errors and not form.errors.email %}<ul class="errorlist"><li>&nbsp;</li></ul>{% else %}{{ form.errors.email }}{% endif %}

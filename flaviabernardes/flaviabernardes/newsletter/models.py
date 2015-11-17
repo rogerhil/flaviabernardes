@@ -2,6 +2,19 @@ import uuid
 
 from django.db import models
 
+from ..cms.models import Page
+
+SIGN_UP_TITLE = "Want an exclusive artwork wallpaper? Sign up below"
+DEFAULT_SUBJECT = "Confirm your subscription"
+DEFAULT_MESSAGE = """<p>Hello %(name)s,</p>
+<p>Please follow the link below.</p>
+<p>If you can't click it, please copy the entire link and paste it into your
+browser.</p>
+<p>%(link)s</p>
+<p>Thank you,</p>
+<p>Flavia Bernardes</p>
+"""
+
 
 class Subscriber(models.Model):
     uuid = models.CharField(max_length=100, blank=True, unique=True,
@@ -20,9 +33,15 @@ class Subscriber(models.Model):
 
 
 class List(models.Model):
-    provider = models.CharField(max_length=32)
+    provider = models.CharField(max_length=32, editable=False,
+                                default='madmimi')
     list_id = models.CharField(max_length=128, unique=True)
     name = models.CharField(max_length=128)
+    sign_up_title = models.CharField(max_length=255, default=SIGN_UP_TITLE)
+    email_subject = models.CharField(max_length=255, default=DEFAULT_SUBJECT)
+    email_message = models.TextField(default=DEFAULT_MESSAGE)
+    confirmation_page = models.ForeignKey(Page, null=True, blank=True,
+                                  related_name='confirmation_newsletter_lists')
 
     def __str__(self):
         return "%s (%s)" % (self.name, self.list_id)

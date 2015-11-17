@@ -14,7 +14,8 @@ from .cms.views import CmsDraftPublishView, CmsObjectNewDraftView, \
                        CmsDraftPreview, SubPageView, CustomPageView, \
                        UploadImageView, ImagesPathsView
 from .fbauth.views import LoginJson, LogoutJson
-from .newsletter.views import LandPageView, ConfirmationView, NewsletterView
+from .newsletter.views import LandPageView, ConfirmationView, NewsletterView, \
+                              CustomConfirmationView
 from .sitemaps import HomeSitemap, BlogSitemap, PagesSitemap
 
 sitemaps = dict(
@@ -58,6 +59,8 @@ urlpatterns = patterns('',
     url(r'^artworks/sort/$', ArtworksSortJson.as_view(), name='artworks_sort'),
     url(r'^about/$', AboutView.as_view(), name='about'),
     url(r'^contact/$', ContactView.as_view(), name='contact'),
+    url(r'^nl/(?P<slug>[-_\w]+)/$', CustomConfirmationView.as_view(),
+        name='custom_confirmation_page'),
     url(r'^(?P<slug>[-_\w]+)/$', CustomPageView.as_view(),
         name='custom_page'),
     url(r'^(?P<slug>[-_\w]+)/(?P<subslug>[-_\w]+)/$', SubPageView.as_view(), name='sub_page'),

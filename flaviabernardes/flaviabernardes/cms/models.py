@@ -4,7 +4,6 @@ from django.core.exceptions import ValidationError
 
 from image_cropping import ImageRatioField
 
-
 from .base import CmsObject, CmsDraft, DESCRIPTION_HELP_TEXT
 
 
@@ -34,6 +33,8 @@ class BasePage(models.Model):
         if self.sub_page_of:
             return reverse('sub_page', kwargs=dict(slug=self.sub_page_of.name,
                                                    subslug=self.name,))
+        elif self.is_newsletter_confirmation_page:
+            return '/nl/%s/' % self.name
         else:
             try:
                 return reverse(self.name)
@@ -67,10 +68,17 @@ class BasePage(models.Model):
                                   'Please change it back to the original none '
                                   'value "---------" .' % self.sub_page_of)
 
+    @property
+    def is_newsletter_confirmation_page(self):
+        if not hasattr(self, 'confirmation_newsletter_lists'):
+            return False
+        return self.confirmation_newsletter_lists.exists()
+
 
 class Page(BasePage, models.Model, CmsObject):
     name = models.CharField(max_length=128, unique=True, editable=False)
     sub_page_of = models.ForeignKey('Page', null=True, blank=True)
+    newsletter = models.ForeignKey('newsletter.List', null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -90,6 +98,7 @@ class PageDraft(BasePage, CmsDraft):
         "REFERENCES AND GOOGLE INDEXING.")
     sub_page_of = models.ForeignKey('Page', null=True, blank=True,
                                     related_name='pages_sub')
+    newsletter = models.ForeignKey('newsletter.List', null=True, blank=True)
     page = models.ForeignKey(Page, null=True, blank=True, editable=False)
 
     class cms:

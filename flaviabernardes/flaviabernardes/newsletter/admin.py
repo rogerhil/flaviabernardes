@@ -35,3 +35,15 @@ class ListAdmin(admin.ModelAdmin):
     list_display = ('name', 'list_id', 'provider')
     list_filter = ('provider',)
     search_fields = ('name', 'list_id')
+
+    class Media:
+        js = (
+            'js/jquery.min.js',
+            'js/ajaxloader.js',
+            'js/jquery.form.min.js',
+            'tinymce/tinymce.min.js',
+            'js/admin/newsletterlist.js',
+        )
+        css = {
+            'all': ('css/ajaxloader.css',)
+        }
