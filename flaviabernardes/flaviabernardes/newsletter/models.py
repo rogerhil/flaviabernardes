@@ -1,8 +1,12 @@
 import uuid
 
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 from ..cms.models import Page
+from .client import EmailMarketing
 
 SIGN_UP_TITLE = "Want an exclusive artwork wallpaper? Sign up below"
 DEFAULT_SUBJECT = "Confirm your subscription"
@@ -45,6 +49,14 @@ class List(models.Model):
 
     def __str__(self):
         return "%s (%s)" % (self.name, self.list_id)
+
+    @staticmethod
+    def create_remote_list(sender, instance, **kwargs):
+        client = EmailMarketing()
+        client.create_list(instance.list_id, instance.name)
+
+
+post_save.connect(List.create_remote_list, List)
 
 
 class Subscription(models.Model):

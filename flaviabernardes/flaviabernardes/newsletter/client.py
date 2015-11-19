@@ -38,43 +38,15 @@ class EmailMarketing(object):
         cur = settings.CURRENT_EMAIL_MARKETING_PROVIDER
         return cur == settings.MAILCHIMP
 
-    def newsletter_id_name(self):
+    def create_list(self, list_id, name=None):
         if self.is_mailchimp():
-            return settings.MAILCHIMP_NEWSLETTER_LIST_ID, \
-                   settings.MAILCHIMP_NEWSLETTER_LIST_NAME
+            raise NotImplementedError("Mailchimp does not support create list "
+                                      "at the moment")
         elif self.is_madmimi():
-            return settings.MADMIMI_NEWSLETTER_LIST_ID, \
-                   settings.MADMIMI_NEWSLETTER_LIST_NAME
+            self.client.add_list(list_id)
         else:
             raise NotImplementedError('EmailMarketing provider %s is '
                         'invalid.' % settings.CURRENT_EMAIL_MARKETING_PROVIDER)
-
-    def oauau_id_name(self):
-        if self.is_mailchimp():
-            return settings.MAILCHIMP_OAUAU_LIST_ID, \
-                   settings.MAILCHIMP_OAUAU_LIST_NAME
-        elif self.is_madmimi():
-            return settings.MADMIMI_OAUAU_LIST_ID, \
-                   settings.MADMIMI_OAUAU_LIST_NAME
-        else:
-            raise NotImplementedError('EmailMarketing provider %s is '
-                        'invalid.' % settings.CURRENT_EMAIL_MARKETING_PROVIDER)
-
-    def subscribe_to_newsletter(self, email, **kwargs):
-        list_id = self.newsletter_id_name()[0]
-        self.subscribe(email, list_id, **kwargs)
-
-    def unsubscribe_to_newsletter(self, email):
-        list_id = self.newsletter_id_name()[0]
-        self.unsubscribe(email, list_id)
-
-    def subscribe_to_oauau(self, email, **kwargs):
-        list_id = self.oauau_id_name()[0]
-        self.subscribe(email, list_id, **kwargs)
-
-    def unsubscribe_to_oauau(self, email):
-        list_id = self.oauau_id_name()[0]
-        self.unsubscribe(email, list_id)
 
     def subscribe(self, email, list_id, **kwargs):
         if self.is_mailchimp():
