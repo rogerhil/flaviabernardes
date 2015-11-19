@@ -42,7 +42,7 @@ class List(models.Model):
     list_id = models.CharField(max_length=128, unique=True)
     name = models.CharField(max_length=128)
     sign_up_title = models.CharField(max_length=255, default=SIGN_UP_TITLE)
-    confirmation_page = models.ForeignKey(Page, null=True, blank=True,
+    confirmation_page = models.ForeignKey(Page,
                                   related_name='confirmation_newsletter_lists')
     email_subject = models.CharField(max_length=255, default=DEFAULT_SUBJECT)
     email_message = models.TextField(default=DEFAULT_MESSAGE)
