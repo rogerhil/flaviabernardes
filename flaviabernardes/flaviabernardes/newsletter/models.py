@@ -42,10 +42,10 @@ class List(models.Model):
     list_id = models.CharField(max_length=128, unique=True)
     name = models.CharField(max_length=128)
     sign_up_title = models.CharField(max_length=255, default=SIGN_UP_TITLE)
-    email_subject = models.CharField(max_length=255, default=DEFAULT_SUBJECT)
-    email_message = models.TextField(default=DEFAULT_MESSAGE)
     confirmation_page = models.ForeignKey(Page, null=True, blank=True,
                                   related_name='confirmation_newsletter_lists')
+    email_subject = models.CharField(max_length=255, default=DEFAULT_SUBJECT)
+    email_message = models.TextField(default=DEFAULT_MESSAGE)
 
     def __str__(self):
         return "%s (%s)" % (self.name, self.list_id)
