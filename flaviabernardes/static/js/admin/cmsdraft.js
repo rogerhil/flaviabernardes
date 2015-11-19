@@ -32,14 +32,24 @@ $(window).ready(function () {
     $('textarea.vLargeTextField').each(function () {
         tinymce.init({
             selector: "#" + $(this).attr('id'),
+            external_plugins: {
+                codemirror: "/static/tinymce/plugins/codemirror/plugin.js"
+            },
             plugins: [
-                "link image textcolor charmap visualblocks table code imageupload"
+                "codemirror link image textcolor charmap visualblocks table imageupload"
             ],
+            codemirror: {
+                indentOnInit: true,
+                path: 'codemirror-4.8',
+                config: {
+                    lineNumbers: true
+                }
+            },
             content_css: '/static/css/base.css,/static/css/blog.css',
             contentCss: '/static/css/base.css,/static/css/blog.css',
             relative_urls: false,
             height: 500,
-            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | forecolor link | table | image imageupload",
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | forecolor link | table | image imageupload | code",
         });
         window.setTimeout(function () {
             $('.mce-edit-area').css('width', '960px').css('padding', '0 100px').css('margin', '0 auto');
