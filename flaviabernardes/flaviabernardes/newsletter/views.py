@@ -13,7 +13,7 @@ from .models import Subscriber, List
 
 class NewsletterBaseView(JsonFormView):
 
-    already_msg = "You are already subscribed to my newsletter."
+    already_msg = "You have already entered your name and email."
 
     def form_valid(self, form):
         try:
