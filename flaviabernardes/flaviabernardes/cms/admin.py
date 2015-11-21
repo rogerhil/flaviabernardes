@@ -71,12 +71,18 @@ class PageCommon(object):
 class PageAdmin(PageCommon, ImageCroppingMixin, CmsObjectAdmin,
                 admin.ModelAdmin):
     fields = PAGE_FIELDS
-    list_display = ('name', 'title', 'description', 'sub_page_of_display',
-                    'modify')
+    list_display = ('name', 'modify', 'title', 'description', 'created',
+                    'updated', 'sub_page_of_display', 'newsletter_display',
+                    'footer')
+    list_filter = ('footer', 'sub_page_of', 'newsletter')
 
     def sub_page_of_display(self, instance):
         return str(instance.sub_page_of or "-")
     sub_page_of_display.short_description = 'Sub Page Of'
+
+    def newsletter_display(self, instance):
+        return str(instance.newsletter or "-")
+    newsletter_display.short_description = 'Newsletter'
 
     def has_add_permission(self, request):
         return False

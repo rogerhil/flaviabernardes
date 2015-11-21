@@ -23,6 +23,7 @@ class PostAdmin(ImageCroppingMixin, CmsObjectAdmin, admin.ModelAdmin):
 class DraftAdmin(ImageCroppingMixin, CmsDraftAdmin, admin.ModelAdmin):
     fields = PostAdmin.fields
     list_display = ('title', 'post', 'slug', 'created', 'updated')
+    list_filter = ('post',)
 
 
 @admin.register(Category)
