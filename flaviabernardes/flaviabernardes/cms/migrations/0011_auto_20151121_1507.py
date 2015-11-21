@@ -11,16 +11,20 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.AlterModelOptions(
+            name='pagedraft',
+            options={'ordering': ('name', '-updated')},
+        ),
         migrations.AlterField(
             model_name='page',
             name='newsletter',
-            field=models.ForeignKey(default=1, to='newsletter.List'),
+            field=models.ForeignKey(to='newsletter.List', blank=True, default=1, null=True),
             preserve_default=True,
         ),
         migrations.AlterField(
             model_name='pagedraft',
             name='newsletter',
-            field=models.ForeignKey(default=1, to='newsletter.List'),
+            field=models.ForeignKey(to='newsletter.List', blank=True, default=1, null=True),
             preserve_default=True,
         ),
     ]
