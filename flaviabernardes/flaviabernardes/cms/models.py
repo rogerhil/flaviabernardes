@@ -80,7 +80,7 @@ class Page(BasePage, models.Model, CmsObject):
     name = models.CharField(max_length=128, unique=True, editable=False)
     sub_page_of = models.ForeignKey('Page', null=True, blank=True)
     newsletter = models.ForeignKey('newsletter.List', null=True, blank=True,
-                                   default=1)
+                                   default=1, on_delete=models.SET(None))
 
     def __str__(self):
         return self.name
@@ -101,8 +101,9 @@ class PageDraft(BasePage, CmsDraft):
     sub_page_of = models.ForeignKey('Page', null=True, blank=True,
                                     related_name='pages_sub')
     newsletter = models.ForeignKey('newsletter.List', null=True, blank=True,
-                                   default=1)
-    page = models.ForeignKey(Page, null=True, blank=True, editable=False)
+                                   default=1, on_delete=models.SET(None))
+    page = models.ForeignKey(Page, null=True, blank=True, editable=False,
+                             on_delete=models.SET(None))
 
     class Meta:
         ordering = ('name', '-updated')
