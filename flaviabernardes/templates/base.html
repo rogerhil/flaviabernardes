@@ -212,7 +212,11 @@
                                                 {% if page and page.newsletter and page.newsletter.sign_up_title %}
                                                     {{ page.newsletter.sign_up_title }}
                                                 {% else %}
-                                                    Want an exclusive artwork wallpaper? Sign up below
+                                                    {% if default_newsletter_list %}
+                                                        {{ default_newsletter_list.sign_up_title }}
+                                                    {% else %}
+                                                        Want an exclusive artwork wallpaper? Add your name and email below
+                                                    {% endif %}
                                                 {% endif %}
                                             {% endblock %}
                                         </p>

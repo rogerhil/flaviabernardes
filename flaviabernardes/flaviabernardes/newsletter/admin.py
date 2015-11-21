@@ -32,9 +32,15 @@ class SubscriberAdmin(admin.ModelAdmin):
 
 @admin.register(List)
 class ListAdmin(admin.ModelAdmin):
-    list_display = ('name', 'list_id', 'provider')
+    list_display = ('name', 'list_id', 'provider', 'sign_up_title',
+                    'confirmation_page_display')
     list_filter = ('provider',)
     search_fields = ('name', 'list_id')
+
+    def confirmation_page_display(self, instance):
+        return str(instance.confirmation_page or "")
+    confirmation_page_display.short_description = 'Confirmation Page'
+
 
     class Media:
         js = (

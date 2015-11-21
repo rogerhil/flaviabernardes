@@ -92,7 +92,17 @@ class PageAdmin(PageCommon, ImageCroppingMixin, CmsObjectAdmin,
 class PageDraftAdmin(PageCommon, ImageCroppingMixin, CmsDraftAdmin,
                      admin.ModelAdmin):
     fields = PageAdmin.fields
-    list_display = ('name', 'title', 'description', 'sub_page_of')
+    list_display = ('name', 'title', 'description', 'created', 'updated',
+                    'sub_page_of_display', 'newsletter_display', 'footer')
+    list_filter = ('name', 'footer', 'sub_page_of', 'newsletter')
+
+    def sub_page_of_display(self, instance):
+        return str(instance.sub_page_of or "-")
+    sub_page_of_display.short_description = 'Sub Page Of'
+
+    def newsletter_display(self, instance):
+        return str(instance.newsletter or "-")
+    newsletter_display.short_description = 'Newsletter'
 
     def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
         field = super(PageDraftAdmin, self).formfield_for_foreignkey(db_field,
