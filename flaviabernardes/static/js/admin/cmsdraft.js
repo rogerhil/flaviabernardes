@@ -48,12 +48,12 @@ $(window).ready(function () {
             content_css: '/static/css/base.css,/static/css/blog.css',
             contentCss: '/static/css/base.css,/static/css/blog.css',
             relative_urls: false,
-            height: 500,
+            height: 600,
             toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | forecolor link | table | image imageupload | code",
         });
         window.setTimeout(function () {
             $('.mce-edit-area').css('width', '960px').css('padding', '0 100px').css('margin', '0 auto');
-        }, 500);
+        }, 1000);
 
     });
 });
