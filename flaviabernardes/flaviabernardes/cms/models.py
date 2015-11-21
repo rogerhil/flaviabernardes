@@ -79,7 +79,8 @@ class BasePage(models.Model):
 class Page(BasePage, models.Model, CmsObject):
     name = models.CharField(max_length=128, unique=True, editable=False)
     sub_page_of = models.ForeignKey('Page', null=True, blank=True)
-    newsletter = models.ForeignKey('newsletter.List', default=1)
+    newsletter = models.ForeignKey('newsletter.List', null=True, blank=True,
+                                   default=1)
 
     def __str__(self):
         return self.name
@@ -99,7 +100,8 @@ class PageDraft(BasePage, CmsDraft):
         "REFERENCES AND GOOGLE INDEXING.")
     sub_page_of = models.ForeignKey('Page', null=True, blank=True,
                                     related_name='pages_sub')
-    newsletter = models.ForeignKey('newsletter.List', default=1)
+    newsletter = models.ForeignKey('newsletter.List', null=True, blank=True,
+                                   default=1)
     page = models.ForeignKey(Page, null=True, blank=True, editable=False)
 
     class Meta:

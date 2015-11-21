@@ -65,7 +65,8 @@ class Post(BasePost, CmsObject):
 class Draft(BasePost, CmsDraft):
     title = models.CharField(max_length=128)
     slug = models.SlugField(max_length=64)
-    post = models.ForeignKey(Post, null=True, blank=True, editable=False)
+    post = models.ForeignKey(Post, null=True, blank=True, editable=False,
+                             on_delete=models.SET(None))
 
     class cms:
         draft_related_class = Post
