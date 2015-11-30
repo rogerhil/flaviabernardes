@@ -15,7 +15,7 @@
                                         <h2>{{ post.title }}</h2>
                                         <p class="summary">
                                             {% autoescape off %}
-                                                {{ post.text|truncatewords:25 }}
+                                                {{ post.text|striptags|truncatewords:25 }}
                                             {% endautoescape %}
                                         </p>
                                         {% if not post.is_old %}
