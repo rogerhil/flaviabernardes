@@ -12,12 +12,12 @@
                             <div class="dark">
                                 <figcaption>
                                     <div class="description">
-                                        <h2>{{ post.title }}</h2><br>
+                                        <h2>{{ post.title }}</h2>
                                         <p class="summary">
                                             {% autoescape off %}
                                                 {{ post.text|truncatewords:25 }}
                                             {% endautoescape %}
-                                        </p><br>
+                                        </p>
                                         {% if not post.is_old %}
                                             <span class="published-date">
                                                 Published on {{ post.created|date }} by Flavia Bernardes

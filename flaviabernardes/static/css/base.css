@@ -859,12 +859,15 @@ figure.effect-lily:hover .published-date {
 
 figure.effect-lily .summary {
     text-transform: none; color: #fff;
+    margin-top: 15px;
 }
 
 figure.effect-lily .published-date {
     text-transform: none;
     font-style: italic;
     font-size: 12px;
+    margin-top: 15px;
+    display: block;
 }
 
 figure.effect-lily:hover p {
