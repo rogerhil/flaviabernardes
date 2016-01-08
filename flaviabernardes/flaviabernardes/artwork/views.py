@@ -20,8 +20,10 @@ class ArtworksSortJson(JsonView):
 
     def json_post(self, request, *args, **kwargs):
         ids = request.POST.getlist('data[]')
-        for index, artwork_id in enumerate(ids):
-            index += 1
+        index = len(ids)
+        for artwork_id in ids:
             artwork = Artwork.objects.get(pk=artwork_id)
             artwork.order = index
             artwork.save()
+            index -= 1
+        print([a.order for a in Artwork.objects.filter(listing=True).order_by('-order')])
