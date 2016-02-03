@@ -26,7 +26,7 @@
                                     {{ artwork.type }}, {{ artwork.width }}x{{ artwork.height }}cm, {{ artwork.year }}
                                 </p>
                             </div>
-                            <a href="#">View more</a>
+                            <a href="#{{ artwork.id }}">View more</a>
                         </figcaption>
                     </div>
                 </figure>
@@ -35,6 +35,8 @@
     </div>
     <div class="clear"></div>
 
+    <script src="{% static 'js/jquery.ba-hashchange.min.js' %}"></script>
+
     <script>
         var preview_urls = {
             {% for artwork in artwork_list %}
@@ -42,10 +44,26 @@
             {% endfor%}
         };
         var $currentOpened;
-        $('#artworks div.artwork').click(function (e) {
-            var url = preview_urls[$(this).attr('artwork')].original;
-            var title = $(this).find('.title').text();
-            var details = $(this).find('.details').text();
+
+        $(window).ready(function () {
+            $(window).hashchange();
+        });
+
+        $(window).hashchange(function() {
+            var hash = window.location.hash;
+            if (!hash) return;
+            hash = hash.replace('#', '');
+            if (!hash) return;
+            var $artwork = $('#artworks div.artwork[artwork=' + hash + ']');
+            if (!$artwork.length) return;
+            showArtwork($artwork);
+        });
+
+        //$('#artworks div.artwork').click(function (e) {
+        function showArtwork($artwork) {
+            var url = preview_urls[$artwork.attr('artwork')].original;
+            var title = $artwork.find('.title').text();
+            var details = $artwork.find('.details').text();
             $("#full-view").append('<img src="' + url + '" alt="' + title + '" title="' + title + '" />');
             $("#full-view").append('<div class="artwork-preview-details"><p class="title">' + title + '</p><p>' + details + '</p></div>');
             $("#full-view").append('<div id="close-artwork-preview" class="fa fa-times" title="Close" alt="Close"></div>');
@@ -63,7 +81,7 @@
             $("#artworks").hide();
             $(".site-middle").hide();
             $(".container-bottom").hide();
-            $currentOpened = $(this);
+            $currentOpened = $artwork;
 
             $('#close-artwork-preview').click(closeFullPreview);
             $('#full-view').click(closeFullPreview);
@@ -84,8 +102,10 @@
                 moveLeft();
             });
             setupArrows();
-        });
+        }
+
         var closeFullPreview = function () {
+            window.location.hash = '';
             $("#full-view").fadeOut(1000, function () {
                 $(this).html('');
             });
@@ -135,7 +155,7 @@
             $item = $currentOpened.prev();
             if ($item.length) {
                 $("#full-view").html('');
-                $item.trigger('click');
+                window.location.hash = $item.attr('artwork');
                 $("#full-view img").hide();
                 $("#full-view img").fadeIn();
             }
@@ -146,7 +166,7 @@
             $item = $currentOpened.next();
             if ($item.length) {
                 $("#full-view").html('');
-                $item.trigger('click');
+                window.location.hash = $item.attr('artwork');
                 $("#full-view img").hide();
                 $("#full-view img").fadeIn();
             }

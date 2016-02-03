@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.signals import pre_save
 
 from easy_thumbnails.files import get_thumbnailer
 from easy_thumbnails.exceptions import InvalidImageFormatError
@@ -44,3 +45,12 @@ class Artwork(models.Model):
         except InvalidImageFormatError:
             return ''
         return thumbnail_url
+
+    @staticmethod
+    def update_order(sender, instance, **kwargs):
+        if not instance.id:
+            order = max([a.order for a in Artwork.objects.all()]) + 1
+            instance.order = order
+
+
+pre_save.connect(Artwork.update_order, Artwork)
