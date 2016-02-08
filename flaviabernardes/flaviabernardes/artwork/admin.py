@@ -1,6 +1,6 @@
 from django.contrib import admin
 from image_cropping import ImageCroppingMixin
-from .models import Artwork, ArtworkType
+from .models import Artwork, ArtworkType, Tag
 
 
 @admin.register(Artwork)
@@ -16,3 +16,7 @@ class ArtworkAdmin(ImageCroppingMixin, admin.ModelAdmin):
 class ArtworkTypeAdmin(admin.ModelAdmin):
     pass
 
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    pass

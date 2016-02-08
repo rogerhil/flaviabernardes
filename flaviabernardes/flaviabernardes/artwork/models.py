@@ -14,11 +14,19 @@ class ArtworkType(models.Model):
         return self.name
 
 
+class Tag(models.Model):
+    name = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.name
+
+
 class Artwork(models.Model):
     name = models.CharField(max_length=64)
     description = models.TextField(null=True, blank=True)
     image = models.ImageField(blank=True, upload_to='uploads')
     type = models.ForeignKey(ArtworkType)
+    tags = models.ManyToManyField(Tag)
     width = models.IntegerField()
     height = models.IntegerField()
     year = models.IntegerField()

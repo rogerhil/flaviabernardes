@@ -1,0 +1,21 @@
+{% load staticfiles %}
+{% load cropping %}
+
+{% for artwork in artwork_list %}
+    <div class="grid artwork" artwork="{{ artwork.id }}">
+        <figure class="effect-lily" style="background-image: url({% cropped_thumbnail artwork 'thumbnail' scale=1 %});" alt="{{ artwork.name }}" title="{{ artwork.name }}">
+            <div class="dark">
+                <figcaption>
+                    <div class="description">
+                        <h2 class="title">{{ artwork.name }}</h2>
+                        <br>
+                        <p class="details">
+                            {{ artwork.type }}, {{ artwork.width }}x{{ artwork.height }}cm, {{ artwork.year }}
+                        </p>
+                    </div>
+                    <a href="#{{ artwork.id }}">View more</a>
+                </figcaption>
+            </div>
+        </figure>
+    </div>
+{% endfor %}

@@ -1,0 +1,17 @@
+.artwork-tag {
+    background-color: #eee;
+    color: #333;
+    padding: 10px 20px;
+    display: inline;
+    margin-right: 10px;
+}
+
+.artwork-tag:hover {
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+.artwork-tag.active {
+    background-color: #333;
+    color: #eee;
+}

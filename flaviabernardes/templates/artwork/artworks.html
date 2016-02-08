@@ -5,7 +5,7 @@
 {% block ogtype %}article{% endblock %}
 
 {% block extrastyle %}
-    <link href="{% static 'css/blog.css' %}" rel="stylesheet">
+    <link href="{% static 'css/artworks.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 {% endblock %}
 
@@ -13,25 +13,19 @@
     <div id="full-view">
 
     </div>
+
+    <div style="padding: 20px; text-align: center;">
+        <div style="display: inline-block; margin-right: 30px;">
+            {% for tag in tags %}
+                <div class="artwork-tag" tag_id="{{ tag.id }}">
+                    {{ tag }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
     <div id="artworks">
-        {% for artwork in artwork_list %}
-            <div class="grid artwork" artwork="{{ artwork.id }}">
-                <figure class="effect-lily" style="background-image: url({% cropped_thumbnail artwork 'thumbnail' scale=1 %});" alt="{{ artwork.name }}" title="{{ artwork.name }}">
-                    <div class="dark">
-                        <figcaption>
-                            <div class="description">
-                                <h2 class="title">{{ artwork.name }}</h2>
-                                <br>
-                                <p class="details">
-                                    {{ artwork.type }}, {{ artwork.width }}x{{ artwork.height }}cm, {{ artwork.year }}
-                                </p>
-                            </div>
-                            <a href="#{{ artwork.id }}">View more</a>
-                        </figcaption>
-                    </div>
-                </figure>
-            </div>
-        {% endfor %}
+        {% include "artwork/artworks_list.html" %}
     </div>
     <div class="clear"></div>
 
@@ -57,6 +51,22 @@
             var $artwork = $('#artworks div.artwork[artwork=' + hash + ']');
             if (!$artwork.length) return;
             showArtwork($artwork);
+        });
+
+        $('.artwork-tag').click(function () {
+            var $self = $(this);
+            $('.artwork-tag').removeClass('active');
+            $.ajax({
+                url: '/artworks/filter/',
+                dataType: 'json',
+                data: {tag: $self.attr('tag_id')},
+                success: function (result) {
+                    $('#artworks').html(result.data);
+                    $self.addClass('active');
+
+                }
+            })
+
         });
 
         //$('#artworks div.artwork').click(function (e) {

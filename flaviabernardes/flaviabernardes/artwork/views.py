@@ -1,8 +1,10 @@
 from django.views.generic import ListView
+from django.template import RequestContext
+from django.template.loader import get_template
 
 from ..utils import JsonView
 from ..cms.models import Page
-from .models import Artwork
+from .models import Artwork, ArtworkType, Tag
 
 
 class PaintingsView(ListView):
@@ -12,6 +14,8 @@ class PaintingsView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(PaintingsView, self).get_context_data(**kwargs)
+        context['types'] = ArtworkType.objects.all()
+        context['tags'] = Tag.objects.all()
         context['page'] = Page.objects.get(name='artworks')
         return context
 
@@ -27,3 +31,14 @@ class ArtworksSortJson(JsonView):
             artwork.save()
             index -= 1
         print([a.order for a in Artwork.objects.filter(listing=True).order_by('-order')])
+
+
+class ArtworksFilter(JsonView):
+
+    def json_get(self, request, *args, **kwargs):
+        tag_id = request.GET.get('tag')
+        artworks = Artwork.objects.filter(listing=True, tags__id=tag_id)
+        template = get_template('artwork/artworks_list.html')
+        context = dict(artwork_list=artworks)
+        rendered = template.render(RequestContext(request, context))
+        return rendered

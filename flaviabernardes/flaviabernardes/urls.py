@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.contrib.sitemaps.views import sitemap
 
 from .views import HomeView, AboutView, ContactView
-from .artwork.views import PaintingsView, ArtworksSortJson
+from .artwork.views import PaintingsView, ArtworksSortJson, ArtworksFilter
 from .blog.views import BlogView, PostView
 from .cms.views import CmsDraftPublishView, CmsObjectNewDraftView, \
                        CmsDraftPreview, SubPageView, CustomPageView, \
@@ -56,6 +56,8 @@ urlpatterns = patterns('',
         name='django.contrib.sitemaps.views.sitemap'),
 
     url(r'^artworks/$', PaintingsView.as_view(), name='artworks'),
+    url(r'^artworks/filter/$', ArtworksFilter.as_view(),
+        name='artworks_filter'),
     url(r'^artworks/sort/$', s(ArtworksSortJson.as_view()),
         name='artworks_sort'),
     url(r'^about/$', AboutView.as_view(), name='about'),
