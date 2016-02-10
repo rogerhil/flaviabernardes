@@ -14,12 +14,12 @@
 
     </div>
 
-    <div style="padding: 20px; text-align: center;">
-        <div style="display: inline-block; margin-right: 30px;">
+    <div style="padding: 20px; text-align: center; width: 960px; margin: 0 auto;">
+        <div style="display: inline-block; margin-right: 30px; text-align: center;">
             {% for tag in tags %}
-                <div class="artwork-tag" tag_id="{{ tag.id }}">
+                <a class="artwork-tag" href="#{{ tag.slug }}" id="tag-link-{{ tag.slug }}">
                     {{ tag }}
-                </div>
+                </a>
             {% endfor %}
         </div>
     </div>
@@ -48,26 +48,29 @@
             if (!hash) return;
             hash = hash.replace('#', '');
             if (!hash) return;
-            var $artwork = $('#artworks div.artwork[artwork=' + hash + ']');
-            if (!$artwork.length) return;
-            showArtwork($artwork);
+            if (Number(hash)) {
+                var $artwork = $('#artworks div.artwork[artwork=' + hash + ']');
+                if (!$artwork.length) return;
+                showArtwork($artwork);
+            } else {
+                filterArtworks(hash);
+            }
         });
 
-        $('.artwork-tag').click(function () {
-            var $self = $(this);
+        function filterArtworks(slug) {
+            var $a = $('#tag-link-' + slug);
             $('.artwork-tag').removeClass('active');
             $.ajax({
                 url: '/artworks/filter/',
                 dataType: 'json',
-                data: {tag: $self.attr('tag_id')},
+                data: {slug: slug},
                 success: function (result) {
                     $('#artworks').html(result.data);
-                    $self.addClass('active');
-
+                    $a.addClass('active');
                 }
             })
 
-        });
+        }
 
         //$('#artworks div.artwork').click(function (e) {
         function showArtwork($artwork) {
@@ -186,6 +189,7 @@
         $("#artworks").sortable({
             stop: function (e, ui) {
                 var data = [];
+                var slug = $('.artwork-tag.active').attr('href').replace('#', '');
                 $("#artworks .artwork").each(function () {
                     data.push($(this).attr('artwork'));
                 });
@@ -193,7 +197,7 @@
                     url: '/artworks/sort/',
                     type: 'POST',
                     dataType: 'json',
-                    data: {data: data},
+                    data: {data: data, tag_slug: slug},
                     success: function (result) {
                         console.log(result);
                         if (!result.success) {

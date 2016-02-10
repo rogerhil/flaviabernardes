@@ -1,3 +1,6 @@
+import random
+import string
+
 from django.db import models
 from django.db.models.signals import pre_save
 
@@ -16,9 +19,30 @@ class ArtworkType(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=128)
+    slug = models.SlugField()
 
     def __str__(self):
         return self.name
+
+
+class TagArtwork(models.Model):
+    artwork = models.ForeignKey('Artwork', related_name='link_to_tag')
+    tag = models.ForeignKey(Tag)
+    order = models.IntegerField(default=0, editable=False)
+
+    class Meta:
+        ordering = ('order',)
+
+    @staticmethod
+    def update_order(sender, instance, **kwargs):
+        if instance.id:
+            tgs = TagArtwork.objects.filter(tag=instance.tag)
+            order = max([a.order for a in tgs]) + 1
+            instance.order = order
+
+
+pre_save.connect(TagArtwork.update_order, TagArtwork)
+
 
 
 class Artwork(models.Model):
@@ -26,7 +50,7 @@ class Artwork(models.Model):
     description = models.TextField(null=True, blank=True)
     image = models.ImageField(blank=True, upload_to='uploads')
     type = models.ForeignKey(ArtworkType)
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, through=TagArtwork)
     width = models.IntegerField()
     height = models.IntegerField()
     year = models.IntegerField()

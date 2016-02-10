@@ -1,11 +1,17 @@
 from django.contrib import admin
 from image_cropping import ImageCroppingMixin
-from .models import Artwork, ArtworkType, Tag
+from .models import Artwork, ArtworkType, Tag, TagArtwork
+
+
+class TagInline(admin.TabularInline):
+    model = Artwork.tags.through
+    extra = 1 # how many rows to show
 
 
 @admin.register(Artwork)
 class ArtworkAdmin(ImageCroppingMixin, admin.ModelAdmin):
     list_display = ('name', 'type', 'mini_thumbnail_display')
+    inlines = [TagInline,]
 
     def mini_thumbnail_display(self, item):
         return '<img src="%s" />' % item.mini_thumbnail_url()
@@ -19,4 +25,5 @@ class ArtworkTypeAdmin(admin.ModelAdmin):
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ("name",)}
+

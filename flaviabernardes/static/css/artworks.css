@@ -1,17 +1,31 @@
 .artwork-tag {
-    background-color: #eee;
+    *background-color: #eee;
     color: #333;
-    padding: 10px 20px;
-    display: inline;
-    margin-right: 10px;
+    padding: 10px 10px;
+    display: block;
+    width: 280px;
+    margin: 0 15px 10px 0;
+    float: left;
+    text-align: center;
 }
 
 .artwork-tag:hover {
-    background-color: #ddd;
+    background-color: #f7f7f7;
     cursor: pointer;
+    color: #333 !important;
 }
 
 .artwork-tag.active {
     background-color: #333;
-    color: #eee;
+    color: #eee !important;
+    text-decoration: none;
+}
+
+.artwork-tag:visited {
+    color: #333;
+    text-decoration: none;
+}
+
+.artwork-tag:active {
+    text-decoration: none;
 }
