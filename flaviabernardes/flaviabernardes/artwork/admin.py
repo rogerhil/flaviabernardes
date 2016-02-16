@@ -10,8 +10,10 @@ class TagInline(admin.TabularInline):
 
 @admin.register(Artwork)
 class ArtworkAdmin(ImageCroppingMixin, admin.ModelAdmin):
-    list_display = ('name', 'type', 'mini_thumbnail_display')
+    list_display = ('name', 'type', 'width', 'height',
+                    'mini_thumbnail_display')
     inlines = [TagInline,]
+    list_filter = ('type__name',)
 
     def mini_thumbnail_display(self, item):
         return '<img src="%s" />' % item.mini_thumbnail_url()
