@@ -49,7 +49,7 @@ class Artwork(models.Model):
     name = models.CharField(max_length=64)
     description = models.TextField(null=True, blank=True)
     image = models.ImageField(blank=True, upload_to='uploads')
-    type = models.ForeignKey(ArtworkType)
+    type = models.ForeignKey(ArtworkType, verbose_name='Medium')
     tags = models.ManyToManyField(Tag, through=TagArtwork)
     width = models.IntegerField()
     height = models.IntegerField()
@@ -61,6 +61,21 @@ class Artwork(models.Model):
     #thumbnail = ImageRatioField('image', '360x310', size_warning=True)
     thumbnail = ImageRatioField('image', '640x400', size_warning=True)
     full_preview = ImageRatioField('image', '960x580', free_crop=True)
+
+    id_number = models.IntegerField(null=True, blank=True)
+    edition = models.CharField(max_length=128, null=True, blank=True)
+    location = models.CharField(max_length=255, null=True, blank=True)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2,
+                                      null=True, blank=True)
+    frame_cost = models.DecimalField(max_digits=10, decimal_places=2,
+                                      null=True, blank=True)
+    other_cost = models.DecimalField(max_digits=10, decimal_places=2,
+                                      null=True, blank=True)
+    sold = models.BooleanField(default=False)
+    collector_contact = models.CharField(max_length=128, null=True, blank=True)
+    sold_by = models.CharField(max_length=128, null=True, blank=True)
+    exhibition = models.CharField(max_length=128, null=True, blank=True)
+    notes = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.name
