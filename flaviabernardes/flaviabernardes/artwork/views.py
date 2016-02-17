@@ -17,7 +17,7 @@ class PaintingsView(ListView):
     def get_context_data(self, **kwargs):
         context = super(PaintingsView, self).get_context_data(**kwargs)
         context['types'] = ArtworkType.objects.all()
-        context['tags'] = Tag.objects.all().exclude(tags__slug='mp')
+        context['tags'] = Tag.objects.all().exclude(slug='mp')
         context['page'] = Page.objects.get(name='artworks')
         return context
 
