@@ -11,7 +11,7 @@ class TagInline(admin.TabularInline):
 @admin.register(Artwork)
 class ArtworkAdmin(ImageCroppingMixin, admin.ModelAdmin):
     list_display = ('mini_thumbnail_display',
-                    'name', 'id', 'type', 'width', 'height', 'tags_display',
+                    'name', 'id', 'type', 'height', 'width', 'tags_display',
                     'year',)
                     #'id_number', 'edition', 'total_price', 'frame_cost',
                     #'other_cost', 'sold', 'collector_contact', 'sold_by',
