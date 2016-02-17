@@ -11,7 +11,7 @@ class TagInline(admin.TabularInline):
 @admin.register(Artwork)
 class ArtworkAdmin(ImageCroppingMixin, admin.ModelAdmin):
     list_display = ('mini_thumbnail_display',
-                    'name', 'type', 'width', 'height',
+                    'name', 'type', 'width', 'height', 'tags_display',
                     'id_number', 'edition', 'total_price', 'frame_cost',
                     'other_cost', 'sold', 'collector_contact', 'sold_by',
                     'exhibition', 'notes')
@@ -25,6 +25,10 @@ class ArtworkAdmin(ImageCroppingMixin, admin.ModelAdmin):
         return '<img src="%s" />' % item.mini_thumbnail_url()
     mini_thumbnail_display.allow_tags = True
     mini_thumbnail_display.short_description = 'Thumb'
+
+    def tags_display(self, item):
+        return ', '.join([i.name for i in item.tags.all()])
+    tags_display.short_description = 'Tags'
 
 
 @admin.register(ArtworkType)
