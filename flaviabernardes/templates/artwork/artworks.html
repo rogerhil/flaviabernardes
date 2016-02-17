@@ -71,13 +71,16 @@
             })
 
         }
-
+        var scrollTop;
         //$('#artworks div.artwork').click(function (e) {
         function showArtwork($artwork) {
+            scrollTop = $(window).scrollTop();
             var url = preview_urls[$artwork.attr('artwork')].original;
             var title = $artwork.find('.title').text();
             var details = $artwork.find('.details').text();
-            $("#full-view").append('<img src="' + url + '" alt="' + title + '" title="' + title + '" />');
+            var $img = $('<img src="' + url + '" alt="' + title + '" title="' + title + '" />');
+            $img[0].src = url;  // preload
+            $("#full-view").append($img);
             $("#full-view").append('<div class="artwork-preview-details"><p class="title">' + title + '</p><p>' + details + '</p></div>');
             $("#full-view").append('<div id="close-artwork-preview" class="fa fa-times" title="Close" alt="Close"></div>');
             $("#full-view").append('<div id="right-artwork-preview" class="fa fa-caret-right" title="Next" alt="Next"></div>');
@@ -134,6 +137,7 @@
             $(".page-content2").show();
             $(".page-content3").show();
             $(window).trigger('scroll');
+            $(window).scrollTop(scrollTop);
         }
 
         $(document).keydown(function(e) {
