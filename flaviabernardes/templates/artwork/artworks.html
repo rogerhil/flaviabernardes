@@ -74,7 +74,9 @@
         var scrollTop;
         //$('#artworks div.artwork').click(function (e) {
         function showArtwork($artwork) {
-            scrollTop = $(window).scrollTop();
+            if (!scrollTop) {
+                scrollTop = $(window).scrollTop();
+            }
             var url = preview_urls[$artwork.attr('artwork')].original;
             var title = $artwork.find('.title').text();
             var details = $artwork.find('.details').text();
@@ -138,6 +140,7 @@
             $(".page-content3").show();
             $(window).trigger('scroll');
             $(window).scrollTop(scrollTop);
+            scrollTop = undefined;
         }
 
         $(document).keydown(function(e) {
