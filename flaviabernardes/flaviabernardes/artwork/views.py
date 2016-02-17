@@ -9,7 +9,9 @@ from .models import Artwork, ArtworkType, Tag, TagArtwork
 
 class PaintingsView(ListView):
     context_object_name = 'artwork_list'
-    queryset = Artwork.objects.filter(listing=True).order_by('-order')
+    queryset = Artwork.objects.filter(listing=True,
+                                      tags__slug='mp')\
+                              .order_by('-order')
     template_name = 'artwork/artworks.html'
 
     def get_context_data(self, **kwargs):
