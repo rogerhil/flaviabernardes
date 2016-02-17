@@ -18,7 +18,7 @@ class ArtworkAdmin(ImageCroppingMixin, admin.ModelAdmin):
                     #'exhibition', 'notes')
 
     inlines = [TagInline,]
-    list_filter = ('type__name', 'sold', 'sold_by')
+    list_filter = ('type__name', 'sold', 'sold_by', 'tags__name')
     search_fields = ('name', 'width', 'height', 'id_number', 'edition',
                      'collector_contact', 'exhibition', 'notes')
 
