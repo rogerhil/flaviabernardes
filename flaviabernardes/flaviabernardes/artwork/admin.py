@@ -12,9 +12,10 @@ class TagInline(admin.TabularInline):
 class ArtworkAdmin(ImageCroppingMixin, admin.ModelAdmin):
     list_display = ('mini_thumbnail_display',
                     'name', 'type', 'width', 'height', 'tags_display',
-                    'id_number', 'edition', 'total_price', 'frame_cost',
-                    'other_cost', 'sold', 'collector_contact', 'sold_by',
-                    'exhibition', 'notes')
+                    'year',)
+                    #'id_number', 'edition', 'total_price', 'frame_cost',
+                    #'other_cost', 'sold', 'collector_contact', 'sold_by',
+                    #'exhibition', 'notes')
 
     inlines = [TagInline,]
     list_filter = ('type__name', 'sold', 'sold_by')
