@@ -2,6 +2,7 @@ function setupNewsletter() {
     $('#newsletter').ajaxForm({
         beforeSubmit: function(arr, $form, options) {
             $('#cover').fadeIn();
+            fbq('track', 'Lead');
         },
         success: function (response, status, xhr, $form) {
             $('#cover').fadeOut();

@@ -74,6 +74,7 @@
         var scrollTop;
         //$('#artworks div.artwork').click(function (e) {
         function showArtwork($artwork) {
+            fbq('track', 'ViewContent');
             if (!scrollTop) {
                 scrollTop = $(window).scrollTop();
             }
