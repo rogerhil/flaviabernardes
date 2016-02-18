@@ -19,6 +19,7 @@ class PaintingsView(ListView):
         context['types'] = ArtworkType.objects.all()
         context['tags'] = Tag.objects.all().exclude(slug='mp')
         context['page'] = Page.objects.get(name='artworks')
+        context['all_artworks'] = Artwork.objects.all()
         return context
 
 

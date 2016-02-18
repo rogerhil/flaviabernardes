@@ -33,7 +33,7 @@
 
     <script>
         var preview_urls = {
-            {% for artwork in artwork_list %}
+            {% for artwork in all_artworks %}
                 {{ artwork.id }}: {original: '{% cropped_thumbnail artwork 'full_preview' width=960 %}'},
             {% endfor%}
         };
