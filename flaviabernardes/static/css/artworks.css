@@ -2,10 +2,9 @@
     *background-color: #eee;
     color: #333;
     padding: 10px 10px;
-    display: block;
-    width: 280px;
+    display: inline-block;
+    width: 270px;
     margin: 0 15px 10px 0;
-    float: left;
     text-align: center;
 }
 

@@ -14,13 +14,15 @@
 
     </div>
 
-    <div style="padding: 20px; text-align: center; width: 960px; margin: 0 auto;">
-        <div style="display: inline-block; margin-right: 30px; text-align: center;">
-            {% for tag in tags %}
-                <a class="artwork-tag" href="#{{ tag.slug }}" id="tag-link-{{ tag.slug }}">
-                    {{ tag }}
-                </a>
-            {% endfor %}
+    <div class="center-column">
+        <div style="padding: 20px; text-align: center; width: 100%; margin: 0 auto;">
+            <div style="display: inline-block; margin-right: 30px; text-align: center;">
+                {% for tag in tags %}
+                    <a class="artwork-tag" href="#{{ tag.slug }}" id="tag-link-{{ tag.slug }}">
+                        {{ tag }}
+                    </a>
+                {% endfor %}
+            </div>
         </div>
     </div>
 
