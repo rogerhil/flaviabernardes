@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.core.exceptions import ValidationError
@@ -20,8 +22,10 @@ class BasePage(models.Model):
     content1 = models.TextField(help_text="This content appears AFTER the FIRST banner", null=True, blank=True)
     content2 = models.TextField(help_text="This content appears BEFORE the SECOND banner", null=True, blank=True)
     content3 = models.TextField(help_text="This content appears AFTER the SECOND banner", null=True, blank=True)
-    created = models.DateTimeField(auto_now_add=True, editable=False)
-    updated = models.DateTimeField(auto_now=True, editable=False)
+    created = models.DateTimeField(auto_now_add=True, editable=False,
+                                   default=datetime.now)
+    updated = models.DateTimeField(auto_now=True, editable=False,
+                                   default=datetime.now)
     footer = models.BooleanField(default=False)
 
     class Meta:

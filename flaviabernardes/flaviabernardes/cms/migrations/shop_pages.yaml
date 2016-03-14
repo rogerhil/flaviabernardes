@@ -1,0 +1,21 @@
+
+- model: cms.page
+  pk: 15
+  fields:
+    name: shop/originals
+    title: Shop Originals
+    description: Shop Originals
+
+- model: cms.page
+  pk: 16
+  fields:
+    name: shop/prints
+    title: Shop Prints
+    description: Shop Prints
+
+- model: cms.page
+  pk: 17
+  fields:
+    name: shop/commissions
+    title: Shop Commissions
+    description: Shop Commissions

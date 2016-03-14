@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load cropping %}
+
+{% block ogtype %}article{% endblock %}
+
+{% block extrastyle %}
+    <link href="{% static 'css/artworks.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+{% endblock %}
+
+{% block container-large %}
+    <div id="full-view">
+
+    </div>
+
+    <div class="center-column">
+        <div style="padding: 20px; text-align: center; width: 100%; margin: 0 auto;">
+            <div style="display: inline-block; margin-right: 30px; text-align: center;">
+                <a class="artwork-tag {% if page.name == 'shop/originals' %}active{% endif %}" href="{% url 'shop_originals' %}" id="tag-link-originals">
+                    Originals
+                </a>
+                <a class="artwork-tag {% if page.name == 'shop/prints' %}active{% endif %}" href="{% url 'shop_prints' %}" id="tag-link-prints">
+                    Prints
+                </a>
+                <a class="artwork-tag {% if page.name == 'shop/commissions' %}active{% endif %}" href="{% url 'custom_page' slug='shop/commissions' %}" id="tag-link-comissions">
+                    Commisions
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="artworks">
+        {% for item in shop_items %}
+            <div class="grid artwork">
+                <figure class="effect-lily" style="background-image: url({% cropped_thumbnail item 'thumbnail' scale=1 %});" alt="{{ item.artwork.name }}" title="{{ item.artwork.name }}">
+                    <div class="dark">
+                        <figcaption>
+                            <div class="description">
+                                <h2 class="title">{{ item.artwork.name }}</h2>
+                                <p class="details">
+                                    {{ item.artwork.type }},
+                                    {% if item.sizes %}
+                                        {{ item.sizes }}
+                                    {% else %}
+                                        {{ item.artwork.height }}x{{ item.artwork.width }}cm,
+                                    {% endif %}
+                                    {{ item.artwork.year }}
+                                </p>
+                                <p>
+                                    {{ item.price_display }}
+                                </p>
+                                <a href="{{ item.link }}" target="_blank">Buy</a>
+                            </div>
+                        </figcaption>
+                    </div>
+                </figure>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="clear"></div>
+
+    <script src="{% static 'js/jquery.ba-hashchange.min.js' %}"></script>
+    <script>
+    </script>
+{% endblock %}

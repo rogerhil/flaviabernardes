@@ -2,12 +2,13 @@ from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
-from django.views.generic import TemplateView
+from django.views.generic import RedirectView
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.sitemaps.views import sitemap
 
 from .views import HomeView, AboutView, ContactView
+from .shop.views import ShopOriginalsView, ShopPrintsView
 from .artwork.views import PaintingsView, ArtworksSortJson, ArtworksFilter
 from .blog.views import BlogView, PostView
 from .cms.views import CmsDraftPublishView, CmsObjectNewDraftView, \
@@ -55,6 +56,13 @@ urlpatterns = patterns('',
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
 
+    url(r'^shop/$', RedirectView.as_view(pattern_name='shop_originals'),
+        name='shop'),
+    url(r'^shop/originals/$', ShopOriginalsView.as_view(),
+        name='shop_originals'),
+    url(r'^shop/prints/$', ShopPrintsView.as_view(),
+        name='shop_prints'),
+
     url(r'^artworks/$', PaintingsView.as_view(), name='artworks'),
     url(r'^artworks/filter/$', ArtworksFilter.as_view(),
         name='artworks_filter'),
@@ -64,7 +72,7 @@ urlpatterns = patterns('',
     url(r'^contact/$', ContactView.as_view(), name='contact'),
     url(r'^nl/(?P<slug>[-_\w/]+)/$', CustomConfirmationView.as_view(),
         name='custom_confirmation_page'),
-    url(r'^(?P<slug>[-_\w]+)/$', CustomPageView.as_view(),
+    url(r'^(?P<slug>[-_\w/]+)/$', CustomPageView.as_view(),
         name='custom_page'),
     url(r'^(?P<slug>[-_\w]+)/(?P<subslug>[-_\w]+)/$', SubPageView.as_view(), name='sub_page'),
 
