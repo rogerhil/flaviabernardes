@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django.db import models
 from django.conf import settings
 
@@ -18,7 +20,7 @@ class Original(models.Model):
         return "Original: %s" % str(self.artwork)
 
     def price_display(self):
-        return "%s EUR" % self.price
+        return "&euro; %s" % self.price  #.quantize(Decimal('0.01'))
 
 
 class Print(models.Model):
@@ -41,10 +43,10 @@ class Print(models.Model):
     def price_display(self):
         price = ""
         if self.price:
-            price = "%s EUR" % self.price
+            price = "&euro; %s" % self.price
         else:
             if self.price_from:
-                price = "from %s EUR" % self.price_from
+                price = "from &euro; %s" % self.price_from
             elif self.price_to:
-                price += " to %s EUR" % self.price_to
+                price += " to &euro; %s" % self.price_to
         return price.strip()

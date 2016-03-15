@@ -23,7 +23,7 @@
                 <a class="artwork-tag {% if page.name == 'shop/prints' %}active{% endif %}" href="{% url 'shop_prints' %}" id="tag-link-prints">
                     Prints
                 </a>
-                <a class="artwork-tag {% if page.name == 'shop/commissions' %}active{% endif %}" href="{% url 'custom_page' slug='shop/commissions' %}" id="tag-link-comissions">
+                <a class="artwork-tag {% if page.name == 'shop/commissions' %}active{% endif %}" href="{% url 'custom_page' slug='shop/commissions' %}" id="tag-link-commissions">
                     Commisions
                 </a>
             </div>
@@ -36,9 +36,9 @@
                 <figure class="effect-lily" style="background-image: url({% cropped_thumbnail item 'thumbnail' scale=1 %});" alt="{{ item.artwork.name }}" title="{{ item.artwork.name }}">
                     <div class="dark">
                         <figcaption>
-                            <div class="description">
-                                <h2 class="title">{{ item.artwork.name }}</h2>
-                                <p class="details">
+                            <div class="description" style="background: rgba(0,0,0,0.5);">
+                                <span style="font-size: 30px; line-height: 40px;" class="title">{{ item.artwork.name }}</span><br>
+                                <span class="details">
                                     {{ item.artwork.type }},
                                     {% if item.sizes %}
                                         {{ item.sizes }}
@@ -46,11 +46,13 @@
                                         {{ item.artwork.height }}x{{ item.artwork.width }}cm,
                                     {% endif %}
                                     {{ item.artwork.year }}
-                                </p>
-                                <p>
-                                    {{ item.price_display }}
-                                </p>
-                                <a href="{{ item.link }}" target="_blank">Buy</a>
+                                </span><br>
+                                <span>
+                                    {{ item.price_display|safe }}
+                                </span><br>
+                                <h2 style="text-align: center;">
+                                    <a href="{{ item.link }}" style="color: white;" target="_blank">CLICK TO BUY</a>
+                                </h2>
                             </div>
                         </figcaption>
                     </div>
