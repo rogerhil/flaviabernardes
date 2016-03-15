@@ -1,5 +1,17 @@
 <section id="menu">
     <div class="item">
+        <a href="{% url 'contact' %}"{% if request.resolver_match.url_name == "contact" or page.sub_page_of.name == "contact" %} class="active"{% endif %}>Contact</a>
+        <ul class="sub-menu">
+            {% for subpage in main_pages.contact.sub_pages %}
+                <li>
+                    <a href="{{ subpage.get_absolute_url }}"{% if page.name == subpage.name %} class="active"{% endif %}>
+                        {{ subpage.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="item">
         <a href="{% url 'blog' %}"{% if request.resolver_match.url_name == "blog" or page.sub_page_of.name == "blog" %} class="active"{% endif %}>Blog</a>
         <ul class="sub-menu">
             {% for subpage in main_pages.blog.sub_pages %}

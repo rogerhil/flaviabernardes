@@ -30,8 +30,12 @@
                 $('.home-bar a').click(function (e) {
                     var href = $(this).attr('href');
                     if ($(window).width() < 1353) {
-                        window.location.replace(href);
-                        return;
+                        if ($(window).width() < 1001) {
+                            window.location.replace(href);
+                            return;
+                        }
+                        var v = ($(window).width() - 1353) / 2;
+                        $('#logo-div').css('margin-left', v + 'px')
                     }
                     e.preventDefault();
                     $('.content').addClass('top');
