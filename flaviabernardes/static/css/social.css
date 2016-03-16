@@ -25,7 +25,7 @@
 }
 
 .social-64 {
-    width: 336px;
+    width: 420px;
     margin: 0 auto;
 }
 
@@ -51,10 +51,14 @@
     background: url(../img/social/instagram-64.png)
 }
 
+.social-64 li.etsy {
+    background: url(../img/social/etsy-64.png)
+}
+
 
 
 .social-32 {
-    width: 208px;
+    width: 260px;
     margin: 0 auto;
 }
 
@@ -78,4 +82,8 @@
 
 .social-32 li.instagram {
     background: url(../img/social/instagram-32.png)
+}
+
+.social-32 li.etsy {
+    background: url(../img/social/etsy-32.png)
 }
