@@ -5,6 +5,9 @@
 
 {% block extrastyle %}
     <link href="{% static 'css/home.css' %}" rel="stylesheet" />
+    {% if enable_shop %}
+        <link href="{% static 'css/homewithshop.css' %}" rel="stylesheet" />
+    {% endif %}
 {% endblock %}
 
 {% block site %}

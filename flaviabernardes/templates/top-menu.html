@@ -35,18 +35,20 @@
             {% endfor %}
         </ul>
     </div>
-    <div class="item">
-        <a href="{% url 'shop_originals' %}"{% if request.resolver_match.url_name == "shop_originals" or request.resolver_match.url_name == "shop_prints" or page.name == "shop/commissions" or page.sub_page_of.name == "shop/originals" or page.sub_page_of.name == "shop/prints" or page.sub_page_of.name == "shop/commissions" %} class="active"{% endif %}>Shop</a>
-        <ul class="sub-menu">
-            {% for subpage in main_pages.shop.sub_pages %}
-                <li>
-                    <a href="{{ subpage.get_absolute_url }}"{% if page.name == subpage.name %} class="active"{% endif %}>
-                        {{ subpage.title }}
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
+    {% if enable_shop %}
+        <div class="item">
+            <a href="{% url 'shop_originals' %}"{% if request.resolver_match.url_name == "shop_originals" or request.resolver_match.url_name == "shop_prints" or page.name == "shop/commissions" or page.sub_page_of.name == "shop/originals" or page.sub_page_of.name == "shop/prints" or page.sub_page_of.name == "shop/commissions" %} class="active"{% endif %}>Shop</a>
+            <ul class="sub-menu">
+                {% for subpage in main_pages.shop.sub_pages %}
+                    <li>
+                        <a href="{{ subpage.get_absolute_url }}"{% if page.name == subpage.name %} class="active"{% endif %}>
+                            {{ subpage.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
     <div class="item">
         <a href="{% url 'artworks' %}"{% if request.resolver_match.url_name == "artworks" or page.sub_page_of.name == "artworks" %} class="active"{% endif %}>Artworks</a>
         <ul class="sub-menu">

@@ -28,7 +28,26 @@ sitemaps = dict(
 is_superuser = user_passes_test(lambda u: u.is_superuser, '/')
 s = lambda v: csrf_exempt(is_superuser(v))
 
-urlpatterns = patterns('',
+if settings.ENABLE_SHOP:
+    urlpatterns = [
+        url(r'^shop/$', RedirectView.as_view(pattern_name='shop_originals'),
+            name='shop'),
+        url(r'^shop/originals/$', ShopOriginalsView.as_view(),
+            name='shop_originals'),
+        url(r'^shop/prints/$', ShopPrintsView.as_view(),
+            name='shop_prints')
+    ]
+else:
+    urlpatterns = [
+        url(r'^shop/$', s(RedirectView.as_view(pattern_name='shop_originals')),
+            name='shop'),
+        url(r'^shop/originals/$', s(ShopOriginalsView.as_view()),
+            name='shop_originals'),
+        url(r'^shop/prints/$', s(ShopPrintsView.as_view()),
+            name='shop_prints')
+    ]
+
+urlpatterns += patterns('',
     # Examples:
     # url(r'^$', 'flaviabernardes.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
@@ -56,13 +75,6 @@ urlpatterns = patterns('',
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
 
-    url(r'^shop/$', RedirectView.as_view(pattern_name='shop_originals'),
-        name='shop'),
-    url(r'^shop/originals/$', ShopOriginalsView.as_view(),
-        name='shop_originals'),
-    url(r'^shop/prints/$', ShopPrintsView.as_view(),
-        name='shop_prints'),
-
     url(r'^artworks/$', PaintingsView.as_view(), name='artworks'),
     url(r'^artworks/filter/$', ArtworksFilter.as_view(),
         name='artworks_filter'),
@@ -77,7 +89,6 @@ urlpatterns = patterns('',
     url(r'^(?P<slug>[-_\w]+)/(?P<subslug>[-_\w]+)/$', SubPageView.as_view(), name='sub_page'),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
 
 urlpatterns += [
     url(r'^$', HomeView.as_view(), name='home'),
