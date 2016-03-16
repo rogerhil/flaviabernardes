@@ -1,0 +1,29 @@
+#top-bar {
+    background-color: #eee;
+    padding: 5px 0;
+    font-family: Gothic;
+}
+
+#top-bar input,
+#top-bar button {
+    padding: 0px 10px;
+    font-size: 12px;
+    line-height: 26px;
+    font-weight: normal;
+}
+
+#top-bar .top-bar-close {
+    float: right;
+    margin-right: 15px;
+    font-weight: normal;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#top-bar .top-bar-close:hover {
+    opacity: 0.7;
+}
+
+#top-bar #newsletter ul {
+    width: 550px;
+}

@@ -29,6 +29,7 @@
         <link href="{% static 'css/base.css' %}" rel="stylesheet" />
         <link href="{% static 'css/ajaxloader.css' %}" rel="stylesheet" />
         <link href="{% static 'css/newsletter.css' %}" rel="stylesheet" />
+        <link href="{% static 'css/topbar.css' %}" rel="stylesheet" />
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
         <!-- jQuery library (served from Google) -->
@@ -88,6 +89,20 @@
         {% block site %}
             <div id="body">
                 <section id="header">
+                    <div id="top-bar">
+                        <div class="top-bar-close">
+                            x
+                        </div>
+                        <div class="center-column">
+                            <div style="float: left; font-size: 12px; font-weight: normal;">
+                                Want an exclusive artwork wallpaper? Add your name and email:
+                            </div>
+                            <div style="float: right;">
+                                {% include "newsletter/line_form.html"  %}
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
                     <div class="center-column">
                         <div id="logo">
                             {% block logo %}
@@ -126,6 +141,7 @@
                 </section>
 
                 <div class="after-header"></div>
+                <div class="after-header-topbar"></div>
 
                 <div class="site-top">
                     {% block container-top %}
@@ -287,6 +303,14 @@
         {% endblock %}
 
         <script>
+
+            $('#top-bar .top-bar-close').click(function () {
+                $('#top-bar').slideUp();
+                $('.after-header-topbar').slideUp({progress: function () {
+                    $(window).scroll();
+                }});
+                $('#header').addClass('no-topbar');
+            });
 
             function toSlug(str) {
                 return str.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'');
