@@ -14,6 +14,8 @@ from .blog.views import BlogView, PostView
 from .cms.views import CmsDraftPublishView, CmsObjectNewDraftView, \
                        CmsDraftPreview, SubPageView, CustomPageView, \
                        UploadImageView, ImagesPathsView
+from .globalsettings.views import CloseTopBarView
+
 from .fbauth.views import LoginJson, LogoutJson
 from .newsletter.views import LandPageView, ConfirmationView, NewsletterView, \
                               CustomConfirmationView
@@ -74,6 +76,9 @@ urlpatterns += patterns('',
         name='blog_post_view'),
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
+
+    url(r'^globalsettings/close-top-bar/$',
+        csrf_exempt(CloseTopBarView.as_view()), name='close_top_bar'),
 
     url(r'^artworks/$', PaintingsView.as_view(), name='artworks'),
     url(r'^artworks/filter/$', ArtworksFilter.as_view(),

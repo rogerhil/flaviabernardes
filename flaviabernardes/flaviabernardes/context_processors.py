@@ -2,6 +2,8 @@
 from django.conf import settings
 from .cms.models import Page
 from .newsletter.models import List
+from .globalsettings import get_global_settings
+
 
 def global_context(request):
     user = request.user
@@ -16,4 +18,6 @@ def global_context(request):
         newsletter_list = None
     context['default_newsletter_list'] = newsletter_list
     context['enable_shop'] = settings.ENABLE_SHOP or user.is_authenticated()
+    context['global_settings'] = get_global_settings()
+    context['enable_top_bar'] = request.session.get('enable_top_bar', True)
     return context

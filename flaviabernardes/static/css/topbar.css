@@ -40,3 +40,9 @@
     font-size: 12px;
     padding: 0px 20px;
 }
+
+#top-bar .topbar-description {
+    float: left;
+    font-size: 13px;
+    font-weight: normal;
+}

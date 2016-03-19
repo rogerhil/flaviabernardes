@@ -1014,6 +1014,16 @@ figure.effect-lily:hover p {
         text-align: right !important;
         padding: 0 10px 0 0 !important;
     }
+
+    .after-header-topbar {
+        display: none;
+    }
+    #top-bar {
+        display: none;
+    }
+    #header {
+        height: 75px;
+    }
 }
 
 

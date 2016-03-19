@@ -1,0 +1,6 @@
+
+- model: globalsettings.globalsettings
+  pk: 1
+  fields:
+    top_newsletter: 1
+    top_sign_up_title: Want an exclusive artwork wallpaper? Sign up below

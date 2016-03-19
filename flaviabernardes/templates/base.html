@@ -88,25 +88,29 @@
         </div>
         {% block site %}
             <div id="body">
-                <section id="header">
-                    <div id="top-bar">
-                        <div class="top-bar-close">
-                            x
-                        </div>
-                        <div class="center-column newsletter-wrap">
-                            <div style="float: left; font-size: 12px; font-weight: normal;">
-                                Want an exclusive artwork wallpaper? Add your name and email:
+                <section id="header" {% if not enable_top_bar %}class="no-topbar"{% endif %}>
+
+                    {% if enable_top_bar %}
+                        <div id="top-bar">
+                            <div class="top-bar-close">
+                                x
                             </div>
-                            <div style="float: right;">
-                                <form id="top-newsletter" class="newsletter" action="{% url 'newsletter' %}" method="post">
-                                    {% with page.newsletter as newsletter %}
-                                        {% include "newsletter/line_form.html"  %}
-                                    {% endwith %}
-                                </form>
+                            <div class="center-column newsletter-wrap">
+                                <div class="topbar-description">
+                                    {{ global_settings.top_sign_up_title }}
+                                </div>
+                                <div style="float: right;">
+                                    <form id="top-newsletter" class="newsletter" action="{% url 'newsletter' %}" method="post">
+                                        {% with global_settings.top_newsletter as newsletter %}
+                                            {% include "newsletter/line_form.html"  %}
+                                        {% endwith %}
+                                    </form>
+                                </div>
                             </div>
+                            <div class="clear"></div>
                         </div>
-                        <div class="clear"></div>
-                    </div>
+                    {% endif %}
+
                     <div class="center-column">
                         <div id="logo">
                             {% block logo %}
@@ -145,7 +149,9 @@
                 </section>
 
                 <div class="after-header"></div>
-                <div class="after-header-topbar"></div>
+                {% if enable_top_bar %}
+                    <div class="after-header-topbar"></div>
+                {% endif %}
 
                 <div class="site-top">
                     {% block container-top %}
@@ -318,6 +324,14 @@
                     $(window).scroll();
                 }});
                 $('#header').addClass('no-topbar');
+                $.ajax({
+                    url: '{% url 'close_top_bar' %}',
+                    type: 'post',
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
             });
 
             function toSlug(str) {

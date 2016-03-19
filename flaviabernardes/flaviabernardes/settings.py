@@ -45,7 +45,8 @@ INSTALLED_APPS = (
     'flaviabernardes.artwork',
     'flaviabernardes.blog',
     'flaviabernardes.newsletter',
-    'flaviabernardes.shop'
+    'flaviabernardes.globalsettings',
+    'flaviabernardes.shop',
 )
 
 MIDDLEWARE_CLASSES = (
