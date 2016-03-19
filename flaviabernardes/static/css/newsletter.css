@@ -1,48 +1,45 @@
-#newsletter {
+.newsletter {
     margin: 0 auto;
     width: calc(92% - 30px);
 }
 
-#newsletter strong {
+.newsletter strong {
     display: block;
     padding: 10px 20px !important;
 }
 
-#newsletter input {
+.newsletter input {
     width: 100%;
     padding: 10px 20px;
 }
 
-#newsletter ul {
+.newsletter ul {
     width: 100%;
-}
-
-#newsletter ul {
     list-style: none;
     margin: 0;
 }
 
-#newsletter ul li {
+.newsletter ul li {
     float: left;
     margin-right: 10px;
     width: 23%;
 }
 
-#newsletter ul.errorlist li {
+.newsletter ul.errorlist li {
     width: auto;
 }
 
-#newsletter ul li.last {
+.newsletter ul li.last {
     margin-right: 0;
 }
 
-#newsletter button {
+.newsletter button {
     margin: 0px;
     width: 100%;
     padding: 11px 20px;
 }
 
-#newsletter button:hover {
+.newsletter button:hover {
     color: #7897c3;
     border-color: #7897c3;
     transition: 0.2s;
@@ -54,4 +51,6 @@
     background-color: rgba(64,0,0,0.5);
     *border: 1px solid #800;
     color: #fff;
+    white-space: nowrap;
+    width: 100%;
 }

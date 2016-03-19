@@ -51,7 +51,7 @@ class JsonFormView(FormView):
         template = get_template(self.form_template)
         context = RequestContext(self.request, {'form': form})
         html = template.render(context)
-        data = {'success': False, 'html': html}
+        data = {'success': False, 'html': html, 'errors': form.errors}
         if extra_data:
             data.update(extra_data)
         return http.JsonResponse(data)

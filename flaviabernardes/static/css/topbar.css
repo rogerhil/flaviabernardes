@@ -24,6 +24,19 @@
     opacity: 0.7;
 }
 
-#top-bar #newsletter ul {
+#top-bar .newsletter {
+    width: 100%;
+}
+
+#top-bar .newsletter ul {
     width: 550px;
+}
+
+#top-bar .errorlist li {
+    font-weight: normal;
+}
+
+.non-field-errors {
+    font-size: 12px;
+    padding: 0px 20px;
 }

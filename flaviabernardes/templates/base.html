@@ -93,12 +93,16 @@
                         <div class="top-bar-close">
                             x
                         </div>
-                        <div class="center-column">
+                        <div class="center-column newsletter-wrap">
                             <div style="float: left; font-size: 12px; font-weight: normal;">
                                 Want an exclusive artwork wallpaper? Add your name and email:
                             </div>
                             <div style="float: right;">
-                                {% include "newsletter/line_form.html"  %}
+                                <form id="top-newsletter" class="newsletter" action="{% url 'newsletter' %}" method="post">
+                                    {% with page.newsletter as newsletter %}
+                                        {% include "newsletter/line_form.html"  %}
+                                    {% endwith %}
+                                </form>
                             </div>
                         </div>
                         <div class="clear"></div>
@@ -235,7 +239,7 @@
                         <div class="center-column">
                             {% block container-middle %}
                                 <section class="container-middle">
-                                    <div id="newsletter-wrap">
+                                    <div class="newsletter-wrap">
                                         <p class="center">
                                             {% block newsletter_description %}
                                                 {% if page and page.newsletter and page.newsletter.sign_up_title %}
@@ -249,7 +253,11 @@
                                                 {% endif %}
                                             {% endblock %}
                                         </p>
-                                        {% include "newsletter/line_form.html"  %}
+                                        <form id="newsletter" class="newsletter" action="{% url 'newsletter' %}" method="post">
+                                            {% with page.newsletter as newsletter %}
+                                                {% include "newsletter/line_form.html"  %}
+                                            {% endwith %}
+                                        </form>
                                     </div>
                                     <div class="clear"></div>
                                     <script src="{% static 'js/jquery.form.min.js' %}"></script>
