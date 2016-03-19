@@ -1157,3 +1157,22 @@ btn {
 .btn-light:active {
     color: #ccc;
 }
+
+
+.click-to-buy {
+    background: rgba(1,1,1,0.8);
+    padding: 10px 30px;
+    display: inline-block;
+    margin: 10px 15px 10px 0;
+    text-align: center;
+    color: white;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.click-to-buy:hover {
+    background: rgba(255,255,255,1);
+    color: black !important;
+    transition: all 0.5s ease;
+
+}
