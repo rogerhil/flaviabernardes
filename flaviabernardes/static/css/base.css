@@ -1174,5 +1174,12 @@ btn {
     background: rgba(255,255,255,1);
     color: black !important;
     transition: all 0.5s ease;
+    text-decoration: none !important;
+}
 
+a.click-to-buy:visited,
+a.click-to-buy:active,
+a.click-to-buy:link {
+    text-decoration: none;
+    color: white;
 }
