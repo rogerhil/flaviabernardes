@@ -8,7 +8,7 @@ from .models import Original, Print
 
 class ShopOriginalsView(ListView):
     context_object_name = 'shop_items'
-    queryset = Original.objects.filter().order_by('-order')
+    queryset = Original.objects.filter(disable=False).order_by('-order')
     template_name = 'shop/shop.html'
 
     def get_context_data(self, **kwargs):
@@ -19,7 +19,7 @@ class ShopOriginalsView(ListView):
 
 class ShopPrintsView(ListView):
     context_object_name = 'shop_items'
-    queryset = Print.objects.filter().order_by('-order')
+    queryset = Print.objects.filter(disable=False).order_by('-order')
     template_name = 'shop/shop.html'
 
     def get_context_data(self, **kwargs):
