@@ -32,7 +32,7 @@
 
     <div id="artworks">
         {% for item in shop_items %}
-            <div class="grid artwork">
+            <div class="grid artwork" item="{{ item.id }}">
                 <figure class="effect-lily" style="background-image: url({% cropped_thumbnail item 'thumbnail' scale=1 %});" alt="{{ item.artwork.name }}" title="{{ item.artwork.name }}">
                     <div class="dark">
                         <figcaption>
@@ -64,5 +64,26 @@
 
     <script src="{% static 'js/jquery.ba-hashchange.min.js' %}"></script>
     <script>
+        $("#artworks").sortable({
+            stop: function (e, ui) {
+                var data = [];
+                var shop_type = window.location.pathname.split('/')[2];
+                $("#artworks .artwork").each(function () {
+                    data.push($(this).attr('item'));
+                });
+                $.ajax({
+                    url: '/shop/sort/',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {data: data, shop_type: shop_type},
+                    success: function (result) {
+                        console.log(result);
+                        if (!result.success) {
+                            alert('Something went wrong while trying to sort the artworks. Please contact Rogerio: ' + result.message);
+                        }
+                    }
+                })
+            }
+        });
     </script>
 {% endblock %}
