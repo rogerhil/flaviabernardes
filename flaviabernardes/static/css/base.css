@@ -1002,6 +1002,15 @@ figure.effect-lily:hover p {
         text-align: right !important;
         padding: 0 10px 0 0 !important;
     }
+    .click-to-buy {
+        font-size: 16px !important;
+    }
+    .description .title {
+        font-size: 20px !important;
+    }
+    .details {
+        font-size: 14px !important;
+    }
 }
 
 
@@ -1162,7 +1171,7 @@ btn {
     background: rgba(1,1,1,0.8);
     padding: 10px 30px;
     display: inline-block;
-    margin: 10px 15px 10px 0;
+    margin: 10px 0 10px 0;
     text-align: center;
     color: white;
     border-radius: 10px;
