@@ -36,21 +36,15 @@
                 <figure class="effect-lily" style="background-image: url({% cropped_thumbnail item 'thumbnail' scale=1 %});" alt="{{ item.artwork.name }}" title="{{ item.artwork.name }}">
                     <div class="dark">
                         <figcaption>
+                            <h2 style="position: absolute; left: calc(50% - 80px); top: 125px;">
+                                <a href="{{ item.link }}" class="click-to-buy" target="_blank">CLICK TO BUY</a>
+                            </h2>
                             <div class="description" style="background: rgba(0,0,0,0.5); height: 120px; padding-top: 10px; text-align: left;">
-                                <h2 style="text-align: right; float: right; margin-top: 20px;">
-                                    <a href="{{ item.link }}" class="click-to-buy" target="_blank">CLICK TO BUY</a>
-                                </h2>
-                                <span style="font-size: 30px; line-height: 40px;" class="title">{{ item.artwork.name }}</span><br>
+                                <span style="font-size: 30px; line-height: 40px; white-space: nowrap; overflow: hidden;" class="title">{{ item.name_display }}</span><br>
                                 <span class="details">
-                                    {{ item.artwork.type }},
-                                    {% if item.sizes %}
-                                        {{ item.sizes }}
-                                    {% else %}
-                                        {{ item.artwork.height }}x{{ item.artwork.width }}cm
-                                    {% endif %}
-                                    {# {{ item.artwork.year }} #}
+                                    {{ item.description_display }}
                                 </span><br>
-                                <span>
+                                <span {% if item.sold_out %}style="color: #FFee00; font-weight: normal;"{% endif %}>
                                     {{ item.price_display|safe }}
                                 </span><br>
                             </div>
