@@ -34,6 +34,7 @@
     <script src="{% static 'js/jquery.ba-hashchange.min.js' %}"></script>
 
     <script>
+        var CURRENT_TITLE = document.title;
         var preview_urls = {
             {% for artwork in all_artworks %}
                 {{ artwork.id }}: {original: '{% cropped_thumbnail artwork 'full_preview' width=960 %}'},
@@ -81,11 +82,12 @@
                 scrollTop = $(window).scrollTop();
             }
             var url = preview_urls[$artwork.attr('artwork')].original;
-            var title = $artwork.find('.title').text();
-            var img_title = $artwork.find('figure').attr('title');
+            var title = $artwork.find('figure').attr('title').text();
+            var description = $artwork.find('figure').attr('description');
             var alt = $artwork.find('figure').attr('alt');
             var details = $artwork.find('.details').text();
-            var $img = $('<img src="' + url + '" data-pin-description="' + alt + '" title="' + img_title + '" />');
+            var $img = $('<img src="' + url + '" alt="' + description + '" title="' + description + '" />');
+            document.title = title;
             $img[0].src = url;  // preload
             $("#full-view").append($img);
             $("#full-view").append('<div class="artwork-preview-details"><p class="title">' + title + '</p><p>' + details + '</p></div>');
@@ -128,6 +130,7 @@
         }
 
         var closeFullPreview = function () {
+            document.title = CURRENT_TITLE;
             window.location.hash = '';
             $("#full-view").fadeOut(1000, function () {
                 $(this).html('');
