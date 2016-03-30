@@ -82,7 +82,7 @@
                 scrollTop = $(window).scrollTop();
             }
             var url = preview_urls[$artwork.attr('artwork')].original;
-            var title = $artwork.find('figure').attr('title').text();
+            var title = $artwork.find('figure').attr('title');
             var description = $artwork.find('figure').attr('description');
             var alt = $artwork.find('figure').attr('alt');
             var details = $artwork.find('.details').text();
