@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.contrib.sitemaps.views import sitemap
 
 from .views import HomeView, AboutView, ContactView
-from .shop.views import ShopOriginalsView, ShopPrintsView
+from .shop.views import ShopOriginalsView, ShopPrintsView, ShopSortJson
 from .artwork.views import PaintingsView, ArtworksSortJson, ArtworksFilter
 from .blog.views import BlogView, PostView
 from .cms.views import CmsDraftPublishView, CmsObjectNewDraftView, \
@@ -35,7 +35,9 @@ if settings.ENABLE_SHOP:
         url(r'^shop/originals/$', ShopOriginalsView.as_view(),
             name='shop_originals'),
         url(r'^shop/prints/$', ShopPrintsView.as_view(),
-            name='shop_prints')
+            name='shop_prints'),
+        url(r'^shop/sort/$', s(ShopSortJson.as_view()),
+            name='shop_sort'),
     ]
 else:
     urlpatterns = [
@@ -44,7 +46,9 @@ else:
         url(r'^shop/originals/$', s(ShopOriginalsView.as_view()),
             name='shop_originals'),
         url(r'^shop/prints/$', s(ShopPrintsView.as_view()),
-            name='shop_prints')
+            name='shop_prints'),
+        url(r'^shop/sort/$', s(ShopSortJson.as_view()),
+            name='shop_sort'),
     ]
 
 urlpatterns += patterns('',

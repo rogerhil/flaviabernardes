@@ -77,8 +77,11 @@ class Artwork(models.Model):
     exhibition = models.CharField(max_length=128, null=True, blank=True)
     notes = models.TextField(null=True, blank=True)
 
+    class Meta:
+        ordering = ('name', 'id')
+
     def __str__(self):
-        return self.name
+        return "%s: %s" % (self.id, self.name)
 
     def mini_thumbnail_url(self):
         field = self._meta.get_field_by_name('mini_thumbnail')[0]
@@ -98,6 +101,10 @@ class Artwork(models.Model):
         if not instance.id:
             order = max([a.order for a in Artwork.objects.all()]) + 1
             instance.order = order
+
+    @property
+    def size(self):
+        return "%sx%scm" % (self.height, self.width)
 
 
 pre_save.connect(Artwork.update_order, Artwork)
