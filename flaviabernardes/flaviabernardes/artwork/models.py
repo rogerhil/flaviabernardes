@@ -1,5 +1,3 @@
-import random
-import string
 
 from django.db import models
 from django.db.models.signals import pre_save
@@ -105,6 +103,7 @@ class Artwork(models.Model):
     @property
     def size(self):
         return "%sx%scm" % (self.height, self.width)
+
 
 
 pre_save.connect(Artwork.update_order, Artwork)
