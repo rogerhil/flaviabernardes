@@ -8,7 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
         <meta name="author" content="Flavia Bernardes">
-        <meta name="description" content="{% block description %}Check out artist Flavia Bernardes' new website{% endblock %}">
+        <meta name="description" content="{% block description %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.description }}{% else %}Check out artist Flavia Bernardes' website{% endif %}{% endblock %}">
 
         <!-- pinterest -->
         <meta name="p:domain_verify" content="0abc82f2a4e2d934f1b07766abce62ee"/>
@@ -16,7 +16,7 @@
 
         <title>{% block title %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.title }}{% else %}Flavia Bernardes Art{% endif %}{% endblock %}</title>
         <meta property="og:title" content="{% block ogtitle %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.title }}{% else %}Flavia Bernardes Art{% endif %}{% endblock %}" />
-        <meta property="og:description" content="{% block ogdescription %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.description }}{% else %}Check out artist Flavia Bernardes' new website{% endif %}{% endblock %}" />
+        <meta property="og:description" content="{% block ogdescription %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.description }}{% else %}Check out artist Flavia Bernardes' website{% endif %}{% endblock %}" />
         <meta property="og:type" content="{% block ogtype %}website{% endblock %}" />
         <meta property="og:url" content="http://www.flaviabernardesart.com{% block ogurl %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.get_absolute_url }}{% else %}/{% endif %}{% endblock %}" />
         <meta property="og:image" content="http://www.flaviabernardesart.com{% block ogimage %}{% if page and page.social %}{% cropped_thumbnail page 'social' scale=1 %}{% else %}{% static 'img/amelie125x125.jpg' %}{% endif %}{% endblock %}" />
