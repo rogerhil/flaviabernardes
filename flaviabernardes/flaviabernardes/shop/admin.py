@@ -13,6 +13,8 @@ class CommonAdmin(object):
     link_display.allow_tags = True
 
     def artwork_display(self, instance):
+        if not instance.artwork:
+            return ""
         url = reverse('admin:artwork_artwork_change',
                       args=[str(instance.artwork.id)])
         return '<a href="%s">%s</a>' % (url, instance.artwork)
