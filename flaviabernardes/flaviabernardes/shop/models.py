@@ -43,7 +43,7 @@ class Original(models.Model, ShopItem):
     sold_out = models.BooleanField(default=False)
 
     def __str__(self):
-        return "Original: %s" % str(self.name_display)
+        return "Original: %s" % str(self.name_display())
 
     def price_display(self):
         if self.sold_out:
@@ -80,7 +80,7 @@ class Print(models.Model, ShopItem):
     sold_out = models.BooleanField(default=False)
 
     def __str__(self):
-        return "Print: %s" % str(self.name_display)
+        return "Print: %s" % str(self.name_display())
 
     def price_display(self):
         if self.sold_out:
