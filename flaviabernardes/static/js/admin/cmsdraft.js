@@ -49,6 +49,7 @@ $(window).ready(function () {
             contentCss: '/static/css/base.css,/static/css/blog.css',
             relative_urls: false,
             height: 600,
+            extended_valid_elements: '*[*],script[charset|defer|language|src|type]',
             toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | forecolor link | table | image imageupload | code",
         });
         window.setTimeout(function () {

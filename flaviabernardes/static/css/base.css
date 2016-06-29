@@ -21,10 +21,9 @@
 
 @font-face {
     font-family: 'Meg';
-    src: url('../font/2E4B6B_0_0.eot');
     src: url('../font/2E4B6B_0_0.eot?#iefix') format('embedded-opentype'),
-         url('../font/2E4B6B_0_0.woff2') format('woff2'),
          url('../font/2E4B6B_0_0.woff') format('woff'),
+         url('../font/2E4B6B_0_0.woff2') format('woff2'),
          url('../font/2E4B6B_0_0.ttf') format('truetype');
     -moz-font-feature-settings:"kern" 1;
     -moz-font-feature-settings:"kern=1";
@@ -1024,6 +1023,15 @@ figure.effect-lily:hover p {
     #header {
         height: 75px;
     }
+    .click-to-buy {
+        font-size: 16px !important;
+    }
+    .description .title {
+        font-size: 20px !important;
+    }
+    .details {
+        font-size: 14px !important;
+    }
 }
 
 
@@ -1177,4 +1185,30 @@ btn {
 .btn-light:focus,
 .btn-light:active {
     color: #ccc;
+}
+
+
+.click-to-buy {
+    background: rgba(1,1,1,0.8);
+    padding: 10px 30px;
+    display: inline-block;
+    margin: 10px 0 10px 0;
+    text-align: center;
+    color: white;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.click-to-buy:hover {
+    background: rgba(255,255,255,1);
+    color: black !important;
+    transition: all 0.5s ease;
+    text-decoration: none !important;
+}
+
+a.click-to-buy:visited,
+a.click-to-buy:active,
+a.click-to-buy:link {
+    text-decoration: none;
+    color: white;
 }

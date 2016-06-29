@@ -1,5 +1,8 @@
 #top-bar {
-    background-color: #eee;
+    *background-color: #eee;
+    *background-color: rgba(0,100,0,0.05);
+    background-color: rgba(254,236,20,0.3);
+    border-bottom: 1px solid #FEEC14;
     padding: 5px 0;
     font-family: Gothic;
 }
@@ -12,12 +15,19 @@
     font-weight: normal;
 }
 
+#top-bar button {
+    line-height: 28px;
+}
+
 #top-bar .top-bar-close {
     float: right;
     margin-right: 15px;
     font-weight: normal;
-    font-size: 14px;
+    font-size: 12px;
     cursor: pointer;
+    *color: #ce0202;
+    *color: #ce0202;
+    text-decoration: underline;
 }
 
 #top-bar .top-bar-close:hover {

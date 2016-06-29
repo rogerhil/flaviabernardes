@@ -165,7 +165,7 @@ SERVER_EMAIL = 'support@flaviabernardesart.com'
 
 LANDING_PAGE = False
 
-ENABLE_SHOP = False
+ENABLE_SHOP = True
 
 try:
     from .developmentsettings import *

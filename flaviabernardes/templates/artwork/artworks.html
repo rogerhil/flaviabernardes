@@ -81,9 +81,11 @@
                 scrollTop = $(window).scrollTop();
             }
             var url = preview_urls[$artwork.attr('artwork')].original;
-            var title = $artwork.find('.title').text();
+            var title = $artwork.find('figure').attr('title');
+            var description = $artwork.find('figure').attr('description');
+            var alt = $artwork.find('figure').attr('alt');
             var details = $artwork.find('.details').text();
-            var $img = $('<img src="' + url + '" alt="' + title + '" title="' + title + '" />');
+            var $img = $('<img src="' + url + '" alt="' + description + '" title="' + description + '" />');
             $img[0].src = url;  // preload
             $("#full-view").append($img);
             $("#full-view").append('<div class="artwork-preview-details"><p class="title">' + title + '</p><p>' + details + '</p></div>');
