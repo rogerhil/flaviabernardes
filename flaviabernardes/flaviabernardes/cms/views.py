@@ -3,7 +3,8 @@ from datetime import datetime
 
 from django.contrib.contenttypes.models import ContentType
 from django.views.generic import DetailView, TemplateView
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from django.conf import settings
 
 from ..utils import JsonView, JsonFormView
@@ -118,6 +119,16 @@ class SubPageView(TemplateView):
 
 class CustomPageView(TemplateView):
     template_name = 'cms/generic_page_view.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        resp = super(CustomPageView, self).dispatch(request, *args, **kwargs)
+        slug = kwargs['slug']
+        page = Page.objects.get(name=slug)
+        if page.sub_page_of:
+            kwargs['subslug'] = kwargs['slug']
+            kwargs['slug'] = page.sub_page_of.name
+            return HttpResponseRedirect(reverse('sub_page', kwargs=kwargs))
+        return resp
 
     def get_context_data(self, **kwargs):
         context = super(CustomPageView, self).get_context_data(**kwargs)

@@ -81,7 +81,8 @@ class BasePage(models.Model):
 
 
 class Page(BasePage, models.Model, CmsObject):
-    name = models.CharField(max_length=128, unique=True, editable=False)
+    name = models.CharField(max_length=128, unique=True, editable=False,
+                            verbose_name='Slug')
     sub_page_of = models.ForeignKey('Page', null=True, blank=True)
     newsletter = models.ForeignKey('newsletter.List', null=True, blank=True,
                                    default=1, on_delete=models.SET(None))

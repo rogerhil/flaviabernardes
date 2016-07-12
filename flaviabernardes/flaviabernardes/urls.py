@@ -93,9 +93,9 @@ urlpatterns += patterns('',
     url(r'^contact/$', ContactView.as_view(), name='contact'),
     url(r'^nl/(?P<slug>[-_\w/]+)/$', CustomConfirmationView.as_view(),
         name='custom_confirmation_page'),
+    url(r'^(?P<slug>[-_\w]+)/(?P<subslug>[-_\w]+)/$', SubPageView.as_view(), name='sub_page'),
     url(r'^(?P<slug>[-_\w/]+)/$', CustomPageView.as_view(),
         name='custom_page'),
-    url(r'^(?P<slug>[-_\w]+)/(?P<subslug>[-_\w]+)/$', SubPageView.as_view(), name='sub_page'),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
