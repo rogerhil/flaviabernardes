@@ -20,6 +20,7 @@ class Category(models.Model):
 class BasePost(models.Model):
     text = models.TextField()
     text2 = models.TextField(null=True, blank=True)
+    text3 = models.TextField(null=True, blank=True)
     description = models.CharField(max_length=255, null=True, blank=True,
                                    help_text=DESCRIPTION_HELP_TEXT)
     created = models.DateTimeField(auto_now_add=True, editable=False)
