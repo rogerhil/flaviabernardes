@@ -22,11 +22,15 @@ class BasePage(models.Model):
     content1 = models.TextField(help_text="This content appears AFTER the FIRST banner", null=True, blank=True)
     content2 = models.TextField(help_text="This content appears BEFORE the SECOND banner", null=True, blank=True)
     content3 = models.TextField(help_text="This content appears AFTER the SECOND banner", null=True, blank=True)
-    created = models.DateTimeField(auto_now_add=True, editable=False,
-                                   default=datetime.now)
-    updated = models.DateTimeField(auto_now=True, editable=False,
-                                   default=datetime.now)
-    footer = models.BooleanField(default=False)
+    content4 = models.TextField(help_text="This content appears AFTER the NEWSLETTER form", null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True, editable=False)
+    updated = models.DateTimeField(auto_now=True, editable=False)
+    footer = models.BooleanField(default=False, verbose_name='Show this page link in footer')
+
+    show_header = models.BooleanField(default=True, verbose_name='Show site header')
+    show_footer = models.BooleanField(default=True, verbose_name='Show site footer')
+    background_cover_image = models.ImageField(blank=True, upload_to='uploads')
+    background_cover = ImageRatioField('background_cover_image', '1920x1200')
 
     class Meta:
         abstract = True
@@ -96,13 +100,13 @@ class Page(BasePage, models.Model, CmsObject):
 
 class PageDraft(BasePage, CmsDraft):
     name = models.CharField(max_length=128, help_text="PLEASE PROVIDE A GOOD "
-        "NAME FOR THIS PAGE IF YOU ARE CREATING A NEW ONE NOW, SO YOU WON'T "
+        "SLUG NAME FOR THIS PAGE IF YOU ARE CREATING A NEW ONE NOW, SO YOU WON'T "
         "NEED TO CHANGE IT ANYMORE IN THE FUTURE. THIS VALUE ALSO CORRESPONDS "
         "TO THE SLUG OF THE PAGE THAT WILL APPEAR IN THE URL "
         "(e.g.: /artworks/slug/) AND IT IS COMPLICATED TO CHANGE THIS VALUE "
         "AFTERWARDS. PLEASE AVOID CHANGING THIS VALUE BECAUSE IT CORRESPONDS "
         "TO THE SLUG OF THE SUB PAGE AND IT WILL AFFECT DISQUS COMMENTS "
-        "REFERENCES AND GOOGLE INDEXING.")
+        "REFERENCES AND GOOGLE INDEXING.", verbose_name='Slug')
     sub_page_of = models.ForeignKey('Page', null=True, blank=True,
                                     related_name='pages_sub')
     newsletter = models.ForeignKey('newsletter.List', null=True, blank=True,

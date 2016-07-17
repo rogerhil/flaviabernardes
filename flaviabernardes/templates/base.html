@@ -87,67 +87,68 @@
             <img src="{% static 'img/ajax-loader.png' %}" class="ajax-loader">
         </div>
         {% block site %}
-            <div id="body">
-                <section id="header" {% if not enable_top_bar %}class="no-topbar"{% endif %}>
+            <div id="body" {% if page.background_cover_image %}class="background-cover" style="background-image: url({% cropped_thumbnail page 'background_cover' scale=1 %});"{% endif %}>
+                {% if page.show_header %}
+                    <section id="header" {% if not enable_top_bar %}class="no-topbar"{% endif %}>
 
-                    {% if enable_top_bar %}
-                        <div id="top-bar">
-                            <div class="top-bar-close">
-                                x
-                            </div>
-                            <div class="center-column newsletter-wrap">
-                                <div class="topbar-description">
-                                    {{ global_settings.top_sign_up_title }}
+                        {% if enable_top_bar %}
+                            <div id="top-bar">
+                                <div class="top-bar-close">
+                                    x
                                 </div>
-                                <div style="float: right;">
-                                    <form id="top-newsletter" class="newsletter" action="{% url 'newsletter' %}" method="post">
-                                        {% with global_settings.top_newsletter as newsletter %}
-                                            {% include "newsletter/line_form.html"  %}
-                                        {% endwith %}
-                                    </form>
+                                <div class="center-column newsletter-wrap">
+                                    <div class="topbar-description">
+                                        {{ global_settings.top_sign_up_title }}
+                                    </div>
+                                    <div style="float: right;">
+                                        <form id="top-newsletter" class="newsletter" action="{% url 'newsletter' %}" method="post">
+                                            {% with global_settings.top_newsletter as newsletter %}
+                                                {% include "newsletter/line_form.html"  %}
+                                            {% endwith %}
+                                        </form>
+                                    </div>
                                 </div>
+                                <div class="clear"></div>
                             </div>
-                            <div class="clear"></div>
+                        {% endif %}
+
+                        <div class="center-column">
+                            <div id="logo">
+                                {% block logo %}
+                                    <img src="{% static 'img/logo-small-bw.png' %}" style="width: 320px;" />
+                                {% endblock %}
+                            </div>
+                            <div class="transp transp-top">
+                                {% include "top-menu.html" %}
+                                <script>
+                                    $('.item').mouseover(function () {
+                                        $(this).find('.sub-menu').css('transform', 'scale(1, 1)');
+                                    });
+                                    $('.item').mouseout(function () {
+                                        if ($(window).width() <= 1000) return;
+                                        $(this).find('.sub-menu').css('transform', 'scale(1, 0)');
+                                    });
+                                </script>
+
+
+                                <a id="menu-toggle" href="javascript:;" class="btn btn-dark btn-lg toggle">
+                                    <i class="fa fa-1x fa-bars"></i>
+                                </a>
+                                <script>
+                                    $('#menu-toggle').click(function () {
+                                        if ($("#menu").is(':hidden')) {
+                                            $("#menu").slideDown();
+                                        } else {
+                                            $("#menu").slideUp();
+                                        }
+                                    });
+                                </script>
+
+                            </div>
+
                         </div>
-                    {% endif %}
-
-                    <div class="center-column">
-                        <div id="logo">
-                            {% block logo %}
-                                <img src="{% static 'img/logo-small-bw.png' %}" style="width: 320px;" />
-                            {% endblock %}
-                        </div>
-                        <div class="transp transp-top">
-                            {% include "top-menu.html" %}
-                            <script>
-                                $('.item').mouseover(function () {
-                                    $(this).find('.sub-menu').css('transform', 'scale(1, 1)');
-                                });
-                                $('.item').mouseout(function () {
-                                    if ($(window).width() <= 1000) return;
-                                    $(this).find('.sub-menu').css('transform', 'scale(1, 0)');
-                                });
-                            </script>
-
-
-                            <a id="menu-toggle" href="javascript:;" class="btn btn-dark btn-lg toggle">
-                                <i class="fa fa-1x fa-bars"></i>
-                            </a>
-                            <script>
-                                $('#menu-toggle').click(function () {
-                                    if ($("#menu").is(':hidden')) {
-                                        $("#menu").slideDown();
-                                    } else {
-                                        $("#menu").slideUp();
-                                    }
-                                });
-                            </script>
-
-                        </div>
-
-                    </div>
-                </section>
-
+                    </section>
+                {% endif %}
                 <div class="after-header"></div>
                 {% if enable_top_bar %}
                     <div class="after-header-topbar"></div>
@@ -163,6 +164,9 @@
                                 <div class="banner-title">
                                     {{ page.title }}
                                 </div>
+                        {% else %}
+                                <div class="" style="min-height: 50px; position: relative;">
+                        {% endif %}
                                 {% block cms_actions %}
                                     {% if user.is_authenticated and user.is_superuser %}
                                         <script src="{% static 'js/admin/cmsobjectlist.js' %}"></script>
@@ -179,7 +183,6 @@
                                     {% endif %}
                                 {% endblock %}
                             </div>
-                        {% endif %}
                     {% endblock %}
                 </div>
 
@@ -241,7 +244,7 @@
 
                 <div id="site-middle-anchor"></div>
                 {% if not page or page and not page.is_newsletter_confirmation_page %}
-                    <div class="site-middle scroll-fixed" fixat="75" anchor="site-middle-anchor">
+                    <div class="site-middle scroll-fixed {% if page.background_cover_image %}site-middle-background{% endif %}" fixat="75" anchor="site-middle-anchor">
                         <div class="center-column">
                             {% block container-middle %}
                                 <section class="container-middle">
@@ -274,45 +277,58 @@
                     </div>
                 {% endif %}
 
-                <div class="center-column">
-                    <section class="container-bottom">
-                        {% include "share.html"  %}
-                        <div class="clear"></div>
-                        <br>
-                        <p class="center">
-                            Feel free to share my work and photos with credit.
-                            All artwork and images of artwork are the sole property
-                            of Flavia Bernardes and may not be used or reproduced in
-                            any way for profit without permission. If you have any
-                            queries, please check my <a href="/artworks/faq/">FAQ page</a> for more information.
-                        </p>
-                        <br><br>
-                        {% block container-bottom %}
-                        {% endblock %}
-                        <div class="clear"></div>
-                    </section>
-                    <div class="clear"></div>
-                </div>
-
-                <div class="clear"></div>
-                <div style="height: 60px;"></div>
-                <div class="clear"></div>
-
-                <section id="footer">
-                    <div class="content">
-                        {% with '32' as size %}
-                            <div class="footer-social">{% include "social.html" %}</div>
-                        {% endwith %}
-                        <div class="copyright">&#9400 Flavia Bernardes, 2016. All rights reserved.</div>
-                        <div class="footer-submenu">
-                            <span class="first-pipe">|</span>
-                            {% for page in footer_pages %}
-                                <a href="{{ page.get_absolute_url }}">{{ page }}</a>{% if not forloop.last %} |{% endif %}
-                            {% endfor %}
+                {% block content4 %}
+                    {% if page and page.content4 %}
+                        <div class="center-column page-content3">
+                            {% autoescape off %}
+                                {{ page.content4 }}
+                            {% endautoescape %}
                         </div>
+                    {% endif %}
+                {% endblock %}
+
+                {% if page.show_footer %}
+
+                    <div class="center-column">
+                        <section class="container-bottom">
+                            {% include "share.html"  %}
+                            <div class="clear"></div>
+                            <br>
+                            <p class="center">
+                                Feel free to share my work and photos with credit.
+                                All artwork and images of artwork are the sole property
+                                of Flavia Bernardes and may not be used or reproduced in
+                                any way for profit without permission. If you have any
+                                queries, please check my <a href="/artworks/faq/">FAQ page</a> for more information.
+                            </p>
+                            <br><br>
+                            {% block container-bottom %}
+                            {% endblock %}
+                            <div class="clear"></div>
+                        </section>
                         <div class="clear"></div>
                     </div>
-                </section>
+
+                    <div class="clear"></div>
+                    <div style="height: 60px;"></div>
+                    <div class="clear"></div>
+
+                    <section id="footer">
+                        <div class="content">
+                            {% with '32' as size %}
+                                <div class="footer-social">{% include "social.html" %}</div>
+                            {% endwith %}
+                            <div class="copyright">&#9400 Flavia Bernardes, 2016. All rights reserved.</div>
+                            <div class="footer-submenu">
+                                <span class="first-pipe">|</span>
+                                {% for page in footer_pages %}
+                                    <a href="{{ page.get_absolute_url }}">{{ page }}</a>{% if not forloop.last %} |{% endif %}
+                                {% endfor %}
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </section>
+                {% endif %}
             </div>
         {% endblock %}
 
