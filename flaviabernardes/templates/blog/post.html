@@ -49,11 +49,41 @@
             {% endautoescape %}
         </div>
     </div>
+
     {% comment %}
     <h1>Related Posts</h1>
 
     <p>0 Thoughts on {{ post }}</p>
     {% endcomment %}
+{% endblock %}
+
+{% block content2 %}
+
+    {% if post.image_banner_with_content and post.content_for_banner %}
+        <div class="parallax banner site-middle-background" bg-size="1920x600"
+             style="background-image: url({% cropped_thumbnail post 'banner_with_content' scale=1 %});">
+            <div class="center-column" style="color: #fff;">
+                {% autoescape off %}
+                    {{ post.content_for_banner }}
+                {% endautoescape %}
+                {% if post.banner_newsletter %}
+                    <form class="newsletter" action="{% url 'newsletter' %}" method="post">
+                        {% with post.banner_newsletter as newsletter %}
+                            {% include "newsletter/line_form.html"  %}
+                        {% endwith %}
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% if post.text2 %}
+        <div class="center-column">
+            {% autoescape off %}
+                {{ post.text2 }}
+            {% endautoescape %}
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block banner2 %}
@@ -68,10 +98,20 @@
 
 
 {% block content3 %}
-    {% if post.text2 %}
+    {% if post.text3 %}
         <div class="center-column">
             {% autoescape off %}
-                {{ post.text2 }}
+                {{ post.text3 }}
+            {% endautoescape %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content4 %}
+    {% if post.text4 %}
+        <div class="center-column">
+            {% autoescape off %}
+                {{ post.text4 }}
             {% endautoescape %}
         </div>
     {% endif %}

@@ -8,6 +8,7 @@ from django.template.defaultfilters import Truncator, strip_tags
 from image_cropping import ImageRatioField
 
 from ..cms.base import CmsObject, CmsDraft, DESCRIPTION_HELP_TEXT
+from ..newsletter.models import List
 
 
 class Category(models.Model):
@@ -18,9 +19,15 @@ class Category(models.Model):
 
 
 class BasePost(models.Model):
-    text = models.TextField()
-    text2 = models.TextField(null=True, blank=True)
-    text3 = models.TextField(null=True, blank=True)
+    text = models.TextField(help_text="Content after the FIRST banner")
+    text2 = models.TextField(help_text="Content after the BANNER WITH CONTENT "
+                                       "**IF THERE IS ONE**",
+                             null=True, blank=True)
+    text3 = models.TextField(help_text="Content after the SECOND banner",
+                             null=True, blank=True)
+    text4 = models.TextField(help_text="Content after the GREY newsletter "
+                                       "near the footer",
+                             null=True, blank=True)
     description = models.CharField(max_length=255, null=True, blank=True,
                                    help_text=DESCRIPTION_HELP_TEXT)
     created = models.DateTimeField(auto_now_add=True, editable=False)
@@ -73,6 +80,9 @@ class Draft(BasePost, CmsDraft):
     slug = models.SlugField(max_length=64)
     post = models.ForeignKey(Post, null=True, blank=True, editable=False,
                              on_delete=models.SET(None))
+    banner_newsletter = models.ForeignKey('newsletter.List', null=True,
+                                          blank=True, default=1,
+                                          on_delete=models.SET(None))
 
     class cms:
         draft_related_class = Post
@@ -85,6 +95,9 @@ class Draft(BasePost, CmsDraft):
 class BaseImage(models.Model):
     name = models.CharField(max_length=64)
     image = models.ImageField(blank=True, upload_to='uploads')
+    banner_newsletter = models.ForeignKey('newsletter.List', null=True,
+                                          blank=True, default=1,
+                                          on_delete=models.SET(None))
 
     class Meta:
         abstract = True

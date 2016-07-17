@@ -14,8 +14,11 @@ from .models import Post, Draft, Category
 class PostAdmin(ImageCroppingMixin, CmsObjectAdmin, admin.ModelAdmin):
     #inlines = [ImageInline]
     fields = ('title', 'slug', 'description', 'tags', 'text', 'text2',
+              'text3', 'text4',
               'image_banner', 'banner', 'image_banner2', 'banner2',
-              'image_listing', 'listing', 'listing_half')
+              'image_listing', 'listing', 'listing_half',
+              'image_banner_with_content', 'banner_with_content',
+              'content_for_banner', 'banner_newsletter')
     list_display = ('title', 'slug', 'created', 'updated', 'modify')
 
 
