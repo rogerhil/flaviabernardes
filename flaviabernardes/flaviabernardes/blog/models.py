@@ -33,6 +33,11 @@ class BasePost(models.Model):
     listing_half = ImageRatioField('image_listing', '960x600')
     banner = ImageRatioField('image_banner', '1920x600')
     banner2 = ImageRatioField('image_banner2', '1920x1200')
+    image_banner_with_content = models.ImageField(blank=True,
+                                                  upload_to=settings.UPLOAD_TO)
+    banner_with_content = ImageRatioField('image_banner_with_content',
+                                          '1920x1200')
+    content_for_banner = models.TextField(null=True, blank=True)
 
     class Meta:
         abstract = True
