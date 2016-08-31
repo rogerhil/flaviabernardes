@@ -5,8 +5,11 @@ from django.core.urlresolvers import reverse, NoReverseMatch
 from django.core.exceptions import ValidationError
 
 from image_cropping import ImageRatioField
+from colorfield.fields import ColorField
 
 from .base import CmsObject, CmsDraft, DESCRIPTION_HELP_TEXT
+
+OPACITY_CHOICES = [(i, i) for i in [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]]
 
 
 class BasePage(models.Model):
@@ -32,11 +35,49 @@ class BasePage(models.Model):
     background_cover_image = models.ImageField(blank=True, upload_to='uploads')
     background_cover = ImageRatioField('background_cover_image', '1920x1200')
 
+    foreground_color = ColorField(null=True, blank=True)
+    box_background_color = ColorField(null=True, blank=True)
+    box_opacity = models.FloatField(choices=OPACITY_CHOICES, null=True, blank=True)
+    box_square = models.BooleanField(default=False)
+
+
     class Meta:
         abstract = True
 
     def __str__(self):
         return self.name
+
+    def box_background_color_rgba(self):
+        if not self.box_background_color:
+            return ""
+        color = self.box_background_color.strip('#')
+        rgb = "%s,%s,%s" % tuple(int(color[i:i+2], 16) for i in (0, 2 ,4))
+        rgba = "rgba(%s,%s)" % (rgb, self.box_opacity)
+        return rgba
+
+    def error_bg_rgba(self):
+        if not self.foreground_color:
+            return ""
+        color = self.foreground_color.strip('#')
+        rgb = "%s,%s,%s" % tuple(int(color[i:i+2], 16) for i in (0, 2 ,4))
+        rgba = "rgba(%s,%s)" % (rgb, str(0.3))
+        return rgba
+
+    def button_bg_rgba(self):
+        if not self.foreground_color:
+            return ""
+        color = self.foreground_color.strip('#')
+        rgb = "%s,%s,%s" % tuple(int(color[i:i+2], 16) for i in (0, 2 ,4))
+        rgba = "rgba(%s,%s)" % (rgb, str(0.2))
+        return rgba
+
+    def placeholder_foreground(self):
+        if not self.foreground_color:
+            return ""
+        color = self.foreground_color.strip('#')
+        rgb = tuple(int(color[i:i+2], 16) for i in (0, 2 ,4))
+        new_rgb = tuple([int(i * 0.7) for i in rgb])
+        return "rgb%s" % str(new_rgb)
 
     def get_absolute_url(self):
         if self.sub_page_of:

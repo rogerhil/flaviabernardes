@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'easy_thumbnails',
     'image_cropping',
+    'colorfield',
     'flaviabernardes.cms',
     'flaviabernardes.artwork',
     'flaviabernardes.blog',

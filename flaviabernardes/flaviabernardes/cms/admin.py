@@ -47,7 +47,7 @@ class CmsDraftAdmin(admin.ModelAdmin):
 
 PAGE_FIELDS = ('name', 'sub_page_of', 'title', 'description', 'footer',
                'show_header', 'show_footer', 'background_cover_image',
-               'background_cover',
+               'background_cover', 'foreground_color', 'box_background_color', 'box_opacity', 'box_square',
                'newsletter', 'content1', 'content2', 'content3', 'content4',
                'image_banner1', 'banner1',
                'image_banner2', 'banner2', 'image_social', 'social')

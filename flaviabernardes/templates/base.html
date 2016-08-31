@@ -50,20 +50,62 @@
         {% block extrajs %}{% endblock %}
 
         <style>
-            {% comment %}
-            {% if user.is_authenticated %}
-                .center-column {
-                    *border: 1px dashed red;
-                    background-color: #fff;
-                }
-                body {
-                    background-color: #fff8f8;
-                }
-                #header .content {
-                    background-color: #fff8f8 !important;
-                }
-            {% endif %}
-            {% endcomment %}
+            .site-middle-background input {
+                background: transparent;
+                color: {{ page.foreground_color }} !important;
+                font-weight: normal;
+                border: 1px solid;
+            }
+
+            .site-middle-background button {
+                background: {{page.button_bg_rgba}};
+                border: 1px solid;
+            }
+
+            .site-middle-background .newsletter button:hover {
+                color: {{page.placeholder_foreground}};
+                border-color: {{page.placeholder_foreground}};
+            }
+
+            .site-middle-background ::-webkit-input-placeholder {
+                color: {{page.placeholder_foreground}} !important;
+            }
+
+            .site-middle-background :-moz-placeholder {
+                color: {{page.placeholder_foreground}} !important;
+                opacity: 1;
+            }
+
+            .site-middle-background ::-moz-placeholder {
+                color: {{page.placeholder_foreground}} !important;
+                opacity: 1;
+            }
+
+            .site-middle-background :-ms-input-placeholder {
+                color: {{page.placeholder_foreground}} !important;
+            }
+
+            .site-middle-background ul.errorlist li {
+                color: #660000;
+                font-weight: normal;
+                background-color: {{page.error_bg_rgba}};
+                padding: 0 10px !important;
+                line-height: 30px;
+            }
+            #landing-page-block {
+                background-color: {{page.box_background_color_rgba}};
+                padding-top: 30px;
+                padding-bottom: 30px;
+            }
+            #landing-page-block.square {
+                max-width: 1020px;
+                margin: 0 auto;
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+            .background-cover {
+                color: {{ page.foreground_color }};
+            }
         </style>
         {% block extrastyle %}{% endblock %}
 
@@ -186,106 +228,113 @@
                     {% endblock %}
                 </div>
 
-                {% block content1 %}
-                    {% if page and page.content1 %}
-                        <div class="center-column page-content1">
-                            {% autoescape off %}
-                                {{ page.content1 }}
-                            {% endautoescape %}
-                        </div>
-                    {% endif %}
-                {% endblock %}
-
-                <div class="container-large">
-                    {% block container-large %}
-                    {% endblock %}
-                </div>
-
-                <div class="center-column">
-                    <section class="container-main">
-                        {% block container %}
-                        {% endblock %}
-                        <div class="clear"></div>
-                    </section>
-                    <div class="clear"></div>
-                </div>
-
-                {% block content2 %}
-                    {% if page and page.content2 %}
-                        <div class="center-column page-content2">
-                            {% autoescape off %}
-                                {{ page.content2 }}
-                            {% endautoescape %}
-                        </div>
-                    {% endif %}
-                {% endblock %}
-
-                <div>
-                    {% block banner2 %}
-                        {% if page and page.image_banner2 %}
-                            <div class="parallax banner banner2" bg-size="1920x600"
-                                 style="background-image: url({% cropped_thumbnail page 'banner2' scale=1 %});">
-                                <div class="center-column">
-                                </div>
+                {# START OF LANDING PAGE BLOCK #}
+                <div {% if page.background_cover_image %} id="landing-page-block" {% endif %} {% if page.background_cover_image and page.box_square %}class="square"{% endif %}>
+                    {% block content1 %}
+                        {% if page and page.content1 %}
+                            <div class="center-column page-content1">
+                                {% autoescape off %}
+                                    {{ page.content1 }}
+                                {% endautoescape %}
                             </div>
                         {% endif %}
                     {% endblock %}
-                </div>
 
-                {% block content3 %}
-                    {% if page and page.content3 %}
-                        <div class="center-column page-content3">
-                            {% autoescape off %}
-                                {{ page.content3 }}
-                            {% endautoescape %}
-                        </div>
-                    {% endif %}
-                {% endblock %}
-
-                <div id="site-middle-anchor"></div>
-                {% if not page or page and not page.is_newsletter_confirmation_page %}
-                    <div class="site-middle scroll-fixed {% if page.background_cover_image %}site-middle-background{% endif %}" fixat="75" anchor="site-middle-anchor">
-                        <div class="center-column">
-                            {% block container-middle %}
-                                <section class="container-middle">
-                                    <div class="newsletter-wrap">
-                                        <p class="center">
-                                            {% block newsletter_description %}
-                                                {% if page and page.newsletter and page.newsletter.sign_up_title %}
-                                                    {{ page.newsletter.sign_up_title }}
-                                                {% else %}
-                                                    {% if default_newsletter_list %}
-                                                        {{ default_newsletter_list.sign_up_title }}
-                                                    {% else %}
-                                                        Want an exclusive artwork wallpaper? Add your name and email below
-                                                    {% endif %}
-                                                {% endif %}
-                                            {% endblock %}
-                                        </p>
-                                        <form id="newsletter" class="newsletter" action="{% url 'newsletter' %}" method="post">
-                                            {% with page.newsletter as newsletter %}
-                                                {% include "newsletter/line_form.html"  %}
-                                            {% endwith %}
-                                        </form>
-                                    </div>
-                                    <div class="clear"></div>
-                                    <script src="{% static 'js/jquery.form.min.js' %}"></script>
-                                    <script src="{% static 'js/newsletter.js' %}"></script>
-                                </section>
-                            {% endblock %}
-                        </div>
+                    <div class="container-large">
+                        {% block container-large %}
+                        {% endblock %}
                     </div>
-                {% endif %}
 
-                {% block content4 %}
-                    {% if page and page.content4 %}
-                        <div class="center-column page-content3">
-                            {% autoescape off %}
-                                {{ page.content4 }}
-                            {% endautoescape %}
+                    <div class="center-column">
+                        <section class="container-main">
+                            {% block container %}
+                            {% endblock %}
+                            <div class="clear"></div>
+                        </section>
+                        <div class="clear"></div>
+                    </div>
+
+                    {% block content2 %}
+                        {% if page and page.content2 %}
+                            <div class="center-column page-content2">
+                                {% autoescape off %}
+                                    {{ page.content2 }}
+                                {% endautoescape %}
+                            </div>
+                        {% endif %}
+                    {% endblock %}
+
+                    <div>
+                        {% block banner2 %}
+                            {% if page and page.image_banner2 %}
+                                <div class="parallax banner banner2" bg-size="1920x600"
+                                     style="background-image: url({% cropped_thumbnail page 'banner2' scale=1 %});">
+                                    <div class="center-column">
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endblock %}
+                    </div>
+
+                    {% block content3 %}
+                        {% if page and page.content3 %}
+                            <div class="center-column page-content3">
+                                {% autoescape off %}
+                                    {{ page.content3 }}
+                                {% endautoescape %}
+                            </div>
+                        {% endif %}
+                    {% endblock %}
+
+                    <div id="site-middle-anchor"></div>
+                    {% if not page or page and not page.is_newsletter_confirmation_page %}
+                        <div class="site-middle scroll-fixed {% if page.background_cover_image %}site-middle-background{% endif %}" fixat="75" anchor="site-middle-anchor">
+                            <div class="center-column">
+                                {% block container-middle %}
+                                    <section class="container-middle">
+                                        <div class="newsletter-wrap">
+                                            {% if page.background_cover_image and page.newsletter.sign_up_title.strip or not page.background_cover_image %}
+                                                <p class="center">
+                                                    {% block newsletter_description %}
+                                                        {% if page and page.newsletter and page.newsletter.sign_up_title %}
+                                                            {{ page.newsletter.sign_up_title }}
+                                                        {% else %}
+                                                            {% if default_newsletter_list %}
+                                                                {{ default_newsletter_list.sign_up_title }}
+                                                            {% else %}
+                                                                Want an exclusive artwork wallpaper? Add your name and email below
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endblock %}
+                                                </p>
+                                            {% endif %}
+                                            <form id="newsletter" class="newsletter" action="{% url 'newsletter' %}" method="post">
+                                                {% with page.newsletter as newsletter %}
+                                                    {% include "newsletter/line_form.html"  %}
+                                                {% endwith %}
+                                            </form>
+                                        </div>
+                                        <div class="clear"></div>
+                                        <script src="{% static 'js/jquery.form.min.js' %}"></script>
+                                        <script src="{% static 'js/newsletter.js' %}"></script>
+                                    </section>
+                                {% endblock %}
+                            </div>
                         </div>
                     {% endif %}
-                {% endblock %}
+
+                    {% block content4 %}
+                        {% if page and page.content4 %}
+                            <div class="center-column page-content3">
+                                {% autoescape off %}
+                                    {{ page.content4 }}
+                                {% endautoescape %}
+                            </div>
+                        {% endif %}
+                    {% endblock %}
+
+                </div>
+                {# END OF LANDING PAGE BLOCK #}
 
                 {% if page.show_footer or not page %}
 
