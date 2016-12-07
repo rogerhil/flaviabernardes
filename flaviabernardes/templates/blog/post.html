@@ -78,7 +78,11 @@
 {% endblock %}
 
 {% block newsletter_description %}
-    Want more blog posts like this in your inbox? Plus an exclusive artwork wallpaper? Sign up below
+    {% if post.newsletter_form_title %}
+        {{ post.newsletter_form_title }}
+    {% else %}
+        Want more blog posts like this in your inbox? Plus an exclusive artwork wallpaper? Sign up below
+    {% endif %}
 {% endblock %}
 
 {% block container-bottom %}

@@ -23,6 +23,8 @@ class BasePost(models.Model):
     text3 = models.TextField(null=True, blank=True)
     description = models.CharField(max_length=255, null=True, blank=True,
                                    help_text=DESCRIPTION_HELP_TEXT)
+    newsletter_form_title = models.CharField(max_length=255, null=True,
+                                             blank=True)
     created = models.DateTimeField(auto_now_add=True, editable=False)
     updated = models.DateTimeField(auto_now=True, editable=False)
     tags = models.ManyToManyField(Category)

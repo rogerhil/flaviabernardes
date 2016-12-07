@@ -13,9 +13,9 @@ from .models import Post, Draft, Category
 @admin.register(Post)
 class PostAdmin(ImageCroppingMixin, CmsObjectAdmin, admin.ModelAdmin):
     #inlines = [ImageInline]
-    fields = ('title', 'slug', 'description', 'tags', 'text', 'text2',
-              'image_banner', 'banner', 'image_banner2', 'banner2',
-              'image_listing', 'listing', 'listing_half')
+    fields = ('title', 'slug', 'description', 'newsletter_form_title', 'tags',
+              'text', 'text2', 'image_banner', 'banner', 'image_banner2',
+              'banner2', 'image_listing', 'listing', 'listing_half')
     list_display = ('title', 'slug', 'created', 'updated', 'modify')
 
 
