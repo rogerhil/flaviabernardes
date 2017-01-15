@@ -1,5 +1,5 @@
-flaviabernardes
-Django
+Django==1.8
+django-colorfield
 easy_thumbnails
 django_image_cropping
 mailchimp

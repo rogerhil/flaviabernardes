@@ -175,7 +175,9 @@ class ImagesPathsView(JsonView):
             os.makedirs(settings.UPLOAD_CMS_IMAGES_PATH)
         j = lambda f: "/media/%s" % os.path.join(
                        settings.UPLOAD_CMS_IMAGES_PATH, f).split('media/')[-1]
-        paths = [j(f) for f in os.listdir(settings.UPLOAD_CMS_IMAGES_PATH)]
+        files = [os.path.join(settings.UPLOAD_CMS_IMAGES_PATH, f) for f in os.listdir(settings.UPLOAD_CMS_IMAGES_PATH)]
+        sorted_files = reversed(sorted(files, key=os.path.getmtime))
+        paths = [j(f) for f in sorted_files]
         return {'paths': paths}
 
 
