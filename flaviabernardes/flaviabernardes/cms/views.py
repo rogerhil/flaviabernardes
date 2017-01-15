@@ -182,9 +182,11 @@ class ImagesPathsView(JsonView):
                  for f in os.listdir(settings.UPLOAD_CMS_IMAGES_PATH)]
         sorted_files = reversed(sorted(files, key=lambda x: x['timestamp']))
         paths = OrderedDict()
+        df = lambda x : datetime.fromtimestamp(x).strftime('%Y-%m-%d')
         for item in sorted_files:
-            paths.setdefault(item['timestamp'], {'date': item['date'], 'items': []})
-            paths[item['timestamp']]['items'].append(j(item))
+            key = df(item['timestamp'])
+            paths.setdefault(key, {'date': item['date'], 'items': []})
+            paths[key]['items'].append(j(item))
         return {'paths': list(reversed(list(OrderedDict(sorted(paths.items())).values())))}
 
 
