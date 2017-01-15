@@ -173,12 +173,18 @@ class ImagesPathsView(JsonView):
     def json_get(self, request, *args, **kwargs):
         if not os.path.isdir(settings.UPLOAD_CMS_IMAGES_PATH):
             os.makedirs(settings.UPLOAD_CMS_IMAGES_PATH)
-        j = lambda f: "/media/%s" % os.path.join(
-                       settings.UPLOAD_CMS_IMAGES_PATH, f).split('media/')[-1]
-        files = [os.path.join(settings.UPLOAD_CMS_IMAGES_PATH, f) for f in os.listdir(settings.UPLOAD_CMS_IMAGES_PATH)]
-        sorted_files = reversed(sorted(files, key=os.path.getmtime))
-        paths = [j(f) for f in sorted_files]
-        return {'paths': paths}
+        j = lambda f: dict(path="/media/%s" % os.path.join(settings.UPLOAD_CMS_IMAGES_PATH, f['path']).split('media/')[-1], date=f['date'])
+        date_format = lambda x : datetime.fromtimestamp(x).strftime('%b %d, %Y')
+        files = [dict(path=os.path.join(settings.UPLOAD_CMS_IMAGES_PATH, f),
+                      timestamp=os.path.getmtime(os.path.join(settings.UPLOAD_CMS_IMAGES_PATH, f)),
+                      date=date_format(os.path.getmtime(os.path.join(settings.UPLOAD_CMS_IMAGES_PATH, f))))
+                 for f in os.listdir(settings.UPLOAD_CMS_IMAGES_PATH)]
+        sorted_files = reversed(sorted(files, key=lambda x: x['timestamp']))
+        paths = dict()
+        for item in sorted_files:
+            paths.setdefault(item['date'], [])
+            paths[item['date']].append(j(item))
+        return {'paths': list(paths.items())}
 
 
 class PurgeUnusedImagesView(JsonView):
