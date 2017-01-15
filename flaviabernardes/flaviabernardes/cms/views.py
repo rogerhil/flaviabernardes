@@ -183,9 +183,9 @@ class ImagesPathsView(JsonView):
         sorted_files = reversed(sorted(files, key=lambda x: x['timestamp']))
         paths = OrderedDict()
         for item in sorted_files:
-            paths.setdefault(item['date'], [])
-            paths[item['date']].append(j(item))
-        return {'paths': sorted(paths.items(), key=lambda x: x[1][0]['timestamp'])}
+            paths.setdefault(item['timestamp'], {'date': item['date'], 'items': []})
+            paths[item['timestamp']]['items'].append(j(item))
+        return {'paths': list(reversed(OrderedDict(sorted(paths.items())).values()))}
 
 
 class PurgeUnusedImagesView(JsonView):

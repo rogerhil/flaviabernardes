@@ -5,3 +5,5 @@ django_image_cropping
 mailchimp
 madmimi
 PyYAML
+bs4
+cssutils
