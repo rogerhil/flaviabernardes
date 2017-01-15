@@ -13,7 +13,7 @@ from .artwork.views import PaintingsView, ArtworksSortJson, ArtworksFilter
 from .blog.views import BlogView, PostView
 from .cms.views import CmsDraftPublishView, CmsObjectNewDraftView, \
                        CmsDraftPreview, SubPageView, CustomPageView, \
-                       UploadImageView, ImagesPathsView
+                       UploadImageView, ImagesPathsView, PurgeUnusedImagesView
 from .globalsettings.views import CloseTopBarView
 
 from .fbauth.views import LoginJson, LogoutJson
@@ -70,6 +70,8 @@ urlpatterns += patterns('',
         name='upload_image'),
     url(r'^admin/cms/image/list/$', s(ImagesPathsView.as_view()),
         name='list_images'),
+    url(r'^admin/cms/image/purge_all/$', s(PurgeUnusedImagesView.as_view()),
+        name='purge_all_images'),
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^login/json/$', LoginJson.as_view(), name='login'),
     #url(r'^logout/json/$', LogoutJson.as_view(), name='logout'),

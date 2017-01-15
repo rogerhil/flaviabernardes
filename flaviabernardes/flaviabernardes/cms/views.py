@@ -1,5 +1,9 @@
 import os
+import re
+
 from datetime import datetime
+from bs4 import BeautifulSoup
+from cssutils import parseStyle
 
 from django.contrib.contenttypes.models import ContentType
 from django.views.generic import DetailView, TemplateView
@@ -11,8 +15,8 @@ from ..utils import JsonView, JsonFormView
 from ..artwork.views import PaintingsView
 from ..blog.views import BlogView, PostView
 from ..views import AboutView, ContactView
-from ..blog.models import Draft
-from .models import Page
+from ..blog.models import Draft, Post
+from .models import Page, PageDraft
 from .forms import UploadFileForm
 
 
@@ -173,3 +177,60 @@ class ImagesPathsView(JsonView):
                        settings.UPLOAD_CMS_IMAGES_PATH, f).split('media/')[-1]
         paths = [j(f) for f in os.listdir(settings.UPLOAD_CMS_IMAGES_PATH)]
         return {'paths': paths}
+
+
+class PurgeUnusedImagesView(JsonView):
+
+    bg_url_regex = re.compile(r'.*url\(["\']{0,1}([\w\-/]+)["\']{0,1}\).*')
+
+    @classmethod
+    def get_images(cls, items):
+        imgs = set()
+        attrs = ['content1', 'content2', 'content3', 'content4', 'text',
+                 'text2', 'text3']
+        a = lambda c: set([os.path.split(i.attrs['src'])[1] for i in
+                           BeautifulSoup(c or "", "html.parser").find_all('img')])
+
+        def b(c):
+            bg_imgs = set()
+            for i in BeautifulSoup(c or "", "html.parser").select('[style]'):
+                style = parseStyle(i.attrs['style'])
+                m = cls.bg_url_regex.match(style.background)
+                if m:
+                    bg_imgs |= os.path.split(m.groups()[0])[1]
+                m = cls.bg_url_regex.match(style.backgroundImage)
+                if m:
+                    bg_imgs |= os.path.split(m.groups()[0])[1]
+            return bg_imgs
+
+        for item in items:
+            for attr in attrs:
+                value = getattr(item, attr, None)
+                if value is not None:
+                    imgs |= a(value)
+                    imgs |= b(value)
+        return imgs
+
+    def get_unused_images(self):
+        used = self.get_images(PageDraft.objects.all())
+        used |= self.get_images(Page.objects.all())
+        used |= self.get_images(Draft.objects.all())
+        used |= self.get_images(Post.objects.all())
+        current = os.listdir(settings.UPLOAD_CMS_IMAGES_PATH)
+        return set(current) - used
+
+    def json_get(self, request, *args, **kwargs):
+        unused = list(self.get_unused_images())
+        j = lambda f: "/media/%s" % os.path.join(
+                       settings.UPLOAD_CMS_IMAGES_PATH, f).split('media/')[-1]
+        paths = [j(f) for f in unused]
+        return {'paths': paths}
+
+    def json_post(self, request, *args, **kwargs):
+        unused = list(self.get_unused_images())
+        removed = []
+        for img in unused:
+            path = os.path.join(settings.UPLOAD_CMS_IMAGES_PATH, img)
+            #os.remove(path)
+            removed.append(path)
+        return {'removed': removed}
