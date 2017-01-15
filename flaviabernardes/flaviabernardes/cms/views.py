@@ -2,6 +2,7 @@ import os
 import re
 
 from datetime import datetime
+from collections import OrderedDict
 from bs4 import BeautifulSoup
 from cssutils import parseStyle
 
@@ -180,11 +181,11 @@ class ImagesPathsView(JsonView):
                       date=date_format(os.path.getmtime(os.path.join(settings.UPLOAD_CMS_IMAGES_PATH, f))))
                  for f in os.listdir(settings.UPLOAD_CMS_IMAGES_PATH)]
         sorted_files = reversed(sorted(files, key=lambda x: x['timestamp']))
-        paths = dict()
+        paths = OrderedDict()
         for item in sorted_files:
             paths.setdefault(item['date'], [])
             paths[item['date']].append(j(item))
-        return {'paths': list(paths.items())}
+        return {'paths': sorted(paths.items())}
 
 
 class PurgeUnusedImagesView(JsonView):
