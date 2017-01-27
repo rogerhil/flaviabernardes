@@ -7,3 +7,4 @@ madmimi
 PyYAML
 bs4
 cssutils
+git+https://github.com/camfulton/python-mailerlite.git

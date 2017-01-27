@@ -1,6 +1,7 @@
 from mailchimp import Mailchimp, ListAlreadySubscribedError
 from madmimi import MadMimi
 
+import mailerlite
 
 from django.conf import settings
 
@@ -25,6 +26,9 @@ class EmailMarketing(object):
                                        settings.MADMIMI_API_KEY)
             elif self.is_mailchimp():
                 self._client = Mailchimp(settings.MAILCHIMP_API_KEY)
+            elif self.is_mailerlite():
+                self._client = mailerlite.Api(
+                                           api_key=settings.MAILERLITE_API_KEY)
             else:
                 raise NotImplementedError('EmailMarketing provider %s is '
                         'invalid.' % settings.CURRENT_EMAIL_MARKETING_PROVIDER)
@@ -38,12 +42,18 @@ class EmailMarketing(object):
         cur = settings.CURRENT_EMAIL_MARKETING_PROVIDER
         return cur == settings.MAILCHIMP
 
+    def is_mailerlite(self):
+        cur = settings.CURRENT_EMAIL_MARKETING_PROVIDER
+        return cur == settings.MAILERLITE
+
     def create_list(self, list_id, name=None):
         if self.is_mailchimp():
             raise NotImplementedError("Mailchimp does not support create list "
                                       "at the moment")
         elif self.is_madmimi():
-            self.client.add_list(list_id)
+            return self.client.add_list(list_id)
+        elif self.is_mailerlite():
+            return self.client.create_list(name)
         else:
             raise NotImplementedError('EmailMarketing provider %s is '
                         'invalid.' % settings.CURRENT_EMAIL_MARKETING_PROVIDER)
@@ -59,6 +69,13 @@ class EmailMarketing(object):
                        email, list_id)
             self.client.add_contacts([contact], audience_list=list_id)
             #self.client.subscribe(email, list_id)
+        elif self.is_mailerlite():
+            self.client.subscribe(
+                list_id=list_id,
+                email=email,
+                fields=dict(last_name=kwargs.get('last_name'),
+                            name=kwargs.get('first_name'))
+            )
         else:
             raise NotImplementedError('EmailMarketing provider %s is '
                         'invalid.' % settings.CURRENT_EMAIL_MARKETING_PROVIDER)
@@ -68,6 +85,8 @@ class EmailMarketing(object):
             self.client.lists.unsubscribe(list_id, dict(email=email))
         elif self.is_madmimi():
             self.client.unsubscribe(email, list_id)
+        elif self.is_mailerlite():
+            self.client.unsubscribe(email)
         else:
             raise NotImplementedError('EmailMarketing provider %s is '
                         'invalid.' % settings.CURRENT_EMAIL_MARKETING_PROVIDER)

@@ -44,6 +44,9 @@ class BaseSubscriberForm(forms.Form):
                                    subscriber.uuid)
         body = list_obj.email_message % dict(name=str(subscriber),
                                              link=link)
+        #print()
+        #print(body)
+        #print()
         send_mail(list_obj.email_subject, body, settings.DEFAULT_FROM_EMAIL,
                   [email], html_message=body)
 

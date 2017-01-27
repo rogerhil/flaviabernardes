@@ -1,7 +1,7 @@
 import uuid
 
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
 
@@ -53,11 +53,14 @@ class List(models.Model):
 
     @staticmethod
     def create_remote_list(sender, instance, **kwargs):
-        client = EmailMarketing()
-        client.create_list(instance.list_id, instance.name)
+        if not instance.id:
+            client = EmailMarketing()
+            new_list = client.create_list(instance.list_id, instance.name)
+            if instance.list_id != new_list.id:
+                instance.list_id = new_list.id
 
 
-post_save.connect(List.create_remote_list, List)
+pre_save.connect(List.create_remote_list, List)
 
 
 class Subscription(models.Model):
