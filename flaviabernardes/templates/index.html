@@ -4,22 +4,34 @@
 {% load cropping %}
 
 {% block extrastyle %}
-    <link href="{% static 'css/home.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/home.css' %}?v=0.0.1" rel="stylesheet" />
     {% if enable_shop %}
-        <link href="{% static 'css/homewithshop.css' %}" rel="stylesheet" />
+        <link href="{% static 'css/homewithshop.css' %}?v=0.0.1" rel="stylesheet" />
     {% endif %}
+    <style>
+        {% if global_settings.foreground_color %}
+            .menu-home a {
+                color: {{ global_settings.foreground_color }} !important;
+            }
+        {% endif %}
+        {% if global_settings.menu_bar_background_color_rgba %}
+            #home .transp {
+                background-color: {{ global_settings.menu_bar_background_color_rgba }};
+            }
+        {% endif %}
+    </style>
 {% endblock %}
 
 {% block site %}
     <section id="home">
-        <div class="home-overlay"></div>
+        <div class="bg_images"></div>
         <div class="home-bar">
             <div id="logo-div">
 
                 {# <div style="width: 960; height: 20px; background: green; margin: 0 auto;"></div> #}
 
                 <div id="logo-home" style="display: none;">
-                    <img src="{% static 'img/logo-big.png' %}" />
+                    <img src="{% static 'img/logo-big.png' %}" style="filter: {{ global_settings.foreground_color_hsl }}" />
                 </div>
             </div>
             <div class="content">
@@ -27,7 +39,13 @@
                     {% include "home-menu.html" %}
                 </div>
             </div>
+            <script src="{% static 'js/jquery.backstretch.min.js' %}"></script>
             <script>
+
+                var BG_IMAGES = {% if global_settings.main_page_background_images %}{% autoescape off %}{{ global_settings.main_page_background_images }}{% endautoescape %}{% else %}['/static/img/amelie-home.jpg']{% endif %};
+                $('.bg_images').backstretch(BG_IMAGES, {duration: 3000, fade: 750});
+
+
                 $('#logo-home').fadeIn(1000);
                 $('.content').fadeIn(2000);
                 $('.home-bar a').click(function (e) {

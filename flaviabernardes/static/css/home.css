@@ -30,7 +30,7 @@
     color: #fff;
     z-index: 999 !important;
     font-weight: bold;
-    background-image: url(/static/img/amelie-home.jpg);
+    /*background-image: url(/static/img/amelie-home.jpg);*/
     display: table;
     position: relative;
     width: 100%;
