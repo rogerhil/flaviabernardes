@@ -38,6 +38,7 @@ class GlobalSettings(models.Model):
     main_page_bg_5 = ImageRatioField('main_page_bg_image_5', '1920x1200')
 
     foreground_color = ColorField(null=True, blank=True)
+    logo_invert_color = models.BooleanField(default=False)
     menu_bar_background_color = ColorField(null=True, blank=True)
     menu_bar_opacity = models.FloatField(choices=OPACITY_CHOICES, null=True,
                                          blank=True)

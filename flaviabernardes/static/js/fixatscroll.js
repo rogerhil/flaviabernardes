@@ -14,6 +14,9 @@ function scrollFixedElements() {
     var stop = $anchor.offset().top;
     var wtop = $(window).scrollTop();
     var fixat = Number($sm.attr('fixat'));
+    if (!$('#header').hasClass('no-topbar')) {
+        fixat = 115;
+    }
     if ((wtop + fixat) > stop) {
         $sm.css('position', 'fixed');
         $sm.css('top', fixat + 'px');

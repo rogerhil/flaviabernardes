@@ -13,6 +13,10 @@
             .menu-home a {
                 color: {{ global_settings.foreground_color }} !important;
             }
+            .menu-top a,
+            .menu-top a:visited {
+                color: {{ global_settings.foreground_color }} !important;
+            }
         {% endif %}
         {% if global_settings.menu_bar_background_color_rgba %}
             #home .transp {
@@ -31,7 +35,7 @@
                 {# <div style="width: 960; height: 20px; background: green; margin: 0 auto;"></div> #}
 
                 <div id="logo-home" style="display: none;">
-                    <img src="{% static 'img/logo-big.png' %}" style="filter: {{ global_settings.foreground_color_hsl }}" />
+                    <img src="{% static 'img/logo-big.png' %}" {% if global_settings.logo_invert_color %}style="filter: invert()"{% endif %} />
                 </div>
             </div>
             <div class="content">
