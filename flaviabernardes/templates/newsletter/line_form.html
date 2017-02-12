@@ -9,7 +9,7 @@
 
 {% block list_id %}
     <input type="hidden" name="list_id" value="{% if newsletter %}{{ newsletter.list_id }}{% else %}Newsletter{% endif %}" />
-    <input type="hidden" name="provider" value="{% if newsletter %}{{ newsletter.provider }}{% else %}madmimi{% endif %}" />
+    <input type="hidden" name="provider" value="{% if newsletter %}{{ newsletter.provider }}{% else %}mailerlite{% endif %}" />
 {% endblock %}
 
 <ul>
