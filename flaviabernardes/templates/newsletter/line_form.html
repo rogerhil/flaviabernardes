@@ -8,7 +8,7 @@
 {% csrf_token %}
 
 {% block list_id %}
-    <input type="hidden" name="list_id" value="{% if newsletter %}{{ newsletter.list_id }}{% else %}{{ default_newsletter_list }}{% endif %}" />
+    <input type="hidden" name="list_id" value="{% if newsletter %}{{ newsletter.list_id }}{% else %}{{ default_newsletter_list.list_id }}{% endif %}" />
     <input type="hidden" name="provider" value="{% if newsletter %}{{ newsletter.provider }}{% else %}mailerlite{% endif %}" />
 {% endblock %}
 
