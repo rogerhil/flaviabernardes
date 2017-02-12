@@ -28,7 +28,7 @@
     <section id="home">
         <div class="bg_images"></div>
         <div class="home-bar">
-            <div id="logo-div">
+            <div id="logo-div" class="transp" style="padding: 15px 0;">
 
                 {# <div style="width: 960; height: 20px; background: green; margin: 0 auto;"></div> #}
 
@@ -67,6 +67,7 @@
                     $('#menu').addClass('menu-top');
                     $('.transp').removeClass('menu-home');
                     $('#home').addClass('home-top');
+                    $('.bg_images').fadeOut();
                     window.setTimeout(function () {
                         window.setTimeout(function () {
                             window.location.replace(href);
