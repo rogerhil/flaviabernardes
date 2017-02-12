@@ -9,6 +9,7 @@ from image_cropping.templatetags.cropping import cropped_thumbnail
 from colorfield.fields import ColorField
 
 from ..newsletter.models import List, SIGN_UP_TITLE
+from ..cms.models import Page
 
 OPACITY_CHOICES = [(i, i) for i in [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]]
 
@@ -43,7 +44,15 @@ class GlobalSettings(models.Model):
     menu_bar_opacity = models.FloatField(choices=OPACITY_CHOICES, null=True,
                                          blank=True)
 
+    menu_1 = models.ForeignKey(Page, null=True, blank=True, related_name="menu_1_global_setting")
+    menu_2 = models.ForeignKey(Page, null=True, blank=True, related_name="menu_2_global_setting")
+    menu_3 = models.ForeignKey(Page, null=True, blank=True, related_name="menu_3_global_setting")
+    menu_4 = models.ForeignKey(Page, null=True, blank=True, related_name="menu_4_global_setting")
+    menu_5 = models.ForeignKey(Page, null=True, blank=True, related_name="menu_5_global_setting")
+
     _cache_object = None
+
+    _menus_cache = None
 
     def __str__(self):
         return "Global Settings"
@@ -57,6 +66,7 @@ class GlobalSettings(models.Model):
     @staticmethod
     def refresh_cache(sender, instance, **kwargs):
         GlobalSettings._cache_object = None
+        GlobalSettings._menus_cache = None
 
     @property
     def foreground_color_hsl(self):
@@ -84,5 +94,25 @@ class GlobalSettings(models.Model):
         cr = lambda x : cropped_thumbnail({}, self, base % x)
         return [cr(i) for i in range(1, 6) if getattr(self, base % i, None)]
 
+    @classmethod
+    def get_pages(cls):
+        return dict([(p.name, p)
+                     for p in Page.objects.filter(sub_page_of=None)])
+
+    @property
+    def menus(self):
+        if not self._menus_cache:
+            default = ['artworks', 'shop/originals', 'about', 'blog',
+                       'contact']
+            pages = self.get_pages()
+            self._menus_cache = []
+            for i in range(len(default)):
+                page = getattr(self, 'menu_%s' % (i + 1))
+                if not page:
+                    page = pages[default[i]]
+                self._menus_cache.append(page)
+            self._menus_cache.reverse()
+        return self._menus_cache
 
 post_save.connect(GlobalSettings.refresh_cache, GlobalSettings)
+post_save.connect(GlobalSettings.refresh_cache, Page)

@@ -30,30 +30,30 @@ sitemaps = dict(
 is_superuser = user_passes_test(lambda u: u.is_superuser, '/')
 s = lambda v: csrf_exempt(is_superuser(v))
 
-if settings.ENABLE_SHOP:
-    urlpatterns = [
-        url(r'^shop/$', RedirectView.as_view(pattern_name='shop_originals'),
-            name='shop'),
-        url(r'^shop/originals/$', ShopOriginalsView.as_view(),
-            name='shop_originals'),
-        url(r'^shop/prints/$', ShopPrintsView.as_view(),
-            name='shop_prints'),
-        url(r'^shop/sort/$', s(ShopSortJson.as_view()),
-            name='shop_sort'),
-    ]
-else:
-    urlpatterns = [
-        url(r'^shop/$', s(RedirectView.as_view(pattern_name='shop_originals')),
-            name='shop'),
-        url(r'^shop/originals/$', s(ShopOriginalsView.as_view()),
-            name='shop_originals'),
-        url(r'^shop/prints/$', s(ShopPrintsView.as_view()),
-            name='shop_prints'),
-        url(r'^shop/sort/$', s(ShopSortJson.as_view()),
-            name='shop_sort'),
-    ]
+# if settings.ENABLE_SHOP:
+#     urlpatterns = [
+#         url(r'^shop/$', RedirectView.as_view(pattern_name='shop_originals'),
+#             name='shop'),
+#         url(r'^shop/originals/$', ShopOriginalsView.as_view(),
+#             name='shop_originals'),
+#         url(r'^shop/prints/$', ShopPrintsView.as_view(),
+#             name='shop_prints'),
+#         url(r'^shop/sort/$', s(ShopSortJson.as_view()),
+#             name='shop_sort'),
+#     ]
+# else:
+#     urlpatterns = [
+#         url(r'^shop/$', s(RedirectView.as_view(pattern_name='shop_originals')),
+#             name='shop'),
+#         url(r'^shop/originals/$', s(ShopOriginalsView.as_view()),
+#             name='shop_originals'),
+#         url(r'^shop/prints/$', s(ShopPrintsView.as_view()),
+#             name='shop_prints'),
+#         url(r'^shop/sort/$', s(ShopSortJson.as_view()),
+#             name='shop_sort'),
+#     ]
 
-urlpatterns += patterns('',
+urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'flaviabernardes.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
@@ -96,8 +96,7 @@ urlpatterns += patterns('',
     url(r'^nl/(?P<slug>[-_\w/]+)/$', CustomConfirmationView.as_view(),
         name='custom_confirmation_page'),
     url(r'^(?P<slug>[-_\w]+)/(?P<subslug>[-_\w]+)/$', SubPageView.as_view(), name='sub_page'),
-    url(r'^(?P<slug>[-_\w/]+)/$', CustomPageView.as_view(),
-        name='custom_page'),
+    url(r'^(?P<slug>[-_\w/]+)/$', CustomPageView.as_view(), name='custom_page'),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

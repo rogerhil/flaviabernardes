@@ -1,10 +1,6 @@
 <section id="menu">
-    <a href="{% url 'contact' %}">Contact</a>
-    <a href="{% url 'blog' %}">Blog</a>
-    <a href="{% url 'about' %}">About</a>
-    {% if enable_shop %}
-        <a href="{% url 'shop' %}">Shop</a>
-    {% endif %}
-    <a href="{% url 'artworks' %}">Artworks</a>
+    {% for menu_page in menus %}
+        <a href="{{ menu_page.get_absolute_url }}">{{ menu_page.title }}</a>
+    {% endfor %}
     <div class="clear" style="width: 0; padding: 0; margin: 0;"></div>
 </section>

@@ -5,9 +5,7 @@
 
 {% block extrastyle %}
     <link href="{% static 'css/home.css' %}?v=0.0.1" rel="stylesheet" />
-    {% if enable_shop %}
-        <link href="{% static 'css/homewithshop.css' %}?v=0.0.1" rel="stylesheet" />
-    {% endif %}
+    <link href="{% static 'css/homewithshop.css' %}?v=0.0.1" rel="stylesheet" />
     <style>
         {% if global_settings.foreground_color %}
             .menu-home a {
