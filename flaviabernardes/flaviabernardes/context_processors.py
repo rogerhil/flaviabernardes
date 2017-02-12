@@ -13,7 +13,7 @@ def global_context(request):
     context['footer_pages'] = [p for p in global_settings.get_pages().values()
                                if p.footer]
     try:
-        newsletter_list = List.objects.get(list_id='Newsletter')
+        newsletter_list = List.objects.get(name='Newsletter')
     except List.DoesNotExist:
         newsletter_list = None
     context['default_newsletter_list'] = newsletter_list
