@@ -6,7 +6,7 @@
 {% block extrastyle %}
     <link href="{% static 'css/home.css' %}?v=0.0.1" rel="stylesheet" />
     <link href="{% static 'css/homewithshop.css' %}?v=0.0.1" rel="stylesheet" />
-    <style>
+    <style id="extra">
         {% if global_settings.foreground_color %}
             .menu-home a {
                 color: {{ global_settings.foreground_color }} !important;
@@ -68,6 +68,7 @@
                     $('.transp').removeClass('menu-home');
                     $('#home').addClass('home-top');
                     $('.bg_images').fadeOut();
+                    $('#extra').remove();
                     window.setTimeout(function () {
                         window.setTimeout(function () {
                             window.location.replace(href);
