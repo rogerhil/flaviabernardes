@@ -93,7 +93,7 @@ class BasePage(models.Model):
 
     @property
     def sub_pages(self):
-        return Page.objects.filter(sub_page_of=self)
+        return Page.objects.filter(sub_page_of=self).order_by('title')
 
     def clean(self):
         if isinstance(self, PageDraft):
