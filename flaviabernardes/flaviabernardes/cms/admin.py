@@ -60,11 +60,12 @@ class PageCommon(object):
             page = obj.page
         else:
             page = obj
-        if page is not None and page.id and page.sub_page_of is None:
-            exclude = ("name", "sub_page_of",)
-            self.fields = tuple([f for f in self.fields if f not in exclude])
-        else:
-            self.fields = PAGE_FIELDS
+        # if page is not None and page.id and page.sub_page_of is None:
+        #     exclude = ("name", "sub_page_of",)
+        #     self.fields = tuple([f for f in self.fields if f not in exclude])
+        # else:
+        #     self.fields = PAGE_FIELDS
+        self.fields = PAGE_FIELDS
         form = super(PageCommon, self).get_form(request, obj, **kwargs)
         return form
 
