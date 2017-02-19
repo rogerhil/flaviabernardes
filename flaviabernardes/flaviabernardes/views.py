@@ -38,4 +38,5 @@ class ShopifyProduct(JsonView):
         shopify.Session.setup(api_key=settings.SHOPIFY_API_KEY,
                               secret=settings.SHOPIFY_SHARED_SECRET)
         product = shopify.Product.find(request.GET['pid'])
+        #import pdb; pdb.set_trace()
         return product.to_dict()

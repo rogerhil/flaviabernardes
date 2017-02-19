@@ -92,7 +92,8 @@ class GlobalSettings(models.Model):
     def main_page_background_images(self):
         base = "main_page_bg_%s"
         cr = lambda x : cropped_thumbnail({}, self, base % x)
-        return [cr(i) for i in range(1, 6) if getattr(self, base % i, None)]
+        return [cr(i) for i in range(1, 6) if getattr(self, base % i, None)
+                                              and cr(i)]
 
     @classmethod
     def get_pages(cls):
