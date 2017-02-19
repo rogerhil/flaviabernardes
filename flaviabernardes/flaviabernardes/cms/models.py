@@ -111,12 +111,12 @@ class BasePage(models.Model):
                                   'have changed the value to "%s". Please '
                                   'change it back to the original value '
                                   '"%s".' % (self.name, existing_name))
-        if page.sub_page_of is None and self.sub_page_of is not None:
-            raise ValidationError('Making a Main Page become a Sub Page is '
-                                  'not permitted. You have changed the field '
-                                  '"Sub page of" with the value "%s". '
-                                  'Please change it back to the original none '
-                                  'value "---------" .' % self.sub_page_of)
+        # if page.sub_page_of is None and self.sub_page_of is not None:
+        #     raise ValidationError('Making a Main Page become a Sub Page is '
+        #                           'not permitted. You have changed the field '
+        #                           '"Sub page of" with the value "%s". '
+        #                           'Please change it back to the original none '
+        #                           'value "---------" .' % self.sub_page_of)
 
     @property
     def is_newsletter_confirmation_page(self):
