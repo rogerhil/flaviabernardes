@@ -8,3 +8,4 @@ PyYAML
 bs4
 cssutils
 git+https://github.com/rogerhil/python-mailerlite.git
+ShopifyAPI

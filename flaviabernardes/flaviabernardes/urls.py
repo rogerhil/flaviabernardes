@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.sitemaps.views import sitemap
 
-from .views import HomeView, AboutView, ContactView
+from .views import HomeView, AboutView, ContactView, ShopifyProduct
 from .shop.views import ShopOriginalsView, ShopPrintsView, ShopSortJson
 from .artwork.views import PaintingsView, ArtworksSortJson, ArtworksFilter
 from .blog.views import BlogView, PostView
@@ -73,6 +73,9 @@ urlpatterns = patterns('',
     url(r'^admin/cms/image/purge_all/$', s(PurgeUnusedImagesView.as_view()),
         name='purge_all_images'),
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^shopify/api/product/$', ShopifyProduct.as_view(),
+        name='shopify_api_product'),
     #url(r'^login/json/$', LoginJson.as_view(), name='login'),
     #url(r'^logout/json/$', LogoutJson.as_view(), name='logout'),
     url(r'^newsletter/$', NewsletterView.as_view(), name='newsletter'),

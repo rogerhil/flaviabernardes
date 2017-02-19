@@ -173,6 +173,10 @@ LANDING_PAGE = False
 
 ENABLE_SHOP = True
 
+SHOPIFY_API_KEY = ''
+SHOPIFY_PASSWORD = ''
+SHOPIFY_SHARED_SECRET = ''
+
 try:
     from .developmentsettings import *
 except ImportError:
