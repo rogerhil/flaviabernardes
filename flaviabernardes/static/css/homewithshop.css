@@ -57,8 +57,8 @@
 @media (max-width: 350px) and (min-width: 5px) {
     #menu a {
         width: auto !important;
-        padding-left: 13px !important;
-        padding-right: 13px !important;
+        padding-left: 6px !important;
+        padding-right: 6px !important;
     }
 }
 
@@ -66,8 +66,8 @@
 @media (max-width: 280px) and (min-width: 5px) {
     #menu a {
         width: auto !important;
-        padding-left: 7px !important;
-        padding-right: 7px !important;
+        padding-left: 5px !important;
+        padding-right: 5px !important;
     }
 }
 
@@ -75,8 +75,8 @@
 @media (max-width: 240px) and (min-width: 5px) {
     #menu a {
         width: auto !important;
-        padding-left: 6px !important;
-        padding-right: 6px !important;
+        padding-left: 5px !important;
+        padding-right: 5px !important;
 
     }
 }
