@@ -47,7 +47,9 @@
 
         <script async defer data-pin-hover="true" data-pin-tall="true" src="//assets.pinterest.com/js/pinit.js"></script>
 
-        {{ global_settings.javascript_codes }}
+        {% autoescape off %}
+            {{ global_settings.javascript_codes }}
+        {% endautoescape %}
 
         {% block extrajs %}{% endblock %}
 
