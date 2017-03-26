@@ -393,27 +393,27 @@
 
 @media (max-height: 500px) {
     #logo-div {
-        top: 52% !important;
+        top: 40% !important;
     }
     .content {
-        top: 74% !important;
+        top: 75% !important;
     }
 }
 
 @media (max-height: 400px) {
     #logo-div {
-        top: 50% !important;
+        top: 32% !important;
     }
     .content {
-        top: 72% !important;
+        top: 75% !important;
     }
 }
 
 @media (max-height: 300px) {
     #logo-div {
-        top: 30% !important;
+        top: 25% !important;
     }
     .content {
-        top: 68% !important;
+        top: 65% !important;
     }
 }
