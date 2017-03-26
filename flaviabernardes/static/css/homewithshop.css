@@ -48,8 +48,8 @@
 @media (max-width: 390px) and (min-width: 5px) {
     #menu a {
         width: auto !important;
-        padding-left: 15px !important;
-        padding-right: 15px !important;
+        padding-left: 13px !important;
+        padding-right: 13px !important;
     }
 }
 
@@ -57,8 +57,8 @@
 @media (max-width: 350px) and (min-width: 5px) {
     #menu a {
         width: auto !important;
-        padding-left: 15px !important;
-        padding-right: 15px !important;
+        padding-left: 13px !important;
+        padding-right: 13px !important;
     }
 }
 
