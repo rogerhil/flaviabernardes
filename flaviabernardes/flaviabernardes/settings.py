@@ -171,7 +171,7 @@ SERVER_EMAIL = 'support@flaviabernardesart.com'
 
 LANDING_PAGE = False
 
-ENABLE_SHOP = True
+ENABLE_SHOP = False
 
 SHOPIFY_API_KEY = ''
 SHOPIFY_PASSWORD = ''

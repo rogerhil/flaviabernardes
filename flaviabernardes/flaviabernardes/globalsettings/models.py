@@ -50,6 +50,8 @@ class GlobalSettings(models.Model):
     menu_4 = models.ForeignKey(Page, null=True, blank=True, related_name="menu_4_global_setting")
     menu_5 = models.ForeignKey(Page, null=True, blank=True, related_name="menu_5_global_setting")
 
+    javascript_codes = models.TextField(null=True, blank=True)
+
     _cache_object = None
 
     _menus_cache = None
