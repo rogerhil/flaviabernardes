@@ -51,6 +51,12 @@
             {{ global_settings.javascript_codes }}
         {% endautoescape %}
 
+        {% if page.show_footer and page.show_header or not page %}
+            {% autoescape off %}
+                {{ global_settings.javascript_codes_ignore_landing_pages }}
+            {% endautoescape %}
+        {% endif %}
+
         {% block extrajs %}{% endblock %}
 
         <style>

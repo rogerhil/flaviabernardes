@@ -38,7 +38,7 @@ class Subscriber(models.Model):
 
 class List(models.Model):
     provider = models.CharField(max_length=32, editable=False,
-                                default='madmimi')
+                                default='mailerlite')
     list_id = models.CharField(max_length=128, unique=True)
     name = models.CharField(max_length=128)
     sign_up_title = models.CharField(max_length=255, default=SIGN_UP_TITLE,

@@ -50,7 +50,13 @@ class GlobalSettings(models.Model):
     menu_4 = models.ForeignKey(Page, null=True, blank=True, related_name="menu_4_global_setting")
     menu_5 = models.ForeignKey(Page, null=True, blank=True, related_name="menu_5_global_setting")
 
-    javascript_codes = models.TextField(null=True, blank=True)
+    javascript_codes = models.TextField(null=True, blank=True,
+                                        help_text="Embed JavaScript codes "
+          "(privy, smartlook, etc) that will be available in EVERY page.")
+    javascript_codes_ignore_landing_pages = models.TextField(null=True,
+         blank=True, help_text="Same as above, except that the codes won't "
+                               "be put on landing pages (without HEADER "
+                               "and FOOTER)")
 
     _cache_object = None
 
