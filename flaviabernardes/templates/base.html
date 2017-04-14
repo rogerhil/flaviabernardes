@@ -48,12 +48,12 @@
         <script async defer data-pin-hover="true" data-pin-tall="true" src="//assets.pinterest.com/js/pinit.js"></script>
 
         {% autoescape off %}
-            {{ global_settings.javascript_codes }}
+            {{ global_settings.javascript_codes|default:"" }}
         {% endautoescape %}
 
         {% if page.show_footer and page.show_header or not page %}
             {% autoescape off %}
-                {{ global_settings.javascript_codes_ignore_landing_pages }}
+                {{ global_settings.javascript_codes_ignore_landing_pages|default:"" }}
             {% endautoescape %}
         {% endif %}
 
