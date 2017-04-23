@@ -208,10 +208,10 @@
                     <div class="after-header-topbar"></div>
                 {% endif %}
                 
-                {% if page and page.banner1 and page.show_banner or user.is_authenticated and user.is_superuser %}
+                {% if page and page.banner1 and page.show_top_banner or user.is_authenticated and user.is_superuser %}
                     <div class="site-top">
                         {% block container-top %}
-                            {% if page and page.banner1 and page.show_banner %}
+                            {% if page and page.banner1 and page.show_top_banner %}
                                 <div class="parallax banner" bg-size="1920x600"
                                      style="background-image: url({% cropped_thumbnail page 'banner1' scale=1 %}); position: relative;">
                                     <div class="center-column">
