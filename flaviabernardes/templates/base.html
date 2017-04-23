@@ -201,8 +201,10 @@
                         </div>
                     </section>
                 {% endif %}
-                <div class="after-header"></div>
-                {% if enable_top_bar %}
+                {% if page.show_header %}
+                    <div class="after-header"></div>
+                {% endif %}
+                {% if enable_top_bar and page.show_header %}
                     <div class="after-header-topbar"></div>
                 {% endif %}
 
