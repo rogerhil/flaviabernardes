@@ -381,7 +381,7 @@
                             {% with '32' as size %}
                                 <div class="footer-social">{% include "social.html" %}</div>
                             {% endwith %}
-                            <div class="copyright">&#9400 Flavia Bernardes, 2016. All rights reserved.</div>
+                            <div class="copyright">&#9400 Flavia Bernardes, {% now "Y" %}. All rights reserved.</div>
                             <div class="footer-submenu">
                                 <span class="first-pipe">|</span>
                                 {% for page in footer_pages %}
