@@ -31,6 +31,7 @@ class BasePage(models.Model):
     footer = models.BooleanField(default=False, verbose_name='Show this page link in footer')
 
     show_header = models.BooleanField(default=True, verbose_name='Show site header')
+    show_top_banner = models.BooleanField(default=True, verbose_name='Show top banner')
     show_footer = models.BooleanField(default=True, verbose_name='Show site footer')
     background_cover_image = models.ImageField(blank=True, upload_to='uploads')
     background_cover = ImageRatioField('background_cover_image', '1920x1200')
