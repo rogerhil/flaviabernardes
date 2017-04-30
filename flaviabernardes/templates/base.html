@@ -1,6 +1,7 @@
 {% load staticfiles %}
 {% load cropping %}
 
+<!DOCTYPE html>
 <html>
     <head>
 
@@ -14,12 +15,14 @@
         <meta name="p:domain_verify" content="0abc82f2a4e2d934f1b07766abce62ee"/>
         <!-- end pinterest -->
 
-        <title>{% block title %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.title }}{% else %}Flavia Bernardes Art{% endif %}{% endblock %}</title>
+        <title>{% block title %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.title }}{% else %}{% if global_settings.main_description %}{{ global_settings.main_title }}{% else %}Flavia Bernardes Art{% endif %}{% endif %}{% endblock %}</title>
         <meta property="og:title" content="{% block ogtitle %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.title }}{% else %}Flavia Bernardes Art{% endif %}{% endblock %}" />
-        <meta property="og:description" content="{% block ogdescription %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.description }}{% else %}Check out artist Flavia Bernardes' website{% endif %}{% endblock %}" />
+        <meta property="og:description" content="{% block ogdescription %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.description }}{% else %}{% if global_settings.main_description %}{{ global_settings.main_description }}{% else %}Check out artist Flavia Bernardes' website{% endif %}{% endif %}{% endblock %}" />
         <meta property="og:type" content="{% block ogtype %}website{% endblock %}" />
         <meta property="og:url" content="http://www.flaviabernardesart.com{% block ogurl %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.get_absolute_url }}{% else %}/{% endif %}{% endblock %}" />
         <meta property="og:image" content="http://www.flaviabernardesart.com{% block ogimage %}{% if page and page.social %}{% cropped_thumbnail page 'social' scale=1 %}{% else %}{% static 'img/amelie125x125.jpg' %}{% endif %}{% endblock %}" />
+        {% block extra_meta %}
+        {% endblock %}
 
         <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" />
 
@@ -130,13 +133,37 @@
             fbq('init', '229568790717139');
             fbq('track', "PageView");
         </script>
-        <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=229568790717139&ev=PageView&noscript=1"/></noscript>
+        <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=229568790717139&ev=PageView&noscript=1" alt="facebook pixel" /></noscript>
         <!-- End Facebook Pixel Code -->
 
     </head>
     <body>
+        <div style="display: none;">
+            <h1>
+                {% if page %}
+                    {{ page.title }}
+                {% else %}
+                    {% if post %}
+                        {{ post.title }}
+                    {% else %}
+                        {{ global_settings.main_title }}
+                    {% endif %}
+                {% endif %}
+            </h1>
+            <h2>
+                {% if page %}
+                    {{ page.description }}
+                {% else %}
+                    {% if post %}
+                        {{ post.description }}
+                    {% else %}
+                        {{ global_settings.main_description }}
+                    {% endif %}
+                {% endif %}
+            </h2>
+        </div>
         <div id="cover">
-            <img src="{% static 'img/ajax-loader.png' %}" class="ajax-loader">
+            <img src="{% static 'img/ajax-loader.png' %}" class="ajax-loader" alt="ajax spinner">
         </div>
         {% block site %}
             <div id="body" {% if page.background_cover_image %}class="background-cover" style="background-image: url({% cropped_thumbnail page 'background_cover' scale=1 %});"{% endif %}>
@@ -167,7 +194,7 @@
                         <div class="center-column">
                             <div id="logo">
                                 {% block logo %}
-                                    <img src="{% static 'img/logo-small-bw.png' %}" style="width: 320px;" />
+                                    <img src="{% static 'img/logo-small-bw.png' %}" style="width: 320px;" alt="logo" />
                                 {% endblock %}
                             </div>
                             <div class="transp transp-top">

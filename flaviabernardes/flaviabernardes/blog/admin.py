@@ -24,6 +24,7 @@ class DraftAdmin(ImageCroppingMixin, CmsDraftAdmin, admin.ModelAdmin):
     fields = PostAdmin.fields
     list_display = ('title', 'post', 'slug', 'created', 'updated')
     list_filter = ('post',)
+    filter_horizontal = ('tags',)
 
 
 @admin.register(Category)

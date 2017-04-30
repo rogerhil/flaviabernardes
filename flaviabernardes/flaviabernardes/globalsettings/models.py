@@ -22,6 +22,13 @@ class GlobalSettings(models.Model):
          help_text="A short description to appear to the left side of the"
                    "newsletter form at the Top Bar.")
 
+    main_title = models.CharField(max_length=128, null=True, blank=True)
+    main_description = models.CharField(max_length=255, null=True, blank=True)
+
+    global_keywords = models.TextField(null=True, blank=True,
+        help_text="Keywords separated by comma, e.g: fine arts, oil pastel, "
+                  "watercolour")
+
     main_page_bg_image_1 = models.ImageField(blank=True,
                                              upload_to='uploads/main_page/')
     main_page_bg_image_2 = models.ImageField(blank=True,
