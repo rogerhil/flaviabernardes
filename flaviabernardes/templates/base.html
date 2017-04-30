@@ -1,6 +1,5 @@
 {% load staticfiles %}
 {% load cropping %}
-
 <html>
     <head>
 
@@ -12,27 +11,27 @@
         <meta name="keywords" content="{{ global_settings.global_keywords }}">
 
         <!-- pinterest -->
-        <meta name="p:domain_verify" content="0abc82f2a4e2d934f1b07766abce62ee"/>
+        <meta name="p:domain_verify" content="0abc82f2a4e2d934f1b07766abce62ee">
         <!-- end pinterest -->
 
         <title>{% block title %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.title }}{% else %}{% if global_settings.main_description %}{{ global_settings.main_title }}{% else %}Flavia Bernardes Art{% endif %}{% endif %}{% endblock %}</title>
-        <meta property="og:title" content="{% block ogtitle %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.title }}{% else %}{% if global_settings.main_description %}{{ global_settings.main_title }}{% else %}Flavia Bernardes Art{% endif %}{% endif %}{% endblock %}" />
-        <meta property="og:description" content="{% block ogdescription %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.description }}{% else %}{% if global_settings.main_description %}{{ global_settings.main_description }}{% else %}Check out artist Flavia Bernardes' website{% endif %}{% endif %}{% endblock %}" />
-        <meta property="og:type" content="{% block ogtype %}website{% endblock %}" />
-        <meta property="og:url" content="http://www.flaviabernardesart.com{% block ogurl %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.get_absolute_url }}{% else %}/{% endif %}{% endblock %}" />
-        <meta property="og:image" content="http://www.flaviabernardesart.com{% block ogimage %}{% if page and page.social %}{% cropped_thumbnail page 'social' scale=1 %}{% else %}{% static 'img/amelie125x125.jpg' %}{% endif %}{% endblock %}" />
+        <meta property="og:title" content="{% block ogtitle %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.title }}{% else %}{% if global_settings.main_description %}{{ global_settings.main_title }}{% else %}Flavia Bernardes Art{% endif %}{% endif %}{% endblock %}">
+        <meta property="og:description" content="{% block ogdescription %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.description }}{% else %}{% if global_settings.main_description %}{{ global_settings.main_description }}{% else %}Check out artist Flavia Bernardes' website{% endif %}{% endif %}{% endblock %}">
+        <meta property="og:type" content="{% block ogtype %}website{% endblock %}">
+        <meta property="og:url" content="http://www.flaviabernardesart.com{% block ogurl %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.get_absolute_url }}{% else %}/{% endif %}{% endblock %}">
+        <meta property="og:image" content="http://www.flaviabernardesart.com{% block ogimage %}{% if page and page.social %}{% cropped_thumbnail page 'social' scale=1 %}{% else %}{% static 'img/amelie125x125.jpg' %}{% endif %}{% endblock %}">
         {% block extra_meta %}
         {% endblock %}
 
-        <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" />
+        <link rel="shortcut icon" href="{% static 'img/favicon.png' %}">
 
-        <link href="{% static 'css/jquery.bxslider.css' %}" rel="stylesheet" />
-        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
-        <link href="{% static 'css/social.css' %}" rel="stylesheet" />
-        <link href="{% static 'css/base.css' %}?v=0.0.2" rel="stylesheet" />
-        <link href="{% static 'css/ajaxloader.css' %}" rel="stylesheet" />
-        <link href="{% static 'css/newsletter.css' %}" rel="stylesheet" />
-        <link href="{% static 'css/topbar.css' %}" rel="stylesheet" />
+        <link href="{% static 'css/jquery.bxslider.css' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/social.css' %}" rel="stylesheet">
+        <link href="{% static 'css/base.css' %}?v=0.0.2" rel="stylesheet">
+        <link href="{% static 'css/ajaxloader.css' %}" rel="stylesheet">
+        <link href="{% static 'css/newsletter.css' %}" rel="stylesheet">
+        <link href="{% static 'css/topbar.css' %}" rel="stylesheet">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
         <!-- jQuery library (served from Google) -->
@@ -133,7 +132,7 @@
             fbq('init', '229568790717139');
             fbq('track', "PageView");
         </script>
-        <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=229568790717139&ev=PageView&noscript=1" alt="facebook pixel" /></noscript>
+        <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=229568790717139&ev=PageView&noscript=1" alt="facebook pixel"></noscript>
         <!-- End Facebook Pixel Code -->
 
     </head>
@@ -194,7 +193,7 @@
                         <div class="center-column">
                             <div id="logo">
                                 {% block logo %}
-                                    <img src="{% static 'img/logo-small-bw.png' %}" style="width: 320px;" alt="logo" />
+                                    <img src="{% static 'img/logo-small-bw.png' %}" style="width: 320px;" alt="logo">
                                 {% endblock %}
                             </div>
                             <div class="transp transp-top">
