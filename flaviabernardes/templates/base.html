@@ -228,42 +228,46 @@
                         </div>
                     </section>
                 {% endif %}
-                <div class="after-header"></div>
-                {% if enable_top_bar %}
+                {% if page.show_header %}
+                    <div class="after-header"></div>
+                {% endif %}
+                {% if enable_top_bar and page.show_header %}
                     <div class="after-header-topbar"></div>
                 {% endif %}
-
-                <div class="site-top">
-                    {% block container-top %}
-                        {% if page and page.banner1 %}
-                            <div class="parallax banner" bg-size="1920x600"
-                                 style="background-image: url({% cropped_thumbnail page 'banner1' scale=1 %}); position: relative;">
-                                <div class="center-column">
+                
+                {% if page and page.banner1 and page.show_top_banner or user.is_authenticated and user.is_superuser %}
+                    <div class="site-top">
+                        {% block container-top %}
+                            {% if page and page.banner1 and page.show_top_banner %}
+                                <div class="parallax banner" bg-size="1920x600"
+                                     style="background-image: url({% cropped_thumbnail page 'banner1' scale=1 %}); position: relative;">
+                                    <div class="center-column">
+                                    </div>
+                                    <div class="banner-title">
+                                        {{ page.title }}
+                                    </div>
+                            {% else %}
+                                    <div class="" style="min-height: 50px; position: relative;">
+                            {% endif %}
+                                    {% block cms_actions %}
+                                        {% if user.is_authenticated and user.is_superuser %}
+                                            <script src="{% static 'js/admin/cmsobjectlist.js' %}"></script>
+                                            <p id="preview-actions">
+                                                <button id="modify-page" class="yellow">
+                                                    MODIFY
+                                                </button>
+                                            </p>
+                                            <script>
+                                                $("#modify-page").click(function () {
+                                                    newDraft('cms', 'page', 'pagedraft', {{ page.id }});
+                                                });
+                                            </script>
+                                        {% endif %}
+                                    {% endblock %}
                                 </div>
-                                <div class="banner-title">
-                                    {{ page.title }}
-                                </div>
-                        {% else %}
-                                <div class="" style="min-height: 50px; position: relative;">
-                        {% endif %}
-                                {% block cms_actions %}
-                                    {% if user.is_authenticated and user.is_superuser %}
-                                        <script src="{% static 'js/admin/cmsobjectlist.js' %}"></script>
-                                        <p id="preview-actions">
-                                            <button id="modify-page" class="yellow">
-                                                MODIFY
-                                            </button>
-                                        </p>
-                                        <script>
-                                            $("#modify-page").click(function () {
-                                                newDraft('cms', 'page', 'pagedraft', {{ page.id }});
-                                            });
-                                        </script>
-                                    {% endif %}
-                                {% endblock %}
-                            </div>
-                    {% endblock %}
-                </div>
+                        {% endblock %}
+                    </div>
+                {% endif %}
 
                 {# START OF LANDING PAGE BLOCK #}
                 <div {% if page.background_cover_image %} id="landing-page-block" {% endif %} {% if page.background_cover_image and page.box_square %}class="square"{% endif %}>
@@ -404,7 +408,7 @@
                             {% with '32' as size %}
                                 <div class="footer-social">{% include "social.html" %}</div>
                             {% endwith %}
-                            <div class="copyright">&#9400 Flavia Bernardes, 2016. All rights reserved.</div>
+                            <div class="copyright">&#9400 Flavia Bernardes, {% now "Y" %}. All rights reserved.</div>
                             <div class="footer-submenu">
                                 <span class="first-pipe">|</span>
                                 {% for page in footer_pages %}
