@@ -16,7 +16,7 @@
         <!-- end pinterest -->
 
         <title>{% block title %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.title }}{% else %}{% if global_settings.main_description %}{{ global_settings.main_title }}{% else %}Flavia Bernardes Art{% endif %}{% endif %}{% endblock %}</title>
-        <meta property="og:title" content="{% block ogtitle %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.title }}{% else %}Flavia Bernardes Art{% endif %}{% endblock %}" />
+        <meta property="og:title" content="{% block ogtitle %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.title }}{% else %}{% if global_settings.main_description %}{{ global_settings.main_title }}{% else %}Flavia Bernardes Art{% endif %}{% endif %}{% endif %}{% endblock %}" />
         <meta property="og:description" content="{% block ogdescription %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.description }}{% else %}{% if global_settings.main_description %}{{ global_settings.main_description }}{% else %}Check out artist Flavia Bernardes' website{% endif %}{% endif %}{% endblock %}" />
         <meta property="og:type" content="{% block ogtype %}website{% endblock %}" />
         <meta property="og:url" content="http://www.flaviabernardesart.com{% block ogurl %}{% if page and not page.is_newsletter_confirmation_page %}{{ page.get_absolute_url }}{% else %}/{% endif %}{% endblock %}" />
