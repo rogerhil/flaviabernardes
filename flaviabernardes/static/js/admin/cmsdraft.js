@@ -45,8 +45,8 @@ $(window).ready(function () {
                     lineNumbers: true
                 }
             },
-            content_css: '/static/css/base.css,/static/css/blog.css',
-            contentCss: '/static/css/base.css,/static/css/blog.css',
+            content_css: '/static/css/base-v001.css,/static/css/blog.css',
+            contentCss: '/static/css/base-v001.css,/static/css/blog.css',
             relative_urls: false,
             height: 600,
             extended_valid_elements: '*[*],script[charset|defer|language|src|type]',
