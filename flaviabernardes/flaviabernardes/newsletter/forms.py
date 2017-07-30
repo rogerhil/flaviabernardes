@@ -13,7 +13,9 @@ BASE_URL = 'http://www.flaviabernardesart.com'
 
 class BaseSubscriberForm(forms.Form):
     email = forms.EmailField()
-    first_name = forms.CharField(max_length=255)
+    hide_name_field = forms.BooleanField(required=False,
+                                         widget=forms.HiddenInput)
+    first_name = forms.CharField(max_length=255, required=False)
     last_name = forms.CharField(max_length=255, required=False)
     list_id = forms.CharField(widget=forms.HiddenInput)
     provider = forms.CharField(widget=forms.HiddenInput)

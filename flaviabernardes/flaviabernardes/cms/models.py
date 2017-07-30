@@ -41,6 +41,12 @@ class BasePage(models.Model):
     box_opacity = models.FloatField(choices=OPACITY_CHOICES, null=True, blank=True)
     box_square = models.BooleanField(default=False)
 
+    show_newsletter_name_field = models.BooleanField(default=True,
+                                     verbose_name='Show newsletter name field')
+    newsletter_submit_button_color = ColorField(null=True, blank=True,
+                                 verbose_name='Newsletter submit button color')
+    newsletter_submit_button_opacity = models.FloatField(
+        choices=OPACITY_CHOICES, null=True, blank=True)
 
     class Meta:
         abstract = True
@@ -64,6 +70,15 @@ class BasePage(models.Model):
         rgba = "rgba(%s,%s)" % (rgb, str(0.3))
         return rgba
 
+    def newsletter_submit_button_color_rgba(self):
+        if not self.newsletter_submit_button_color:
+            return self.button_bg_rgba()
+        color = self.newsletter_submit_button_color.strip('#')
+        rgb = "%s,%s,%s" % tuple(int(color[i:i+2], 16) for i in (0, 2 ,4))
+        rgba = "rgba(%s,%s)" % (rgb,
+                                str(self.newsletter_submit_button_opacity))
+        return rgba
+
     def button_bg_rgba(self):
         if not self.foreground_color:
             return ""
@@ -78,6 +93,14 @@ class BasePage(models.Model):
         color = self.foreground_color.strip('#')
         rgb = tuple(int(color[i:i+2], 16) for i in (0, 2 ,4))
         new_rgb = tuple([int(i * 0.7) for i in rgb])
+        return "rgb%s" % str(new_rgb)
+
+    def newsletter_button_foreground(self):
+        if not self.newsletter_submit_button_color:
+            return self.placeholder_foreground()
+        color = self.newsletter_submit_button_color.strip('#')
+        rgb = tuple(int(color[i:i+2], 16) for i in (0, 2 ,4))
+        new_rgb = tuple([int(i * 0.3) for i in rgb])
         return "rgb%s" % str(new_rgb)
 
     def get_absolute_url(self):

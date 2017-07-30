@@ -12,23 +12,23 @@
     <input type="hidden" name="provider" value="{% if newsletter %}{{ newsletter.provider }}{% else %}mailerlite{% endif %}" />
 {% endblock %}
 
-<ul>
-    <li>
+<ul {% if page and not page.show_newsletter_name_field or form.data.hide_name_field %}class="hide_name_field"{% endif %}>
+
+    <input type="hidden" name="hide_name_field" value="{% if page and not page.show_newsletter_name_field or form.data.hide_name_field %}true{% endif %}" />
+
+    <li class="email">
         {% if form.errors and not form.errors.email %}<ul class="errorlist"><li>&nbsp;</li></ul>{% else %}{{ form.errors.email }}{% endif %}
         <input type="email" name="email" value="{{ form.data.email }}" placeholder="e-mail" class="required" />
     </li>
-    <li>
-        {% if form.errors and not form.errors.first_name %}<ul class="errorlist"><li>&nbsp;</li></ul>{% else %}{{ form.errors.first_name }}{% endif %}
-        <input type="text" name="first_name" value="{{ form.data.first_name }}" placeholder="first name" class="required" />
-    </li>
-    <li>
-        {% if form.errors and not form.errors.last_name %}<ul class="errorlist"><li>&nbsp;</li></ul>{% else %}{{ form.errors.last_name }}{% endif %}
-        <input type="text" name="last_name" value="{{ form.data.last_name }}" placeholder="last name (optional)" class="" />
-    </li>
-    <li class="last">
+    {% if page and page.show_newsletter_name_field and not form.data.hide_name_field or not form.data and not page or form.data and not form.data.hide_name_field %}
+        <li>
+            {% if form.errors and not form.errors.first_name %}<ul class="errorlist"><li>&nbsp;</li></ul>{% else %}{{ form.errors.first_name }}{% endif %}
+            <input type="text" name="first_name" value="{{ form.data.first_name }}" placeholder="name" class="required" />
+        </li>
+    {% endif %}
+    <li class="last submit">
         {% if form.errors %}<ul class="errorlist"><li>&nbsp;</li></ul>{% endif %}
         <button style="white-space: nowrap;">Yes, please!</button>
     </li>
 </ul>
 <div class="clear"></div>
-

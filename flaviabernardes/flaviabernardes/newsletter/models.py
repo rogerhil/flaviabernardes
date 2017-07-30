@@ -24,7 +24,8 @@ class Subscriber(models.Model):
     uuid = models.CharField(max_length=100, blank=True, unique=True,
                             default=uuid.uuid4)
     email = models.EmailField(unique=True)
-    first_name = models.CharField(max_length=255, blank=True, null=True)
+    first_name = models.CharField(verbose_name="Name",
+                                  max_length=255, blank=True, null=True)
     last_name = models.CharField(max_length=255, blank=True, null=True)
     registered = models.DateTimeField(auto_now_add=True, null=True)
 

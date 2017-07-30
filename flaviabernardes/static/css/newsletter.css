@@ -22,7 +22,15 @@
 .newsletter ul li {
     float: left;
     margin-right: 10px;
-    width: 23%;
+    width: 31%;
+}
+
+ul.hide_name_field li.email {
+    width: 70%;
+}
+
+ul.hide_name_field li.submit {
+    width: 28%;
 }
 
 .newsletter ul.errorlist li {
