@@ -22,6 +22,7 @@ class BaseSubscriberForm(forms.Form):
 
     def pre_subscribe_locally(self):
         data = self.cleaned_data
+        data.pop('hide_name_field')
         list_id = data.pop('list_id')
         provider = data.pop('provider')
         list_obj = List.objects.get(list_id=list_id, provider=provider)
