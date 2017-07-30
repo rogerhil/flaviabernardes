@@ -48,10 +48,11 @@ class CmsDraftAdmin(admin.ModelAdmin):
 PAGE_FIELDS = ('name', 'sub_page_of', 'title', 'description', 'footer',
                'show_header', 'show_top_banner', 'show_footer', 'background_cover_image',
                'background_cover', 'foreground_color', 'box_background_color', 'box_opacity', 'box_square',
-               'newsletter', 'show_newsletter_name_field', 'newsletter_submit_button_color',
-               'newsletter_submit_button_opacity', 'content1', 'content2',
-               'content3', 'content4', 'image_banner1', 'banner1',
-               'image_banner2', 'banner2', 'image_social', 'social')
+               'newsletter', 'show_newsletter_form_inline', 'show_newsletter_name_field',
+               'newsletter_submit_button_color', 'newsletter_submit_button_opacity',
+               'content1', 'content2', 'content3', 'content4',
+               'image_banner1', 'banner1', 'image_banner2', 'banner2',
+               'image_social', 'social')
 
 
 class PageCommon(object):

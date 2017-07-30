@@ -41,12 +41,14 @@ class BasePage(models.Model):
     box_opacity = models.FloatField(choices=OPACITY_CHOICES, null=True, blank=True)
     box_square = models.BooleanField(default=False)
 
+    show_newsletter_form_inline = models.BooleanField(default=True)
     show_newsletter_name_field = models.BooleanField(default=True,
                                      verbose_name='Show newsletter name field')
     newsletter_submit_button_color = ColorField(null=True, blank=True,
                                  verbose_name='Newsletter submit button color')
     newsletter_submit_button_opacity = models.FloatField(
         choices=OPACITY_CHOICES, null=True, blank=True)
+
 
     class Meta:
         abstract = True
